@@ -1,8 +1,7 @@
 from lib_bgp_simulator import Simulator, Graph, BGPPolicy
 from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
-from attacks import AccidentalLeak
-from announcements import DOAnn
+from bgp_simulator_policies import AccidentalLeak, DOAnn
 
 graphs = [Graph(percent_adoptions=[0, 5],
                 adopt_policies=[BGPPolicy], # change to DO policy

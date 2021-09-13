@@ -1,5 +1,7 @@
 from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
+from .. import DOAnn
+
 class AccidentalLeak(Attack):
     def __init__(self, attacker=ASNs.ATTACKER.value, victim=ASNs.VICTIM.value):
         anns = [DOAnn(prefix=Prefixes.PREFIX.value,
