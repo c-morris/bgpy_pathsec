@@ -29,7 +29,4 @@ class IntentionalLeak(Attack):
             # Clear any down only communities
             print("Clearing all down-only communities from the attack announcement")
             s.engine.as_dict[self.attacker_asn].policy.local_rib[Prefixes.PREFIX.value].do_communities = tuple()
-        self.announcements.clear()
-
-
 
