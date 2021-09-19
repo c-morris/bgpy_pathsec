@@ -24,6 +24,7 @@ class IntentionalLeak(Attack):
                 for ann_tuple in inner_dict.values():
                     ann = ann_tuple[0]
                     atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
+                    # TODO truncate path as much as possible
                     # Clear any down only communities
                     atk_ann.do_communities = tuple()
                     # This suppresses withdrawals
