@@ -24,9 +24,9 @@ setup(
         'lib_caida_collector',
         'lib_utils',
         'matplotlib',
+        'tikzplotlib',
         'pytest',
         'tqdm',
-        'jinja2',
     ],
     classifiers=[
         'Environment :: Console',

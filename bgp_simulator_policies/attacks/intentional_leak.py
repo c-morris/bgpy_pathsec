@@ -17,16 +17,37 @@ class IntentionalLeak(Attack):
         # Add the route leak from the attacker
         attacker_ann = None
         self.round += 1
+        attacker = s.engine.as_dict[self.attacker_asn]
         if self.round == 1:
-            attacker_ann = s.engine.as_dict[self.attacker_asn].policy.local_rib.get(Prefixes.PREFIX.value)
-            # If the attacker never received, the announcement, this attack is impossible, return
-            if attacker_ann is None: 
+            attack_anns = []
+            for neighbor, inner_dict in attacker.policy.ribs_in.items():
+                for ann_tuple in inner_dict.values():
+                    ann = ann_tuple[0]
+                    atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
+                    # Clear any down only communities
+                    atk_ann.do_communities = tuple()
+                    # This suppresses withdrawals
+                    atk_ann.seed_asn = attacker.asn
+                    attack_anns.append(atk_ann)
+
+            if len(attack_anns) == 0: 
                 print("Attacker did not receive announcement from victim, cannot attack")
-                print("Attacker RIB WAS", s.engine.as_dict[self.attacker_asn].policy.local_rib)
                 return
-            print("Altering the recv_relationship to customer for:", attacker_ann)
-            s.engine.as_dict[self.attacker_asn].policy.local_rib[Prefixes.PREFIX.value].recv_relationship = Relationships.CUSTOMERS
-            # Clear any down only communities
-            print("Clearing all down-only communities from the attack announcement")
-            s.engine.as_dict[self.attacker_asn].policy.local_rib[Prefixes.PREFIX.value].do_communities = tuple()
+            # Populate send_q with leaks
+            print(type(attacker.providers))
+            print(attacker.providers)
+            for neighbor in attacker.providers + attacker.peers:
+                for ann in attack_anns:
+                    if neighbor.asn not in ann.as_path:
+                        #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
+                        neighbor.policy.recv_q[attacker.asn][ann.prefix].append(ann)
+                        neighbor.policy.process_incoming_anns(neighbor, Relationships.CUSTOMERS)
+                        # Only need to leak one announcement per neighbor
+                        print("Leaking", ann, "to neighbor", neighbor.asn)
+                        continue
+        else:
+            print("FINAL RIBS ATTACKER")
+            print(attacker.policy.local_rib)
+            for neighbor in attacker.providers + attacker.peers:
+                print(neighbor.policy.local_rib)
 

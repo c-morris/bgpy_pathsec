@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph
 
 from .. import DOAnn
 
@@ -18,9 +18,7 @@ class AccidentalLeak(Attack):
         attacker_ann = None
         self.round += 1
         attacker_ann = s.engine.as_dict[self.attacker_asn].policy.local_rib.get(Prefixes.PREFIX.value)
-        print("DEBUG :", attacker_ann)
         if self.round == 1:
-            attacker_ann = s.engine.as_dict[self.attacker_asn].policy.local_rib.get(Prefixes.PREFIX.value)
             # If the attacker never received, the announcement, this attack is impossible, return
             if attacker_ann is None: 
                 print("Attacker did not receive announcement from victim, cannot attack")
@@ -28,6 +26,3 @@ class AccidentalLeak(Attack):
                 return
             print("Altering the recv_relationship to customer for:", attacker_ann)
             s.engine.as_dict[self.attacker_asn].policy.local_rib[Prefixes.PREFIX.value].recv_relationship = Relationships.CUSTOMERS
-
-
-

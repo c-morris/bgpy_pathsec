@@ -1,15 +1,18 @@
-from lib_bgp_simulator import Simulator, Graph, BGPPolicy
+from lib_bgp_simulator import Simulator, Graph, BGPPolicy, BGPRIBSPolicy
 from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
-from bgp_simulator_policies import IntentionalLeak, DOAnn
+from bgp_simulator_policies import IntentionalLeak, LeakGraph, DOAnn
 
-graphs = [Graph(percent_adoptions=[0, 5],
-                adopt_policies=[BGPPolicy], # change to DO policy
+from lib_bgp_simulator import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
+
+graphs = [LeakGraph(
+                percent_adoptions=[0, 10, 20, 50, 80, 100],
+                adopt_policies=[BGPRIBSPolicy], # change to DO policy
                 AttackCls=IntentionalLeak,
                 num_trials=1,
                 propagation_rounds=2,
-                base_policy=BGPPolicy)]
-Simulator().run(graphs=graphs)
+                base_policy=BGPRIBSPolicy)]
+Simulator().run(graphs=graphs, graph_path="/home/cbm14007/Downloads/graphs/graphs.tar.gz")
 
 # Dealing with output data (not in the code yet)
 for graph in graphs:
