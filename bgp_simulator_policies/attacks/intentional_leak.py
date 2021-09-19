@@ -34,8 +34,6 @@ class IntentionalLeak(Attack):
                 print("Attacker did not receive announcement from victim, cannot attack")
                 return
             # Populate send_q with leaks
-            print(type(attacker.providers))
-            print(attacker.providers)
             for neighbor in attacker.providers + attacker.peers:
                 for ann in attack_anns:
                     if neighbor.asn not in ann.as_path:
@@ -45,9 +43,3 @@ class IntentionalLeak(Attack):
                         # Only need to leak one announcement per neighbor
                         print("Leaking", ann, "to neighbor", neighbor.asn)
                         continue
-        else:
-            print("FINAL RIBS ATTACKER")
-            print(attacker.policy.local_rib)
-            for neighbor in attacker.providers + attacker.peers:
-                print(neighbor.policy.local_rib)
-
