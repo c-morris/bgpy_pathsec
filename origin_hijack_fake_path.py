@@ -1,13 +1,13 @@
 from lib_bgp_simulator import Simulator, Graph, BGPPolicy, BGPRIBSPolicy
 from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
-from bgp_simulator_policies import OriginHijack, LeakGraph, PAnn
+from bgp_simulator_policies import OriginHijack, LeakGraph, PAnn, BGPsecPolicy
 
 from lib_bgp_simulator import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
 
 graphs = [LeakGraph(
                 percent_adoptions=[0, 10, 20, 50, 80, 100],
-                adopt_policies=[BGPRIBSPolicy], # change to DO policy
+                adopt_policies=[BGPsecPolicy],
                 AttackCls=OriginHijack,
                 num_trials=1,
                 propagation_rounds=1,
