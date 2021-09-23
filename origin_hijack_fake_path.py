@@ -7,9 +7,9 @@ from lib_bgp_simulator import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPP
 
 graphs = [LeakGraph(
                 percent_adoptions=[0, 10, 20, 50, 80, 100],
-                adopt_policies=[BGPsecPolicy],
+                adopt_policies=[BGPRIBSPolicy, BGPsecPolicy],
                 AttackCls=OriginHijack,
-                num_trials=1,
+                num_trials=2,
                 propagation_rounds=1,
                 base_policy=BGPRIBSPolicy)]
 Simulator().run(graphs=graphs, graph_path="/home/cbm14007/Downloads/graphs/graphs.tar.gz")
