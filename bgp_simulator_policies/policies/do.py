@@ -19,7 +19,7 @@ class DownOnlyPolicy(BGPRIBSPolicy):
                     ribs_out_ann = policy_self.ribs_out[as_obj.asn].get(prefix)
                     # To make sure we don't repropagate anns we have already sent
                     if not ann.prefix_path_attributes_eq(ribs_out_ann):
-                        policy_self.send_q[as_obj.asn][prefix].append(ann)
+                        policy_self.send_q[as_obj.asn][prefix].append(ann_to_send)
 
     def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
         """Assigns the priority to an announcement according to Gao Rexford"""
