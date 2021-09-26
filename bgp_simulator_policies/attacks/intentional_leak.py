@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
 
 from .. import DOAnn
 
@@ -10,15 +10,13 @@ class IntentionalLeak(Attack):
                     seed_asn=victim)]
         super(IntentionalLeak, self).__init__(attacker, victim, anns)
         
-        self.round = 0
         self.post_run_hooks = [self.hook]
 
-    def hook(self, s: Scenario):
+    def hook(self, engine: SimulatorEngine, prev_data_point: DataPoint):
         # Add the route leak from the attacker
         attacker_ann = None
-        self.round += 1
-        attacker = s.engine.as_dict[self.attacker_asn]
-        if self.round == 1:
+        attacker = engine.as_dict[self.attacker_asn]
+        if prev_data_point.propagation_round == 0:
             attack_anns = []
             for neighbor, inner_dict in attacker.policy.ribs_in.items():
                 for ann_tuple in inner_dict.values():

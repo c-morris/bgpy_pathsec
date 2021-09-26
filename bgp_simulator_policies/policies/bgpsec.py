@@ -36,8 +36,8 @@ class BGPsecPolicy(BGPRIBSPolicy):
             # This is BGPsec Security Second, where announcements with security
             # attributes are preferred over those without, but only after
             # considering business relationships.
-            deep_ann_valid = deep_ann.bgpsec_path == deep_ann.as_path and next_as == self.asn
-            shallow_ann_valid = shallow_ann.bgpsec_path == shallow_ann.as_path and next_as == self.asn
+            deep_ann_valid = deep_ann.bgpsec_path == deep_ann.as_path and deep_ann.next_as == self.asn
+            shallow_ann_valid = shallow_ann.bgpsec_path == shallow_ann.as_path and shallow_ann.next_as == self.asn
             if shallow_ann_valid and not deep_ann_valid:
                 return True
             if len(deep_ann.as_path) < len(shallow_ann.as_path) + 1:

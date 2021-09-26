@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
 
 from .. import PAnn
 
@@ -11,8 +11,7 @@ class OriginHijack(Attack):
                     seed_asn=victim),
                 PAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.ATTACKER.value,
-                    # 64555 is a private ASN, it should not exist in the AS graph
-                    as_path=(attacker, 64555, victim),
+                    as_path=(attacker, victim),
                     seed_asn=attacker),]
         super(OriginHijack, self).__init__(attacker, victim, anns)
 

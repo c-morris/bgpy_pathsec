@@ -24,4 +24,3 @@ class PAnn(DOAnn):
         # The next_as indicates the AS this announcement is being sent to. It
         # must match for the announcement to be accepted. 
         self.next_as = 0
-

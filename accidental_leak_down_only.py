@@ -6,7 +6,7 @@ from bgp_simulator_policies import AccidentalLeak, LeakGraph, DOAnn, DownOnlyPol
 from lib_bgp_simulator import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
 
 graphs = [LeakGraph(
-                percent_adoptions=[0, 10, 20, 50, 80, 100],
+                percent_adoptions=[0, 5, 10, 20, 50, 80, 100],
                 adopt_policies=[BGPRIBSPolicy, DownOnlyPolicy],
                 AttackCls=AccidentalLeak,
                 num_trials=2,
@@ -21,6 +21,7 @@ for graph in graphs:
         print("Adopted policy:", data_point.PolicyCls.name)
         print("Propagation round", data_point.propagation_round)
         for scenario in list_of_scenarios:
-            print(scenario.data)
+            from pprint import pprint
+            pprint(scenario.data)
 
 
