@@ -28,7 +28,7 @@ def test_process_incoming_anns_bgpsec_depref():
     # assert new announcement was accepted to local rib
     assert(a.policy.local_rib[prefix].origin == ann2.origin)
 
-def test_process_incoming_anns_bgpsec_update_attrs():
+def test_bgpsec_update_attrs():
     """Test updating of bgpsec attributes when forwarding a bgpsec ann"""
     prefix = '137.99.0.0/16'
     ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0)
@@ -44,3 +44,20 @@ def test_process_incoming_anns_bgpsec_update_attrs():
     a.policy._populate_send_q(a, Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
     assert(a.policy.send_q[2][prefix][0].bgpsec_path == (1, 13796) and 
            a.policy.send_q[2][prefix][0].next_as == 2)
+
+def test_bgpsec_remove_attrs():
+    """Test removal of bgpsec attributes when a non-adopting AS is detected on the path"""
+    prefix = '137.99.0.0/16'
+    ann = PAnn(prefix=prefix, as_path=(13795, 13796),timestamp=0)
+    ann.bgpsec_path = (13796)
+    ann.next_as = 13795
+    a = BGPAS(1) 
+    b = BGPAS(2)
+    a.customers = [b]
+    a.policy = BGPsecPolicy()
+    b.policy = BGPsecPolicy()
+    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
+    a.policy._populate_send_q(a, Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
+    assert(len(a.policy.send_q[2][prefix][0].bgpsec_path) == 0 and 
+           a.policy.send_q[2][prefix][0].next_as == 0)
