@@ -17,8 +17,9 @@ class BGPsecPolicy(BGPRIBSPolicy):
                     if not ann.prefix_path_attributes_eq(ribs_out_ann):
                         ann_to_send = deepcopy(ann)
                         # BGPsec
-                        ann_to_send.next_as = as_obj.asn
-                        policy_self.send_q[as_obj.asn][prefix].append(ann)
+                        if ann_to_send.next_as == self.asn:
+                            ann_to_send.next_as = as_obj.asn
+                        policy_self.send_q[as_obj.asn][prefix].append(ann_to_send)
 
 
 
