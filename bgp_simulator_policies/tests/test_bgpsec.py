@@ -12,8 +12,8 @@ from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy
 def test_process_incoming_anns_bgpsec_depref():
     """Test preference of ann from customer with a BGPsec signature"""
     prefix = '137.99.0.0/16'
-    ann1 = PAnn(prefix=prefix, as_path=(13796,),timestamp=0)
-    ann2 = PAnn(prefix=prefix, as_path=(13795,),timestamp=0)
+    ann1 = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann2 = PAnn(prefix=prefix, as_path=(13795,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann2.bgpsec_path = ann2.as_path
     ann2.next_as = 1
     a = BGPAS(1) 
@@ -31,7 +31,7 @@ def test_process_incoming_anns_bgpsec_depref():
 def test_bgpsec_update_attrs():
     """Test updating of bgpsec attributes when forwarding a bgpsec ann"""
     prefix = '137.99.0.0/16'
-    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0)
+    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann.bgpsec_path = ann.as_path
     ann.next_as = 1
     a = BGPAS(1) 
@@ -48,7 +48,7 @@ def test_bgpsec_update_attrs():
 def test_bgpsec_remove_attrs():
     """Test removal of bgpsec attributes when a non-adopting AS is detected on the path"""
     prefix = '137.99.0.0/16'
-    ann = PAnn(prefix=prefix, as_path=(13795, 13796),timestamp=0)
+    ann = PAnn(prefix=prefix, as_path=(13795, 13796),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann.bgpsec_path = (13796)
     ann.next_as = 13795
     a = BGPAS(1) 

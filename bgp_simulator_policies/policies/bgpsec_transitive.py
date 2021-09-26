@@ -2,26 +2,11 @@ from copy import deepcopy
 
 from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, RibsIn, RibsOut, SendQueue, RecvQueue, Relationships
 
-class BGPsecTransitivePolicy(BGPRIBSPolicy):
+from .bgpsec import BGPsecPolicy
+
+class BGPsecTransitivePolicy(BGPsecPolicy):
 
     name="BGPsec Transitive"
-
-    def _populate_send_q(policy_self, self, propagate_to, send_rels):
-        """Populates send queue and ribs out"""
-
-        for as_obj in getattr(self, propagate_to.name.lower()):
-            for prefix, ann in policy_self.local_rib.items():
-                if ann.recv_relationship in send_rels:
-                    ribs_out_ann = policy_self.ribs_out[as_obj.asn].get(prefix)
-                    # To make sure we don't repropagate anns we have already sent
-                    if not ann.prefix_path_attributes_eq(ribs_out_ann):
-                        ann_to_send = deepcopy(ann)
-                        # BGPsec
-                        if ann_to_send.next_as == self.asn:
-                            ann_to_send.next_as = as_obj.asn
-                        policy_self.send_q[as_obj.asn][prefix].append(ann_to_send)
-
-
 
     def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
         """Assigns the priority to an announcement according to Gao Rexford"""
@@ -48,17 +33,14 @@ class BGPsecTransitivePolicy(BGPRIBSPolicy):
             else:
                 return not deep_ann.as_path[0] <= self.asn
 
-    def _deep_copy_ann(policy_self, self, ann, recv_relationship):
+    def _deep_copy_ann(policy_self, self, ann, recv_relationship, **extra_kwargs):
         """Deep copies ann and modifies attrs"""
 
-        ann = deepcopy(ann)
-        ann.seed_asn = None
-        # Update the BGPsec path, too
-        if ann.bgpsec_path == ann.as_path:
-            ann.bgpsec_path = (self.asn, *ann.bgpsec_path)
-        ann.as_path = (self.asn, *ann.as_path)
-        ann.recv_relationship = recv_relationship
-        return ann
+        kwargs = dict()
+        # Put default kwargs here
+        kwargs.update(extra_kwargs)
+
+        return super(BGPsecTransitivePolicy, policy_self)._deep_copy_ann(self, ann, recv_relationship, **kwargs)
 
     def _partial_verify_path(policy_self, partial, full):
         """Verify a partial path"""

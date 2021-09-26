@@ -8,11 +8,13 @@ class OriginHijack(Attack):
         anns = [PAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.VICTIM.value,
                     as_path=(victim,),
-                    seed_asn=victim),
+                    seed_asn=victim,
+                    recv_relationship=Relationships.ORIGIN),
                 PAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.ATTACKER.value,
                     as_path=(attacker, victim),
-                    seed_asn=attacker),]
+                    seed_asn=attacker,
+                    recv_relationship=Relationships.ORIGIN),]
         super(OriginHijack, self).__init__(attacker, victim, anns)
 
         self.post_run_hooks = []

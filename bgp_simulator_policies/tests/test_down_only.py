@@ -7,7 +7,7 @@ from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy
 def test_process_incoming_anns_do_reject():
     """Test rejection of ann from customer with DO community"""
     prefix = '137.99.0.0/16'
-    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0)
+    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann.do_communities = (13796,)
     a = BGPAS(1) 
     a.policy = DownOnlyPolicy()
@@ -19,7 +19,7 @@ def test_process_incoming_anns_do_reject():
 def test_process_incoming_anns_do_accept():
     """Test acceptance of ann from non-customer with DO community"""
     prefix = '137.99.0.0/16'
-    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0)
+    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann.do_communities = (13796,)
     a = BGPAS(1) 
     a.policy = DownOnlyPolicy()
@@ -33,7 +33,7 @@ def test_process_incoming_anns_do_accept():
 def test_populate_send_q_do(b_relationship, community_len):
     """Test addition of DO community when propagating to customers"""
     prefix = '137.99.0.0/16'
-    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0)
+    ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     a = BGPAS(1) 
     b = BGPAS(2)
     a.policy = DownOnlyPolicy()

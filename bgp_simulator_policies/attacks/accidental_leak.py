@@ -7,7 +7,8 @@ class AccidentalLeak(Attack):
         anns = [DOAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.VICTIM.value,
                     as_path=(victim,),
-                    seed_asn=victim)]
+                    seed_asn=victim,
+                    recv_relationship=Relationships.ORIGIN)]
         super(AccidentalLeak, self).__init__(attacker, victim, anns)
         
         self.post_run_hooks = [self.hook]

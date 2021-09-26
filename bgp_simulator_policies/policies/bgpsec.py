@@ -6,24 +6,16 @@ class BGPsecPolicy(BGPRIBSPolicy):
 
     name="BGPsec"
 
-    def _populate_send_q(policy_self, self, propagate_to, send_rels):
-        """Populates send queue and ribs out"""
+    def _add_ann_to_send_q(policy_self, self, as_obj, ann, *args):
 
-        for as_obj in getattr(self, propagate_to.name.lower()):
-            for prefix, ann in policy_self.local_rib.items():
-                if ann.recv_relationship in send_rels:
-                    ribs_out_ann = policy_self.ribs_out[as_obj.asn].get(prefix)
-                    # To make sure we don't repropagate anns we have already sent
-                    if not ann.prefix_path_attributes_eq(ribs_out_ann):
-                        ann_to_send = deepcopy(ann)
-                        # BGPsec
-                        if ann_to_send.next_as == self.asn:
-                            ann_to_send.next_as = as_obj.asn
-                        policy_self.send_q[as_obj.asn][prefix].append(ann_to_send)
+        # Set next_as for bgpsec
+        next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
+        super(BGPsecPolicy, policy_self)._add_ann_to_send_q(self,
+                                                     as_obj,
+                                                     ann.copy(next_as=next_as), *args)
 
-
-    def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
+    def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships, *args):
         """Assigns the priority to an announcement according to Gao Rexford"""
 
         if deep_ann is None:
@@ -48,19 +40,24 @@ class BGPsecPolicy(BGPRIBSPolicy):
             else:
                 return not deep_ann.as_path[0] <= self.asn
 
-    def _deep_copy_ann(policy_self, self, ann, recv_relationship):
-        """Deep copies ann and modifies attrs"""
+    def _deep_copy_ann(policy_self, self, ann, recv_relationship, **extra_kwargs):
+        """Policy modifications to ann
 
-        ann = deepcopy(ann)
-        ann.seed_asn = None
+        When it is decided that an annoucenemnt will be saved
+        in the local RIB, first it is copied with
+        copy_w_sim_attrs, then this function is called (before updated
+        path) then the path is updated
+        """
+
         # Update the BGPsec path, too
         if ann.bgpsec_path == ann.as_path:
             # If paths are equal, there is an unbroken chain of adopters,
             # otherwise, the attributes are lost
-            ann.bgpsec_path = (self.asn, *ann.bgpsec_path)
+            kwargs = {"bgpsec_path": (self.asn, *ann.bgpsec_path)}
         else:
-            ann.bgpsec_path = tuple()
-            ann.next_as = 0
-        ann.as_path = (self.asn, *ann.as_path)
-        ann.recv_relationship = recv_relationship
-        return ann
+            kwargs = {"bgpsec_path": tuple(), "next_as": 0}
+
+        kwargs.update(extra_kwargs)
+        # NOTE that after this point ann has been deep copied and processed
+        # This means that the AS path has 1 extra ASN that you don't need to check
+        return super(BGPsecPolicy, policy_self)._deep_copy_ann(self, ann, recv_relationship, **kwargs)

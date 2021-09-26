@@ -3,11 +3,15 @@ from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Ann
 from .. import DOAnn
 
 class IntentionalLeak(Attack):
+
+    AnnCls = DOAnn
+
     def __init__(self, attacker=ASNs.ATTACKER.value, victim=ASNs.VICTIM.value):
-        anns = [DOAnn(prefix=Prefixes.PREFIX.value,
-                    timestamp=Timestamps.VICTIM.value,
-                    as_path=(victim,),
-                    seed_asn=victim)]
+        anns = [self.AnnCls(prefix=Prefixes.PREFIX.value,
+                            timestamp=Timestamps.VICTIM.value,
+                            as_path=(victim,),
+                            seed_asn=victim,
+                                recv_relationship=Relationships.ORIGIN)]
         super(IntentionalLeak, self).__init__(attacker, victim, anns)
         
         self.post_run_hooks = [self.hook]
@@ -22,6 +26,7 @@ class IntentionalLeak(Attack):
                 for ann_tuple in inner_dict.values():
                     ann = ann_tuple[0]
                     atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
+                    self._truncate_ann(ann)
                     # TODO truncate path as much as possible
                     # Clear any down only communities
                     atk_ann.do_communities = tuple()
@@ -41,4 +46,6 @@ class IntentionalLeak(Attack):
                         neighbor.policy.process_incoming_anns(neighbor, Relationships.CUSTOMERS)
                         # Only need to leak one announcement per neighbor
                         print("Leaking", ann, "to neighbor", neighbor.asn)
-                        continue
+
+    def _truncate_ann(self, ann):
+        pass
