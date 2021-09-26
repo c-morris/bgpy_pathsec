@@ -13,7 +13,7 @@ class DownOnlyPolicy(BGPRIBSPolicy):
         if propagate_to == Relationships.CUSTOMERS:
             ann_to_send.do_communities = (self.asn, *ann_to_send.do_communities)
         # To make sure we don't repropagate anns we have already sent
-        super(DownOnlyPolicy, policy_self)._add_ann_to_send_q(self, as_obj, ann, propagate_to, *args)
+        super(DownOnlyPolicy, policy_self)._add_ann_to_send_q(self, as_obj, ann_to_send, propagate_to, *args)
 
     def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
         """Assigns the priority to an announcement according to Gao Rexford"""
