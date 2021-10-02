@@ -8,6 +8,9 @@ class OriginHijack(Attack):
         anns = [PAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.VICTIM.value,
                     as_path=(victim,),
+                    # Legitimate announcement has valid BGPsec attributes
+                    bgpsec_path=(victim,),
+                    next_as=victim,
                     seed_asn=victim,
                     recv_relationship=Relationships.ORIGIN),
                 PAnn(prefix=Prefixes.PREFIX.value,
