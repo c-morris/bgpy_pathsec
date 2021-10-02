@@ -10,7 +10,7 @@ class DownOnlyPolicy(BGPRIBSPolicy):
         
         ann_to_send = ann.copy()
         # Down Only Community
-        if propagate_to == Relationships.CUSTOMERS:
+        if propagate_to in (Relationships.CUSTOMERS, Relationships.PEERS):
             ann_to_send.do_communities = (self.asn, *ann_to_send.do_communities)
         # To make sure we don't repropagate anns we have already sent
         super(DownOnlyPolicy, policy_self)._add_ann_to_q(self, as_obj, ann_to_send, propagate_to, *args)
