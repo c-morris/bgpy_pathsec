@@ -15,11 +15,16 @@ class DownOnlyPolicy(BGPRIBSPolicy):
         # To make sure we don't repropagate anns we have already sent
         super(DownOnlyPolicy, policy_self)._add_ann_to_q(self, as_obj, ann_to_send, propagate_to, *args)
 
-    def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
-        """Assigns the priority to an announcement according to Gao Rexford"""
-        
-        # Down Only Check
+    def passes_down_only_checks(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
+        # Down Only Checks, defined in section 4.2
         if recv_relationship == Relationships.CUSTOMERS and len(shallow_ann.do_communities) != 0:
             return False
+        if recv_relationship == Relationships.PEERS and len(shallow_ann.do_communities) != 1:
+            return False
+        return True
 
+    def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
+        """Assigns the priority to an announcement according to Gao Rexford"""
+        if not policy_self.passes_down_only_checks(self, deep_ann, shallow_ann, recv_relationship):
+            return False
         return super(DownOnlyPolicy, policy_self)._new_ann_is_better(self, deep_ann, shallow_ann, recv_relationship)
