@@ -4,11 +4,6 @@ from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS
 
 from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy
 
-# In BGPsec, an attacker should never send an invalid signature. It is always
-# more advantageous to strip the security attributes and send a legacy
-# announcement, which will likely be depreferred, but should not be rejected
-# outright. 
-
 @pytest.mark.parametrize("partial, full", [[(1, 3), (1, 2, 3)],
                                            [(1,), (1, 2, 3)],
                                            [(1, 4, 5), (1, 2, 3, 4, 5)],
