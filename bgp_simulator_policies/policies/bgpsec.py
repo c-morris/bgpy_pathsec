@@ -6,12 +6,12 @@ class BGPsecPolicy(BGPRIBSPolicy):
 
     name="BGPsec"
 
-    def _add_ann_to_send_q(policy_self, self, as_obj, ann, *args):
+    def _add_ann_to_q(policy_self, self, as_obj, ann, *args):
 
         # Set next_as for bgpsec
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
-        super(BGPsecPolicy, policy_self)._add_ann_to_send_q(self,
+        super(BGPsecPolicy, policy_self)._add_ann_to_q(self,
                                                      as_obj,
                                                      ann.copy(next_as=next_as), *args)
 
