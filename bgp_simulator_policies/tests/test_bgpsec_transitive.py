@@ -3,7 +3,7 @@ import pytest
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS, Relationships, LocalRib, run_example
 
-from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy
+from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy
 
 @pytest.mark.parametrize("partial, full", [[(1, 3), (1, 2, 3)],
                                            [(1,), (1, 2, 3)],
@@ -31,7 +31,7 @@ def test_partial_path_metric(partial, full, segments):
     a.policy = BGPsecTransitivePolicy()
     assert(a.policy._partial_path_metric(partial, full) == segments)
 
-@pytest.mark.parametrize("BasePolicyCls", [BGPsecTransitivePolicy])
+@pytest.mark.parametrize("BasePolicyCls", [BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_propagate_bgpsec_transitive1(BasePolicyCls):
     r"""
     Test BGPsec transitive preference for fewer nonadopting segments.

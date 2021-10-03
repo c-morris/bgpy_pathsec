@@ -29,7 +29,8 @@ def test_process_incoming_anns_bgpsec_depref():
     # assert new announcement was accepted to local rib
     assert(a.policy.local_rib[prefix].origin == ann2.origin)
 
-def test_bgpsec_update_attrs():
+@pytest.mark.parametrize("BasePolicyCls", [BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
+def test_bgpsec_update_attrs(BasePolicyCls):
     """Test updating of bgpsec attributes when forwarding a bgpsec ann"""
     prefix = '137.99.0.0/16'
     ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
@@ -38,8 +39,8 @@ def test_bgpsec_update_attrs():
     a = BGPAS(1) 
     b = BGPAS(2)
     a.customers = [b]
-    a.policy = BGPsecPolicy()
-    b.policy = BGPsecPolicy()
+    a.policy = BasePolicyCls()
+    b.policy = BasePolicyCls()
     a.policy.recv_q[13796][prefix].append(ann)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     a.policy._populate_send_q(a, Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
