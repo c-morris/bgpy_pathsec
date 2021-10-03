@@ -2,9 +2,9 @@ import pytest
 
 from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS
 
-from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy
+from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy
 
-@pytest.mark.parametrize("AdoptedPolicy", [DownOnlyPolicy, BGPsecPolicy])
+@pytest.mark.parametrize("AdoptedPolicy", [DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_process_incoming_anns_do(AdoptedPolicy):
     """Test basic functionality of process_incoming_anns"""
     prefix = '137.99.0.0/16'

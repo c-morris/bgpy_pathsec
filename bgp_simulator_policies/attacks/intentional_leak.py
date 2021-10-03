@@ -1,15 +1,17 @@
 from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
 
-from .. import DOAnn
+from .. import PAnn
 
 class IntentionalLeak(Attack):
 
-    AnnCls = DOAnn
+    AnnCls = PAnn
 
     def __init__(self, attacker=ASNs.ATTACKER.value, victim=ASNs.VICTIM.value):
         anns = [self.AnnCls(prefix=Prefixes.PREFIX.value,
                             timestamp=Timestamps.VICTIM.value,
                             as_path=(victim,),
+                            bgpsec_path=(victim,),
+                            next_as=victim,
                             seed_asn=victim,
                                 recv_relationship=Relationships.ORIGIN)]
         super(IntentionalLeak, self).__init__(attacker, victim, anns)
@@ -26,8 +28,11 @@ class IntentionalLeak(Attack):
                 for ann_tuple in inner_dict.values():
                     ann = ann_tuple[0]
                     atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
+                    # Truncate path as much as possible, which is to the AS
+                    # after the most recent BGPsec Transitive adopter on the
+                    # path
                     self._truncate_ann(ann)
-                    # TODO truncate path as much as possible
+
                     # Clear any down only communities
                     atk_ann.do_communities = tuple()
                     # This suppresses withdrawals
@@ -48,4 +53,12 @@ class IntentionalLeak(Attack):
                         print("Leaking", ann, "to neighbor", neighbor.asn)
 
     def _truncate_ann(self, ann):
-        pass
+        j = 0
+        while ann.bgpsec_path[0] != ann.as_path[j]:
+            j += 1
+        if j == 0: # cannot truncate
+            return
+        # Decrement j to get one after the most recent adopting AS
+        ann.as_path = ann.as_path[j-1:]
+
+
