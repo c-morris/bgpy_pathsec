@@ -8,16 +8,16 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
 
     name="BGPsec Transitive"
 
-    def _add_ann_to_q(policy_self, self, as_obj, ann, *args):
-
-        # Set next_as for bgpsec
-        next_as = as_obj.asn
-
+    def _add_ann_to_q(policy_self, self, as_obj, ann, send_rels, *args, **kwargs):
+        ann_to_send = ann.copy()
+        policy_self.bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs)
         # Although this looks weird, it is correct to call the BGPsecPolicy's
         # superclass here
-        super(BGPsecPolicy, policy_self)._add_ann_to_q(self,
-                                                     as_obj,
-                                                     ann.copy(next_as=next_as), *args)
+        super(BGPsecPolicy, policy_self)._add_ann_to_q(self, as_obj, ann_to_send, send_rels, *args, **kwargs)
+
+    def bgpsec_transitive_modifications(policy_self, self, as_obj, ann_to_send, *args, **kwargs):
+        # Set next_as for bgpsec
+        ann_to_send.next_as = as_obj.asn
 
     def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships, *args):
         """Assigns the priority to an announcement according to Gao Rexford"""

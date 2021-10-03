@@ -3,7 +3,7 @@ import pytest
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS, Relationships, LocalRib, run_example
 
-from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy
+from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitiveDownOnlyPolicy
 
 def test_process_incoming_anns_do_reject():
     """Test rejection of ann from customer with DO community"""
@@ -45,7 +45,7 @@ def test_populate_send_q_do(b_relationship, community_len):
     a.policy._populate_send_q(a, b_relationship, [Relationships.CUSTOMERS])
     assert(len(a.policy.send_q[2][prefix][0].do_communities) == community_len)
 
-@pytest.mark.parametrize("BasePolicyCls", [DownOnlyPolicy])
+@pytest.mark.parametrize("BasePolicyCls", [DownOnlyPolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_propagate_do(BasePolicyCls):
     r"""
     Test the setting of down-only communities.
@@ -73,6 +73,8 @@ def test_propagate_do(BasePolicyCls):
     prefix = '137.99.0.0/16'
     announcements = [PAnn(prefix=prefix, as_path=(5,),timestamp=0, seed_asn=5,
                                   do_communities = tuple(),
+                                  bgpsec_path=(5,),
+                                  next_as=5,
                                   recv_relationship=Relationships.ORIGIN,
                                   traceback_end=True)]
 

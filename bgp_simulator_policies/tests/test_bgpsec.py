@@ -3,7 +3,7 @@ import pytest
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS, Relationships, LocalRib, run_example
 
-from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy
+from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy
 
 # In BGPsec, an attacker should never send an invalid signature. It is always
 # more advantageous to strip the security attributes and send a legacy
@@ -63,7 +63,7 @@ def test_bgpsec_remove_attrs():
     assert(len(a.policy.send_q[2][prefix][0].bgpsec_path) == 0 and 
            a.policy.send_q[2][prefix][0].next_as == 0)
 
-@pytest.mark.parametrize("BasePolicyCls", [BGPsecPolicy, BGPsecTransitivePolicy])
+@pytest.mark.parametrize("BasePolicyCls", [BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_propagate_bgpsec(BasePolicyCls):
     r"""
     Test BGPsec preference for authenticated paths.
