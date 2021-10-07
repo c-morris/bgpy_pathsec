@@ -31,7 +31,7 @@ class IntentionalLeak(Attack):
                     # Truncate path as much as possible, which is to the AS
                     # after the most recent BGPsec Transitive adopter on the
                     # path
-                    self._truncate_ann(ann)
+                    self._truncate_ann(atk_ann)
 
                     # Clear any down only communities
                     atk_ann.do_communities = tuple()
@@ -61,4 +61,6 @@ class IntentionalLeak(Attack):
         # Decrement j to get one after the most recent adopting AS
         ann.as_path = ann.as_path[j-1:]
 
+    def _trim_do_communities(self, ann):
+        ann.do_communities = tuple(x for x in ann.do_communities if x in ann.bgpsec_path)
 
