@@ -4,8 +4,6 @@ import os
 import shutil
 from statistics import mean, stdev
 
-import matplotlib
-import matplotlib.pyplot as plt
 import tikzplotlib
 
 from lib_bgp_simulator import Outcomes
@@ -17,6 +15,8 @@ class Line:
         self.yerr = []
 
 def aggregate_and_write(self, graph_dir):
+    import matplotlib
+    import matplotlib.pyplot as plt
     """Writes the graph in specified dir"""
 
     print("Can't do this with more than 1 graph, write a better solution")
@@ -78,6 +78,8 @@ def aggregate_and_write(self, graph_dir):
                             graph_dir, adopting="all")
 
 def _write(self, lines, outcome, subgraph_name, propagation_round, graph_dir, adopting=None):
+    import matplotlib
+    import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     plt.xlim(0, 100)
     plt.ylim(0, 100)
