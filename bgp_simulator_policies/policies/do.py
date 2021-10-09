@@ -29,15 +29,3 @@ class DownOnlyPolicy(BGPRIBSPolicy):
         if recv_relationship == Relationships.PEERS and len(ann.do_communities) != 1:
             return False
         return True
-
-    #def _new_ann_is_better(policy_self,
-    #                       self,
-    #                       current_best_ann,
-    #                       current_best_ann_processed,
-    #                       new_ann,
-    #                       new_ann_processed,
-    #                       recv_relationship: Relationships):
-    #    """Assigns the priority to an announcement according to Gao Rexford"""
-    #    if not policy_self.passes_down_only_checks(self, new_ann, recv_relationship):
-    #        return False
-    #    return super(DownOnlyPolicy, policy_self)._new_ann_is_better(self, current_best_ann, current_best_ann_processed, new_ann, new_ann_processed, recv_relationship)

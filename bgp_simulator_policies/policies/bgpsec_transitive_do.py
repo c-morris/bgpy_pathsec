@@ -16,8 +16,3 @@ class BGPsecTransitiveDownOnlyPolicy(BGPsecTransitivePolicy, DownOnlyPolicy):
         # superclass here (which is the BGPRIBSPolicy)
         super(DownOnlyPolicy, policy_self)._add_ann_to_q(self, as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
 
-    #def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
-    #    """Assigns the priority to an announcement according to Gao Rexford and Security Policies"""
-    #    if not policy_self.passes_down_only_checks(self, shallow_ann, recv_relationship):
-    #        return False
-    #    return super(BGPsecTransitiveDownOnlyPolicy, policy_self)._new_ann_is_better(self, deep_ann, shallow_ann, recv_relationship)
