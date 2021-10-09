@@ -11,7 +11,7 @@ def test_process_incoming_anns_do(AdoptedPolicy):
     ann = PAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     a = BGPAS(1) 
     a.policy = AdoptedPolicy()
-    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.recv_q.add_ann(ann)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     # assert announcement was accepted to local rib
-    assert(a.policy.local_rib[prefix].origin == ann.origin)
+    assert(a.policy.local_rib.get_ann(prefix).origin == ann.origin)

@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, RibsIn, RibsOut, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, SendQueue, RecvQueue, Relationships
 
 from .bgpsec import BGPsecPolicy
 

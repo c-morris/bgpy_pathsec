@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, RibsIn, RibsOut, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, SendQueue, RecvQueue, Relationships
 
 class DownOnlyPolicy(BGPRIBSPolicy):
     name = "Down Only"
@@ -10,10 +10,10 @@ class DownOnlyPolicy(BGPRIBSPolicy):
         # To make sure we don't repropagate anns we have already sent
         super(DownOnlyPolicy, policy_self)._add_ann_to_q(self, as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
 
-    #def _valid_ann(policy_self, self, ann, recv_relationship: Relationships):
-    #    """Determine if an announcement is valid or should be dropped"""
-    #    return (super(DownOnlyPolicy, policy_self)._valid_ann(self, ann, recv_relationship) and 
-    #            policy_self.passes_down_only_checks(self, ann, recv_relationship))
+    def _valid_ann(policy_self, self, ann, recv_relationship: Relationships):
+        """Determine if an announcement is valid or should be dropped"""
+        return (super(DownOnlyPolicy, policy_self)._valid_ann(self, ann, recv_relationship) and 
+                policy_self.passes_down_only_checks(self, ann, recv_relationship))
 
         # BGP Loop Prevention Check
         return not (self.asn in ann.as_path)
@@ -30,8 +30,14 @@ class DownOnlyPolicy(BGPRIBSPolicy):
             return False
         return True
 
-    def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships):
-        """Assigns the priority to an announcement according to Gao Rexford"""
-        if not policy_self.passes_down_only_checks(self, shallow_ann, recv_relationship):
-            return False
-        return super(DownOnlyPolicy, policy_self)._new_ann_is_better(self, deep_ann, shallow_ann, recv_relationship)
+    #def _new_ann_is_better(policy_self,
+    #                       self,
+    #                       current_best_ann,
+    #                       current_best_ann_processed,
+    #                       new_ann,
+    #                       new_ann_processed,
+    #                       recv_relationship: Relationships):
+    #    """Assigns the priority to an announcement according to Gao Rexford"""
+    #    if not policy_self.passes_down_only_checks(self, new_ann, recv_relationship):
+    #        return False
+    #    return super(DownOnlyPolicy, policy_self)._new_ann_is_better(self, current_best_ann, current_best_ann_processed, new_ann, new_ann_processed, recv_relationship)

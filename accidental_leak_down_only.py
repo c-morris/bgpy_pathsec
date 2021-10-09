@@ -9,10 +9,10 @@ graphs = [LeakGraph(
                 percent_adoptions=[0, 5, 10, 20, 50, 80, 100],
                 adopt_policies=[BGPRIBSPolicy, DownOnlyPolicy],
                 AttackCls=AccidentalLeak,
-                num_trials=2,
+                num_trials=20,
                 propagation_rounds=2,
                 base_policy=BGPRIBSPolicy)]
-Simulator().run(graphs=graphs, graph_path="/home/cbm14007/Downloads/graphs/graphs.tar.gz")
+Simulator().run(graphs=graphs, graph_path="/tmp/ezgraphs.tar.gz")
 
 # Dealing with output data (not in the code yet)
 for graph in graphs:

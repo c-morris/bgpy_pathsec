@@ -19,15 +19,15 @@ def test_process_incoming_anns_bgpsec_depref():
     ann2.next_as = 1
     a = BGPAS(1) 
     a.policy = BGPsecPolicy()
-    a.policy.recv_q[13796][prefix].append(ann1)
+    a.policy.recv_q.add_ann(ann1)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     # assert announcement was accepted to local rib
-    assert(a.policy.local_rib[prefix].origin == ann1.origin)
+    assert(a.policy.local_rib.get_ann(prefix).origin == ann1.origin)
     # Now add announcement with valid signatures
-    a.policy.recv_q[13795][prefix].append(ann2)
+    a.policy.recv_q.add_ann(ann2)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     # assert new announcement was accepted to local rib
-    assert(a.policy.local_rib[prefix].origin == ann2.origin)
+    assert(a.policy.local_rib.get_ann(prefix).origin == ann2.origin)
 
 @pytest.mark.parametrize("BasePolicyCls", [BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_bgpsec_update_attrs(BasePolicyCls):
@@ -41,11 +41,11 @@ def test_bgpsec_update_attrs(BasePolicyCls):
     a.customers = [b]
     a.policy = BasePolicyCls()
     b.policy = BasePolicyCls()
-    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.recv_q.add_ann(ann)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     a.policy._populate_send_q(a, Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
-    assert(a.policy.send_q[2][prefix][0].bgpsec_path == (1, 13796) and 
-           a.policy.send_q[2][prefix][0].next_as == 2)
+    assert(a.policy.send_q.get_send_info(b, prefix).ann.bgpsec_path == (1, 13796) and 
+           a.policy.send_q.get_send_info(b, prefix).ann.next_as == 2)
 
 def test_bgpsec_remove_attrs():
     """Test removal of bgpsec attributes when a non-adopting AS is detected on the path"""
@@ -58,11 +58,11 @@ def test_bgpsec_remove_attrs():
     a.customers = [b]
     a.policy = BGPsecPolicy()
     b.policy = BGPsecPolicy()
-    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.recv_q.add_ann(ann)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     a.policy._populate_send_q(a, Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
-    assert(len(a.policy.send_q[2][prefix][0].bgpsec_path) == 0 and 
-           a.policy.send_q[2][prefix][0].next_as == 0)
+    assert(len(a.policy.send_q.get_send_info(b, prefix).ann.bgpsec_path) == 0 and 
+           a.policy.send_q.get_send_info(b, prefix).ann.next_as == 0)
 
 @pytest.mark.parametrize("BasePolicyCls", [BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_propagate_bgpsec(BasePolicyCls):
@@ -104,11 +104,11 @@ def test_propagate_bgpsec(BasePolicyCls):
 
     # Local RIB data
     local_ribs = {
-        1: LocalRib({prefix: PAnn(as_path=(1, 3, 4, 5), bgpsec_path=(1, 3, 4, 5), next_as=1, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        2: LocalRib({prefix: PAnn(as_path=(2, 5), bgpsec_path=(5,), next_as=5, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        3: LocalRib({prefix: PAnn(as_path=(3, 4, 5), bgpsec_path=(3, 4, 5), next_as=3, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        4: LocalRib({prefix: PAnn(as_path=(4, 5), bgpsec_path=(4, 5), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        5: LocalRib({prefix: announcements[0]}),
+        1: {prefix: PAnn(as_path=(1, 3, 4, 5), bgpsec_path=(1, 3, 4, 5), next_as=1, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        2: {prefix: PAnn(as_path=(2, 5), bgpsec_path=(5,), next_as=5, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        3: {prefix: PAnn(as_path=(3, 4, 5), bgpsec_path=(3, 4, 5), next_as=3, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        4: {prefix: PAnn(as_path=(4, 5), bgpsec_path=(4, 5), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        5: {prefix: announcements[0]},
     }
 
     run_example(peers=peers,
