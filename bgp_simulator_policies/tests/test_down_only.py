@@ -12,10 +12,10 @@ def test_process_incoming_anns_do_reject():
     ann.do_communities = (13796,)
     a = BGPAS(1) 
     a.policy = DownOnlyPolicy()
-    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.recv_q.add_ann(ann)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     # assert announcement was accepted to local rib
-    assert(a.policy.local_rib.get(prefix) is None)
+    assert(a.policy.local_rib.get_ann(prefix) is None)
 
 def test_process_incoming_anns_do_accept():
     """Test acceptance of ann from non-customer with DO community"""
@@ -24,10 +24,10 @@ def test_process_incoming_anns_do_accept():
     ann.do_communities = (13796,)
     a = BGPAS(1) 
     a.policy = DownOnlyPolicy()
-    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.recv_q.add_ann(ann)
     a.policy.process_incoming_anns(a, Relationships.PROVIDERS)
     # assert announcement was accepted to local rib
-    assert(a.policy.local_rib[prefix].origin == ann.origin)
+    assert(a.policy.local_rib.get_ann(prefix).origin == ann.origin)
 
 @pytest.mark.parametrize("b_relationship, community_len", [[Relationships.CUSTOMERS, 1],
                                                            [Relationships.PROVIDERS, 0]])
@@ -40,10 +40,10 @@ def test_populate_send_q_do(b_relationship, community_len):
     a.policy = DownOnlyPolicy()
     b.policy = DownOnlyPolicy()
     setattr(a, b_relationship.name.lower(), (b,))
-    a.policy.recv_q[13796][prefix].append(ann)
+    a.policy.recv_q.add_ann(ann)
     a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
     a.policy._populate_send_q(a, b_relationship, [Relationships.CUSTOMERS])
-    assert(len(a.policy.send_q[2][prefix][0].do_communities) == community_len)
+    assert(len(a.policy.send_q.get_send_info(b, prefix).ann.do_communities) == community_len)
 
 @pytest.mark.parametrize("BasePolicyCls", [DownOnlyPolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_propagate_do(BasePolicyCls):
@@ -83,11 +83,11 @@ def test_propagate_do(BasePolicyCls):
 
     # Local RIB data
     local_ribs = {
-        1: LocalRib({prefix: PAnn(as_path=(1, 3, 5), do_communities=tuple(), recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        2: LocalRib({prefix: PAnn(as_path=(2, 3, 5), do_communities=(3,), recv_relationship=Relationships.PEERS, **kwargs)}),
-        3: LocalRib({prefix: PAnn(as_path=(3, 5), do_communities=tuple(), recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        4: LocalRib({prefix: PAnn(as_path=(4, 2, 3, 5), do_communities=(2, 3), recv_relationship=Relationships.PROVIDERS, **kwargs)}),
-        5: LocalRib({prefix: announcements[0]}),
+        1: {prefix: PAnn(as_path=(1, 3, 5), do_communities=tuple(), recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        2: {prefix: PAnn(as_path=(2, 3, 5), do_communities=(3,), recv_relationship=Relationships.PEERS, **kwargs)},
+        3: {prefix: PAnn(as_path=(3, 5), do_communities=tuple(), recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        4: {prefix: PAnn(as_path=(4, 2, 3, 5), do_communities=(2, 3), recv_relationship=Relationships.PROVIDERS, **kwargs)},
+        5: {prefix: announcements[0]},
     }
 
     run_example(peers=peers,

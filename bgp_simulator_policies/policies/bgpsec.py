@@ -38,13 +38,13 @@ class BGPsecPolicy(BGPRIBSPolicy):
         if new_rel_better is not None:
             return new_rel_better
         else:
-            bgpsec_is_present = policy_self._new_ann_is_better_bgpsec(self,
+            bgpsec_better = policy_self._new_ann_is_better_bgpsec(self,
                                                                       current_ann,
                                                                       current_processed,
                                                                       new_ann,
                                                                       new_processed)
-            if (bgpsec_is_present is not None):
-                return  bgpsec_is_present
+            if (bgpsec_better is not None):
+                return  bgpsec_better
             else:
                 new_as_path_shorter = policy_self._new_as_path_shorter(current_ann,
                                                                        current_processed,

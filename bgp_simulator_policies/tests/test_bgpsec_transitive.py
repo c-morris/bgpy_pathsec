@@ -87,15 +87,15 @@ def test_propagate_bgpsec_transitive1(BasePolicyCls):
 
     # Local RIB data
     local_ribs = {
-        1: LocalRib({prefix: PAnn(as_path=(1, 3, 7, 9, 4, 5), bgpsec_path=(1, 5), next_as=1, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        2: LocalRib({prefix: PAnn(as_path=(2, 6, 8, 5), bgpsec_path=(6, 5), next_as=2, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        3: LocalRib({prefix: PAnn(as_path=(3, 7, 9, 4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        4: LocalRib({prefix: PAnn(as_path=(4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        5: LocalRib({prefix: announcements[0]}),
-        6: LocalRib({prefix: PAnn(as_path=(6, 8, 5), bgpsec_path=(6, 5), next_as=6, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        7: LocalRib({prefix: PAnn(as_path=(7, 9, 4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        8: LocalRib({prefix: PAnn(as_path=(8, 5), bgpsec_path=(5,), next_as=8, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
-        9: LocalRib({prefix: PAnn(as_path=(9, 4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)}),
+        1: {prefix: PAnn(as_path=(1, 3, 7, 9, 4, 5), bgpsec_path=(1, 5), next_as=1, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        2: {prefix: PAnn(as_path=(2, 6, 8, 5), bgpsec_path=(6, 5), next_as=2, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        3: {prefix: PAnn(as_path=(3, 7, 9, 4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        4: {prefix: PAnn(as_path=(4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        5: {prefix: announcements[0]},
+        6: {prefix: PAnn(as_path=(6, 8, 5), bgpsec_path=(6, 5), next_as=6, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        7: {prefix: PAnn(as_path=(7, 9, 4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        8: {prefix: PAnn(as_path=(8, 5), bgpsec_path=(5,), next_as=8, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
+        9: {prefix: PAnn(as_path=(9, 4, 5), bgpsec_path=(5,), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
     }
 
     run_example(peers=peers,

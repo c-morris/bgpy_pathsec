@@ -19,30 +19,24 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
         # Set next_as for bgpsec
         ann_to_send.next_as = as_obj.asn
 
-    def _new_ann_is_better(policy_self, self, deep_ann, shallow_ann, recv_relationship: Relationships, *args):
-        """Assigns the priority to an announcement according to Gao Rexford"""
-
-        if deep_ann is None:
+    def _new_ann_is_better_bgpsec(policy_self,
+                                  self,
+                                  current_ann,
+                                  current_processed,
+                                  new_ann,
+                                  new_processed):
+           
+        # This is BGPsec Security Second, where announcements with security
+        # attributes are preferred over those without, but only after
+        # considering business relationships.
+        current_ann_metric = policy_self._partial_path_metric(current_ann.bgpsec_path, current_ann.as_path)
+        new_ann_metric = policy_self._partial_path_metric(new_ann.bgpsec_path, new_ann.as_path)
+        if current_ann_metric > new_ann_metric:
             return True
-
-        if deep_ann.recv_relationship.value > recv_relationship.value:
-            return False
-        elif deep_ann.recv_relationship.value < recv_relationship.value:
-            return True
+        elif current_ann_metric == new_ann_metric:
+            return None
         else:
-            # This is BGPsec Security Second, where announcements with security
-            # attributes are preferred over those without, but only after
-            # considering business relationships.
-            deep_ann_metric = policy_self._partial_path_metric(deep_ann.bgpsec_path, deep_ann.as_path)
-            shallow_ann_metric = policy_self._partial_path_metric(shallow_ann.bgpsec_path, shallow_ann.as_path)
-            if deep_ann_metric > shallow_ann_metric:
-                return True
-            if len(deep_ann.as_path) < len(shallow_ann.as_path) + 1:
-                return False
-            elif len(deep_ann.as_path) > len(shallow_ann.as_path) + 1:
-                return True
-            else:
-                return not deep_ann.as_path[0] <= self.asn
+            return False
 
     def _deep_copy_ann(policy_self, self, ann, recv_relationship, **extra_kwargs):
         """Policy modifications to ann
