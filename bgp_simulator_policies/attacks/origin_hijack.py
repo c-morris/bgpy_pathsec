@@ -17,6 +17,8 @@ class OriginHijack(Attack):
                     timestamp=Timestamps.ATTACKER.value,
                     as_path=(attacker, victim),
                     seed_asn=attacker,
+                    # Add victim to removed signatures
+                    removed_signatures=(victim,),
                     recv_relationship=Relationships.ORIGIN),]
         super(OriginHijack, self).__init__(attacker, victim, anns)
 

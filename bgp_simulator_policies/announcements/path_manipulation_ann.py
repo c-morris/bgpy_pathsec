@@ -6,7 +6,7 @@ class PAnn(DOAnn):
     Generic path manipulation announcement.
     """
 
-    __slots__ = ["bgpsec_path", "next_as"]
+    __slots__ = ["bgpsec_path", "next_as", "removed_signatures"]
 
     def __init__(self, *args, **kwargs):
 
@@ -24,6 +24,13 @@ class PAnn(DOAnn):
         # The next_as indicates the AS this announcement is being sent to. It
         # must match for the announcement to be accepted. 
         self.next_as = kwargs.pop("next_as", 0)
+
+        # The removed_signatures attribute is for tracking removed bgpsec
+        # transitive signatures. Normally, a BGPsec Transitive AS would be
+        # aware of all other adopting nodes and it could check for missing
+        # signatures that way. For convenience, since this is a simulation,
+        # attackers will update this attribute when they remove signatures. 
+        self.removed_signatures =  kwargs.pop("removed_signatures", tuple())
 
         super(PAnn, self).__init__(*args, **kwargs)
     @property

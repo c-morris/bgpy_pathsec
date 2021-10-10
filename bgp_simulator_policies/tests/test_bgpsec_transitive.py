@@ -31,6 +31,21 @@ def test_partial_path_metric(partial, full, segments):
     a.policy = BGPsecTransitivePolicy()
     assert(a.policy._partial_path_metric(partial, full) == segments)
 
+def test_process_incoming_anns_bgpsec_transitive_reject():
+    """Test rejection of bgpsec transitive ann with missing signature"""
+    prefix = '137.99.0.0/16'
+    ann = PAnn(prefix=prefix, as_path=(13795,),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann.bgpsec_path = tuple()
+    ann.next_as = 1
+    ann.removed_signatures = (13795,)
+    a = BGPAS(1) 
+    a.policy = BGPsecTransitivePolicy()
+    # Now add announcement with missing signatures
+    a.policy.recv_q.add_ann(ann)
+    a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
+    # assert new announcement was not accepted to local rib
+    assert(a.policy.local_rib.get_ann(prefix) is None)
+
 @pytest.mark.parametrize("BasePolicyCls", [BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
 def test_propagate_bgpsec_transitive1(BasePolicyCls):
     r"""

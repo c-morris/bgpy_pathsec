@@ -19,6 +19,12 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
         # Set next_as for bgpsec
         ann_to_send.next_as = as_obj.asn
 
+    def _valid_ann(policy_self, self, ann, recv_relationship: Relationships):
+        """Determine if an announcement is valid or should be dropped"""
+        return (super(BGPsecTransitivePolicy, policy_self)._valid_ann(self, ann, recv_relationship) and 
+                len(ann.removed_signatures) == 0)
+
+
     def _new_ann_is_better_bgpsec(policy_self,
                                   self,
                                   current_ann,
