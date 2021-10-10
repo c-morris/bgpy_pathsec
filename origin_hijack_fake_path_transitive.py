@@ -9,7 +9,7 @@ graphs = [LeakGraph(
                 percent_adoptions=[0, 10, 20, 50, 80, 100],
                 adopt_policies=[BGPRIBSPolicy, BGPsecPolicy, BGPsecTransitivePolicy],
                 AttackCls=OriginHijack,
-                num_trials=10,
+                num_trials=200,
                 propagation_rounds=1,
                 base_policy=BGPRIBSPolicy)]
 Simulator().run(graphs=graphs, graph_path="/home/cam/graphs/graphs.tar.gz")
