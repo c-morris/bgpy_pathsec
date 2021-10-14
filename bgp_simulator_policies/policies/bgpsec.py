@@ -75,7 +75,7 @@ class BGPsecAS(BGPRIBsAS):
         else:
             return None
 
-    def _deep_copy_ann(self, ann, recv_relationship, **extra_kwargs):
+    def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
         """Policy modifications to ann
 
         When it is decided that an annoucenemnt will be saved
@@ -95,4 +95,4 @@ class BGPsecAS(BGPRIBsAS):
         kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
         # This means that the AS path has 1 extra ASN that you don't need to check
-        return super(BGPsecAS, self)._deep_copy_ann(self, ann, recv_relationship, **kwargs)
+        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)

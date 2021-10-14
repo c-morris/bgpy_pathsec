@@ -43,7 +43,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         else:
             return False
 
-    def _deep_copy_ann(self, ann, recv_relationship, **extra_kwargs):
+    def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
         """Policy modifications to ann
 
         When it is decided that an annoucenemnt will be saved
@@ -61,7 +61,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         # This means that the AS path has 1 extra ASN that you don't need to check
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        return super(BGPsecAS, self)._deep_copy_ann(ann, recv_relationship, **kwargs)
+        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)
 
     def _partial_verify_path(partial, full):
         """Verify a partial path"""
