@@ -3,12 +3,14 @@ from lib_bgp_simulator import BGPRIBsAS, LocalRib, SendQueue, RecvQueue, Relatio
 class DownOnlyAS(BGPRIBsAS):
     name = "Down Only"
     
-    def _add_ann_to_q(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs):
+    __slots__ = []
+
+    def _process_outgoing_ann(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs):
         
         ann_to_send = ann.copy()
         self.down_only_modifications(as_obj, ann_to_send, propagate_to, *args, **kwargs)
         # To make sure we don't repropagate anns we have already sent
-        super(DownOnlyAS, self)._add_ann_to_q(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
+        super(DownOnlyAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
 
     def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""

@@ -12,7 +12,7 @@ def test_process_incoming_anns_do_reject():
     ann.do_communities = (13796,)
     a = DownOnlyAS(1)
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(a, Relationships.CUSTOMERS)
+    a.process_incoming_anns(Relationships.CUSTOMERS)
     # assert announcement was accepted to local rib
     assert(a._local_rib.get_ann(prefix) is None)
 
@@ -23,7 +23,7 @@ def test_process_incoming_anns_do_accept():
     ann.do_communities = (13796,)
     a = DownOnlyAS(1)
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(a, Relationships.PROVIDERS)
+    a.process_incoming_anns(Relationships.PROVIDERS)
     # assert announcement was accepted to local rib
     assert(a._local_rib.get_ann(prefix).origin == ann.origin)
 
@@ -37,9 +37,9 @@ def test_populate_send_q_do(b_relationship, community_len):
     b = DownOnlyAS(2)
     setattr(a, b_relationship.name.lower(), (b,))
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(a, Relationships.CUSTOMERS)
-    a._populate_send_q(a, b_relationship, [Relationships.CUSTOMERS])
-    assert(len(a.send_q.get_send_info(b, prefix).ann.do_communities) == community_len)
+    a.process_incoming_anns(Relationships.CUSTOMERS)
+    a._populate_send_q(b_relationship, [Relationships.CUSTOMERS])
+    assert(len(a._send_q.get_send_info(b, prefix).ann.do_communities) == community_len)
 
 @pytest.mark.parametrize("BasePolicyCls", [DownOnlyAS, BGPsecTransitiveDownOnlyAS])
 def test_propagate_do(BasePolicyCls):
@@ -90,4 +90,4 @@ def test_propagate_do(BasePolicyCls):
                 customer_providers=customer_providers,
                 as_policies=as_policies,
                 announcements=announcements,
-                _local_ribs=_local_ribs)
+                local_ribs=_local_ribs)

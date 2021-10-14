@@ -7,12 +7,14 @@ class BGPsecTransitiveDownOnlyAS(BGPsecTransitiveAS, DownOnlyAS):
     # means that attributes in the BGPsecTransitive policy take priority. 
     name = "BGPsec Transitive Down Only"
     
-    def _add_ann_to_q(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs):
+    __slots__ = []
+    
+    def _process_outgoing_ann(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs):
         
         ann_to_send = ann.copy()
-        self.down_only_modifications(self, as_obj, ann_to_send, propagate_to, *args, **kwargs)
-        self.bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs)
+        self.down_only_modifications(as_obj, ann_to_send, propagate_to, *args, **kwargs)
+        self.bgpsec_transitive_modifications(as_obj, ann_to_send, *args, **kwargs)
         # Although this looks weird, it is correct to call the DownOnlyAS's
         # superclass here (which is the BGPRIBsAS)
-        super(DownOnlyAS, self)._add_ann_to_q(self, as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
+        super(DownOnlyAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
 

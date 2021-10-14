@@ -6,12 +6,14 @@ class BGPsecAS(BGPRIBsAS):
 
     name="BGPsec"
 
-    def _add_ann_to_q(self, as_obj, ann, *args):
+    __slots__ = []
+
+    def _process_outgoing_ann(self, as_obj, ann, *args):
 
         # Set next_as for bgpsec
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
-        super(BGPsecAS, self)._add_ann_to_q(
+        super(BGPsecAS, self)._process_outgoing_ann(
                                                      as_obj,
                                                      ann.copy(next_as=next_as), *args)
     def _new_ann_is_better(self,

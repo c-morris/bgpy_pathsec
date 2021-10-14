@@ -10,15 +10,13 @@ from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransit
                                            [(1, 4, 5), (1, 2, 3, 4, 5)],
                                            [(1, 2, 3), (1, 2, 3)]])
 def test_partial_path(partial, full):
-    a = BGPAS(1) 
-    a = BGPsecTransitiveAS()
+    a = BGPsecTransitiveAS(1)
     assert(a._partial_verify_path(partial, full))
 
 @pytest.mark.parametrize("partial, full", [[(4,), (1, 2, 3)],
                                            [(5, 4), (1, 2, 3, 4, 5)]])
 def test_partial_path(partial, full):
-    a = BGPAS(1) 
-    a = BGPsecTransitiveAS()
+    a = BGPsecTransitiveAS(1)
     assert(not a._partial_verify_path(partial, full))
 
 
@@ -27,8 +25,7 @@ def test_partial_path(partial, full):
                                            [(1, 4, 5), (1, 2, 3, 4, 5), 1],
                                            [(1, 2, 3), (1, 2, 3), 0]])
 def test_partial_path_metric(partial, full, segments):
-    a = BGPAS(1) 
-    a = BGPsecTransitiveAS()
+    a = BGPsecTransitiveAS(1)
     assert(a._partial_path_metric(partial, full) == segments)
 
 def test_process_incoming_anns_bgpsec_transitive_reject():
@@ -38,11 +35,10 @@ def test_process_incoming_anns_bgpsec_transitive_reject():
     ann.bgpsec_path = tuple()
     ann.next_as = 1
     ann.removed_signatures = (13795,)
-    a = BGPAS(1) 
-    a = BGPsecTransitiveAS()
+    a = BGPsecTransitiveAS(1)
     # Now add announcement with missing signatures
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(a, Relationships.CUSTOMERS)
+    a.process_incoming_anns(Relationships.CUSTOMERS)
     # assert new announcement was not accepted to local rib
     assert(a._local_rib.get_ann(prefix) is None)
 
@@ -117,4 +113,4 @@ def test_propagate_bgpsec_transitive1(BaseASCls):
                 customer_providers=customer_providers,
                 as_policies=as_policies,
                 announcements=announcements,
-                _local_ribs=_local_ribs)
+                local_ribs=_local_ribs)

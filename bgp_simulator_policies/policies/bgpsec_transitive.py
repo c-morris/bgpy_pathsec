@@ -7,13 +7,15 @@ from .bgpsec import BGPsecAS
 class BGPsecTransitiveAS(BGPsecAS):
 
     name="BGPsec Transitive"
+    
+    __slots__ = []
 
-    def _add_ann_to_q(self, as_obj, ann, send_rels, *args, **kwargs):
+    def _process_outgoing_ann(self, as_obj, ann, send_rels, *args, **kwargs):
         ann_to_send = ann.copy()
         self.bgpsec_transitive_modifications(as_obj, ann_to_send, *args, **kwargs)
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        super(BGPsecAS, self)._add_ann_to_q(as_obj, ann_to_send, send_rels, *args, **kwargs)
+        super(BGPsecAS, self)._process_outgoing_ann(as_obj, ann_to_send, send_rels, *args, **kwargs)
 
     def bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs):
         # Set next_as for bgpsec
@@ -63,7 +65,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         # superclass here
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)
 
-    def _partial_verify_path(partial, full):
+    def _partial_verify_path(self, partial, full):
         """Verify a partial path"""
         i = 0
         j = 0
@@ -75,7 +77,7 @@ class BGPsecTransitiveAS(BGPsecAS):
             i += 1
         return i == len(partial)
 
-    def _partial_path_metric(partial, full):
+    def _partial_path_metric(self, partial, full):
         """Count the number of non-adopting segments"""
         i = 0
         j = 0
