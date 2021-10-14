@@ -1,6 +1,6 @@
 import random
 
-from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph
+from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph
 
 from .custom_graph import CustomGraph
 

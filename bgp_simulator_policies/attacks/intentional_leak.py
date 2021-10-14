@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
+from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
 
 from .. import PAnn
 
@@ -24,10 +24,10 @@ class IntentionalLeak(Attack):
         attacker = engine.as_dict[self.attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
-            for neighbor, inner_dict in attacker.policy.ribs_in.items():
+            for neighbor, inner_dict in attacker.ribs_in.items():
                 for ann_tuple in inner_dict.values():
                     ann = ann_tuple[0]
-                    atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
+                    atk_ann = attacker._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
                     # Truncate path as much as possible, which is to the AS
                     # after the most recent BGPsec Transitive adopter on the
                     # path
@@ -46,9 +46,9 @@ class IntentionalLeak(Attack):
             for neighbor in attacker.providers + attacker.peers:
                 for ann in attack_anns:
                     if neighbor.asn not in ann.as_path:
-                        #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
-                        neighbor.policy.recv_q[attacker.asn][ann.prefix].append(ann)
-                        neighbor.policy.process_incoming_anns(neighbor, Relationships.CUSTOMERS)
+                        #attacker.send_q[neighbor][ann.prefix].append(ann)
+                        neighbor.recv_q[attacker.asn][ann.prefix].append(ann)
+                        neighbor.process_incoming_anns(neighbor, Relationships.CUSTOMERS)
                         # Only need to leak one announcement per neighbor
                         print("Leaking", ann, "to neighbor", neighbor.asn)
 

@@ -1,32 +1,31 @@
 from copy import deepcopy
 
-from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPRIBsAS, LocalRib, SendQueue, RecvQueue, Relationships
 
-from .bgpsec import BGPsecPolicy
+from .bgpsec import BGPsecAS
 
-class BGPsecTransitivePolicy(BGPsecPolicy):
+class BGPsecTransitiveAS(BGPsecAS):
 
     name="BGPsec Transitive"
 
-    def _add_ann_to_q(policy_self, self, as_obj, ann, send_rels, *args, **kwargs):
+    def _add_ann_to_q(self, as_obj, ann, send_rels, *args, **kwargs):
         ann_to_send = ann.copy()
-        policy_self.bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs)
-        # Although this looks weird, it is correct to call the BGPsecPolicy's
+        self.bgpsec_transitive_modifications(as_obj, ann_to_send, *args, **kwargs)
+        # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        super(BGPsecPolicy, policy_self)._add_ann_to_q(self, as_obj, ann_to_send, send_rels, *args, **kwargs)
+        super(BGPsecAS, self)._add_ann_to_q(as_obj, ann_to_send, send_rels, *args, **kwargs)
 
-    def bgpsec_transitive_modifications(policy_self, self, as_obj, ann_to_send, *args, **kwargs):
+    def bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs):
         # Set next_as for bgpsec
         ann_to_send.next_as = as_obj.asn
 
-    def _valid_ann(policy_self, self, ann, recv_relationship: Relationships):
+    def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""
-        return (super(BGPsecTransitivePolicy, policy_self)._valid_ann(self, ann, recv_relationship) and 
+        return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and 
                 len(ann.removed_signatures) == 0)
 
 
-    def _new_ann_is_better_bgpsec(policy_self,
-                                  self,
+    def _new_ann_is_better_bgpsec(self,
                                   current_ann,
                                   current_processed,
                                   new_ann,
@@ -35,8 +34,8 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
         # This is BGPsec Security Second, where announcements with security
         # attributes are preferred over those without, but only after
         # considering business relationships.
-        current_ann_metric = policy_self._partial_path_metric(current_ann.bgpsec_path, current_ann.as_path)
-        new_ann_metric = policy_self._partial_path_metric(new_ann.bgpsec_path, new_ann.as_path)
+        current_ann_metric = self._partial_path_metric(current_ann.bgpsec_path, current_ann.as_path)
+        new_ann_metric = self._partial_path_metric(new_ann.bgpsec_path, new_ann.as_path)
         if current_ann_metric > new_ann_metric:
             return True
         elif current_ann_metric == new_ann_metric:
@@ -44,7 +43,7 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
         else:
             return False
 
-    def _deep_copy_ann(policy_self, self, ann, recv_relationship, **extra_kwargs):
+    def _deep_copy_ann(self, ann, recv_relationship, **extra_kwargs):
         """Policy modifications to ann
 
         When it is decided that an annoucenemnt will be saved
@@ -60,11 +59,11 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
         kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
         # This means that the AS path has 1 extra ASN that you don't need to check
-        # Although this looks weird, it is correct to call the BGPsecPolicy's
+        # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        return super(BGPsecPolicy, policy_self)._deep_copy_ann(self, ann, recv_relationship, **kwargs)
+        return super(BGPsecAS, self)._deep_copy_ann(ann, recv_relationship, **kwargs)
 
-    def _partial_verify_path(policy_self, partial, full):
+    def _partial_verify_path(partial, full):
         """Verify a partial path"""
         i = 0
         j = 0
@@ -76,7 +75,7 @@ class BGPsecTransitivePolicy(BGPsecPolicy):
             i += 1
         return i == len(partial)
 
-    def _partial_path_metric(policy_self, partial, full):
+    def _partial_path_metric(partial, full):
         """Count the number of non-adopting segments"""
         i = 0
         j = 0

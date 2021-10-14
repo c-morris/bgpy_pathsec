@@ -1,9 +1,9 @@
 import pytest
 
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
-from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS, Relationships, LocalRib, run_example
+from lib_bgp_simulator import Relationships, BGPRIBsAS, BGPAS, Relationships, LocalRib, run_example
 
-from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy
+from bgp_simulator_policies import PAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
 
 @pytest.mark.parametrize("partial, full", [[(1, 3), (1, 2, 3)],
                                            [(1,), (1, 2, 3)],
@@ -11,15 +11,15 @@ from bgp_simulator_policies import PAnn, DownOnlyPolicy, BGPsecPolicy, BGPsecTra
                                            [(1, 2, 3), (1, 2, 3)]])
 def test_partial_path(partial, full):
     a = BGPAS(1) 
-    a.policy = BGPsecTransitivePolicy()
-    assert(a.policy._partial_verify_path(partial, full))
+    a = BGPsecTransitiveAS()
+    assert(a._partial_verify_path(partial, full))
 
 @pytest.mark.parametrize("partial, full", [[(4,), (1, 2, 3)],
                                            [(5, 4), (1, 2, 3, 4, 5)]])
 def test_partial_path(partial, full):
     a = BGPAS(1) 
-    a.policy = BGPsecTransitivePolicy()
-    assert(not a.policy._partial_verify_path(partial, full))
+    a = BGPsecTransitiveAS()
+    assert(not a._partial_verify_path(partial, full))
 
 
 @pytest.mark.parametrize("partial, full, segments", [[(1, 3), (1, 2, 3), 1],
@@ -28,8 +28,8 @@ def test_partial_path(partial, full):
                                            [(1, 2, 3), (1, 2, 3), 0]])
 def test_partial_path_metric(partial, full, segments):
     a = BGPAS(1) 
-    a.policy = BGPsecTransitivePolicy()
-    assert(a.policy._partial_path_metric(partial, full) == segments)
+    a = BGPsecTransitiveAS()
+    assert(a._partial_path_metric(partial, full) == segments)
 
 def test_process_incoming_anns_bgpsec_transitive_reject():
     """Test rejection of bgpsec transitive ann with missing signature"""
@@ -39,15 +39,15 @@ def test_process_incoming_anns_bgpsec_transitive_reject():
     ann.next_as = 1
     ann.removed_signatures = (13795,)
     a = BGPAS(1) 
-    a.policy = BGPsecTransitivePolicy()
+    a = BGPsecTransitiveAS()
     # Now add announcement with missing signatures
-    a.policy.recv_q.add_ann(ann)
-    a.policy.process_incoming_anns(a, Relationships.CUSTOMERS)
+    a.recv_q.add_ann(ann)
+    a.process_incoming_anns(a, Relationships.CUSTOMERS)
     # assert new announcement was not accepted to local rib
-    assert(a.policy.local_rib.get_ann(prefix) is None)
+    assert(a.local_rib.get_ann(prefix) is None)
 
-@pytest.mark.parametrize("BasePolicyCls", [BGPsecTransitivePolicy, BGPsecTransitiveDownOnlyPolicy])
-def test_propagate_bgpsec_transitive1(BasePolicyCls):
+@pytest.mark.parametrize("BaseASCls", [BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS])
+def test_propagate_bgpsec_transitive1(BaseASCls):
     r"""
     Test BGPsec transitive preference for fewer nonadopting segments.
     Horizontal lines are peer relationships, vertical lines are customer-provider. 
@@ -78,16 +78,16 @@ def test_propagate_bgpsec_transitive1(BasePolicyCls):
                           CPLink(provider_asn=9, customer_asn=4),
                           ]
     # Number identifying the type of AS class
-    as_policies = {asn: BasePolicyCls for asn in
+    as_policies = {asn: BaseASCls for asn in
                    list(range(1, 10))}
     # Multiple short segments
-    as_policies[2] = BGPRIBSPolicy
-    as_policies[8] = BGPRIBSPolicy
+    as_policies[2] = BGPRIBsAS
+    as_policies[8] = BGPRIBsAS
     # Long single segment
-    as_policies[4] = BGPRIBSPolicy
-    as_policies[9] = BGPRIBSPolicy
-    as_policies[7] = BGPRIBSPolicy
-    as_policies[3] = BGPRIBSPolicy
+    as_policies[4] = BGPRIBsAS
+    as_policies[9] = BGPRIBsAS
+    as_policies[7] = BGPRIBsAS
+    as_policies[3] = BGPRIBsAS
 
     # Announcements
     prefix = '137.99.0.0/16'

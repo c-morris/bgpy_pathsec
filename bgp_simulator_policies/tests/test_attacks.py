@@ -1,6 +1,6 @@
 import pytest
 
-from lib_bgp_simulator import Relationships, BGPRIBSPolicy, BGPAS
+from lib_bgp_simulator import Relationships
 
 from bgp_simulator_policies import PAnn, IntentionalLeak
 
