@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPAS, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
+from lib_bgp_simulator import BGPAS, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
 
 from .. import PAnn
 
