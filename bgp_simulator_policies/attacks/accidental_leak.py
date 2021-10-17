@@ -32,4 +32,4 @@ class AccidentalLeak(Attack):
                 print("Attacker RIB WAS", engine.as_dict[self.attacker_asn].local_rib)
                 return
             print("Altering the recv_relationship to customer for:", attacker_ann)
-            engine.as_dict[self.attacker_asn].local_rib.get_ann(Prefixes.PREFIX.value).recv_relationship = Relationships.CUSTOMERS
+            engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value).recv_relationship = Relationships.CUSTOMERS
