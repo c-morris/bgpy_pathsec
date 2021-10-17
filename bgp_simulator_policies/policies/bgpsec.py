@@ -1,21 +1,22 @@
 from copy import deepcopy
 
-from lib_bgp_simulator import BGPRIBSPolicy, LocalRib, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPRIBsAS, LocalRib, SendQueue, RecvQueue, Relationships
 
-class BGPsecPolicy(BGPRIBSPolicy):
+class BGPsecAS(BGPRIBsAS):
 
     name="BGPsec"
 
-    def _add_ann_to_q(policy_self, self, as_obj, ann, *args):
+    __slots__ = []
+
+    def _process_outgoing_ann(self, as_obj, ann, *args):
 
         # Set next_as for bgpsec
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
-        super(BGPsecPolicy, policy_self)._add_ann_to_q(self,
+        super(BGPsecAS, self)._process_outgoing_ann(
                                                      as_obj,
                                                      ann.copy(next_as=next_as), *args)
-    def _new_ann_is_better(policy_self,
-                           self,
+    def _new_ann_is_better(self,
                            current_ann,
                            current_processed,
                            default_current_recv_rel,
@@ -29,7 +30,7 @@ class BGPsecPolicy(BGPRIBSPolicy):
         # Can't assert this here due to passing new_ann as None now that it can be prpcessed or not
         #assert self.asn not in new_ann.as_path, "Should have been removed in ann validation func"
 
-        new_rel_better = policy_self._new_rel_better(current_ann,
+        new_rel_better = self._new_rel_better(current_ann,
                                                      current_processed,
                                                      default_current_recv_rel,
                                                      new_ann,
@@ -38,18 +39,18 @@ class BGPsecPolicy(BGPRIBSPolicy):
         if new_rel_better is not None:
             return new_rel_better
         else:
-            bgpsec_better = policy_self._new_ann_is_better_bgpsec(self,
-                                                                      current_ann,
-                                                                      current_processed,
-                                                                      new_ann,
-                                                                      new_processed)
+            bgpsec_better = self._new_ann_is_better_bgpsec(
+                                                           current_ann,
+                                                           current_processed,
+                                                           new_ann,
+                                                           new_processed)
             if (bgpsec_better is not None):
                 return  bgpsec_better
             else:
-                new_as_path_shorter = policy_self._new_as_path_shorter(current_ann,
-                                                                       current_processed,
-                                                                       new_ann,
-                                                                       new_processed)
+                new_as_path_shorter = self._new_as_path_shorter(current_ann,
+                                                                current_processed,
+                                                                new_ann,
+                                                                new_processed)
                 if new_as_path_shorter is not None:
                     return new_as_path_shorter
                 else:
@@ -59,8 +60,7 @@ class BGPsecPolicy(BGPRIBSPolicy):
                                                new_processed)
 
 
-    def _new_ann_is_better_bgpsec(policy_self,
-                                  self,
+    def _new_ann_is_better_bgpsec(self,
                                   current_ann,
                                   current_processed,
                                   new_ann,
@@ -77,7 +77,7 @@ class BGPsecPolicy(BGPRIBSPolicy):
         else:
             return None
 
-    def _deep_copy_ann(policy_self, self, ann, recv_relationship, **extra_kwargs):
+    def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
         """Policy modifications to ann
 
         When it is decided that an annoucenemnt will be saved
@@ -97,4 +97,4 @@ class BGPsecPolicy(BGPRIBSPolicy):
         kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
         # This means that the AS path has 1 extra ASN that you don't need to check
-        return super(BGPsecPolicy, policy_self)._deep_copy_ann(self, ann, recv_relationship, **kwargs)
+        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)

@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPPolicy, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
+from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
 
 from .. import PAnn
 
@@ -11,7 +11,12 @@ class IntentionalLeak(Attack):
                             timestamp=Timestamps.VICTIM.value,
                             as_path=(victim,),
                             bgpsec_path=(victim,),
+                            removed_signatures = tuple(),
                             next_as=victim,
+                            do_communities = tuple(),
+                            roa_validity = ROAValidity.UNKNOWN,
+                            withdraw = False,
+                            traceback_end = True,
                             seed_asn=victim,
                                 recv_relationship=Relationships.ORIGIN)]
         super(IntentionalLeak, self).__init__(attacker, victim, anns)
@@ -26,7 +31,6 @@ class IntentionalLeak(Attack):
             attack_anns = []
             for ann, recv_rel in attacker.policy.ribs_in.get_ann_infos(Prefixes.PREFIX.value):
                 atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
-
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
                 # path
