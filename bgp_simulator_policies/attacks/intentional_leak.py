@@ -24,20 +24,19 @@ class IntentionalLeak(Attack):
         attacker = engine.as_dict[self.attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
-            for neighbor, inner_dict in attacker.policy.ribs_in.items():
-                for ann_tuple in inner_dict.values():
-                    ann = ann_tuple[0]
-                    atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
-                    # Truncate path as much as possible, which is to the AS
-                    # after the most recent BGPsec Transitive adopter on the
-                    # path
-                    self._truncate_ann(atk_ann)
+            for ann, recv_rel in attacker.policy.ribs_in.get_ann_infos(Prefixes.PREFIX.value):
+                atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
 
-                    # Clear any down only communities
-                    atk_ann.do_communities = tuple()
-                    # This suppresses withdrawals
-                    atk_ann.seed_asn = attacker.asn
-                    attack_anns.append(atk_ann)
+                # Truncate path as much as possible, which is to the AS
+                # after the most recent BGPsec Transitive adopter on the
+                # path
+                self._truncate_ann(atk_ann)
+
+                # Clear any down only communities
+                atk_ann.do_communities = tuple()
+
+
+                attack_anns.append(atk_ann)
 
             if len(attack_anns) == 0: 
                 print("Attacker did not receive announcement from victim, cannot attack")
@@ -45,9 +44,22 @@ class IntentionalLeak(Attack):
             # Populate send_q with leaks
             for neighbor in attacker.providers + attacker.peers:
                 for ann in attack_anns:
+                    current_best_ann = None
                     if neighbor.asn not in ann.as_path:
+                        new_ann_is_better = attacker.policy_self._new_ann_is_better(self,
+                                                                           current_best_ann,
+                                                                           current_best_ann_processed,
+                                                                           recv_relationship,
+                                                                           ann,
+                                                                           False,
+                                                                           recv_relationship)
+                        # If the new priority is higher
+                        if new_ann_is_better:
+                            current_best_ann = ann
+                            current_best_ann_processed = False
+
                         #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
-                        neighbor.policy.recv_q[attacker.asn][ann.prefix].append(ann)
+                        neighbor.policy.recv_q.add_ann(ann)
                         neighbor.policy.process_incoming_anns(neighbor, Relationships.CUSTOMERS)
                         # Only need to leak one announcement per neighbor
                         print("Leaking", ann, "to neighbor", neighbor.asn)
