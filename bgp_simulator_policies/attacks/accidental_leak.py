@@ -1,14 +1,22 @@
 from lib_bgp_simulator import BGPAS, Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
 
-from .. import DOAnn
+from .. import PAnn
 
 class AccidentalLeak(Attack):
     def __init__(self, attacker=ASNs.ATTACKER.value, victim=ASNs.VICTIM.value):
-        anns = [DOAnn(prefix=Prefixes.PREFIX.value,
+        anns = [PAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.VICTIM.value,
                     as_path=(victim,),
+                    bgpsec_path=(victim,),
+                    removed_signatures = tuple(),
+                    next_as=victim,
+                    do_communities = tuple(),
+                    roa_validity = ROAValidity.UNKNOWN,
+                    withdraw = False,
+                    traceback_end = True,
                     seed_asn=victim,
                     recv_relationship=Relationships.ORIGIN)]
+
         super(AccidentalLeak, self).__init__(attacker, victim, anns)
         
         self.post_run_hooks = [self.hook]
