@@ -1,4 +1,4 @@
-from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
+from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
 
 from .. import PAnn
 
@@ -11,11 +11,22 @@ class OriginHijack(Attack):
                     # Legitimate announcement has valid BGPsec attributes
                     bgpsec_path=(victim,),
                     next_as=victim,
+                    removed_signatures = tuple(),
+                    do_communities = tuple(),
+                    roa_validity = ROAValidity.UNKNOWN,
+                    withdraw = False,
+                    traceback_end = True,
                     seed_asn=victim,
                     recv_relationship=Relationships.ORIGIN),
                 PAnn(prefix=Prefixes.PREFIX.value,
                     timestamp=Timestamps.ATTACKER.value,
                     as_path=(attacker, victim),
+                    bgpsec_path=tuple(),
+                    next_as=0,
+                    do_communities = tuple(),
+                    roa_validity = ROAValidity.UNKNOWN,
+                    withdraw = False,
+                    traceback_end = True,
                     seed_asn=attacker,
                     # Add victim to removed signatures
                     removed_signatures=(victim,),
