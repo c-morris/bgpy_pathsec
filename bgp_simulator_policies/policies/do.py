@@ -1,6 +1,6 @@
-from lib_bgp_simulator import BGPRIBsAS, LocalRib, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPAS, SendQueue, RecvQueue, Relationships
 
-class DownOnlyAS(BGPRIBsAS):
+class DownOnlyAS(BGPAS):
     name = "Down Only"
     
     __slots__ = []
@@ -17,8 +17,6 @@ class DownOnlyAS(BGPRIBsAS):
         return (super(DownOnlyAS, self)._valid_ann(ann, recv_relationship) and 
                 self.passes_down_only_checks(ann, recv_relationship))
 
-        # BGP Loop Prevention Check
-        return not (self.asn in ann.as_path)
     def down_only_modifications(self, as_obj, ann_to_send, propagate_to, *args, **kwargs):
         # Down Only modifications, defined in section 4.2
         if propagate_to in (Relationships.CUSTOMERS, Relationships.PEERS):

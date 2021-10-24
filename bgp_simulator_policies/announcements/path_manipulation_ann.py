@@ -10,7 +10,7 @@ class PAnn(DOAnn):
     Generic path manipulation announcement.
     """
 
-    __slots__ = ["bgpsec_path", "next_as", "removed_signatures"]
+    __slots__ = ("bgpsec_path", "next_as", "removed_signatures")
 
 
 
@@ -37,14 +37,6 @@ class PAnn(DOAnn):
     # attackers will update this attribute when they remove signatures. 
     #self.removed_signatures =  kwargs.pop("removed_signatures", tuple())
     removed_signatures: tuple
-
-    @property
-    def default_copy_kwargs(self):
-        kwargs = super(PAnn, self).default_copy_kwargs
-        kwargs.update({"bgpsec_path": self.bgpsec_path, "next_as": self.next_as})
-        return kwargs
-
-
 
 # We set equal to false here so that it can inherit __eq__ from parent
 @dataclass(eq=False)

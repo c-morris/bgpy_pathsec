@@ -1,21 +1,20 @@
 from copy import deepcopy
 
-from lib_bgp_simulator import BGPRIBsAS, LocalRib, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPAS, SendQueue, RecvQueue, Relationships
 
-class BGPsecAS(BGPRIBsAS):
+class BGPsecAS(BGPAS):
 
     name="BGPsec"
 
-    __slots__ = []
+    __slots__ = tuple()
 
     def _process_outgoing_ann(self, as_obj, ann, *args):
 
         # Set next_as for bgpsec
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
-        super(BGPsecAS, self)._process_outgoing_ann(
-                                                     as_obj,
-                                                     ann.copy(next_as=next_as), *args)
+        super(BGPsecAS, self)._process_outgoing_ann(as_obj,
+                                                    ann.copy(next_as=next_as), *args)
     def _new_ann_is_better(self,
                            current_ann,
                            current_processed,
@@ -47,18 +46,10 @@ class BGPsecAS(BGPRIBsAS):
             if (bgpsec_better is not None):
                 return  bgpsec_better
             else:
-                new_as_path_shorter = self._new_as_path_shorter(current_ann,
-                                                                current_processed,
-                                                                new_ann,
-                                                                new_processed)
-                if new_as_path_shorter is not None:
-                    return new_as_path_shorter
-                else:
-                    return self._new_wins_ties(current_ann,
-                                               current_processed,
-                                               new_ann,
-                                               new_processed)
-
+                return self._new_as_path_ties_better(current_ann,
+                                                     current_processed,
+                                                     new_ann,
+                                                     new_processed)
 
     def _new_ann_is_better_bgpsec(self,
                                   current_ann,

@@ -1,9 +1,9 @@
-from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
+from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint
 
+from .mh_path_manipulation import MHPathManipulation
 from .. import PAnn
 
-class NeighborHijack(Attack):
-    AnnCls = PAnn
+class NeighborHijack(MHPathManipulation):
 
     def _truncate_ann(self, ann):
         # Truncate this ann down to a path length of 3 plus the attacker

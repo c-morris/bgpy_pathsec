@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from lib_bgp_simulator import BGPRIBsAS, LocalRib, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPAS, LocalRIB, SendQueue, RecvQueue, Relationships
 
 from .bgpsec import BGPsecAS
 
@@ -10,12 +10,12 @@ class BGPsecTransitiveAS(BGPsecAS):
     
     __slots__ = []
 
-    def _process_outgoing_ann(self, as_obj, ann, send_rels, *args, **kwargs):
+    def _process_outgoing_ann(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs):
         ann_to_send = ann.copy()
         self.bgpsec_transitive_modifications(as_obj, ann_to_send, *args, **kwargs)
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        super(BGPsecAS, self)._process_outgoing_ann(as_obj, ann_to_send, send_rels, *args, **kwargs)
+        super(BGPsecAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
 
     def bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs):
         # Set next_as for bgpsec
@@ -25,7 +25,6 @@ class BGPsecTransitiveAS(BGPsecAS):
         """Determine if an announcement is valid or should be dropped"""
         return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and 
                 len(ann.removed_signatures) == 0)
-
 
     def _new_ann_is_better_bgpsec(self,
                                   current_ann,
@@ -40,10 +39,10 @@ class BGPsecTransitiveAS(BGPsecAS):
         new_ann_metric = self._partial_path_metric(new_ann.bgpsec_path, new_ann.as_path)
         if current_ann_metric > new_ann_metric:
             return True
-        elif current_ann_metric == new_ann_metric:
-            return None
-        else:
+        elif current_ann_metric < new_ann_metric:
             return False
+        else:
+            return None
 
     def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
         """Policy modifications to ann
@@ -96,5 +95,3 @@ class BGPsecTransitiveAS(BGPsecAS):
         if j < len(full):
             segments += 1
         return segments
-
-

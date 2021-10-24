@@ -1,29 +1,10 @@
-from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
+from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
 
+from .mh_leak import MHLeak
 from .. import PAnn
 
-class IntentionalLeak(Attack):
-
-    AnnCls = PAnn
-
-    def __init__(self, attacker=ASNs.ATTACKER.value, victim=ASNs.VICTIM.value):
-        anns = [self.AnnCls(prefix=Prefixes.PREFIX.value,
-                            timestamp=Timestamps.VICTIM.value,
-                            as_path=(victim,),
-                            bgpsec_path=(victim,),
-                            removed_signatures = tuple(),
-                            next_as=victim,
-                            do_communities = tuple(),
-                            roa_validity = ROAValidity.UNKNOWN,
-                            withdraw = False,
-                            traceback_end = True,
-                            seed_asn=victim,
-                                recv_relationship=Relationships.ORIGIN)]
-        super(IntentionalLeak, self).__init__(attacker, victim, anns)
-        
-        self.post_run_hooks = [self.hook]
-
-    def hook(self, engine: SimulatorEngine, prev_data_point: DataPoint):
+class IntentionalLeak(MHLeak):
+    def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
         # Add the route leak from the attacker
         attacker_ann = None
         attacker = engine.as_dict[self.attacker_asn]
@@ -79,4 +60,3 @@ class IntentionalLeak(Attack):
 
     def _trim_do_communities(self, ann):
         ann.do_communities = tuple(x for x in ann.do_communities if x in ann.bgpsec_path)
-
