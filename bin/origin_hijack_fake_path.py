@@ -1,26 +1,16 @@
-from lib_bgp_simulator import Simulator, Graph, BGPPolicy, BGPRIBSPolicy
-from lib_bgp_simulator import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from pathlib import Path
 
-from bgp_simulator_policies import OriginHijack, LeakGraph, PAnn, BGPsecPolicy
+from lib_bgp_simulator import Simulator, Graph, BGPAS
+from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
-from lib_bgp_simulator import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
+from bgp_simulator_policies import OriginHijack, LeakGraph, PAnn, BGPsecAS
 
-graphs = [LeakGraph(
-                percent_adoptions=[0, 10, 20, 50, 80, 100],
-                adopt_policies=[BGPRIBSPolicy, BGPsecPolicy],
-                AttackCls=OriginHijack,
-                num_trials=2,
-                propagation_rounds=1,
-                base_policy=BGPRIBSPolicy)]
-Simulator().run(graphs=graphs, graph_path="/home/cbm14007/Downloads/graphs/graphs.tar.gz")
+from lib_bgp_simulator import Simulator, Graph, ROVAS, SubprefixHijack, BGPAS
 
-# Dealing with output data (not in the code yet)
-for graph in graphs:
-    for data_point, list_of_scenarios in graph.data_points.items():
-        print("Percent adoption", data_point.percent_adoption)
-        print("Adopted policy:", data_point.PolicyCls.name)
-        print("Propagation round", data_point.propagation_round)
-        for scenario in list_of_scenarios:
-            print(scenario.data)
-
-
+graphs = [LeakGraph(percent_adoptions=[0, 10, 20, 50, 80, 100],
+                    adopt_as_classes=[BGPAS, BGPsecAS],
+                    EngineInputCls=OriginHijack,
+                    num_trials=2,
+                    propagation_rounds=1,
+                    BaseASCls=BGPAS)]
+Simulator().run(graphs=graphs, graph_path=Path("/home/cbm14007/Downloads/graphs/graphs.tar.gz"))

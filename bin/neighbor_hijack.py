@@ -5,13 +5,12 @@ from bgp_simulator_policies import NeighborHijack, LeakGraph
 
 from lib_bgp_simulator import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
 
-graphs = [LeakGraph(
-                percent_adoptions=[0, 10, 20, 50, 80, 100],
-                adopt_policies=[BGPRIBSPolicy], # change to DO policy
-                AttackCls=NeighborHijack,
-                num_trials=1,
-                propagation_rounds=2,
-                base_policy=BGPRIBSPolicy)]
+graphs = [LeakGraph(percent_adoptions=[0, 10, 20, 50, 80, 100],
+                    adopt_policies=[BGPRIBSPolicy], # change to DO policy
+                    EngineInoCls=NeighborHijack,
+                    num_trials=1,
+                    propagation_rounds=2,
+                    base_policy=BGPRIBSPolicy)]
 Simulator().run(graphs=graphs, graph_path="/home/cbm14007/Downloads/graphs/graphs.tar.gz")
 
 # Dealing with output data (not in the code yet)
@@ -22,5 +21,3 @@ for graph in graphs:
         print("Propagation round", data_point.propagation_round)
         for scenario in list_of_scenarios:
             print(scenario.data)
-
-
