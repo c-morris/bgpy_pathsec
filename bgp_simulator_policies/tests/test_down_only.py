@@ -1,7 +1,7 @@
 import pytest
 
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
-from lib_bgp_simulator import Relationships, BGPRIBsAS, BGPAS, Relationships, LocalRib, run_example
+from lib_bgp_simulator import Relationships, BGPAS, Relationships, LocalRIB
 
 from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveDownOnlyAS
 
