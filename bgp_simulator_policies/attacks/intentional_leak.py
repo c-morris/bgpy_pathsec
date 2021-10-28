@@ -59,7 +59,8 @@ class IntentionalLeak(MHLeak):
                     neighbor._recv_q.add_ann(ann)
                     neighbor.process_incoming_anns(Relationships.CUSTOMERS)
 
-    def _truncate_ann(self, ann):
+    @staticmethod
+    def _truncate_ann(ann):
         j = 0
         while ann.bgpsec_path[0] != ann.as_path[j]:
             j += 1
@@ -68,5 +69,6 @@ class IntentionalLeak(MHLeak):
         # Decrement j to get one after the most recent adopting AS
         ann.as_path = ann.as_path[j-1:]
 
-    def _trim_do_communities(self, ann):
+    @staticmethod
+    def _trim_do_communities(ann):
         ann.do_communities = tuple(x for x in ann.do_communities if x in ann.bgpsec_path)

@@ -5,7 +5,7 @@ from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 from lib_bgp_simulator import GraphInfo, ASNs
 
 class Graph100(GraphInfo):
-    """                                                                             
+    r"""                                                                             
       1                                                                         
      / \                                                                         
     2   3                                                                     
