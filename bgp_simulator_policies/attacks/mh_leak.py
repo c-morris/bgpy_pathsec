@@ -16,4 +16,5 @@ class MHLeak(MHPathManipulation):
                             withdraw = False,
                             traceback_end = True,
                             seed_asn=self.victim_asn,
+                            communities = tuple(),
                             recv_relationship=Relationships.ORIGIN)]

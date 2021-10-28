@@ -50,6 +50,7 @@ class PTestAnn(PAnn):
     withdraw: bool = False
     traceback_end: bool = False
     do_communities: tuple = tuple()
+    communities: tuple = tuple()
     bgpsec_path: tuple = tuple()
     removed_signatures: tuple = tuple()
     next_as: int = 0

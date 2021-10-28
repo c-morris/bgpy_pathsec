@@ -5,13 +5,20 @@ from .. import PAnn
 
 class IntentionalLeak(MHLeak):
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
+        # check attacker rank...
+        for i, rank in enumerate(engine.propagation_ranks):
+            for as_obj in rank:
+                if as_obj.asn == self.attacker_asn:
+                    if i != 0:
+                        print("ATTACKER RANK WAS", i)
+                        exit(i)
         # Add the route leak from the attacker
         attacker_ann = None
         attacker = engine.as_dict[self.attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
-            for ann, recv_rel in attacker.policy.ribs_in.get_ann_infos(Prefixes.PREFIX.value):
-                atk_ann = attacker.policy._deep_copy_ann(attacker, ann, Relationships.CUSTOMERS)
+            for ann_info in attacker._ribs_in.get_ann_infos(Prefixes.PREFIX.value):
+                atk_ann = attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
                 # path
@@ -26,28 +33,31 @@ class IntentionalLeak(MHLeak):
             if len(attack_anns) == 0: 
                 print("Attacker did not receive announcement from victim, cannot attack")
                 return
-            # Populate send_q with leaks
+            # Populate neighbor recv_q with leaks
             for neighbor in attacker.providers + attacker.peers:
+                current_best_ann = None
                 for ann in attack_anns:
-                    current_best_ann = None
                     if neighbor.asn not in ann.as_path:
-                        new_ann_is_better = attacker.policy_self._new_ann_is_better(self,
-                                                                           current_best_ann,
-                                                                           current_best_ann_processed,
-                                                                           recv_relationship,
-                                                                           ann,
-                                                                           False,
-                                                                           recv_relationship)
+                        new_ann_is_better = False
+                        recv_relationship = Relationships.CUSTOMERS
+                        if current_best_ann is not None:
+                            new_ann_is_better = attacker._new_ann_better(current_best_ann,
+                                                                         current_best_ann_processed,
+                                                                         recv_relationship,
+                                                                         ann,
+                                                                         False,
+                                                                         recv_relationship)
                         # If the new priority is higher
-                        if new_ann_is_better:
+                        if new_ann_is_better or current_best_ann is None:
                             current_best_ann = ann
                             current_best_ann_processed = False
 
-                        #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
-                        neighbor.policy.recv_q.add_ann(ann)
-                        neighbor.policy.process_incoming_anns(neighbor, Relationships.CUSTOMERS)
-                        # Only need to leak one announcement per neighbor
-                        print("Leaking", ann, "to neighbor", neighbor.asn)
+                #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
+                if current_best_ann is not None:
+                    # Only need to leak one announcement per neighbor
+                    print("Leaking", ann, "to neighbor", neighbor.asn)
+                    neighbor._recv_q.add_ann(ann)
+                    neighbor.process_incoming_anns(Relationships.CUSTOMERS)
 
     def _truncate_ann(self, ann):
         j = 0
