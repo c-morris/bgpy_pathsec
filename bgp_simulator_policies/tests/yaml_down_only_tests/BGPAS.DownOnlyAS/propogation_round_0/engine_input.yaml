@@ -1,0 +1,12 @@
+!yamlable/IntentionalLeak
+as_classes:
+  1: DownOnlyAS
+  2: DownOnlyAS
+  3: DownOnlyAS
+  4: DownOnlyAS
+  5: BGPAS
+  666: BGPAS
+  777: DownOnlyAS
+attacker_asn: 666
+extra_ann_kwargs: {}
+victim_asn: 777
