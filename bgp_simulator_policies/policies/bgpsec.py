@@ -42,8 +42,6 @@ class BGPsecAS(BGPAS):
                                                            current_processed,
                                                            new_ann,
                                                            new_processed)
-            if self.asn == 1:
-                print("IN HERE", bgpsec_better)
             if (bgpsec_better is not None):
                 return  bgpsec_better
             else:

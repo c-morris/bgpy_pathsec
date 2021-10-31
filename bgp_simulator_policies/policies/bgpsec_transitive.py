@@ -35,8 +35,20 @@ class BGPsecTransitiveAS(BGPsecAS):
         # This is BGPsec Security Second, where announcements with security
         # attributes are preferred over those without, but only after
         # considering business relationships.
-        current_ann_metric = self._partial_path_metric(current_ann.bgpsec_path, current_ann.as_path)
-        new_ann_metric = self._partial_path_metric(new_ann.bgpsec_path, new_ann.as_path)
+        if current_processed:
+            current_path = current_ann.as_path[1:]
+            current_bgpsec_path = current_ann.bgpsec_path[1:]
+        else:
+            current_path = current_ann.as_path
+            current_bgpsec_path = current_ann.bgpsec_path
+        if new_processed:
+            new_path = new_ann.as_path[1:]
+            new_bgpsec_path = new_ann.bgpsec_path[1:]
+        else:
+            new_path = new_ann.as_path
+            new_bgpsec_path = new_ann.bgpsec_path
+        new_ann_metric = self._partial_path_metric(new_bgpsec_path, new_path)
+        current_ann_metric = self._partial_path_metric(current_bgpsec_path, current_path)
         if current_ann_metric > new_ann_metric:
             return True
         elif current_ann_metric < new_ann_metric:
@@ -82,6 +94,9 @@ class BGPsecTransitiveAS(BGPsecAS):
         j = 0
         switch = 0
         segments = 0
+        if partial[0] != full[0]:
+            # count first segment
+            segments += 1
         while i < len(partial) and j < len(full):
             while partial[i] != full[j]:
                 segments += switch
@@ -93,5 +108,6 @@ class BGPsecTransitiveAS(BGPsecAS):
             i += 1
             j += 1
         if j < len(full):
+            # count last segment
             segments += 1
         return segments

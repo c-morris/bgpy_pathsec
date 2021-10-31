@@ -1,9 +1,14 @@
 import pytest
+from pathlib import Path
 
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 from lib_bgp_simulator import Relationships, BGPAS, Relationships, LocalRIB
+from lib_bgp_simulator import ASNs, BaseGraphSystemTester, YamlSystemTestRunner
 
 from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, IntentionalLeak
+from .graphs import PGraph001
+
+
 
 # In BGPsec, an attacker should never send an invalid signature. It is always
 # more advantageous to strip the security attributes and send a legacy
@@ -73,73 +78,27 @@ def test_bgpsec_remove_attrs():
 
 
 
-from pathlib import Path
-
-from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
-
-from .graphs import PGraph001
-
-from lib_bgp_simulator import ASNs, BaseGraphSystemTester, YamlSystemTestRunner
-
-
-class Test100BGPsecPreference(BaseGraphSystemTester):
+class Test001BGPsecPreference(BaseGraphSystemTester):
     GraphInfoCls = PGraph001
     EngineInputCls = IntentionalLeak
     base_dir = Path(__file__).parent
     BaseASCls = BGPAS
     AdoptASCls = BGPsecAS
     adopting_asns = [1, 3, 4, 777]
-#
-#@pytest.mark.parametrize("BasePolicyCls", [BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS])
-#def test_propagate_bgpsec(BasePolicyCls):
-#    r"""
-#    Test BGPsec preference for authenticated paths.
-#    Horizontal lines are peer relationships, vertical lines are customer-provider. 
-#                                                                             
-#      1                                                                         
-#     / \                                                                         
-#    2   3                                                                     
-#     \  |                                                                    
-#      \ 4                                                                  
-#       \|
-#        5
-#    Starting propagation at 5, the longer path through adopting ASes should be preferred.
-#    """
-#    # Graph data
-#    peers = []
-#    customer_providers = [CPLink(provider_asn=1, customer_asn=2),
-#                          CPLink(provider_asn=1, customer_asn=3),
-#                          CPLink(provider_asn=2, customer_asn=5),
-#                          CPLink(provider_asn=3, customer_asn=4),
-#                          CPLink(provider_asn=4, customer_asn=5)]
-#    # Number identifying the type of AS class
-#    as_policies = {asn: BasePolicyCls for asn in
-#                   list(range(1, 6))}
-#    as_policies[2] = BGPAS
-#
-#    # Announcements
-#    prefix = '137.99.0.0/16'
-#    announcements = [PTestAnn(prefix=prefix, as_path=(5,),timestamp=0, seed_asn=5,
-#                                  bgpsec_path=(5,),
-#                                  next_as=5,
-#                                  recv_relationship=Relationships.ORIGIN,
-#                                  traceback_end=True)]
-#
-#    kwargs = {"prefix": prefix, "timestamp": 0,
-#                      "traceback_end": False}
-#
-#    # Local RIB data
-#    _local_ribs = {
-#        1: {prefix: PTestAnn(as_path=(1, 3, 4, 5), bgpsec_path=(1, 3, 4, 5), next_as=1, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
-#        2: {prefix: PTestAnn(as_path=(2, 5), bgpsec_path=(5,), next_as=5, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
-#        3: {prefix: PTestAnn(as_path=(3, 4, 5), bgpsec_path=(3, 4, 5), next_as=3, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
-#        4: {prefix: PTestAnn(as_path=(4, 5), bgpsec_path=(4, 5), next_as=4, recv_relationship=Relationships.CUSTOMERS, **kwargs)},
-#        5: {prefix: announcements[0]},
-#    }
-#
-#    run_example(peers=peers,
-#                customer_providers=customer_providers,
-#                as_policies=as_policies,
-#                announcements=announcements,
-#                BaseASCls=BGPAS,
-#                local_ribs=_local_ribs)
+
+class Test001BGPsecTransitivePreference(BaseGraphSystemTester):
+    GraphInfoCls = PGraph001
+    EngineInputCls = IntentionalLeak
+    base_dir = Path(__file__).parent
+    BaseASCls = BGPAS
+    AdoptASCls = BGPsecTransitiveAS
+    adopting_asns = [1, 3, 4, 777]
+
+class Test001BGPsecPreference(BaseGraphSystemTester):
+    GraphInfoCls = PGraph001
+    EngineInputCls = IntentionalLeak
+    base_dir = Path(__file__).parent
+    BaseASCls = BGPAS
+    AdoptASCls = BGPsecTransitiveDownOnlyAS
+    adopting_asns = [1, 3, 4, 777]
+
