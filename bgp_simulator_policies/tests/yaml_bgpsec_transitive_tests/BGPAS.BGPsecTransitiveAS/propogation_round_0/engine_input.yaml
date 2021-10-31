@@ -1,0 +1,15 @@
+!yamlable/IntentionalLeak
+as_classes:
+  1: BGPsecTransitiveAS
+  2: BGPsecTransitiveAS
+  3: BGPsecTransitiveAS
+  4: BGPsecTransitiveAS
+  6: BGPAS
+  7: BGPsecTransitiveAS
+  8: BGPsecTransitiveAS
+  9: BGPsecTransitiveAS
+  666: BGPAS
+  777: BGPsecTransitiveAS
+attacker_asn: 666
+extra_ann_kwargs: {}
+victim_asn: 777

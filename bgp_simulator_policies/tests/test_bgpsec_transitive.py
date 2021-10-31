@@ -43,6 +43,7 @@ def test_process_incoming_anns_bgpsec_transitive_reject():
     # assert new announcement was not accepted to local rib
     assert(a._local_rib.get_ann(prefix) is None)
 
+
 #@pytest.mark.parametrize("BaseASCls", [BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS])
 #def test_propagate_bgpsec_transitive1(BaseASCls):
 #    r"""
