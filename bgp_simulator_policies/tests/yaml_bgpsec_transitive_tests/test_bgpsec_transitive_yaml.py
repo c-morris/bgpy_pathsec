@@ -16,4 +16,12 @@ class Test002BGPsecTransitivePreference(BaseGraphSystemTester):
     AdoptASCls = BGPsecTransitiveAS
     adopting_asns = [1, 2, 3, 4, 7, 8, 9, 777]
 
+class Test002BGPsecTransitivePreference(BaseGraphSystemTester):
+    GraphInfoCls = PGraph002
+    EngineInputCls = IntentionalLeak
+    base_dir = Path(__file__).parent
+    BaseASCls = BGPAS
+    AdoptASCls = BGPsecTransitiveDownOnlyAS
+    adopting_asns = [1, 2, 3, 4, 7, 8, 9, 777]
+
 
