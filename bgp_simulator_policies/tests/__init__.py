@@ -1,1 +1,1 @@
-from .graphs import Graph100
+from .graphs import PGraph001

@@ -3,7 +3,7 @@ import pytest
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 from lib_bgp_simulator import Relationships, BGPAS, Relationships, LocalRIB
 
-from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
+from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, IntentionalLeak
 
 # In BGPsec, an attacker should never send an invalid signature. It is always
 # more advantageous to strip the security attributes and send a legacy
@@ -13,7 +13,7 @@ from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransit
 def test_process_incoming_anns_bgpsec_depref():
     """Test preference of ann from customer with a BGPsec signature"""
     prefix = '137.99.0.0/16'
-    ann1 = PTestAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann1 = PTestAnn(prefix=prefix, as_path=(2, 13796),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann2 = PTestAnn(prefix=prefix, as_path=(13795,),timestamp=0, recv_relationship=Relationships.ORIGIN)
     ann2.bgpsec_path = ann2.as_path
     ann2.next_as = 1
@@ -77,17 +77,18 @@ from pathlib import Path
 
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 
-from .graphs import Graph100
+from .graphs import PGraph001
 
 from lib_bgp_simulator import ASNs, BaseGraphSystemTester, YamlSystemTestRunner
 
 
-#class Test100BGPsecPreference(BaseGraphSystemTester):
-#    GraphInfoCls = Graph100
-#    EngineInputCls = ???
-#    base_dir = Path(__file__).parent
-#    BaseASCls = BGPAS
-#    adopting_asns = [3, 4]
+class Test100BGPsecPreference(BaseGraphSystemTester):
+    GraphInfoCls = PGraph001
+    EngineInputCls = IntentionalLeak
+    base_dir = Path(__file__).parent
+    BaseASCls = BGPAS
+    AdoptASCls = BGPsecAS
+    adopting_asns = [1, 3, 4, 777]
 #
 #@pytest.mark.parametrize("BasePolicyCls", [BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS])
 #def test_propagate_bgpsec(BasePolicyCls):

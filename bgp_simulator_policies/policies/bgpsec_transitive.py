@@ -26,7 +26,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and 
                 len(ann.removed_signatures) == 0)
 
-    def _new_ann_is_better_bgpsec(self,
+    def _new_ann_better_bgpsec(self,
                                   current_ann,
                                   current_processed,
                                   new_ann,

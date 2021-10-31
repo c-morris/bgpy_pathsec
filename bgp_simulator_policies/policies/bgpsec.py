@@ -15,7 +15,7 @@ class BGPsecAS(BGPAS):
 
         super(BGPsecAS, self)._process_outgoing_ann(as_obj,
                                                     ann.copy(next_as=next_as), *args)
-    def _new_ann_is_better(self,
+    def _new_ann_better(self,
                            current_ann,
                            current_processed,
                            default_current_recv_rel,
@@ -29,29 +29,30 @@ class BGPsecAS(BGPAS):
         # Can't assert this here due to passing new_ann as None now that it can be prpcessed or not
         #assert self.asn not in new_ann.as_path, "Should have been removed in ann validation func"
 
-        new_rel_better = self._new_rel_better(current_ann,
-                                                     current_processed,
-                                                     default_current_recv_rel,
-                                                     new_ann,
-                                                     new_processed,
-                                                     default_new_recv_rel)
+        new_rel_better: opt_bool = self._new_rel_better(current_ann,
+                                                        current_processed,
+                                                        default_current_recv_rel,
+                                                        new_ann,
+                                                        new_processed,
+                                                        default_new_recv_rel)
         if new_rel_better is not None:
             return new_rel_better
         else:
-            bgpsec_better = self._new_ann_is_better_bgpsec(
-                                                           current_ann,
+            bgpsec_better = self._new_ann_better_bgpsec(current_ann,
                                                            current_processed,
                                                            new_ann,
                                                            new_processed)
+            if self.asn == 1:
+                print("IN HERE", bgpsec_better)
             if (bgpsec_better is not None):
                 return  bgpsec_better
             else:
                 return self._new_as_path_ties_better(current_ann,
-                                                     current_processed,
-                                                     new_ann,
-                                                     new_processed)
+                                                 current_processed,
+                                                 new_ann,
+                                                 new_processed)
 
-    def _new_ann_is_better_bgpsec(self,
+    def _new_ann_better_bgpsec(self,
                                   current_ann,
                                   current_processed,
                                   new_ann,
