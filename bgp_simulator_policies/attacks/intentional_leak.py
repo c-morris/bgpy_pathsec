@@ -5,19 +5,9 @@ from .. import PAnn
 
 class IntentionalLeak(MHLeak):
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
-        # check attacker properties...
-        for i, rank in enumerate(engine.propagation_ranks):
-            for as_obj in rank:
-                if as_obj.asn == self.attacker_asn:
-                    if i != 0:
-                        print("ATTACKER RANK WAS", i)
-                        exit(i)
         # Add the route leak from the attacker
         attacker_ann = None
         attacker = engine.as_dict[self.attacker_asn]
-# debug
-        if len(attacker.customers) != 0:
-            input("WHAT IS GOING ON THE ATTACKER HAS CUSTOMERS", self.attacker_asn, len(attacker.customers))
         if prev_data_point.propagation_round == 0:
             attack_anns = []
             for ann_info in attacker._ribs_in.get_ann_infos(Prefixes.PREFIX.value):
@@ -28,7 +18,8 @@ class IntentionalLeak(MHLeak):
                 self._truncate_ann(atk_ann)
 
                 # Clear any down only communities
-                atk_ann.do_communities = tuple()
+                #atk_ann.do_communities = tuple()
+                self._trim_do_communities(atk_ann)
                 
                 # Reprocess atk_ann to add the attacker's ASN
                 atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS)
