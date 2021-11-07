@@ -20,6 +20,7 @@ class OriginHijack(MHPathManipulation):
                         withdraw = False,
                         traceback_end = True,
                         seed_asn=self.victim_asn,
+                        communities = tuple(),
                         recv_relationship=Relationships.ORIGIN),
                 self.AnnCls(prefix=Prefixes.PREFIX.value,
                         timestamp=Timestamps.ATTACKER.value,
@@ -33,4 +34,5 @@ class OriginHijack(MHPathManipulation):
                         seed_asn=self.attacker_asn,
                         # Add victim to removed signatures
                         removed_signatures=(self.victim_asn,),
+                        communities = tuple(),
                         recv_relationship=Relationships.ORIGIN),]
