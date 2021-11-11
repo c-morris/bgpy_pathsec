@@ -3,6 +3,8 @@ from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relation
 from .mh_leak import MHLeak
 from .. import PAnn
 
+#(666, 666, 5, 4, 1, 7, 10, 13, 777)
+
 class IntentionalLeak(MHLeak):
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
         # check attacker properties...
@@ -60,7 +62,7 @@ class IntentionalLeak(MHLeak):
                 if current_best_ann is not None:
                     # Only need to leak one announcement per neighbor
                     print("Attacker", self.attacker_asn, "Leaking", ann, "to neighbor", neighbor.asn)
-                    neighbor._recv_q.add_ann(ann)
+                    neighbor._recv_q.add_ann(current_best_ann)
                     neighbor.process_incoming_anns(Relationships.CUSTOMERS)
 
     @staticmethod

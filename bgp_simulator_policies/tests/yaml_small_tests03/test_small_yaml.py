@@ -9,16 +9,7 @@ from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransit
 from ..graphs import PGraph007
 
 
-class Test006BGPsecPreference(BaseGraphSystemTester):
-    GraphInfoCls = PGraph007
-    EngineInputCls = IntentionalLeak
-    base_dir = Path(__file__).parent
-    BaseASCls = BGPAS
-    AdoptASCls = BGPsecAS
-    propagation_rounds = 2
-    adopting_asns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 777]
-
-class Test006BGPsecTransitivePreference(BaseGraphSystemTester):
+class Test007BGPsecTransitivePreference(BaseGraphSystemTester):
     GraphInfoCls = PGraph007
     EngineInputCls = IntentionalLeak
     base_dir = Path(__file__).parent
@@ -27,7 +18,7 @@ class Test006BGPsecTransitivePreference(BaseGraphSystemTester):
     propagation_rounds = 2
     adopting_asns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 777]
 
-class Test006BGPsecTransitiveDownOnlyPreference(BaseGraphSystemTester):
+class Test007BGPsecTransitiveDownOnlyPreference(BaseGraphSystemTester):
     GraphInfoCls = PGraph007
     EngineInputCls = IntentionalLeak
     base_dir = Path(__file__).parent
