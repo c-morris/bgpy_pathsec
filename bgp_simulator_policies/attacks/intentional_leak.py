@@ -28,7 +28,7 @@ class IntentionalLeak(MHLeak):
                 self._truncate_ann(atk_ann)
 
                 # Clear any down only communities
-                atk_ann.do_communities = tuple()
+                self._trim_do_communities(atk_ann)
                 
                 # Reprocess atk_ann to add the attacker's ASN
                 atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS)
