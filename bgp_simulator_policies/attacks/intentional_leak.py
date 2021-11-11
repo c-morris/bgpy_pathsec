@@ -9,6 +9,10 @@ class IntentionalLeak(MHLeak):
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
         # Add the route leak from the attacker
         attacker_ann = None
+        # Freeze this current ann in the local rib of the attacker
+        attacker_ann = engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value)
+        if attacker_ann is not None:
+            attacker_ann.seed_asn = self.attacker_asn
         attacker = engine.as_dict[self.attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
