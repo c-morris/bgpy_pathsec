@@ -11,7 +11,7 @@ graphs = [LeakGraph(
                 percent_adoptions=[1, 10, 20, 50, 80, 99],
                 adopt_as_classes=[BGPAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS], 
                 EngineInputCls=IntentionalLeak,
-                num_trials=10,
+                num_trials=100,
                 propagation_rounds=2,
                 BaseASCls=BGPAS)]
 Simulator().run(graphs=graphs, graph_path=Path("/tmp/ezgraphs.tar.gz"), mp_method=MPMethod.MP)
