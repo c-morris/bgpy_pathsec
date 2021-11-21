@@ -5,6 +5,8 @@ from .. import PAnn
 
 #(666, 666, 5, 4, 1, 7, 10, 13, 777)
 
+# TIMID
+
 class IntentionalLeak(MHLeak):
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
         # Add the route leak from the attacker
@@ -21,20 +23,22 @@ class IntentionalLeak(MHLeak):
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
                 # path
+                prev_len = len(atk_ann.as_path)
                 self._truncate_ann(atk_ann)
 
                 # Clear any down only communities
                 self._trim_do_communities(atk_ann)
                 
                 # Reprocess atk_ann to add the attacker's ASN
-                atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS)
+                if prev_len != len(atk_ann.as_path):
+                    atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS)
                 attack_anns.append(atk_ann)
 
             if len(attack_anns) == 0: 
                 print("Attacker did not receive announcement from victim, cannot attack")
                 return
             # Populate neighbor recv_q with leaks
-            for neighbor in attacker.providers + attacker.peers:
+            for neighbor in attacker.providers:
                 current_best_ann = None
                 for ann in attack_anns:
                     if neighbor.asn not in ann.as_path:
@@ -45,29 +49,63 @@ class IntentionalLeak(MHLeak):
                                                                          current_best_ann_processed,
                                                                          recv_relationship,
                                                                          ann,
-                                                                         False,
+                                                                         True,
                                                                          recv_relationship)
                         # If the new priority is higher
                         if new_ann_is_better or current_best_ann is None:
                             current_best_ann = ann
-                            current_best_ann_processed = False
+                            current_best_ann_processed = True
 
                 #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
                 if current_best_ann is not None:
                     # Only need to leak one announcement per neighbor
-                    print("Attacker", self.attacker_asn, "Leaking", ann, "to neighbor", neighbor.asn)
+                    print("Attacker", self.attacker_asn, "Leaking", current_best_ann, "to neighbor", neighbor.asn)
                     neighbor._recv_q.add_ann(current_best_ann)
                     neighbor.process_incoming_anns(Relationships.CUSTOMERS)
 
+    #@staticmethod
+    #def _truncate_ann(ann):
+    #    j = 0
+    #    while ann.bgpsec_path[0] != ann.as_path[j]:
+    #        j += 1
+    #    if j == 0: # cannot truncate
+    #        return
+    #    # Decrement j to get one after the most recent adopting AS
+    #    ann.as_path = ann.as_path[j-1:]
+
     @staticmethod
     def _truncate_ann(ann):
-        j = 0
-        while ann.bgpsec_path[0] != ann.as_path[j]:
-            j += 1
-        if j == 0: # cannot truncate
-            return
-        # Decrement j to get one after the most recent adopting AS
-        ann.as_path = ann.as_path[j-1:]
+        """
+
+        This must tuncate to two cases: either the last adopting AS on the path
+        is replaced by the attacker or the path is truncated to one after the
+        last sequence of two or more adopting ASes. To generate the final
+        attack path, we attempt to find both cases and choose the shorter one.
+
+        Case 1: 
+          bgpsec_path:         [y, z]
+              as_path:      [x, y, z]
+             atk_path: [666, x, y, z]
+
+        Case 2: 
+          bgpsec_path: [x, z]
+              as_path: [x, y, z]
+             atk_path: [666, y, z]
+        """
+        # Case 1
+        
+        # Case 2
+        i = 0 # bgpsec path
+        j = 0 # as path
+        case2path = ann.as_path
+        while i+1 < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
+            if ann.bgpsec_path[i] == ann.as_path[j]:
+                if ann.bgpsec_path[i+1] != ann.as_path[j+1]:
+                    # found one
+                    case2path = ann.as_path[j+1:]
+                    break
+            while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
+                j += 1
 
     @staticmethod
     def _trim_do_communities(ann):
