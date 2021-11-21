@@ -7,13 +7,14 @@ from lib_bgp_simulator import GraphInfo, ASNs
 class PGraph007(GraphInfo):
     r"""                                                                             
           1------6---7                                                                         
-         / \    /|  / \       12                                                          
-        2   |  8 | 666 \     /                                                             
+         / \    /|    \       12                                                          
+        2   |  8 |     \     /                                                             
         |   |   \|      10--11--15                                                           
         3---4    9       |  |                                                       
-         \ /            13--14--16
-          5              |
-                        777
+         \ /    /       13--14--16
+          5    /         |
+           \  /         777
+            666  
     """
     def __init__(self):
         # Graph data
@@ -28,7 +29,7 @@ class PGraph007(GraphInfo):
                               CPLink(provider_asn=8, customer_asn=9),
                               CPLink(provider_asn=7, customer_asn=10),
                               CPLink(provider_asn=5, customer_asn=666),
-                              CPLink(provider_asn=7, customer_asn=666),
+                              CPLink(provider_asn=9, customer_asn=666),
                               CPLink(provider_asn=10, customer_asn=13),
                               CPLink(provider_asn=11, customer_asn=14),
                               CPLink(provider_asn=12, customer_asn=11),

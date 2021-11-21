@@ -10,7 +10,7 @@ from lib_bgp_simulator import Simulator, Graph, ROVAS, SubprefixHijack, BGPAS, M
 graphs = [LeakGraph(percent_adoptions=[1, 10, 20, 50, 80, 99],
                     adopt_as_classes=[BGPAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS],
                     EngineInputCls=OriginHijack,
-                    num_trials=3000,
+                    num_trials=1000,
                     propagation_rounds=1,
                     BaseASCls=BGPAS)]
 Simulator().run(graphs=graphs, graph_path=Path("/tmp/ezgraphs.tar.gz"), mp_method=MPMethod.MP)

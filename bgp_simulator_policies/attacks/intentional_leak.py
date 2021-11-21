@@ -79,8 +79,9 @@ class IntentionalLeak(MHLeak):
 
         This must tuncate to two cases: either the last adopting AS on the path
         is replaced by the attacker or the path is truncated to one after the
-        last sequence of two or more adopting ASes. To generate the final
-        attack path, we attempt to find both cases and choose the shorter one.
+        last sequence of two or more adopting ASes (or the origin). To generate
+        the final attack path, we attempt to find both cases and choose the
+        shorter one.
 
         Case 1: 
           bgpsec_path:         [y, z]
@@ -93,19 +94,34 @@ class IntentionalLeak(MHLeak):
              atk_path: [666, y, z]
         """
         # Case 1
+        i = 0 # bgpsec path
+        j = 0 # as path
+        case1path = ann.as_path
+        while i < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
+            while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
+                j += 1
+            if j > 0 and ann.bgpsec_path[i] == ann.as_path[j-1] and (ann.bgpsec_path[i+1] == ann.as_path[j+1] or j+1 == len(ann.as_path)):
+                case1path = ann.as_path[j-1:]
+            i += 1
         
         # Case 2
         i = 0 # bgpsec path
         j = 0 # as path
         case2path = ann.as_path
         while i+1 < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
+            while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
+                j += 1
             if ann.bgpsec_path[i] == ann.as_path[j]:
                 if ann.bgpsec_path[i+1] != ann.as_path[j+1]:
                     # found one
                     case2path = ann.as_path[j+1:]
                     break
-            while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
-                j += 1
+            i += 1
+
+        if len(case1path) < len(case2path):
+            return case1path
+        else:
+            return case2path
 
     @staticmethod
     def _trim_do_communities(ann):
