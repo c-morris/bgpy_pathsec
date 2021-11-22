@@ -108,20 +108,23 @@ class IntentionalLeak(MHLeak):
         i = 0 # bgpsec path
         j = 0 # as path
         case2path = ann.as_path
-        while i+1 < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
+        while i < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
             while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
                 j += 1
             if ann.bgpsec_path[i] == ann.as_path[j]:
+                if j+1 == len(ann.as_path):
+                    case2path = ann.as_path[j-1:]
+                    break
                 if ann.bgpsec_path[i+1] != ann.as_path[j+1]:
                     # found one
-                    case2path = ann.as_path[j+1:]
+                    case2path = ann.as_path[j:]
                     break
             i += 1
 
         if len(case1path) < len(case2path):
-            return case1path
+            ann.as_path = case1path
         else:
-            return case2path
+            ann.as_path = case2path
 
     @staticmethod
     def _trim_do_communities(ann):
