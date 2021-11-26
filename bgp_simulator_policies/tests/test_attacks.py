@@ -8,6 +8,7 @@ from bgp_simulator_policies import PTestAnn, IntentionalLeak, AccidentalLeak, Ne
     [[(2,), (2,), (2,)],
     [(2, 3), (2, 3), (2, 3)],
     [(2, 4), (2, 3, 4), (2, 3, 4)],
+    [(2, 3, 4, 5), (2, 3, 4, 5), (2, 3, 4, 5)],
     [(4,), (2, 3, 4), (3, 4)],
 ])
 def test_truncate_path_hash(bgpsec_path, as_path, result):
