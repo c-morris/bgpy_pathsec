@@ -94,7 +94,9 @@ class IntentionalLeak(MHLeak):
              atk_path: [666, y, z]
         """
         # Case 0: if path is un-truncatable
-        if len(ann.as_path) < 2 or len(ann.as_path) == len(ann.bgpsec_path):
+        if (len(ann.as_path) < 2 or 
+            (len(ann.bgpsec_path) > 1 and ann.as_path[0] == ann.bgpsec_path[0] and ann.as_path[1] == ann.bgpsec_path[1]) or
+            len(ann.as_path) == len(ann.bgpsec_path)):
             # Return without modifying path
             return 
 
