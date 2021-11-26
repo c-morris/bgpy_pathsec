@@ -15,6 +15,8 @@ class IntentionalLeak(MHLeak):
         attacker_ann = engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value)
         if attacker_ann is not None:
             attacker_ann.seed_asn = self.attacker_asn
+        print("ATK LOC RIB ANN  PATH:", attacker_ann.as_path)
+        print("ATK LOC RIB ANN BPATH:", attacker_ann.bgpsec_path)
         attacker = engine.as_dict[self.attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
@@ -85,14 +87,18 @@ class IntentionalLeak(MHLeak):
 
         Case 1: 
           bgpsec_path:         [y, z]
-              as_path:      [x, y, z]
+              as_path: [666, x, y, z]
              atk_path: [666, x, y, z]
 
         Case 2: 
-          bgpsec_path: [x, z]
-              as_path: [x, y, z]
+          bgpsec_path:      [x, z]
+              as_path: [666, x, y, z]
              atk_path: [666, y, z]
+
+        The announcement will be reprocessed after, so the attacker's ASN will
+        be re-added to the AS path.
         """
+        ann.as_path = ann.as_path[1:] # remove attacker ASN
         # Case 0: if path is un-truncatable
         if (len(ann.as_path) < 2 or 
             (len(ann.bgpsec_path) > 1 and ann.as_path[0] == ann.bgpsec_path[0] and ann.as_path[1] == ann.bgpsec_path[1]) or
