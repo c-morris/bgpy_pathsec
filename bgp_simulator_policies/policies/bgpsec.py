@@ -58,8 +58,22 @@ class BGPsecAS(BGPAS):
         # This is BGPsec Security Second, where announcements with security
         # attributes are preferred over those without, but only after
         # considering business relationships.
-        current_ann_valid = current_ann.bgpsec_path == current_ann.as_path and current_ann.next_as == self.asn
-        new_ann_valid = new_ann.bgpsec_path == new_ann.as_path and new_ann.next_as == self.asn
+        if current_processed:
+            current_path = current_ann.as_path[1:]
+            current_bgpsec_path = current_ann.bgpsec_path[1:]
+        else:
+            current_path = current_ann.as_path
+            current_bgpsec_path = current_ann.bgpsec_path
+        if new_processed:
+            new_path = new_ann.as_path[1:]
+            new_bgpsec_path = new_ann.bgpsec_path[1:]
+        else:
+            new_path = new_ann.as_path
+            new_bgpsec_path = new_ann.bgpsec_path
+
+        current_ann_valid = current_bgpsec_path == current_path and current_ann.next_as == self.asn
+        new_ann_valid = new_bgpsec_path == new_path and new_ann.next_as == self.asn
+
         if new_ann_valid and not current_ann_valid:
             return True
         elif current_ann_valid and not new_ann_valid:

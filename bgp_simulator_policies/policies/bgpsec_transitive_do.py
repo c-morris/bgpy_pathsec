@@ -15,5 +15,5 @@ class BGPsecTransitiveDownOnlyAS(BGPsecTransitiveAS, DownOnlyAS):
         self.down_only_modifications(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
         self.bgpsec_transitive_modifications(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
         # Although this looks weird, it is correct to call the DownOnlyAS's
-        # superclass here (which is the BGPRIBsAS)
+        # superclass here (which is the BGPAS)
         super(DownOnlyAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
