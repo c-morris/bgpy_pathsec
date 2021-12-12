@@ -77,7 +77,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)
 
     def _partial_verify_path(self, partial, full):
-        """Verify a partial path"""
+        """Unused, consider removing"""
         i = 0
         j = 0
         while i < len(partial) and j < len(full):

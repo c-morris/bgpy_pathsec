@@ -15,8 +15,8 @@ class IntentionalLeak(MHLeak):
         attacker_ann = engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value)
         if attacker_ann is not None:
             attacker_ann.seed_asn = self.attacker_asn
-            print("ATK LOC RIB ANN  PATH:", attacker_ann.as_path)
-            print("ATK LOC RIB ANN BPATH:", attacker_ann.bgpsec_path)
+            #print("ATK LOC RIB ANN  PATH:", attacker_ann.as_path)
+            #print("ATK LOC RIB ANN BPATH:", attacker_ann.bgpsec_path)
         attacker = engine.as_dict[self.attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
