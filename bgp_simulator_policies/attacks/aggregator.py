@@ -15,6 +15,6 @@ class Aggregator(MHPathManipulation):
     #            BGPsecTransitiveDownOnlyAggressive, BGPsecTransitiveTimid, 
     #            BGPsecTransitiveDownOnlyTimid, BGPsecTransitiveDownOnlyNoHashTimid]
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """Set behavior based on internal counter."""
         super(Aggregator, self).__init__(*args, **kwargs)
