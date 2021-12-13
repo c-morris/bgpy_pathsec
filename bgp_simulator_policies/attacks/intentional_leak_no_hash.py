@@ -6,8 +6,8 @@ from .. import PAnn
 
 class IntentionalLeakNoHash(IntentionalLeak):
 
-    @staticmethod
-    def _truncate_ann(ann):
+    #@staticmethod
+    def _truncate_ann(self, ann):
         partial = ann.bgpsec_path
         full = ann.as_path
         i = len(partial) - 1

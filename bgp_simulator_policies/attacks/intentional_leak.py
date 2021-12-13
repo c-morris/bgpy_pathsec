@@ -75,8 +75,8 @@ class IntentionalLeak(MHLeak):
     #    # Decrement j to get one after the most recent adopting AS
     #    ann.as_path = ann.as_path[j-1:]
 
-    @staticmethod
-    def _truncate_ann(ann):
+    #@staticmethod
+    def _truncate_ann(self, ann):
         """
 
         This must tuncate to two cases: either the last adopting AS on the path
@@ -139,6 +139,6 @@ class IntentionalLeak(MHLeak):
         else:
             ann.as_path = case2path
 
-    @staticmethod
-    def _trim_do_communities(ann):
+    #@staticmethod
+    def _trim_do_communities(self, ann):
         ann.do_communities = tuple(x for x in ann.do_communities if x in ann.bgpsec_path)
