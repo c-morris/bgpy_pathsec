@@ -10,7 +10,7 @@ from ..policies import BGPsecAS, DownOnlyAS, BGPsecTransitiveAS, BGPsecTransitiv
 # this *only* works with a specific set of policies!
 # any deviation may produce unexpected results
 
-class Aggregator(MHPathManipulation):
+class Aggregator(OriginHijack):
     
     def __init__(self, *args, **kwargs):
         """Set behavior based on internal counter."""
@@ -23,12 +23,13 @@ class Aggregator(MHPathManipulation):
             BGPsecTransitiveDownOnlyTimidAS: IntentionalLeak,
             BGPsecTransitiveDownOnlyNoHashTimidAS: IntentionalLeakNoHash,
         }
-        self._get_announcements = types.MethodType(OriginHijack._get_announcements, self)
-        self._truncate_ann = self.nullfunc
-        self._trim_do_communities = self.nullfunc
         super(Aggregator, self).__init__(*args, **kwargs)
     
     def nullfunc(*args, **kwargs):
+        pass
+    def _truncate_ann(*args, **kwargs):
+        pass
+    def _trim_do_communities(*args, **kwargs):
         pass
 
     def seed(self, engine, AdoptingASClass=None):
