@@ -61,7 +61,7 @@ class IntentionalLeak(MHLeak):
                 #attacker.policy.send_q[neighbor][ann.prefix].append(ann)
                 if current_best_ann is not None:
                     # Only need to leak one announcement per neighbor
-                    print("Attacker", self.attacker_asn, "Leaking", current_best_ann, "to neighbor", neighbor.asn)
+                    #print("Attacker", self.attacker_asn, "Leaking", current_best_ann, "to neighbor", neighbor.asn)
                     neighbor._recv_q.add_ann(current_best_ann)
                     neighbor.process_incoming_anns(Relationships.CUSTOMERS)
 

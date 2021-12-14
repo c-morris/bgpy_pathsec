@@ -11,7 +11,10 @@ from ..policies import BGPsecAS, DownOnlyAS, BGPsecTransitiveAS, BGPsecTransitiv
 # any deviation may produce unexpected results
 
 class Aggregator(MHPathManipulation):
-    pol_atk_map = { 
+    
+    def __init__(self, *args, **kwargs):
+        """Set behavior based on internal counter."""
+        self.pol_atk_map = { 
             BGPAS: OriginHijack,
             BGPsecAggressiveAS: OriginHijack,
             BGPsecTransitiveAggressiveAS: OriginHijack,
@@ -20,28 +23,24 @@ class Aggregator(MHPathManipulation):
             BGPsecTransitiveDownOnlyTimidAS: IntentionalLeak,
             BGPsecTransitiveDownOnlyNoHashTimidAS: IntentionalLeakNoHash,
         }
-    def __init__(self, *args, **kwargs):
-        """Set behavior based on internal counter."""
-        
         self._get_announcements = types.MethodType(OriginHijack._get_announcements, self)
         self._truncate_ann = self.nullfunc
         self._trim_do_communities = self.nullfunc
         super(Aggregator, self).__init__(*args, **kwargs)
     
-    @staticmethod 
     def nullfunc(*args, **kwargs):
         pass
 
-    def seed(self, engine):
+    def seed(self, engine, AdoptingASClass=None):
         """Seeds announcement at the proper AS"""
-        print('self as classes', self.adopting_as_class)
-        Atk_cls = self.pol_atk_map[self.adopting_as_class]
-        print('atk_cls', Atk_cls)
+        Atk_cls = self.pol_atk_map[AdoptingASClass]
         # set attributes
         self._get_announcements = types.MethodType(Atk_cls._get_announcements, self)
         self.post_propagation_hook = types.MethodType(Atk_cls.post_propagation_hook, self)
         self._truncate_ann = types.MethodType(getattr(Atk_cls, "_truncate_ann", self.nullfunc), self)
         self._trim_do_communities = types.MethodType(getattr(Atk_cls, "_trim_do_communities", self.nullfunc), self)
         # reset anns
+        #print('before', self.announcements)
         self.announcements = self._get_announcements()
+        #print('after', self.announcements)
         return super(Aggregator, self).seed(engine)
