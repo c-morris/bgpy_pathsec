@@ -8,6 +8,7 @@ class IntentionalLeakNoHash(IntentionalLeak):
 
     #@staticmethod
     def _truncate_ann(self, ann):
+        ann.as_path = ann.as_path[1:] # remove attacker ASN
         partial = ann.bgpsec_path
         full = ann.as_path
         i = len(partial) - 1
@@ -16,4 +17,5 @@ class IntentionalLeakNoHash(IntentionalLeak):
             i -= 1
             j -= 1
         ann.as_path = ann.as_path[j:]
+        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
 

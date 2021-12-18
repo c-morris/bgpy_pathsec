@@ -3,8 +3,6 @@ from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relation
 from .mh_leak import MHLeak
 from .. import PAnn
 
-#(666, 666, 5, 4, 1, 7, 10, 13, 777)
-
 # TIMID
 
 class IntentionalLeak(MHLeak):
@@ -62,28 +60,19 @@ class IntentionalLeak(MHLeak):
                 if current_best_ann is not None:
                     # Only need to leak one announcement per neighbor
                     #print("Attacker", self.attacker_asn, "Leaking", current_best_ann, "to neighbor", neighbor.asn)
+                    #print("COMMUNITIES", current_best_ann.do_communities)
                     neighbor._recv_q.add_ann(current_best_ann)
                     neighbor.process_incoming_anns(Relationships.CUSTOMERS)
-
-    #@staticmethod
-    #def _truncate_ann(ann):
-    #    j = 0
-    #    while ann.bgpsec_path[0] != ann.as_path[j]:
-    #        j += 1
-    #    if j == 0: # cannot truncate
-    #        return
-    #    # Decrement j to get one after the most recent adopting AS
-    #    ann.as_path = ann.as_path[j-1:]
 
     #@staticmethod
     def _truncate_ann(self, ann):
         """
 
         This must tuncate to two cases: either the last adopting AS on the path
-        is replaced by the attacker or the path is truncated to one after the
-        last sequence of two or more adopting ASes (or the origin). To generate
-        the final attack path, we attempt to find both cases and choose the
-        shorter one.
+        is replaced by the attacker (case 2) or the path is truncated to one
+        after the last sequence of two or more adopting ASes (or the origin)
+        (case 1). To generate the final attack path, we attempt to find both
+        cases and choose the longer one.
 
         Case 1: 
           bgpsec_path:         [y, z]
@@ -109,18 +98,19 @@ class IntentionalLeak(MHLeak):
         # Case 1
         i = 0 # bgpsec path
         j = 0 # as path
-        case1path = ann.as_path
+        case1path = []
         while i < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
             while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
                 j += 1
-            if j > 0 and ann.bgpsec_path[i] == ann.as_path[j-1] and (ann.bgpsec_path[i+1] == ann.as_path[j+1] or j+1 == len(ann.as_path)):
+            if j > 0 and i+1 < len(ann.bgpsec_path) and (ann.bgpsec_path[i+1] == ann.as_path[j+1] or j+1 == len(ann.as_path)):
                 case1path = ann.as_path[j-1:]
+                break
             i += 1
         
         # Case 2
         i = 0 # bgpsec path
         j = 0 # as path
-        case2path = ann.as_path
+        case2path = []
         while i < len(ann.bgpsec_path) and j+1 < len(ann.as_path):
             while ann.bgpsec_path[i] != ann.as_path[j] and j+1 < len(ann.as_path):
                 j += 1
@@ -128,16 +118,19 @@ class IntentionalLeak(MHLeak):
                 if j+1 == len(ann.as_path):
                     case2path = ann.as_path[j-1:]
                     break
-                if ann.bgpsec_path[i+1] != ann.as_path[j+1]:
-                    # found one
-                    case2path = ann.as_path[j:]
+                else:
+                    # replace last adopting
+                    case2path = ann.as_path[j+1:]
                     break
             i += 1
 
-        if len(case1path) < len(case2path):
+        if case1path == [] and case2path == []:
+            return
+        if len(case1path) > len(case2path):
             ann.as_path = case1path
         else:
             ann.as_path = case2path
+        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
 
     #@staticmethod
     def _trim_do_communities(self, ann):

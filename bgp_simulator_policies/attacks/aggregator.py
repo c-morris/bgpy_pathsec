@@ -36,10 +36,14 @@ class Aggregator(OriginHijack):
         """Seeds announcement at the proper AS"""
         Atk_cls = self.pol_atk_map[AdoptingASClass]
         # set attributes
-        self._get_announcements = types.MethodType(Atk_cls._get_announcements, self)
-        self.post_propagation_hook = types.MethodType(Atk_cls.post_propagation_hook, self)
-        self._truncate_ann = types.MethodType(getattr(Atk_cls, "_truncate_ann", self.nullfunc), self)
-        self._trim_do_communities = types.MethodType(getattr(Atk_cls, "_trim_do_communities", self.nullfunc), self)
+        #self._get_announcements = types.MethodType(Atk_cls._get_announcements, self)
+        #self.post_propagation_hook = types.MethodType(Atk_cls.post_propagation_hook, self)
+        #self._truncate_ann = types.MethodType(getattr(Atk_cls, "_truncate_ann", self.nullfunc), self)
+        #self._trim_do_communities = types.MethodType(getattr(Atk_cls, "_trim_do_communities", self.nullfunc), self)
+        Aggregator._get_announcements = Atk_cls._get_announcements
+        Aggregator.post_propagation_hook = Atk_cls.post_propagation_hook
+        Aggregator._truncate_ann = getattr(Atk_cls, "_truncate_ann", self.nullfunc)
+        Aggregator._trim_do_communities = getattr(Atk_cls, "_trim_do_communities", self.nullfunc)
         # reset anns
         #print('before', self.announcements)
         self.announcements = self._get_announcements()
