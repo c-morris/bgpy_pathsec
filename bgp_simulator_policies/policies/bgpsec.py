@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from lib_bgp_simulator import BGPAS, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPAS, Relationships
 
 class BGPsecAS(BGPAS):
 
@@ -16,12 +16,12 @@ class BGPsecAS(BGPAS):
         super(BGPsecAS, self)._process_outgoing_ann(as_obj,
                                                     ann.copy(next_as=next_as), *args)
     def _new_ann_better(self,
-                           current_ann,
-                           current_processed,
-                           default_current_recv_rel,
-                           new_ann,
-                           new_processed,
-                           default_new_recv_rel):
+                        current_ann,
+                        current_processed,
+                        default_current_recv_rel,
+                        new_ann,
+                        new_processed,
+                        default_new_recv_rel):
         """Assigns the priority to an announcement according to Gao Rexford
 
         NOTE: processed is processed for second ann"""
@@ -82,15 +82,9 @@ class BGPsecAS(BGPAS):
             return None
 
     def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
-        """Policy modifications to ann
+        """Policy modifications to ann"""
 
-        When it is decided that an annoucenemnt will be saved
-        in the local RIB, first it is copied with
-        copy_w_sim_attrs, then this function is called (before updated
-        path) then the path is updated
-        """
-
-        # Update the BGPsec path, too
+        # Update the BGPsec path
         if ann.bgpsec_path == ann.as_path:
             # If paths are equal, there is an unbroken chain of adopters,
             # otherwise, the attributes are lost

@@ -1,7 +1,6 @@
-from lib_bgp_simulator import BGPAS, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
+from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Relationships, ROAValidity
 
 from .mh_path_manipulation import MHPathManipulation
-from .. import PAnn
 
 class MHLeak(MHPathManipulation):
     def _get_announcements(self, **extra_ann_kwargs):

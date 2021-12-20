@@ -1,13 +1,14 @@
-from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
-
-from .mh_leak import MHLeak
 from .intentional_leak import IntentionalLeak
-from .. import PAnn
 
 class IntentionalLeakNoHash(IntentionalLeak):
+    """Same as IntentionalLeak, but without the path shortening defense.
 
-    #@staticmethod
+    Now paths can be truncated to the first non-adopting ASN, yielding shorter
+    paths.  
+    """
+
     def _truncate_ann(self, ann):
+        """Truncate to the first non-adopting ASN."""
         ann.as_path = ann.as_path[1:] # remove attacker ASN
         partial = ann.bgpsec_path
         full = ann.as_path
@@ -17,5 +18,6 @@ class IntentionalLeakNoHash(IntentionalLeak):
             i -= 1
             j -= 1
         ann.as_path = ann.as_path[j:]
+        # update BGPsec path to match new AS path
         ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
 

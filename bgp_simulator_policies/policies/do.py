@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPAS, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import BGPAS, Relationships
 
 class DownOnlyAS(BGPAS):
     name = "Down Only"

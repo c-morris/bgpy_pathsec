@@ -27,14 +27,16 @@ class BGPsecTransitiveAS(BGPsecAS):
                 len(ann.removed_signatures) == 0)
 
     def _new_ann_better_bgpsec(self,
-                                  current_ann,
-                                  current_processed,
-                                  new_ann,
-                                  new_processed):
+                               current_ann,
+                               current_processed,
+                               new_ann,
+                               new_processed):
            
         # This is BGPsec Security Second, where announcements with security
         # attributes are preferred over those without, but only after
         # considering business relationships.
+
+        # Need to get the two paths without the current ASN so they are comparable
         if current_processed:
             current_path = current_ann.as_path[1:]
             current_bgpsec_path = current_ann.bgpsec_path[1:]
@@ -57,13 +59,7 @@ class BGPsecTransitiveAS(BGPsecAS):
             return None
 
     def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
-        """Policy modifications to ann
-
-        When it is decided that an annoucenemnt will be saved
-        in the local RIB, first it is copied with
-        copy_w_sim_attrs, then this function is called (before updated
-        path) then the path is updated
-        """
+        """Policy modifications to ann"""
 
         # Update the BGPsec path, but since attributes are transitive, the path
         # is always updated unlike BGPsec.
@@ -71,22 +67,10 @@ class BGPsecTransitiveAS(BGPsecAS):
 
         kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
-        # This means that the AS path has 1 extra ASN that you don't need to check
+        # This means that the AS path has 1 extra ASN that you don't need to check.
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)
-
-    def _partial_verify_path(self, partial, full):
-        """Unused, consider removing"""
-        i = 0
-        j = 0
-        while i < len(partial) and j < len(full):
-            while partial[i] != full[j]:
-                j += 1
-                if j == len(full):
-                    return False
-            i += 1
-        return i == len(partial)
 
     def _partial_path_metric(self, partial, full):
         """Count the number of non-adopting segments"""

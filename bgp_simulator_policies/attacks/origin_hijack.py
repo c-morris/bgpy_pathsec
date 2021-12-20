@@ -1,8 +1,6 @@
-from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
-
+from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Relationships, ROAValidity
 
 from .mh_path_manipulation import MHPathManipulation
-from .. import PAnn
 
 class OriginHijack(MHPathManipulation):
     """Origin hijack with a *fake* path"""

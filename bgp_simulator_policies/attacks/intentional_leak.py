@@ -1,13 +1,25 @@
-from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
+from lib_bgp_simulator import Prefixes, Relationships, SimulatorEngine, DataPoint
 
 from .mh_leak import MHLeak
-from .. import PAnn
-
-# TIMID
 
 class IntentionalLeak(MHLeak):
+    """Intentional, but timid route leak.
+
+    The attack is "timid" in that the attacker will only modify the AS path in
+    ways that will not be detected by PaBGPsec. 
+
+    The attack is intentional in that the attacker will attempt to shorten the
+    AS path as much as possible, removing BGPsec signatures and Down-Only
+    communities in the process. The attacker will also choose the optimal
+    announcement to leak to each provider to maximize the effectiveness of the
+    attack. This means, for multi-homed attackers, when the path cannot be
+    shortened, no provider will receive the same announcement that they sent to
+    the attacker (so the announcements are not rejected for having the
+    provider's ASN on them).  
+    """
+
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
-        # Add the route leak from the attacker
+        """Add the route leak from the attacker"""
         attacker_ann = None
         # Freeze this current ann in the local rib of the attacker
         attacker_ann = engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value)
@@ -132,6 +144,6 @@ class IntentionalLeak(MHLeak):
             ann.as_path = case2path
         ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
 
-    #@staticmethod
+    # This can't be a static method because of the aggregator
     def _trim_do_communities(self, ann):
         ann.do_communities = tuple(x for x in ann.do_communities if x in ann.bgpsec_path)

@@ -1,10 +1,14 @@
-from lib_bgp_simulator import BGPAS, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, Graph, SimulatorEngine, DataPoint, ROAValidity
+from lib_bgp_simulator import Prefixes, Relationships, SimulatorEngine, DataPoint
 
 from .mh_leak import MHLeak
 
-from .. import PAnn
-
 class AccidentalLeak(MHLeak):
+    """An "accidental" route leak.
+
+    This attack is meant to approximate an accidental leak in that the attacker
+    does not remove any down-only communities and does not alter the AS path.
+    The unmodified announcement is simply forwarded to all of its providers. 
+    """
 
     def post_propagation_hook(self, engine: SimulatorEngine, prev_data_point: DataPoint, *args, **kwargs):
         # Add the route leak from the attacker
