@@ -22,8 +22,6 @@ setup(
     install_requires=[
         'lib_bgp_simulator',
         'lib_caida_collector',
-        'lib_utils',
-        'tikzplotlib',
         'pytest',
         'tqdm',
     ],
