@@ -5,7 +5,7 @@ from lib_bgp_simulator import Announcement, Relationships, ROAValidity
 from .do_ann import DOAnn
 
 @dataclass(eq=False)
-class PAnn(DOAnn):
+class PathManipulationAnn(DOAnn):
     """
     Generic path manipulation announcement.
     """
@@ -40,7 +40,7 @@ class PAnn(DOAnn):
 
 # We set equal to false here so that it can inherit __eq__ from parent
 @dataclass(eq=False)
-class PTestAnn(PAnn):
+class PTestAnn(PathManipulationAnn):
     prefix: str = None
     as_path: tuple = None
     timestamp: int = 0
