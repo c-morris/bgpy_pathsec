@@ -12,7 +12,7 @@ graphs = [LeakGraph(
                 adopt_as_classes=[BGPAS, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS], 
                 #adopt_as_classes=[BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS], 
                 EngineInputCls=Aggregator,
-                num_trials=100,
+                num_trials=500,
                 propagation_rounds=2,
                 BaseASCls=BGPAS)]
 Simulator().run(graphs=graphs, graph_path=Path("/tmp/ezgraphs.tar.gz"), mp_method=MPMethod.MP)
