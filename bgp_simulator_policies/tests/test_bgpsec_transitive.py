@@ -5,21 +5,6 @@ from lib_bgp_simulator import Relationships, BGPAS, Relationships, LocalRIB
 
 from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
 
-@pytest.mark.parametrize("partial, full", [[(1, 3), (1, 2, 3)],
-                                           [(1,), (1, 2, 3)],
-                                           [(1, 4, 5), (1, 2, 3, 4, 5)],
-                                           [(1, 2, 3), (1, 2, 3)]])
-def test_partial_path(partial, full):
-    a = BGPsecTransitiveAS(1)
-    assert(a._partial_verify_path(partial, full))
-
-@pytest.mark.parametrize("partial, full", [[(4,), (1, 2, 3)],
-                                           [(5, 4), (1, 2, 3, 4, 5)]])
-def test_partial_path(partial, full):
-    a = BGPsecTransitiveAS(1)
-    assert(not a._partial_verify_path(partial, full))
-
-
 @pytest.mark.parametrize("partial, full, segments", [[(1, 3), (1, 2, 3), 1],
                                            [(1,), (1, 2, 3), 1],
                                            [(777,), (2, 777), 1],
