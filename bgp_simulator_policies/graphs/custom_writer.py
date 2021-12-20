@@ -1,3 +1,8 @@
+# THIS FILE IS UNUSED
+
+# It is preserved to document how combined adopting and non-adopting graphs
+# used to be generated, so they can be generated again in the future. 
+
 from collections import defaultdict
 import math
 import os
