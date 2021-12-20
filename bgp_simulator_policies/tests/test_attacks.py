@@ -2,7 +2,7 @@ import pytest
 
 from lib_bgp_simulator import Relationships
 
-from bgp_simulator_policies import PTestAnn, IntentionalLeak, AccidentalLeak, NeighborHijack, OriginHijack, IntentionalLeakNoHash
+from bgp_simulator_policies import PTestAnn, IntentionalLeak, AccidentalLeak, OriginHijack, IntentionalLeakNoHash
 
 @pytest.mark.parametrize("bgpsec_path, as_path, result",
     [[(2,), (0, 2,), (2,)],
