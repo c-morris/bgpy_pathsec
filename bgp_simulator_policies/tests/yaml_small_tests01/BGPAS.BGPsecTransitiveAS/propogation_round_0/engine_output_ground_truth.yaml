@@ -1,7 +1,7 @@
 !yamlable/SimulatorEngine
 1: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 1
       - 7
@@ -32,7 +32,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PEERS
           value: 2
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 7
           - 777
@@ -56,7 +56,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     2:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 1
         - 7
@@ -81,7 +81,7 @@
         traceback_end: false
         withdraw: false
     4:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 1
         - 7
@@ -121,7 +121,7 @@
   providers: []
 2: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 2
       - 1
@@ -154,7 +154,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 1
           - 7
@@ -180,7 +180,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     3:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 2
         - 1
@@ -219,7 +219,7 @@
   - 1
 3: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 3
       - 2
@@ -254,7 +254,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 2
           - 1
@@ -282,7 +282,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     5:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 3
         - 2
@@ -324,7 +324,7 @@
   - 2
 4: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 4
       - 1
@@ -357,7 +357,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 1
           - 7
@@ -383,7 +383,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     5:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 4
         - 1
@@ -423,7 +423,7 @@
   - 1
 5: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 5
       - 4
@@ -458,7 +458,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 3
           - 2
@@ -491,7 +491,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 4
           - 1
@@ -531,7 +531,7 @@
   - 3
 6: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 6
       - 7
@@ -562,7 +562,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PEERS
           value: 2
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 7
           - 777
@@ -586,7 +586,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     8:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 6
         - 7
@@ -611,7 +611,7 @@
         traceback_end: false
         withdraw: false
     9:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 6
         - 7
@@ -650,7 +650,7 @@
   providers: []
 7: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 7
       - 777
@@ -679,7 +679,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: CUSTOMERS
           value: 3
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 777
           bgpsec_path: !!python/tuple
@@ -701,7 +701,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     1:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 7
         - 777
@@ -724,7 +724,7 @@
         traceback_end: false
         withdraw: false
     6:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 7
         - 777
@@ -747,7 +747,7 @@
         traceback_end: false
         withdraw: false
     10:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 7
         - 777
@@ -770,7 +770,7 @@
         traceback_end: false
         withdraw: false
     777:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 7
         - 777
@@ -807,7 +807,7 @@
   providers: []
 8: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 8
       - 6
@@ -840,7 +840,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 6
           - 7
@@ -866,7 +866,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     9:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 8
         - 6
@@ -905,7 +905,7 @@
   - 6
 9: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 9
       - 6
@@ -938,7 +938,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 6
           - 7
@@ -967,7 +967,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 8
           - 6
@@ -1007,7 +1007,7 @@
   - 8
 10: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 10
       - 7
@@ -1038,7 +1038,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 7
           - 777
@@ -1062,7 +1062,7 @@
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
     13:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 10
         - 7
@@ -1133,7 +1133,7 @@
   providers: []
 13: !yamlable/BGPAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 13
       - 10
@@ -1165,7 +1165,7 @@
         recv_relationship: !simulator_codec/Relationships
           name: PROVIDERS
           value: 1
-        unprocessed_ann: !yamlable/PAnn
+        unprocessed_ann: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 10
           - 7
@@ -1265,7 +1265,7 @@
   providers: []
 777: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PAnn
+    1.2.0.0/16: !yamlable/PathManipulationAnn
       as_path: !!python/tuple
       - 777
       bgpsec_path: !!python/tuple
@@ -1289,7 +1289,7 @@
   _ribs_in: !yamlable/RIBsIn {}
   _ribs_out: !yamlable/RIBsOut
     7:
-      1.2.0.0/16: !yamlable/PAnn
+      1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 777
         bgpsec_path: !!python/tuple
