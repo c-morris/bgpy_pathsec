@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from lib_bgp_simulator import Announcement
 
-@dataclass(eq=False)
+@dataclass(eq=False, unsafe_hash=True)
 class DOAnn(Announcement):
     """
     Down-Only Community Announcement
