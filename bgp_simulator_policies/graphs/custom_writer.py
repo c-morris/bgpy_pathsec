@@ -1,4 +1,5 @@
 # THIS FILE IS UNUSED
+# flake8: noqa
 
 # It is preserved to document how combined adopting and non-adopting graphs
 # used to be generated, so they can be generated again in the future. 

@@ -1,29 +1,34 @@
-from copy import deepcopy
-
-from lib_bgp_simulator import BGPAS, LocalRIB, SendQueue, RecvQueue, Relationships
+from lib_bgp_simulator import Relationships
 
 from .bgpsec import BGPsecAS
 
+
 class BGPsecTransitiveAS(BGPsecAS):
 
-    name="BGPsec Transitive"
-    
+    name = "BGPsec Transitive"
+
     __slots__ = []
 
-    def _process_outgoing_ann(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs):
+    def _process_outgoing_ann(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs): # noqa E501
         ann_to_send = ann.copy()
-        self.bgpsec_transitive_modifications(as_obj, ann_to_send, *args, **kwargs)
+        self.bgpsec_transitive_modifications(as_obj, ann_to_send, *args,
+                                             **kwargs)
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        super(BGPsecAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs)
+        super(BGPsecAS, self)._process_outgoing_ann(as_obj,
+                                                    ann_to_send,
+                                                    propagate_to,
+                                                    send_rels,
+                                                    *args,
+                                                    **kwargs)
 
-    def bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs):
+    def bgpsec_transitive_modifications(self, as_obj, ann_to_send, *args, **kwargs): # noqa E501
         # Set next_as for bgpsec
         ann_to_send.next_as = as_obj.asn
 
     def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""
-        return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and 
+        return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and  # noqa E501
                 len(ann.removed_signatures) == 0)
 
     def _new_ann_better_bgpsec(self,
@@ -31,12 +36,12 @@ class BGPsecTransitiveAS(BGPsecAS):
                                current_processed,
                                new_ann,
                                new_processed):
-           
+
         # This is BGPsec Security Second, where announcements with security
         # attributes are preferred over those without, but only after
         # considering business relationships.
 
-        # Need to get the two paths without the current ASN so they are comparable
+        # Need to get the paths without the current ASN so they are comparable
         if current_processed:
             current_path = current_ann.as_path[1:]
             current_bgpsec_path = current_ann.bgpsec_path[1:]
@@ -50,7 +55,8 @@ class BGPsecTransitiveAS(BGPsecAS):
             new_path = new_ann.as_path
             new_bgpsec_path = new_ann.bgpsec_path
         new_ann_metric = self._partial_path_metric(new_bgpsec_path, new_path)
-        current_ann_metric = self._partial_path_metric(current_bgpsec_path, current_path)
+        current_ann_metric = self._partial_path_metric(current_bgpsec_path,
+                                                       current_path)
         if current_ann_metric > new_ann_metric:
             return True
         elif current_ann_metric < new_ann_metric:
@@ -67,10 +73,11 @@ class BGPsecTransitiveAS(BGPsecAS):
 
         kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
-        # This means that the AS path has 1 extra ASN that you don't need to check.
+        # This means the AS path has 1 extra ASN that you don't need to check.
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
-        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)
+        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship,
+                                                       **kwargs)
 
     def _partial_path_metric(self, partial, full):
         """Count the number of non-adopting segments"""

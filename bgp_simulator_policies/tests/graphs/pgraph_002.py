@@ -1,23 +1,23 @@
-from pathlib import Path
-
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 
-from lib_bgp_simulator import GraphInfo, ASNs
+from lib_bgp_simulator import GraphInfo
+
 
 class PGraph002(GraphInfo):
     r"""
     Test BGPsec transitive preference for fewer nonadopting segments.
-    Horizontal lines are peer relationships, vertical lines are customer-provider. 
-                                                                             
-      1                                                                         
-     / \                                                                         
-    2   3                                                                     
+    Horizontal lines are peer relationships, vertical lines are
+    customer-provider.
+
+      1
+     / \
+    2   3
     |   |
     6   7
     |   |
     8   9
-     \  |                                                                    
-      \ 4                                                                  
+     \  |
+      \ 4
        \|
        777--666
     """
@@ -39,4 +39,3 @@ class PGraph002(GraphInfo):
         super(PGraph002, self).__init__(
             peer_links=set(peers),
             customer_provider_links=set(customer_providers))
-

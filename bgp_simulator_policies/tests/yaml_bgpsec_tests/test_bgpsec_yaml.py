@@ -1,11 +1,10 @@
-import pytest
 from pathlib import Path
 
-from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
-from lib_bgp_simulator import Relationships, BGPAS, Relationships, LocalRIB
-from lib_bgp_simulator import ASNs, BaseGraphSystemTester, YamlSystemTestRunner
+from lib_bgp_simulator import BGPAS
+from lib_bgp_simulator import BaseGraphSystemTester
 
-from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, IntentionalLeak
+from bgp_simulator_policies import BGPsecAS, BGPsecTransitiveAS
+from bgp_simulator_policies import BGPsecTransitiveDownOnlyAS, IntentionalLeak
 from ..graphs import PGraph001
 
 
@@ -17,6 +16,7 @@ class Test001BGPsecPreference(BaseGraphSystemTester):
     AdoptASCls = BGPsecAS
     adopting_asns = [1, 3, 4, 777]
 
+
 class Test001BGPsecTransitivePreference(BaseGraphSystemTester):
     GraphInfoCls = PGraph001
     EngineInputCls = IntentionalLeak
@@ -25,11 +25,11 @@ class Test001BGPsecTransitivePreference(BaseGraphSystemTester):
     AdoptASCls = BGPsecTransitiveAS
     adopting_asns = [1, 3, 4, 777]
 
-class Test001BGPsecPreference(BaseGraphSystemTester):
+
+class Test001BGPsecTransitiveDownOnlyPreference(BaseGraphSystemTester):
     GraphInfoCls = PGraph001
     EngineInputCls = IntentionalLeak
     base_dir = Path(__file__).parent
     BaseASCls = BGPAS
     AdoptASCls = BGPsecTransitiveDownOnlyAS
     adopting_asns = [1, 3, 4, 777]
-

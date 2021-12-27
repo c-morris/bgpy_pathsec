@@ -1,10 +1,9 @@
-from copy import deepcopy
+from lib_bgp_simulator import BGPAS
 
-from lib_bgp_simulator import BGPAS, Relationships
 
 class BGPsecAS(BGPAS):
 
-    name="BGPsec"
+    name = "BGPsec"
 
     __slots__ = tuple()
 
@@ -14,7 +13,9 @@ class BGPsecAS(BGPAS):
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
         super(BGPsecAS, self)._process_outgoing_ann(as_obj,
-                                                    ann.copy(next_as=next_as), *args)
+                                                    ann.copy(next_as=next_as),
+                                                    *args)
+
     def _new_ann_better(self,
                         current_ann,
                         current_processed,
@@ -26,12 +27,9 @@ class BGPsecAS(BGPAS):
 
         NOTE: processed is processed for second ann"""
 
-        # Can't assert this here due to passing new_ann as None now that it can be prpcessed or not
-        #assert self.asn not in new_ann.as_path, "Should have been removed in ann validation func"
-
-        new_rel_better: opt_bool = self._new_rel_better(current_ann,
+        new_rel_better: opt_bool = self._new_rel_better(current_ann, # noqa F821
                                                         current_processed,
-                                                        default_current_recv_rel,
+                                                        default_current_recv_rel, # noqa E501
                                                         new_ann,
                                                         new_processed,
                                                         default_new_recv_rel)
@@ -39,22 +37,22 @@ class BGPsecAS(BGPAS):
             return new_rel_better
         else:
             bgpsec_better = self._new_ann_better_bgpsec(current_ann,
-                                                           current_processed,
-                                                           new_ann,
-                                                           new_processed)
+                                                        current_processed,
+                                                        new_ann,
+                                                        new_processed)
             if (bgpsec_better is not None):
-                return  bgpsec_better
+                return bgpsec_better
             else:
                 return self._new_as_path_ties_better(current_ann,
-                                                 current_processed,
-                                                 new_ann,
-                                                 new_processed)
+                                                     current_processed,
+                                                     new_ann,
+                                                     new_processed)
 
     def _new_ann_better_bgpsec(self,
-                                  current_ann,
-                                  current_processed,
-                                  new_ann,
-                                  new_processed):
+                               current_ann,
+                               current_processed,
+                               new_ann,
+                               new_processed):
         # This is BGPsec Security Second, where announcements with security
         # attributes are preferred over those without, but only after
         # considering business relationships.
@@ -71,8 +69,8 @@ class BGPsecAS(BGPAS):
             new_path = new_ann.as_path
             new_bgpsec_path = new_ann.bgpsec_path
 
-        current_ann_valid = current_bgpsec_path == current_path and current_ann.next_as == self.asn
-        new_ann_valid = new_bgpsec_path == new_path and new_ann.next_as == self.asn
+        current_ann_valid = current_bgpsec_path == current_path and current_ann.next_as == self.asn # noqa E501
+        new_ann_valid = new_bgpsec_path == new_path and new_ann.next_as == self.asn # noqa E501
 
         if new_ann_valid and not current_ann_valid:
             return True
@@ -94,5 +92,5 @@ class BGPsecAS(BGPAS):
 
         kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
-        # This means that the AS path has 1 extra ASN that you don't need to check
-        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs)
+        # This means the AS path has 1 extra ASN that you don't need to check
+        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs) # noqa E501

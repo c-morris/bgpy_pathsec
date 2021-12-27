@@ -1,3 +1,6 @@
+# TODO make this test actually work once defaultdicts are removed
+# flake8: noqa
+
 import pytest
 from pathlib import Path
 

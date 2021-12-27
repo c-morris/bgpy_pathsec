@@ -1,15 +1,16 @@
 from .intentional_leak import IntentionalLeak
 
+
 class IntentionalLeakNoHash(IntentionalLeak):
     """Same as IntentionalLeak, but without the path shortening defense.
 
     Now paths can be truncated to the first non-adopting ASN, yielding shorter
-    paths.  
+    paths.
     """
 
     def _truncate_ann(self, ann):
         """Truncate to the first non-adopting ASN."""
-        ann.as_path = ann.as_path[1:] # remove attacker ASN
+        ann.as_path = ann.as_path[1:]  # remove attacker ASN
         partial = ann.bgpsec_path
         full = ann.as_path
         i = len(partial) - 1
@@ -20,4 +21,3 @@ class IntentionalLeakNoHash(IntentionalLeak):
         ann.as_path = ann.as_path[j:]
         # update BGPsec path to match new AS path
         ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
-
