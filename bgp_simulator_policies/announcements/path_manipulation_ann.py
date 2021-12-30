@@ -1,18 +1,17 @@
 from dataclasses import dataclass
 
-from lib_bgp_simulator import Announcement, Relationships, ROAValidity
+from lib_bgp_simulator import Relationships, ROAValidity
 
 from .do_ann import DOAnn
 
-@dataclass(eq=False)
+
+@dataclass(eq=False, unsafe_hash=True)
 class PathManipulationAnn(DOAnn):
     """
     Generic path manipulation announcement.
     """
 
     __slots__ = ("bgpsec_path", "next_as", "removed_signatures")
-
-
 
     # The BGPsec path is like the BGPsec_PATH attribute with some
     # modifications. First, unlike in real BGPsec, it can coexist with the
@@ -21,25 +20,23 @@ class PathManipulationAnn(DOAnn):
     # capabilities before sending an announcement. If the BGPsec and AS
     # paths are ever out of sync, that indicates it has passed through a
     # legacy AS and the BGPsec path should be ignored (except for
-    # transitive BGPsec). 
-    #self.bgpsec_path = kwargs.pop("bgpsec_path", tuple())
+    # transitive BGPsec).
     bgpsec_path: tuple
 
     # The next_as indicates the AS this announcement is being sent to. It
-    # must match for the announcement to be accepted. 
-    #self.next_as = kwargs.pop("next_as", 0)
+    # must match for the announcement to be accepted.
     next_as: int
 
     # The removed_signatures attribute is for tracking removed bgpsec
     # transitive signatures. Normally, a BGPsec Transitive AS would be
     # aware of all other adopting nodes and it could check for missing
     # signatures that way. For convenience, since this is a simulation,
-    # attackers will update this attribute when they remove signatures. 
-    #self.removed_signatures =  kwargs.pop("removed_signatures", tuple())
+    # attackers will update this attribute when they remove signatures.
     removed_signatures: tuple
 
+
 # We set equal to false here so that it can inherit __eq__ from parent
-@dataclass(eq=False)
+@dataclass(eq=False, unsafe_hash=True)
 class PTestAnn(PathManipulationAnn):
     prefix: str = None
     as_path: tuple = None

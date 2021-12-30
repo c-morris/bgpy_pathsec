@@ -1,3 +1,4 @@
+# flake8: noqa
 from .announcements import DOAnn, PathManipulationAnn, PTestAnn
 
 from .attacks import AccidentalLeak, IntentionalLeak, OriginHijack, IntentionalLeakNoHash, Aggregator

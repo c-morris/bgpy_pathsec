@@ -1,16 +1,15 @@
-from pathlib import Path
-
 from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
 
-from lib_bgp_simulator import GraphInfo, ASNs
+from lib_bgp_simulator import GraphInfo
+
 
 class PGraph001(GraphInfo):
-    r"""                                                                             
-      1                                                                         
-     / \                                                                         
-    2   3                                                                     
-     \  |                                                                    
-      \ 4                                                                  
+    r"""
+      1
+     / \
+    2   3
+     \  |
+      \ 4
        \|
        777--666
     """

@@ -1,14 +1,21 @@
 import pytest
 
-from lib_bgp_simulator import Relationships, BGPAS
+from lib_bgp_simulator import Relationships
 
-from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
+from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS
+from bgp_simulator_policies import BGPsecTransitiveAS
+from bgp_simulator_policies import BGPsecTransitiveDownOnlyAS
 
-@pytest.mark.parametrize("AdoptedPolicy", [DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS])
+
+pols = [DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS]
+
+
+@pytest.mark.parametrize("AdoptedPolicy", pols)
 def test_process_incoming_anns_do(AdoptedPolicy):
     """Test basic functionality of process_incoming_anns"""
     prefix = '137.99.0.0/16'
-    ann = PTestAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann = PTestAnn(prefix=prefix, as_path=(13796,), timestamp=0,
+                   recv_relationship=Relationships.ORIGIN)
     a = AdoptedPolicy(1)
     a._recv_q.add_ann(ann)
     a.process_incoming_anns(Relationships.CUSTOMERS)

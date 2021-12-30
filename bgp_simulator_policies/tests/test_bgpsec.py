@@ -1,21 +1,25 @@
 import pytest
 
-from lib_caida_collector import PeerLink, CustomerProviderLink as CPLink
-from lib_bgp_simulator import Relationships, BGPAS, Relationships, LocalRIB
+from lib_bgp_simulator import Relationships
 
-from bgp_simulator_policies import PTestAnn, DownOnlyAS, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
+from bgp_simulator_policies import PTestAnn, BGPsecAS
+from bgp_simulator_policies import BGPsecTransitiveAS
+from bgp_simulator_policies import BGPsecTransitiveDownOnlyAS
 
 
 # In BGPsec, an attacker should never send an invalid signature. It is always
 # more advantageous to strip the security attributes and send a legacy
 # announcement, which will likely be depreferred, but should not be rejected
-# outright. 
+# outright.
+
 
 def test_process_incoming_anns_bgpsec_depref():
     """Test preference of ann from customer with a BGPsec signature"""
     prefix = '137.99.0.0/16'
-    ann1 = PTestAnn(prefix=prefix, as_path=(2, 13796),timestamp=0, recv_relationship=Relationships.ORIGIN)
-    ann2 = PTestAnn(prefix=prefix, as_path=(13795,),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann1 = PTestAnn(prefix=prefix, as_path=(2, 13796), timestamp=0,
+                    recv_relationship=Relationships.ORIGIN)
+    ann2 = PTestAnn(prefix=prefix, as_path=(13795,), timestamp=0,
+                    recv_relationship=Relationships.ORIGIN)
     ann2.bgpsec_path = ann2.as_path
     ann2.next_as = 1
     a = BGPsecAS(1)
@@ -33,11 +37,16 @@ def test_process_incoming_anns_bgpsec_depref():
     # assert new announcement was accepted to local rib
     assert(a._local_rib.get_ann(prefix).origin == ann2.origin)
 
-@pytest.mark.parametrize("BasePolicyCls", [BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS])
+
+pols = [BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS]
+
+
+@pytest.mark.parametrize("BasePolicyCls", pols)
 def test_bgpsec_update_attrs(BasePolicyCls):
     """Test updating of bgpsec attributes when forwarding a bgpsec ann"""
     prefix = '137.99.0.0/16'
-    ann = PTestAnn(prefix=prefix, as_path=(13796,),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann = PTestAnn(prefix=prefix, as_path=(13796,), timestamp=0,
+                   recv_relationship=Relationships.ORIGIN)
     ann.bgpsec_path = ann.as_path
     ann.next_as = 1
     a = BasePolicyCls(1)
@@ -50,13 +59,16 @@ def test_bgpsec_update_attrs(BasePolicyCls):
     a._recv_q.add_ann(ann)
     a.process_incoming_anns(Relationships.CUSTOMERS)
     a._populate_send_q(Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
-    assert(a._send_q.get_send_info(b, prefix).ann.bgpsec_path == (1, 13796) and 
+    assert(a._send_q.get_send_info(b, prefix).ann.bgpsec_path == (1, 13796) and
            a._send_q.get_send_info(b, prefix).ann.next_as == 2)
 
+
 def test_bgpsec_remove_attrs():
-    """Test removal of bgpsec attributes when a non-adopting AS is detected on the path"""
+    """Test removal of bgpsec attributes when a non-adopting AS is detected on
+    the path"""
     prefix = '137.99.0.0/16'
-    ann = PTestAnn(prefix=prefix, as_path=(13795, 13796),timestamp=0, recv_relationship=Relationships.ORIGIN)
+    ann = PTestAnn(prefix=prefix, as_path=(13795, 13796), timestamp=0,
+                   recv_relationship=Relationships.ORIGIN)
     ann.bgpsec_path = (13796)
     ann.next_as = 13795
     a = BGPsecAS(1)
@@ -69,6 +81,5 @@ def test_bgpsec_remove_attrs():
     a._recv_q.add_ann(ann)
     a.process_incoming_anns(Relationships.CUSTOMERS)
     a._populate_send_q(Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
-    assert(len(a._send_q.get_send_info(b, prefix).ann.bgpsec_path) == 0 and 
+    assert(len(a._send_q.get_send_info(b, prefix).ann.bgpsec_path) == 0 and
            a._send_q.get_send_info(b, prefix).ann.next_as == 0)
-

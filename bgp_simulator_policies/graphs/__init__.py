@@ -1,1 +1,1 @@
-from .leak_graph import LeakGraph
+from .leak_graph import LeakGraph # noqa F401
