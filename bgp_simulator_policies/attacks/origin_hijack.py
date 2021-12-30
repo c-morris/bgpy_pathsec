@@ -1,4 +1,4 @@
-from lib_bgp_simulator import Prefixes, Timestamps, Relationships, ROAValidity
+from lib_bgp_simulator import Prefixes, Timestamps, Relationships
 
 from .mh_path_manipulation import MHPathManipulation
 
@@ -15,7 +15,8 @@ class OriginHijack(MHPathManipulation):
                             next_as=self.victim_asn,
                             removed_signatures=tuple(),
                             do_communities=tuple(),
-                            roa_validity=ROAValidity.UNKNOWN,
+                            roa_valid_length=None,
+                            roa_origin=None,
                             withdraw=False,
                             traceback_end=True,
                             seed_asn=self.victim_asn,
@@ -27,7 +28,8 @@ class OriginHijack(MHPathManipulation):
                             bgpsec_path=tuple(),
                             next_as=0,
                             do_communities=tuple(),
-                            roa_validity=ROAValidity.UNKNOWN,
+                            roa_valid_length=None,
+                            roa_origin=None,
                             withdraw=False,
                             traceback_end=True,
                             seed_asn=self.attacker_asn,
