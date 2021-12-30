@@ -7,17 +7,17 @@
   _send_q: !yamlable/SendQueue {}
   asn: 1
   customer_cone_size: 4
-  customers:
+  customers: !!python/tuple
   - 2
   - 4
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 666
   - 6
   - 7
   propagation_rank: 3
-  providers: []
+  providers: !!python/tuple []
 2: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
   _recv_q: !yamlable/RecvQueue {}
@@ -26,13 +26,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 2
   customer_cone_size: 2
-  customers:
+  customers: !!python/tuple
   - 3
   input_clique: false
   ixp: false
-  peers: []
+  peers: !!python/tuple []
   propagation_rank: 2
-  providers:
+  providers: !!python/tuple
   - 1
 3: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
@@ -42,14 +42,14 @@
   _send_q: !yamlable/SendQueue {}
   asn: 3
   customer_cone_size: 1
-  customers:
+  customers: !!python/tuple
   - 5
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 4
   propagation_rank: 1
-  providers:
+  providers: !!python/tuple
   - 2
 4: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
@@ -59,14 +59,14 @@
   _send_q: !yamlable/SendQueue {}
   asn: 4
   customer_cone_size: 1
-  customers:
+  customers: !!python/tuple
   - 5
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 3
   propagation_rank: 1
-  providers:
+  providers: !!python/tuple
   - 1
 5: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
@@ -76,12 +76,12 @@
   _send_q: !yamlable/SendQueue {}
   asn: 5
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers: []
+  peers: !!python/tuple []
   propagation_rank: 0
-  providers:
+  providers: !!python/tuple
   - 4
   - 3
 6: !yamlable/BGPsecAS
@@ -92,16 +92,16 @@
   _send_q: !yamlable/SendQueue {}
   asn: 6
   customer_cone_size: 2
-  customers:
+  customers: !!python/tuple
   - 8
   - 9
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 1
   - 7
   propagation_rank: 2
-  providers: []
+  providers: !!python/tuple []
 7: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
   _recv_q: !yamlable/RecvQueue {}
@@ -110,15 +110,15 @@
   _send_q: !yamlable/SendQueue {}
   asn: 7
   customer_cone_size: 2
-  customers:
+  customers: !!python/tuple
   - 10
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 6
   - 1
   propagation_rank: 2
-  providers: []
+  providers: !!python/tuple []
 8: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
   _recv_q: !yamlable/RecvQueue {}
@@ -127,13 +127,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 8
   customer_cone_size: 1
-  customers:
+  customers: !!python/tuple
   - 9
   input_clique: false
   ixp: false
-  peers: []
+  peers: !!python/tuple []
   propagation_rank: 1
-  providers:
+  providers: !!python/tuple
   - 6
 9: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB {}
@@ -143,12 +143,12 @@
   _send_q: !yamlable/SendQueue {}
   asn: 9
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers: []
+  peers: !!python/tuple []
   propagation_rank: 0
-  providers:
+  providers: !!python/tuple
   - 6
   - 8
 10: !yamlable/BGPsecAS
@@ -172,9 +172,8 @@
         name: PEERS
         value: 2
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -203,9 +202,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -231,9 +229,8 @@
           name: PEERS
           value: 2
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -241,14 +238,14 @@
   _send_q: !yamlable/SendQueue {}
   asn: 10
   customer_cone_size: 1
-  customers:
+  customers: !!python/tuple
   - 13
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 11
   propagation_rank: 1
-  providers:
+  providers: !!python/tuple
   - 7
 11: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB
@@ -269,9 +266,8 @@
         name: CUSTOMERS
         value: 3
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -302,9 +298,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -329,9 +324,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -355,9 +349,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -380,9 +373,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -405,9 +397,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -430,9 +421,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -440,15 +430,15 @@
   _send_q: !yamlable/SendQueue {}
   asn: 11
   customer_cone_size: 2
-  customers:
+  customers: !!python/tuple
   - 14
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 10
   - 15
   propagation_rank: 2
-  providers:
+  providers: !!python/tuple
   - 12
 12: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB
@@ -471,9 +461,8 @@
         name: CUSTOMERS
         value: 3
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -502,9 +491,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -530,9 +518,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -540,13 +527,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 12
   customer_cone_size: 0
-  customers:
+  customers: !!python/tuple
   - 11
   input_clique: false
   ixp: false
-  peers: []
+  peers: !!python/tuple []
   propagation_rank: 3
-  providers: []
+  providers: !!python/tuple []
 13: !yamlable/BGPAS
   _local_rib: !yamlable/LocalRIB
     1.2.0.0/16: !yamlable/PathManipulationAnn
@@ -565,9 +552,8 @@
         name: PEERS
         value: 2
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -598,9 +584,8 @@
             name: PEERS
             value: 2
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -625,9 +610,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -636,13 +620,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 13
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 14
   propagation_rank: 0
-  providers:
+  providers: !!python/tuple
   - 10
 14: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB
@@ -661,9 +645,8 @@
         name: CUSTOMERS
         value: 3
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -692,9 +675,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -717,9 +699,8 @@
             name: ORIGIN
             value: 4
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -741,9 +722,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -764,9 +744,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -787,9 +766,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -810,9 +788,8 @@
           name: CUSTOMERS
           value: 3
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -820,15 +797,15 @@
   _send_q: !yamlable/SendQueue {}
   asn: 14
   customer_cone_size: 1
-  customers:
+  customers: !!python/tuple
   - 777
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 13
   - 16
   propagation_rank: 1
-  providers:
+  providers: !!python/tuple
   - 11
 15: !yamlable/BGPAS
   _local_rib: !yamlable/LocalRIB
@@ -850,9 +827,8 @@
         name: PEERS
         value: 2
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -881,9 +857,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -892,13 +867,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 15
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 11
   propagation_rank: 0
-  providers: []
+  providers: !!python/tuple []
 16: !yamlable/BGPAS
   _local_rib: !yamlable/LocalRIB
     1.2.0.0/16: !yamlable/PathManipulationAnn
@@ -917,9 +892,8 @@
         name: PEERS
         value: 2
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: null
       timestamp: 0
       traceback_end: false
@@ -946,9 +920,8 @@
             name: CUSTOMERS
             value: 3
           removed_signatures: !!python/tuple []
-          roa_validity: !simulator_codec/ROAValidity
-            name: UNKNOWN
-            value: 1
+          roa_origin: null
+          roa_valid_length: null
           seed_asn: null
           timestamp: 0
           traceback_end: false
@@ -957,13 +930,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 16
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 14
   propagation_rank: 0
-  providers: []
+  providers: !!python/tuple []
 666: !yamlable/BGPAS
   _local_rib: !yamlable/LocalRIB {}
   _recv_q: !yamlable/RecvQueue {}
@@ -972,13 +945,13 @@
   _send_q: !yamlable/SendQueue {}
   asn: 666
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers:
+  peers: !!python/tuple
   - 1
   propagation_rank: 0
-  providers: []
+  providers: !!python/tuple []
 777: !yamlable/BGPsecAS
   _local_rib: !yamlable/LocalRIB
     1.2.0.0/16: !yamlable/PathManipulationAnn
@@ -994,9 +967,8 @@
         name: ORIGIN
         value: 4
       removed_signatures: !!python/tuple []
-      roa_validity: !simulator_codec/ROAValidity
-        name: UNKNOWN
-        value: 1
+      roa_origin: null
+      roa_valid_length: null
       seed_asn: 777
       timestamp: 0
       traceback_end: true
@@ -1018,9 +990,8 @@
           name: ORIGIN
           value: 4
         removed_signatures: !!python/tuple []
-        roa_validity: !simulator_codec/ROAValidity
-          name: UNKNOWN
-          value: 1
+        roa_origin: null
+        roa_valid_length: null
         seed_asn: null
         timestamp: 0
         traceback_end: false
@@ -1028,10 +999,10 @@
   _send_q: !yamlable/SendQueue {}
   asn: 777
   customer_cone_size: 0
-  customers: []
+  customers: !!python/tuple []
   input_clique: false
   ixp: false
-  peers: []
+  peers: !!python/tuple []
   propagation_rank: 0
-  providers:
+  providers: !!python/tuple
   - 14

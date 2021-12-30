@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from lib_bgp_simulator import Relationships, ROAValidity
+from lib_bgp_simulator import Relationships
 
 from .do_ann import DOAnn
 
@@ -42,7 +42,8 @@ class PTestAnn(PathManipulationAnn):
     as_path: tuple = None
     timestamp: int = 0
     seed_asn: int = None
-    roa_validity: ROAValidity = ROAValidity.UNKNOWN
+    roa_valid_length: bool = None
+    roa_origin: int = None
     recv_relationship: Relationships = Relationships.CUSTOMERS
     withdraw: bool = False
     traceback_end: bool = False
