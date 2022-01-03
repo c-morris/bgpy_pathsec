@@ -31,15 +31,15 @@ class BGPsecTransitiveAS(BGPsecAS):
         return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and  # noqa E501
                 len(ann.removed_signatures) == 0)
 
-    def _new_ann_better_bgpsec(self,
+    def _old_new_ann_better_bgpsec(self,
                                current_ann,
                                current_processed,
                                new_ann,
                                new_processed):
 
-        # This is BGPsec Security Second, where announcements with security
+        # This is BGPsec Security Third, where announcements with full security
         # attributes are preferred over those without, but only after
-        # considering business relationships.
+        # considering path length.
 
         # Need to get the paths without the current ASN so they are comparable
         if current_processed:
@@ -54,12 +54,18 @@ class BGPsecTransitiveAS(BGPsecAS):
         else:
             new_path = new_ann.as_path
             new_bgpsec_path = new_ann.bgpsec_path
-        new_ann_metric = self._partial_path_metric(new_bgpsec_path, new_path)
-        current_ann_metric = self._partial_path_metric(current_bgpsec_path,
-                                                       current_path)
-        if current_ann_metric > new_ann_metric:
+
+        current_ann_valid = current_bgpsec_path == current_path and current_ann.next_as == self.asn # noqa E501
+        new_ann_valid = new_bgpsec_path == new_path and new_ann.next_as == self.asn # noqa E501
+        # Old metric code may become relevant again if using bloom filter
+        # new_ann_metric = self._partial_path_metric(new_bgpsec_path, new_path)
+        # current_ann_metric = self._partial_path_metric(current_bgpsec_path,
+        #                                                current_path)
+
+        # Do not give preference to partly signed paths
+        if new_ann_valid and not current_ann_valid:
             return True
-        elif current_ann_metric < new_ann_metric:
+        elif current_ann_valid and not new_ann_valid:
             return False
         else:
             return None

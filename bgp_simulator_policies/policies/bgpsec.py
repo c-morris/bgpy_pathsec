@@ -1,5 +1,10 @@
-from lib_bgp_simulator import BGPAS
+from typing import Optional
 
+from lib_bgp_simulator import BGPAS
+from lib_bgp_simulator import Announcement as Ann
+
+
+opt_bool = Optional[bool]
 
 class BGPsecAS(BGPAS):
 
@@ -16,7 +21,8 @@ class BGPsecAS(BGPAS):
                                                     ann.copy(next_as=next_as),
                                                     *args)
 
-    def _new_ann_better(self,
+    # Rename function and comment out the other one for security second
+    def _security_second_new_ann_better(self,
                         current_ann,
                         current_processed,
                         default_current_recv_rel,
@@ -24,8 +30,7 @@ class BGPsecAS(BGPAS):
                         new_processed,
                         default_new_recv_rel):
         """Assigns the priority to an announcement according to Gao Rexford
-
-        NOTE: processed is processed for second ann"""
+        """
 
         new_rel_better: opt_bool = self._new_rel_better(current_ann, # noqa F821
                                                         current_processed,
@@ -48,14 +53,41 @@ class BGPsecAS(BGPAS):
                                                      new_ann,
                                                      new_processed)
 
+    def _new_as_path_ties_better(self,
+                                 current_ann: Optional[Ann],
+                                 current_processed: bool,
+                                 new_ann: Ann,
+                                 new_processed: bool) -> opt_bool:
+
+        new_as_path_shorter: opt_bool = self._new_as_path_shorter(
+            current_ann, current_processed, new_ann, new_processed)
+
+        if new_as_path_shorter is not None:
+            return new_as_path_shorter
+        else:
+            # Security Third
+            bgpsec_better = self._new_ann_better_bgpsec(current_ann,
+                                                        current_processed,
+                                                        new_ann,
+                                                        new_processed)
+            if (bgpsec_better is not None):
+                return bgpsec_better
+            else:
+                return self._new_wins_ties(current_ann,
+                                           current_processed,
+                                           new_ann,
+                                           new_processed)
+
+
+
     def _new_ann_better_bgpsec(self,
                                current_ann,
                                current_processed,
                                new_ann,
                                new_processed):
-        # This is BGPsec Security Second, where announcements with security
+        # This is BGPsec Security Third, where announcements with security
         # attributes are preferred over those without, but only after
-        # considering business relationships.
+        # considering path length.
         if current_processed:
             current_path = current_ann.as_path[1:]
             current_bgpsec_path = current_ann.bgpsec_path[1:]
