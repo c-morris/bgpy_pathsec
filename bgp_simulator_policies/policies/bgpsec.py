@@ -6,6 +6,7 @@ from lib_bgp_simulator import Announcement as Ann
 
 opt_bool = Optional[bool]
 
+
 class BGPsecAS(BGPAS):
 
     name = "BGPsec"
@@ -23,12 +24,12 @@ class BGPsecAS(BGPAS):
 
     # Rename function and comment out the other one for security second
     def _security_second_new_ann_better(self,
-                        current_ann,
-                        current_processed,
-                        default_current_recv_rel,
-                        new_ann,
-                        new_processed,
-                        default_new_recv_rel):
+                                        current_ann,
+                                        current_processed,
+                                        default_current_recv_rel,
+                                        new_ann,
+                                        new_processed,
+                                        default_new_recv_rel):
         """Assigns the priority to an announcement according to Gao Rexford
         """
 
@@ -77,8 +78,6 @@ class BGPsecAS(BGPAS):
                                            current_processed,
                                            new_ann,
                                            new_processed)
-
-
 
     def _new_ann_better_bgpsec(self,
                                current_ann,

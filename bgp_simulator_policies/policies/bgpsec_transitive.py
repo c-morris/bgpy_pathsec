@@ -32,10 +32,10 @@ class BGPsecTransitiveAS(BGPsecAS):
                 len(ann.removed_signatures) == 0)
 
     def _old_new_ann_better_bgpsec(self,
-                               current_ann,
-                               current_processed,
-                               new_ann,
-                               new_processed):
+                                   current_ann,
+                                   current_processed,
+                                   new_ann,
+                                   new_processed):
 
         # This is BGPsec Security Third, where announcements with full security
         # attributes are preferred over those without, but only after
