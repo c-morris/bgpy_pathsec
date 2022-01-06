@@ -3,11 +3,13 @@ from lib_bgp_simulator import BGPAS
 from . import OriginHijack, IntentionalLeak, IntentionalLeakNoHash
 from ..policies import BGPsecAS, DownOnlyAS, BGPsecTransitiveAS # noqa F401
 from ..policies import BGPsecTransitiveDownOnlyAS, BGPsecAggressiveAS # noqa F401
+from ..policies import BGPsecTimidAS
 from ..policies import BGPsecTransitiveAggressiveAS
 from ..policies import BGPsecTransitiveDownOnlyAggressiveAS
 from ..policies import BGPsecTransitiveTimidAS
 from ..policies import BGPsecTransitiveDownOnlyTimidAS
 from ..policies import BGPsecTransitiveDownOnlyNoHashTimidAS
+from ..policies import BGPsecTransitiveDownOnlyNoHashAggressiveAS
 
 
 class Aggregator(OriginHijack):
@@ -31,11 +33,13 @@ class Aggregator(OriginHijack):
         self.pol_atk_map = {
             BGPAS: OriginHijack,
             BGPsecAggressiveAS: OriginHijack,
+            BGPsecTimidAS: IntentionalLeak,
             BGPsecTransitiveAggressiveAS: OriginHijack,
             BGPsecTransitiveDownOnlyAggressiveAS: OriginHijack,
             BGPsecTransitiveTimidAS: IntentionalLeak,
             BGPsecTransitiveDownOnlyTimidAS: IntentionalLeak,
             BGPsecTransitiveDownOnlyNoHashTimidAS: IntentionalLeakNoHash,
+            BGPsecTransitiveDownOnlyNoHashAggressiveAS: OriginHijack,
         }
         super(Aggregator, self).__init__(*args, **kwargs)
 
