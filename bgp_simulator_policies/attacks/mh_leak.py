@@ -4,18 +4,37 @@ from .mh_path_manipulation import MHPathManipulation
 
 
 class MHLeak(MHPathManipulation):
-    def _get_announcements(self, **extra_ann_kwargs):
-        return [self.AnnCls(prefix=Prefixes.PREFIX.value,
-                            timestamp=Timestamps.VICTIM.value,
-                            as_path=(self.victim_asn,),
-                            bgpsec_path=(self.victim_asn,),
-                            removed_signatures=tuple(),
-                            next_as=self.victim_asn,
-                            do_communities=tuple(),
-                            roa_valid_length=None,
-                            roa_origin=None,
-                            withdraw=False,
-                            traceback_end=True,
-                            seed_asn=self.victim_asn,
-                            communities=tuple(),
-                            recv_relationship=Relationships.ORIGIN)]
+    def _get_announcements(self):
+        """Returns the two announcements seeded for this engine input
+
+        This engine input is for a prefix hijack,
+        consisting of a valid prefix and invalid prefix
+
+        for subclasses of this EngineInput, you can set AnnCls equal to
+        something other than Announcement
+        """
+
+        anns = list()
+        for victim_asn in self.victim_asns:
+            anns.append(self.AnnCls(prefix=Prefixes.PREFIX.value,
+                                    as_path=(victim_asn,),
+                                    timestamp=Timestamps.VICTIM.value,
+                                    seed_asn=victim_asn,
+                                    roa_valid_length=True,
+                                    roa_origin=victim_asn,
+                                    recv_relationship=Relationships.ORIGIN,
+                                    next_as=victim_asn,
+                                    do_communities=tuple(),
+                                    bgpsec_path=(victim_asn,),
+                                    removed_signatures=tuple(),
+                                    withdraw = False,
+                                    traceback_end = True,
+                                    communities = ()
+                                    ))
+
+        err = "Fix the roa_origins of the announcements for multiple victims"
+        assert len(self.victim_asns) == 1, err
+
+        roa_origin = next(iter(self.victim_asns))
+
+        return tuple(anns)

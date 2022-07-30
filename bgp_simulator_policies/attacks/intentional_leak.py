@@ -1,5 +1,4 @@
-from lib_bgp_simulator import Prefixes, Relationships, SimulatorEngine
-from lib_bgp_simulator import DataPoint
+from lib_bgp_simulator import Prefixes, Relationships
 
 from .mh_leak import MHLeak
 
@@ -20,8 +19,8 @@ class IntentionalLeak(MHLeak):
     provider's ASN on them).
     """
 
-    def post_propagation_hook(self, engine: SimulatorEngine,
-                              prev_data_point: DataPoint, *args, **kwargs):
+    def post_propagation_hook(self, engine,
+                              prev_data_point, *args, **kwargs):
         """Add the route leak from the attacker"""
         attacker_ann = None
         # Freeze this current ann in the local rib of the attacker

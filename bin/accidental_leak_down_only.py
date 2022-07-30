@@ -1,16 +1,15 @@
 from pathlib import Path
 
-from lib_bgp_simulator import Simulator, Graph, BGPSimpleAS, BGPAS
-#from lib_bgp_simulator import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from lib_bgp_simulator import Simulation, BGPSimpleAS, BGPAS
 
-from bgp_simulator_policies import AccidentalLeak, LeakGraph, DOAnn, DownOnlyAS
+from bgp_simulator_policies import AccidentalLeak, PathManipulationAnn, DownOnlyAS
 
-from lib_bgp_simulator import Simulator, Graph, ROVAS, SubprefixHijack, BGPSimpleAS, MPMethod
-
-graphs = [LeakGraph(percent_adoptions=[1, 5, 10, 20, 50, 80, 99],
-                    adopt_as_classes=[BGPAS, DownOnlyAS],
-                    EngineInputCls=AccidentalLeak,
-                    num_trials=20,
-                    propagation_rounds=2,
-                    BaseASCls=BGPAS)]
-Simulator().run(graphs=graphs, graph_path=Path("/tmp/ezgraphs.tar.gz"), mp_method=MPMethod.MP)
+sim = Simulation(num_trials=2,
+                 scenarios=[AccidentalLeak(AnnCls=PathManipulationAnn, 
+                                           AdoptASCls=DownOnlyAS,
+                                           BaseASCls=BGPAS)],
+                 propagation_rounds=2,
+                 percent_adoptions = (0.01, 0.1, 0.2, 0.4, 0.6, 0.8, 0.99),
+                 output_path=Path("/tmp/ezgraphs.tar.gz"),
+                 parse_cpus=2)
+sim.run()
