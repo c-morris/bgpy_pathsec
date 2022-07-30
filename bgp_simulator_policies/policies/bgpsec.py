@@ -19,7 +19,7 @@ class BGPsecAS(BGPAS):
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
         super(BGPsecAS, self)._process_outgoing_ann(as_obj,
-                                                    ann.copy(next_as=next_as),
+                                                    ann.copy(overwrite_default_kwargs={'next_as':next_as}),
                                                     *args)
 
     # Rename function and comment out the other one for security second
@@ -110,18 +110,20 @@ class BGPsecAS(BGPAS):
         else:
             return None
 
-    def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
+    def _copy_and_process(self, ann, recv_relationship, overwrite_default_kwargs=None):
         """Policy modifications to ann"""
 
+        if overwrite_default_kwargs is None:
+            overwrite_default_kwargs = dict()
         # Update the BGPsec path
         if ann.bgpsec_path == ann.as_path:
             # If paths are equal, there is an unbroken chain of adopters,
             # otherwise, the attributes are lost
-            kwargs = {"bgpsec_path": (self.asn, *ann.bgpsec_path)}
+            overwrite_default_kwargs.update({"bgpsec_path": (self.asn, *ann.bgpsec_path)})
         else:
-            kwargs = {"bgpsec_path": tuple(), "next_as": 0}
+            overwrite_default_kwargs.update({"bgpsec_path": tuple(), "next_as": 0})
 
-        kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
         # This means the AS path has 1 extra ASN that you don't need to check
-        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, **kwargs) # noqa E501
+        return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, overwrite_default_kwargs) # noqa E501
+

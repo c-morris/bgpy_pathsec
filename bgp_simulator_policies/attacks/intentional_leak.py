@@ -23,11 +23,12 @@ class IntentionalLeak(MHLeak):
                               prev_data_point, *args, **kwargs):
         """Add the route leak from the attacker"""
         attacker_ann = None
+        attacker_asn = list(self.attacker_asns)[0]
         # Freeze this current ann in the local rib of the attacker
-        attacker_ann = engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
+        attacker_ann = engine.as_dict[attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
         if attacker_ann is not None:
-            attacker_ann.seed_asn = self.attacker_asn
-        attacker = engine.as_dict[self.attacker_asn]
+            attacker_ann.seed_asn = attacker_asn
+        attacker = engine.as_dict[attacker_asn]
         if prev_data_point.propagation_round == 0:
             attack_anns = []
             for ann_info in attacker._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501

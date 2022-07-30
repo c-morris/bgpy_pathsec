@@ -70,20 +70,21 @@ class BGPsecTransitiveAS(BGPsecAS):
         else:
             return None
 
-    def _copy_and_process(self, ann, recv_relationship, **extra_kwargs):
+    def _copy_and_process(self, ann, recv_relationship, overwrite_default_kwargs=None):
         """Policy modifications to ann"""
 
+        if overwrite_default_kwargs is None:
+            overwrite_default_kwargs = dict()
         # Update the BGPsec path, but since attributes are transitive, the path
         # is always updated unlike BGPsec.
-        kwargs = {"bgpsec_path": (self.asn, *ann.bgpsec_path)}
+        overwrite_default_kwargs.update({"bgpsec_path": (self.asn, *ann.bgpsec_path)})
 
-        kwargs.update(extra_kwargs)
         # NOTE that after this point ann has been deep copied and processed
         # This means the AS path has 1 extra ASN that you don't need to check.
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship,
-                                                       **kwargs)
+                                                       overwrite_default_kwargs)
 
     def _partial_path_metric(self, partial, full):
         """Count the number of non-adopting segments"""
