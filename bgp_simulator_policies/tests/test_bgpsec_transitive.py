@@ -31,6 +31,6 @@ def test_process_incoming_anns_bgpsec_transitive_reject():
     a = BGPsecTransitiveAS(1)
     # Now add announcement with missing signatures
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(Relationships.CUSTOMERS)
+    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=0, scenario=None)
     # assert new announcement was not accepted to local rib
     assert(a._local_rib.get_ann(prefix) is None)
