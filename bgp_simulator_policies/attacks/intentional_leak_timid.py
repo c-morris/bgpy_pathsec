@@ -26,18 +26,18 @@ class IntentionalLeakTimid(IntentionalLeak):
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
                 # path
-                print('pre truncated', atk_ann)
-                print('apath', atk_ann.as_path)
-                print('bpath', atk_ann.bgpsec_path)
+                #print('pre truncated', atk_ann)
+                #print('apath', atk_ann.as_path)
+                #print('bpath', atk_ann.bgpsec_path)
                 prev_len = len(atk_ann.as_path)
                 self._truncate_ann(atk_ann)
 
-                print('truncated', atk_ann)
+                #print('truncated', atk_ann)
                 # Clear any down only communities
                 self._trim_do_communities(atk_ann)
                 if len(atk_ann.do_communities) > 0:
                     # If there are any DO communities, this is un-leakable
-                    print('Skipping Leak', atk_ann)
+                    #print('Skipping Leak', atk_ann)
                     continue
 
                 # Reprocess atk_ann to add the attacker's ASN
