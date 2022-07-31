@@ -22,4 +22,4 @@ def test_process_incoming_anns_do(AdoptedPolicy):
                             propagation_round=0,
                             scenario=None)
     # assert announcement was accepted to local rib
-    assert(a._local_rib.get_ann(prefix).origin == ann.origin)
+    assert (a._local_rib.get_ann(prefix).origin == ann.origin)

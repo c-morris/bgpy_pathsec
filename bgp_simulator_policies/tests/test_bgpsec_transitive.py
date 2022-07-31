@@ -17,7 +17,7 @@ t1 = ([[(1, 3), (1, 2, 3), 1],
 @pytest.mark.parametrize("partial, full, segments", t1)
 def test_partial_path_metric(partial, full, segments):
     a = BGPsecTransitiveAS(1)
-    assert(a._partial_path_metric(partial, full) == segments)
+    assert (a._partial_path_metric(partial, full) == segments)
 
 
 def test_process_incoming_anns_bgpsec_transitive_reject():
@@ -35,4 +35,4 @@ def test_process_incoming_anns_bgpsec_transitive_reject():
                             propagation_round=0,
                             scenario=None)
     # assert new announcement was not accepted to local rib
-    assert(a._local_rib.get_ann(prefix) is None)
+    assert (a._local_rib.get_ann(prefix) is None)

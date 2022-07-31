@@ -28,7 +28,7 @@ def test_truncate_path_hash(bgpsec_path, as_path, result):
                    next_as=1,
                    recv_relationship=Relationships.PROVIDERS)
     IntentionalLeak._truncate_ann(None, ann)
-    assert(ann.as_path == result)
+    assert (ann.as_path == result)
 
 
 t2 = ([[(2,), (0, 2,), (2,)],
@@ -52,4 +52,4 @@ def test_truncate_path_nohash(bgpsec_path, as_path, result):
                    next_as=1,
                    recv_relationship=Relationships.PROVIDERS)
     IntentionalLeakNoHash._truncate_ann(None, ann)
-    assert(ann.as_path == result)
+    assert (ann.as_path == result)

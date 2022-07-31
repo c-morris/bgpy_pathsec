@@ -17,7 +17,7 @@ def test_process_incoming_anns_do_reject():
                             propagation_round=0,
                             scenario=None)
     # assert announcement was accepted to local rib
-    assert(a._local_rib.get_ann(prefix) is None)
+    assert (a._local_rib.get_ann(prefix) is None)
 
 
 def test_process_incoming_anns_do_accept():
@@ -32,7 +32,7 @@ def test_process_incoming_anns_do_accept():
                             propagation_round=0,
                             scenario=None)
     # assert announcement was accepted to local rib
-    assert(a._local_rib.get_ann(prefix).origin == ann.origin)
+    assert (a._local_rib.get_ann(prefix).origin == ann.origin)
 
 
 @pytest.mark.parametrize("b_relationship, community_len",
@@ -51,5 +51,5 @@ def test_populate_send_q_do(b_relationship, community_len):
                             propagation_round=0,
                             scenario=None)
     a._populate_send_q(b_relationship, [Relationships.CUSTOMERS])
-    assert(len(a._send_q.get_send_info(b, prefix).ann.do_communities) ==
+    assert (len(a._send_q.get_send_info(b, prefix).ann.do_communities) ==
            community_len)
