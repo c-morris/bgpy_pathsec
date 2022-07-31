@@ -40,8 +40,7 @@ class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with Origin Hijack"""
     name = "PaBGPsec, No Path Shortening Defense Aggressive"
 
+
 class BGPsecTransitiveDownOnlyTimidLeakAS(BGPsecTransitiveDownOnlyAS):
     """For use with IntentionalLeakTimid"""
     name = "PaBGPsec, Timid Leak"
-
-

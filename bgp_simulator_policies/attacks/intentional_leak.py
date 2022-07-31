@@ -74,7 +74,9 @@ class IntentionalLeak(MHLeak):
                 if current_best_ann is not None:
                     # Only need to leak one announcement per neighbor
                     neighbor._recv_q.add_ann(current_best_ann)
-                    neighbor.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=propagation_round, scenario=self)
+                    neighbor.process_incoming_anns(from_rel=Relationships.CUSTOMERS, # noqa E501
+                                                   propagation_round=propagation_round, # noqa E501
+                                                   scenario=self)
 
     def _truncate_ann(self, ann):
         """

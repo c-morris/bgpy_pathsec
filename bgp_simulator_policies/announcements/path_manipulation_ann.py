@@ -1,9 +1,10 @@
 from dataclasses import dataclass
-from yamlable import yaml_info, yaml_info_decorate
-from typing import Any, Dict, Optional, Tuple, Type
+from yamlable import yaml_info
+from typing import Optional, Tuple
 
 from lib_bgp_simulator import Relationships
 from lib_bgp_simulator import Announcement
+
 
 @yaml_info(yaml_tag="PathManipulationAnn")
 class PathManipulationAnn(Announcement):
@@ -11,7 +12,10 @@ class PathManipulationAnn(Announcement):
     Generic path manipulation announcement.
     """
 
-    __slots__ = ("do_communities", "bgpsec_path", "next_as", "removed_signatures")
+    __slots__ = ("do_communities",
+                 "bgpsec_path",
+                 "next_as",
+                 "removed_signatures")
 
     def __init__(self,
                  *,

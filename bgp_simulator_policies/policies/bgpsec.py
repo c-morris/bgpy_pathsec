@@ -19,10 +19,12 @@ class BGPsecAS(BGPAS):
         next_as = as_obj.asn if ann.next_as == self.asn else ann.next_as
 
         super(BGPsecAS, self)._process_outgoing_ann(as_obj,
-                                                    ann.copy(overwrite_default_kwargs={'next_as':next_as}),
+                                                    ann.copy(overwrite_default_kwargs={'next_as':next_as}), # noqa E501
                                                     *args)
 
     # Rename function and comment out the other one for security second
+    # As of July 2022 the preferred behavior is security third
+    # The function below does not run, but is saved as an example
     def _security_second_new_ann_better(self,
                                         current_ann,
                                         current_processed,
@@ -110,7 +112,10 @@ class BGPsecAS(BGPAS):
         else:
             return None
 
-    def _copy_and_process(self, ann, recv_relationship, overwrite_default_kwargs=None):
+    def _copy_and_process(self,
+                          ann,
+                          recv_relationship,
+                          overwrite_default_kwargs=None):
         """Policy modifications to ann"""
 
         if overwrite_default_kwargs is None:
@@ -119,11 +124,10 @@ class BGPsecAS(BGPAS):
         if ann.bgpsec_path == ann.as_path:
             # If paths are equal, there is an unbroken chain of adopters,
             # otherwise, the attributes are lost
-            overwrite_default_kwargs.update({"bgpsec_path": (self.asn, *ann.bgpsec_path)})
+            overwrite_default_kwargs.update({"bgpsec_path": (self.asn, *ann.bgpsec_path)}) # noqa E501
         else:
-            overwrite_default_kwargs.update({"bgpsec_path": tuple(), "next_as": 0})
+            overwrite_default_kwargs.update({"bgpsec_path": tuple(), "next_as": 0}) # noqa E501
 
         # NOTE that after this point ann has been deep copied and processed
         # This means the AS path has 1 extra ASN that you don't need to check
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, overwrite_default_kwargs) # noqa E501
-

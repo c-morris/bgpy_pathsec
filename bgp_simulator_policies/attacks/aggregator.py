@@ -1,6 +1,7 @@
 from lib_bgp_simulator import BGPAS
 
-from . import OriginHijack, IntentionalLeak, IntentionalLeakNoHash, IntentionalLeakTimid
+from . import OriginHijack, IntentionalLeak, IntentionalLeakNoHash
+from . import IntentionalLeakTimid
 from ..policies import BGPsecAS, DownOnlyAS, BGPsecTransitiveAS # noqa F401
 from ..policies import BGPsecTransitiveDownOnlyAS, BGPsecAggressiveAS # noqa F401
 from ..policies import BGPsecTimidAS

@@ -1,7 +1,4 @@
 from lib_bgp_simulator import Scenario, Prefixes, Relationships, Timestamps
-from lib_bgp_simulator import BGPAS
-
-from .. import PathManipulationAnn
 
 
 class MHPathManipulation(Scenario):
@@ -46,7 +43,5 @@ class MHPathManipulation(Scenario):
 
         err = "Fix the roa_origins of the announcements for multiple victims"
         assert len(self.victim_asns) == 1, err
-
-        roa_origin = next(iter(self.victim_asns))
 
         return tuple(anns)

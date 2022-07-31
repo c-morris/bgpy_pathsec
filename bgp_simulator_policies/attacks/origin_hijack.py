@@ -29,15 +29,13 @@ class OriginHijack(MHPathManipulation):
                                     do_communities=tuple(),
                                     bgpsec_path=(victim_asn,),
                                     removed_signatures=tuple(),
-                                    withdraw = False,
-                                    traceback_end = True,
-                                    communities = ()
+                                    withdraw=False,
+                                    traceback_end=True,
+                                    communities=()
                                     ))
 
         err = "Fix the roa_origins of the announcements for multiple victims"
         assert len(self.victim_asns) == 1, err
-
-        roa_origin = next(iter(self.victim_asns))
 
         for attacker_asn in self.attacker_asns:
             anns.append(self.AnnCls(prefix=Prefixes.PREFIX.value,
@@ -50,41 +48,10 @@ class OriginHijack(MHPathManipulation):
                                     next_as=0,
                                     do_communities=tuple(),
                                     bgpsec_path=tuple(),
-                                    removed_signatures=(list(self.victim_asns)[0],),
+                                    removed_signatures=(list(self.victim_asns)[0],), # noqa E501
                                     withdraw=False,
                                     traceback_end=True,
                                     communities=tuple()
                                     ))
 
         return tuple(anns)
-    #def _get_announcements(self, **extra_ann_kwargs):
-    #    return [self.AnnCls(prefix=Prefixes.PREFIX.value,
-    #                        timestamp=Timestamps.VICTIM.value,
-    #                        as_path=(victim_asn,),
-    #                        # Legitimate announcement has valid BGPsec attrs
-    #                        bgpsec_path=(self.victim_asn,),
-    #                        next_as=self.victim_asn,
-    #                        removed_signatures=tuple(),
-    #                        do_communities=tuple(),
-    #                        roa_valid_length=None,
-    #                        roa_origin=None,
-    #                        withdraw=False,
-    #                        traceback_end=True,
-    #                        seed_asn=victim_asn,
-    #                        communities=tuple(),
-    #                        recv_relationship=Relationships.ORIGIN),
-    #            self.AnnCls(prefix=Prefixes.PREFIX.value,
-    #                        timestamp=Timestamps.ATTACKER.value,
-    #                        as_path=(self.attacker_asn, victim_asn),
-    #                        bgpsec_path=tuple(),
-    #                        next_as=0,
-    #                        do_communities=tuple(),
-    #                        roa_valid_length=None,
-    #                        roa_origin=None,
-    #                        withdraw=False,
-    #                        traceback_end=True,
-    #                        seed_asn=self.attacker_asn,
-    #                        # Add victim to removed signatures
-    #                        removed_signatures=(self.victim_asn,),
-    #                        communities=tuple(),
-    #                        recv_relationship=Relationships.ORIGIN)]

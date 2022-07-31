@@ -27,14 +27,12 @@ class MHLeak(MHPathManipulation):
                                     do_communities=tuple(),
                                     bgpsec_path=(victim_asn,),
                                     removed_signatures=tuple(),
-                                    withdraw = False,
-                                    traceback_end = True,
-                                    communities = ()
+                                    withdraw=False,
+                                    traceback_end=True,
+                                    communities=()
                                     ))
 
         err = "Fix the roa_origins of the announcements for multiple victims"
         assert len(self.victim_asns) == 1, err
-
-        roa_origin = next(iter(self.victim_asns))
 
         return tuple(anns)
