@@ -15,7 +15,7 @@ class Config008(EngineTestConfig):
                                BaseASCls=BGPAS,
                                AnnCls=PathManipulationAnn)
     graph = PGraph005()
-    non_default_as_cls_dict = {1: BGPsecTransitiveAS, 
+    non_default_as_cls_dict = {1: BGPsecTransitiveAS,
                                2: BGPsecTransitiveAS,
                                3: BGPsecTransitiveAS,
                                4: BGPsecTransitiveAS,
@@ -30,4 +30,3 @@ class Config008(EngineTestConfig):
                                14: BGPsecTransitiveAS,
                                777: BGPsecTransitiveAS}
     propagation_rounds = 1
-

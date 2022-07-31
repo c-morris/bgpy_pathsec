@@ -11,11 +11,11 @@ class Config016(EngineTestConfig):
     name = "P016"
     desc = "Small Graph test"
     scenario = IntentionalLeakTimid(attacker_asns={ASNs.ATTACKER.value},
-                               victim_asns={ASNs.VICTIM.value},
-                               BaseASCls=BGPAS,
-                               AnnCls=PathManipulationAnn)
+                                    victim_asns={ASNs.VICTIM.value},
+                                    BaseASCls=BGPAS,
+                                    AnnCls=PathManipulationAnn)
     graph = PGraph007()
-    non_default_as_cls_dict = {1: BGPsecTransitiveAS, 
+    non_default_as_cls_dict = {1: BGPsecTransitiveAS,
                                2: BGPsecTransitiveAS,
                                3: BGPsecTransitiveAS,
                                4: BGPsecTransitiveAS,
@@ -30,4 +30,3 @@ class Config016(EngineTestConfig):
                                14: BGPsecTransitiveAS,
                                777: BGPsecTransitiveAS}
     propagation_rounds = 2
-

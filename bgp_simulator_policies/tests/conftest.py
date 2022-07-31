@@ -2,7 +2,7 @@ from pathlib import Path
 import subprocess
 
 import pytest
-from lib_bgp_simulator import EngineTestConfig
+
 
 # https://stackoverflow.com/a/40673918/8903959
 @pytest.fixture(scope="session", autouse=True)
@@ -17,6 +17,7 @@ def open_pdf(view):
         dir_ = Path(__file__).parent / "engine_tests"
         path = dir_ / "engine_test_outputs" / "aggregated_diagrams.pdf"
         subprocess.call(["xdg-open", str(path)])
+
 
 @pytest.fixture(scope="session")
 def view(pytestconfig):

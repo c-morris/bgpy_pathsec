@@ -28,12 +28,16 @@ def test_process_incoming_anns_bgpsec_depref():
     a.peers = tuple()
     a.customers = tuple()
     a._recv_q.add_ann(ann1)
-    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=0, scenario=None)
+    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS,
+                            propagation_round=0,
+                            scenario=None)
     # assert announcement was accepted to local rib
     assert(a._local_rib.get_ann(prefix).origin == ann1.origin)
     # Now add announcement with valid signatures
     a._recv_q.add_ann(ann2)
-    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=0, scenario=None)
+    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS,
+                            propagation_round=0,
+                            scenario=None)
     # assert new announcement was accepted to local rib
     assert(a._local_rib.get_ann(prefix).origin == ann2.origin)
 
@@ -57,7 +61,9 @@ def test_bgpsec_update_attrs(BasePolicyCls):
     a.customers = tuple()
     a.customers = [b]
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=0, scenario=None)
+    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS,
+                            propagation_round=0,
+                            scenario=None)
     a._populate_send_q(Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
     assert(a._send_q.get_send_info(b, prefix).ann.bgpsec_path == (1, 13796) and
            a._send_q.get_send_info(b, prefix).ann.next_as == 2)
@@ -79,7 +85,9 @@ def test_bgpsec_remove_attrs():
     a.customers = tuple()
     a.customers = [b]
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=0, scenario=None)
+    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS,
+                            propagation_round=0,
+                            scenario=None)
     a._populate_send_q(Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
     assert(len(a._send_q.get_send_info(b, prefix).ann.bgpsec_path) == 0 and
            a._send_q.get_send_info(b, prefix).ann.next_as == 0)

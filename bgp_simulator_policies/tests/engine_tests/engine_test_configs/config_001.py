@@ -15,6 +15,8 @@ class Config001(EngineTestConfig):
                                BaseASCls=BGPAS,
                                AnnCls=PathManipulationAnn)
     graph = PGraph001()
-    non_default_as_cls_dict = {1: BGPsecAS, 3: BGPsecAS, 4: BGPsecAS, 777: BGPsecAS}
+    non_default_as_cls_dict = {1: BGPsecAS,
+                               3: BGPsecAS,
+                               4: BGPsecAS,
+                               777: BGPsecAS}
     propagation_rounds = 1
-

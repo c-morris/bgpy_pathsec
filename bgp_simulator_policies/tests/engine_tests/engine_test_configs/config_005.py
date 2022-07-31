@@ -15,10 +15,9 @@ class Config005(EngineTestConfig):
                                BaseASCls=BGPAS,
                                AnnCls=PathManipulationAnn)
     graph = PGraph003()
-    non_default_as_cls_dict = {1: DownOnlyAS, 
+    non_default_as_cls_dict = {1: DownOnlyAS,
                                2: DownOnlyAS,
                                3: DownOnlyAS,
                                4: DownOnlyAS,
                                777: DownOnlyAS}
     propagation_rounds = 1
-

@@ -18,6 +18,8 @@ def test_process_incoming_anns_do(AdoptedPolicy):
                    recv_relationship=Relationships.ORIGIN)
     a = AdoptedPolicy(1)
     a._recv_q.add_ann(ann)
-    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=0, scenario=None)
+    a.process_incoming_anns(from_rel=Relationships.CUSTOMERS,
+                            propagation_round=0,
+                            scenario=None)
     # assert announcement was accepted to local rib
     assert(a._local_rib.get_ann(prefix).origin == ann.origin)
