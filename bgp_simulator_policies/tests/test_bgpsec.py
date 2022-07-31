@@ -65,8 +65,8 @@ def test_bgpsec_update_attrs(BasePolicyCls):
                             propagation_round=0,
                             scenario=None)
     a._populate_send_q(Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
-    assert (a._send_q.get_send_info(b, prefix).ann.bgpsec_path == (1, 13796) and
-           a._send_q.get_send_info(b, prefix).ann.next_as == 2)
+    assert (a._send_q.get_send_info(b, prefix).ann.bgpsec_path == (1, 13796) and # noqa E501
+            a._send_q.get_send_info(b, prefix).ann.next_as == 2)
 
 
 def test_bgpsec_remove_attrs():
