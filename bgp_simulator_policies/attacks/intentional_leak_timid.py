@@ -10,15 +10,16 @@ class IntentionalLeakTimid(IntentionalLeak):
     """
 
     def post_propagation_hook(self, engine,
-                              prev_data_point, *args, **kwargs):
+                              propagation_round, *args, **kwargs):
         """Add the route leak from the attacker"""
         attacker_ann = None
+        attacker_asn = list(self.attacker_asns)[0]
         # Freeze this current ann in the local rib of the attacker
-        attacker_ann = engine.as_dict[self.attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
+        attacker_ann = engine.as_dict[attacker_asn]._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
         if attacker_ann is not None:
-            attacker_ann.seed_asn = self.attacker_asn
-        attacker = engine.as_dict[self.attacker_asn]
-        if prev_data_point.propagation_round == 0:
+            attacker_ann.seed_asn = attacker_asn
+        attacker = engine.as_dict[attacker_asn]
+        if propagation_round == 0:
             attack_anns = []
             for ann_info in attacker._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
                 atk_ann = attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS) # noqa E501
@@ -71,5 +72,5 @@ class IntentionalLeakTimid(IntentionalLeak):
                 if current_best_ann is not None:
                     # Only need to leak one announcement per neighbor
                     neighbor._recv_q.add_ann(current_best_ann)
-                    neighbor.process_incoming_anns(Relationships.CUSTOMERS)
+                    neighbor.process_incoming_anns(from_rel=Relationships.CUSTOMERS, propagation_round=propagation_round, scenario=self)
 
