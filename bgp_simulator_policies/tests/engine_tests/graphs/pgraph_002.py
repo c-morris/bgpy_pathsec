@@ -17,7 +17,7 @@ class PGraph002(GraphInfo):
     |   |
     8   9
      \  |
-      \ 4
+      5 4
        \|
        777--666
     """
@@ -32,7 +32,8 @@ class PGraph002(GraphInfo):
                               CPLink(provider_asn=4, customer_asn=777),
                               CPLink(provider_asn=6, customer_asn=8),
                               CPLink(provider_asn=7, customer_asn=9),
-                              CPLink(provider_asn=8, customer_asn=777),
+                              CPLink(provider_asn=8, customer_asn=5),
+                              CPLink(provider_asn=5, customer_asn=777),
                               CPLink(provider_asn=9, customer_asn=4),
                               ]
 

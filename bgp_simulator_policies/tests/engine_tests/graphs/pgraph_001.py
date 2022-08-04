@@ -9,7 +9,7 @@ class PGraph001(GraphInfo):
      / \
     2   3
      \  |
-      \ 4
+      5 4
        \|
        777--666
     """
@@ -18,7 +18,8 @@ class PGraph001(GraphInfo):
         peers = [PeerLink(777, 666)]
         customer_providers = [CPLink(provider_asn=1, customer_asn=2),
                               CPLink(provider_asn=1, customer_asn=3),
-                              CPLink(provider_asn=2, customer_asn=777),
+                              CPLink(provider_asn=2, customer_asn=5),
+                              CPLink(provider_asn=5, customer_asn=777),
                               CPLink(provider_asn=3, customer_asn=4),
                               CPLink(provider_asn=4, customer_asn=777)]
         super(PGraph001, self).__init__(

@@ -17,6 +17,9 @@ from .engine_test_configs import Config013
 from .engine_test_configs import Config014
 from .engine_test_configs import Config015
 from .engine_test_configs import Config016
+from .engine_test_configs import Config017
+from .engine_test_configs import Config018
+from .engine_test_configs import Config019
 
 # Graphs
 from lib_bgp_simulator import GraphInfo
@@ -26,6 +29,7 @@ from .graphs import PGraph003
 from .graphs import PGraph005
 from .graphs import PGraph006
 from .graphs import PGraph007
+from .graphs import PGraph008
 
 __all__ = [
     "TestEngine",
@@ -45,6 +49,9 @@ __all__ = [
     "Config014",
     "Config015",
     "Config016",
+    "Config017",
+    "Config018",
+    "Config019",
     "GraphInfo",
     "PGraph001",
     "PGraph002",
@@ -52,4 +59,5 @@ __all__ = [
     "PGraph005",
     "PGraph006",
     "PGraph007",
+    "PGraph008",
 ]
