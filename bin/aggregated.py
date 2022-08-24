@@ -8,11 +8,11 @@ from bgp_simulator_pkg import AttackerSuccessAdoptingStubsAndMHSubgraph
 from bgp_simulator_pkg import AttackerSuccessNonAdoptingEtcSubgraph
 from bgp_simulator_pkg import AttackerSuccessNonAdoptingInputCliqueSubgraph
 from bgp_simulator_pkg import AttackerSuccessNonAdoptingStubsAndMHSubgraph
+from bgp_simulator_pkg import AttackerSuccessAllSubgraph
 
 from bgp_simulator_policies import Aggregator, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS
 
 from bgp_simulator_policies import PathManipulationAnn
-from bgp_simulator_policies import AttackerSuccessAllSubgraph
 
 
 sim = Simulation(num_trials=2,
@@ -55,5 +55,5 @@ sim = Simulation(num_trials=2,
                  propagation_rounds=2,
                  percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
                  output_path=Path("/tmp/ezgraphs"),
-                 parse_cpus=2)
+                 parse_cpus=21)
 sim.run()
