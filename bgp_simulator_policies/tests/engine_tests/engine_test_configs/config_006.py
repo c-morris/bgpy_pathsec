@@ -2,7 +2,7 @@ from ..graphs import PGraph003
 from ....attacks import IntentionalLeak
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
-from lib_bgp_simulator import EngineTestConfig, BGPAS, ASNs
+from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
 
 
 class Config006(EngineTestConfig):

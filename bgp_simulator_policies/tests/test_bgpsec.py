@@ -1,6 +1,6 @@
 import pytest
 
-from lib_bgp_simulator import Relationships
+from bgp_simulator_pkg import Relationships
 
 from bgp_simulator_policies import PTestAnn, BGPsecAS
 from bgp_simulator_policies import BGPsecTransitiveAS

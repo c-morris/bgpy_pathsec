@@ -1,4 +1,4 @@
-from lib_bgp_simulator import Relationships
+from bgp_simulator_pkg import Relationships
 
 from .bgpsec import BGPsecAS
 

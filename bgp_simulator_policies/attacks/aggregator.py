@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPAS
+from bgp_simulator_pkg import BGPAS
 
 from . import OriginHijack, IntentionalLeak, IntentionalLeakNoHash
 from . import IntentionalLeakTimid

@@ -1,4 +1,4 @@
-from lib_bgp_simulator import Prefixes, Relationships
+from bgp_simulator_pkg import Prefixes, Relationships
 
 from .mh_leak import MHLeak
 

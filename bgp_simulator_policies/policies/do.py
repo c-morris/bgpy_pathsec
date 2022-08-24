@@ -1,4 +1,4 @@
-from lib_bgp_simulator import BGPAS, Relationships
+from bgp_simulator_pkg import BGPAS, Relationships
 
 
 class DownOnlyAS(BGPAS):

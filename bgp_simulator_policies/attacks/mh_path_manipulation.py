@@ -1,4 +1,4 @@
-from lib_bgp_simulator import Scenario, Prefixes, Relationships, Timestamps
+from bgp_simulator_pkg import Scenario, Prefixes, Relationships, Timestamps
 
 
 class MHPathManipulation(Scenario):

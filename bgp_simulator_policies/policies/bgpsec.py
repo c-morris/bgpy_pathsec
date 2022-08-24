@@ -1,7 +1,7 @@
 from typing import Optional
 
-from lib_bgp_simulator import BGPAS
-from lib_bgp_simulator import Announcement as Ann
+from bgp_simulator_pkg import BGPAS
+from bgp_simulator_pkg import Announcement as Ann
 
 
 opt_bool = Optional[bool]

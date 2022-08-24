@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from yamlable import yaml_info
 from typing import Optional, Tuple
 
-from lib_bgp_simulator import Relationships
-from lib_bgp_simulator import Announcement
+from bgp_simulator_pkg import Relationships
+from bgp_simulator_pkg import Announcement
 
 
 @yaml_info(yaml_tag="PathManipulationAnn")

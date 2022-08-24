@@ -1,8 +1,8 @@
 from pathlib import Path
 import pytest
 
-from lib_bgp_simulator import EngineTester
-from lib_bgp_simulator import EngineTestConfig
+from bgp_simulator_pkg import EngineTester
+from bgp_simulator_pkg import EngineTestConfig
 
 
 from .engine_test_configs import Config001

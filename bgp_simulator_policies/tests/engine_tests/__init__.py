@@ -22,7 +22,7 @@ from .engine_test_configs import Config018
 from .engine_test_configs import Config019
 
 # Graphs
-from lib_bgp_simulator import GraphInfo
+from bgp_simulator_pkg import GraphInfo
 from .graphs import PGraph001
 from .graphs import PGraph002
 from .graphs import PGraph003
