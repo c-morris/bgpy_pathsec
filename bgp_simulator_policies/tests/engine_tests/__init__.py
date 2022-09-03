@@ -30,6 +30,7 @@ from .graphs import PGraph005
 from .graphs import PGraph006
 from .graphs import PGraph007
 from .graphs import PGraph008
+from .graphs import PGraph009
 
 __all__ = [
     "TestEngine",
@@ -60,4 +61,5 @@ __all__ = [
     "PGraph006",
     "PGraph007",
     "PGraph008",
+    "PGraph009",
 ]

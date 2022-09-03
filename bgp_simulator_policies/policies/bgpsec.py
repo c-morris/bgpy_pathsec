@@ -1,6 +1,6 @@
 from typing import Optional
 
-from bgp_simulator_pkg import BGPAS
+from bgp_simulator_pkg import BGPAS, Relationships
 from bgp_simulator_pkg import Announcement as Ann
 
 
@@ -10,8 +10,15 @@ opt_bool = Optional[bool]
 class BGPsecAS(BGPAS):
 
     name = "BGPsec"
+    count = 0
 
     __slots__ = tuple()
+
+    def _valid_ann(self, ann, recv_relationship: Relationships):
+        """Determine if an announcement is valid or should be dropped"""
+        if len(ann.bgpsec_path) == len(ann.as_path):
+            BGPsecAS.count += len(ann.bgpsec_path)
+        return super(BGPsecAS, self)._valid_ann(ann, recv_relationship)
 
     def _process_outgoing_ann(self, as_obj, ann, *args):
 

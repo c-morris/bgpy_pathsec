@@ -24,6 +24,7 @@ from .engine_test_configs import Config016
 from .engine_test_configs import Config017
 from .engine_test_configs import Config018
 from .engine_test_configs import Config019
+from .engine_test_configs import Config020
 
 
 @pytest.mark.engine
@@ -34,25 +35,26 @@ class TestEngine:
     """
 
     @pytest.mark.parametrize("conf",
-                             [Config001,
-                              Config002,
-                              Config003,
-                              Config004,
-                              Config005,
-                              Config006,
-                              Config007,
-                              Config008,
-                              Config009,
-                              Config010,
-                              Config011,
-                              Config012,
-                              Config013,
-                              Config014,
-                              Config015,
-                              Config016,
-                              Config017,
-                              Config018,
-                              Config019,
+                             [#Config001,
+                              #Config002,
+                              #Config003,
+                              #Config004,
+                              #Config005,
+                              #Config006,
+                              #Config007,
+                              #Config008,
+                              #Config009,
+                              #Config010,
+                              #Config011,
+                              #Config012,
+                              #Config013,
+                              #Config014,
+                              #Config015,
+                              #Config016,
+                              #Config017,
+                              #Config018,
+                              #Config019,
+                              Config020,
                               ])
     def test_engine(self, conf: EngineTestConfig, overwrite: bool):
         """Performs a system test on the engine
