@@ -1,6 +1,5 @@
 from ..graphs import PGraph008
 from ....attacks import IntentionalLeak
-from ....policies import BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
 from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
 
@@ -26,5 +25,6 @@ class Config018(EngineTestConfig):
                                11: BGPsecTransitiveWithPathShorteningDefenseAS,
                                12: BGPsecTransitiveWithPathShorteningDefenseAS,
                                14: BGPsecTransitiveWithPathShorteningDefenseAS,
-                               777: BGPsecTransitiveWithPathShorteningDefenseAS}
+                               777: BGPsecTransitiveWithPathShorteningDefenseAS
+                               }
     propagation_rounds = 2

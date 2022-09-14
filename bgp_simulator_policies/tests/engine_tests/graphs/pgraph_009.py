@@ -1,4 +1,4 @@
-from caida_collector_pkg import PeerLink, CustomerProviderLink as CPLink
+from caida_collector_pkg import CustomerProviderLink as CPLink
 
 from bgp_simulator_pkg import GraphInfo
 

@@ -6,13 +6,13 @@ from bgp_simulator_pkg import GraphInfo
 class PGraph008(GraphInfo):
     r"""
           1------6---7
-         / \    /|    \ 
+         / \    /|    \
         2   |  8 |    777
-        |   |   \|     
-        3---4    9     
+        |   |   \|
+        3---4    9
          \ /    /
-          5    / 
-           \  /  
+          5    /
+           \  /
             666
     """
     def __init__(self):
@@ -21,7 +21,7 @@ class PGraph008(GraphInfo):
                  PeerLink(3, 4),
                  PeerLink(6, 7),
                  PeerLink(1, 7),
-                ]
+                 ]
         customer_providers = [CPLink(provider_asn=1, customer_asn=2),
                               CPLink(provider_asn=1, customer_asn=4),
                               CPLink(provider_asn=2, customer_asn=3),

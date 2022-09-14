@@ -30,5 +30,6 @@ class Config017(EngineTestConfig):
                                11: BGPsecTransitiveWithPathShorteningDefenseAS,
                                12: BGPsecTransitiveWithPathShorteningDefenseAS,
                                14: BGPsecTransitiveWithPathShorteningDefenseAS,
-                               777: BGPsecTransitiveWithPathShorteningDefenseAS}
+                               777: BGPsecTransitiveWithPathShorteningDefenseAS
+                               }
     propagation_rounds = 2
