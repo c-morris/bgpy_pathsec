@@ -1,4 +1,4 @@
-from .intentional_leak import IntentionalLeak
+from .intentional_leak_no_hash import IntentionalLeakNoHash
 
 
 class ShortestPathExportAllNoHash(IntentionalLeakNoHash):
