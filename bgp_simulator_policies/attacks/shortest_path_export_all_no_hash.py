@@ -15,4 +15,4 @@ class ShortestPathExportAllNoHash(IntentionalLeakNoHash):
             if len(ann.as_path) < len(shortest_so_far.as_path):
                 shortest_so_far = ann
         attack_anns = [shortest_so_far]
-        super().leak_announcements_to_providers(self, attack_anns, attacker, propagation_round) 
+        super().leak_announcements_to_providers(attack_anns, attacker, propagation_round) 
