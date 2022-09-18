@@ -75,7 +75,7 @@ def test_bgpsec_remove_attrs():
     prefix = '137.99.0.0/16'
     ann = PTestAnn(prefix=prefix, as_path=(13795, 13796), timestamp=0,
                    recv_relationship=Relationships.ORIGIN)
-    ann.bgpsec_path = (13796)
+    ann.bgpsec_path = (13796,)
     ann.next_as = 13795
     a = BGPsecAS(1)
     b = BGPsecAS(2)

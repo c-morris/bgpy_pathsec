@@ -50,6 +50,10 @@ class IntentionalLeak(MHLeak):
             if len(attack_anns) == 0:
                 print("Attacker did not receive announcement from victim, cannot attack") # noqa E501
                 return
+            
+            self.leak_announcements_to_providers(attack_anns, attacker, propagation_round)
+
+    def leak_announcements_to_providers(self, attack_anns, attacker, propagation_round):
             # Populate neighbor recv_q with leaks
             for neighbor in attacker.providers:
                 current_best_ann = None
