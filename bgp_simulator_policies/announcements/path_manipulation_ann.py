@@ -32,7 +32,8 @@ class PathManipulationAnn(Announcement):
                  communities: Tuple[str, ...] = (),
                  do_communities: Tuple[int, ...] = (),
                  bgpsec_path: Tuple[int, ...] = (),
-                 removed_signatures: Tuple[int, ...] = ()):
+                 removed_signatures: Tuple[int, ...] = (),
+                 path_end_valid: bool = True):
         self.prefix: str = prefix
         self.as_path: Tuple[int, ...] = as_path
         self.timestamp: int = timestamp
@@ -47,6 +48,7 @@ class PathManipulationAnn(Announcement):
         self.bgpsec_path: Tuple[int, ...] = bgpsec_path
         self.next_as: int = next_as
         self.removed_signatures: Tuple[int, ...] = removed_signatures
+        self.path_end_valid: bool = path_end_valid
 
     # The BGPsec path is like the BGPsec_PATH attribute with some
     # modifications. First, unlike in real BGPsec, it can coexist with the
@@ -65,6 +67,14 @@ class PathManipulationAnn(Announcement):
     # aware of all other adopting nodes and it could check for missing
     # signatures that way. For convenience, since this is a simulation,
     # attackers will update this attribute when they remove signatures.
+
+    # The path_end_valid attribute indicates whether the first two ASes (the
+    # origin and the AS immediately following it) on the path are valid
+    # according to the path_end record in the RPKI for this prefix/origin pair.
+    # Note, the attacker must update this attribute if modifying the
+    # announcement in a way that would make an announcement invalid by path
+    # end. See https://dl.acm.org/doi/pdf/10.1145/2934872.2934883 for details
+    # of the path end mechanism. 
 
 
 # We set equal to false here so that it can inherit __eq__ from parent

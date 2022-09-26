@@ -3,7 +3,7 @@ import pytest
 from bgp_simulator_pkg import Relationships
 
 from bgp_simulator_policies import PTestAnn, IntentionalLeak
-from bgp_simulator_policies import IntentionalLeakNoHash
+from bgp_simulator_policies import IntentionalLeakNoHash, TwoHopAttack
 
 t1 = ([[(2,), (0, 2,), (2,)],
        [(2, 3), (0, 2, 3), (2, 3)],
@@ -52,4 +52,20 @@ def test_truncate_path_nohash(bgpsec_path, as_path, result):
                    next_as=1,
                    recv_relationship=Relationships.PROVIDERS)
     IntentionalLeakNoHash._truncate_ann(None, ann)
+    assert (ann.as_path == result)
+
+
+t3 = ([[(1, 2, 3), (2, 3)],
+       [(4, 1, 2, 3), (2, 3)]])
+
+
+@pytest.mark.parametrize("as_path, result", t3)
+def test_truncate_path_twohop(as_path, result):
+    ann = PTestAnn(prefix="137.99.0.0/16",
+                   timestamp=0,
+                   as_path=as_path,
+                   bgpsec_path=(3,),
+                   next_as=1,
+                   recv_relationship=Relationships.PROVIDERS)
+    TwoHopAttack._truncate_ann(None, ann)
     assert (ann.as_path == result)
