@@ -90,4 +90,4 @@ def test_bgpsec_remove_attrs():
                             scenario=None)
     a._populate_send_q(Relationships.CUSTOMERS, [Relationships.CUSTOMERS])
     assert (len(a._send_q.get_send_info(b, prefix).ann.bgpsec_path) == 0 and
-           a._send_q.get_send_info(b, prefix).ann.next_as == 0)
+            a._send_q.get_send_info(b, prefix).ann.next_as == 0)

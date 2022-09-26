@@ -1,7 +1,6 @@
 from bgp_simulator_pkg import Prefixes, Timestamps, Relationships
 
 from .mh_path_manipulation import MHPathManipulation
-from ..policies import BGPsecAS, BGPsecTransitiveAS
 
 
 class OriginHijack(MHPathManipulation):
@@ -57,14 +56,11 @@ class OriginHijack(MHPathManipulation):
 
         return tuple(anns)
 
-
-    def post_propagation_hook(self, engine,
-                              propagation_round, trial, scenario, *args, **kwargs):
+    def post_propagation_hook(self,
+                              engine,
+                              propagation_round,
+                              trial, scenario,
+                              *args,
+                              **kwargs):
         """Add the route leak from the attacker"""
-        #if propagation_round == 0:
-            #print()
-            #print(scenario.AdoptASCls.name, 'signatures', BGPsecAS.count)
-            #print()
-            #engine.as_dict[list(scenario.victim_asns)[0]].total_signature_verifications = BGPsecAS.count
-        #BGPsecAS.count = 0
-        #BGPsecTransitiveAS.count = 0
+        pass

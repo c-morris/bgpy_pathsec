@@ -50,37 +50,41 @@ class IntentionalLeak(MHLeak):
             if len(attack_anns) == 0:
                 print("Attacker did not receive announcement from victim, cannot attack") # noqa E501
                 return
-            
-            self.leak_announcements_to_providers(attack_anns, attacker, propagation_round)
 
-    def leak_announcements_to_providers(self, attack_anns, attacker, propagation_round):
+            self.leak_announcements_to_providers(
+                attack_anns, attacker, propagation_round)
+
+    def leak_announcements_to_providers(self,
+                                        attack_anns,
+                                        attacker,
+                                        propagation_round):
+        for neighbor in attacker.providers:
             # Populate neighbor recv_q with leaks
-            for neighbor in attacker.providers:
-                current_best_ann = None
-                current_best_ann_processed = True
-                for ann in attack_anns:
-                    if neighbor.asn not in ann.as_path:
-                        new_ann_is_better = False
-                        recv_relationship = Relationships.CUSTOMERS
-                        if current_best_ann is not None:
-                            new_ann_is_better = attacker._new_ann_better(
-                                current_best_ann,
-                                current_best_ann_processed,
-                                recv_relationship,
-                                ann,
-                                True,
-                                recv_relationship)
-                        # If the new priority is higher
-                        if new_ann_is_better or current_best_ann is None:
-                            current_best_ann = ann
-                            current_best_ann_processed = True
+            current_best_ann = None
+            current_best_ann_processed = True
+            for ann in attack_anns:
+                if neighbor.asn not in ann.as_path:
+                    new_ann_is_better = False
+                    recv_relationship = Relationships.CUSTOMERS
+                    if current_best_ann is not None:
+                        new_ann_is_better = attacker._new_ann_better(
+                            current_best_ann,
+                            current_best_ann_processed,
+                            recv_relationship,
+                            ann,
+                            True,
+                            recv_relationship)
+                    # If the new priority is higher
+                    if new_ann_is_better or current_best_ann is None:
+                        current_best_ann = ann
+                        current_best_ann_processed = True
 
-                if current_best_ann is not None:
-                    # Only need to leak one announcement per neighbor
-                    neighbor._recv_q.add_ann(current_best_ann)
-                    neighbor.process_incoming_anns(from_rel=Relationships.CUSTOMERS, # noqa E501
-                                                   propagation_round=propagation_round, # noqa E501
-                                                   scenario=self)
+            if current_best_ann is not None:
+                # Only need to leak one announcement per neighbor
+                neighbor._recv_q.add_ann(current_best_ann)
+                neighbor.process_incoming_anns(from_rel=Relationships.CUSTOMERS, # noqa E501
+                                               propagation_round=propagation_round, # noqa E501
+                                               scenario=self)
 
     def _truncate_ann(self, ann):
         """
@@ -156,7 +160,7 @@ class IntentionalLeak(MHLeak):
         else:
             ann.as_path = case2path
         ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
-        
+
         # Set the path_end attribute
         if len(ann.as_path) < 2:
             ann.path_end_valid = False

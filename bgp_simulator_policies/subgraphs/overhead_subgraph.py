@@ -1,10 +1,7 @@
 from bgp_simulator_pkg import Subgraph
-from bgp_simulator_pkg import Outcomes
 from bgp_simulator_pkg import Scenario
 from bgp_simulator_pkg import SimulationEngine
 from typing import Any, Dict
-
-from ..policies import BGPsecAS
 
 
 class OverheadAllSubgraph(Subgraph):
@@ -19,13 +16,10 @@ class OverheadAllSubgraph(Subgraph):
                                       outcomes):
         """Adds traceback info to shared data"""
 
-        #shared["all_overhead"] = engine.as_dict[list(scenario.victim_asns)[0]].total_signature_verifications
-        #shared["all_overhead"] = BGPsecAS.count
-        shared["overhead_all"] = engine.as_dict[list(scenario.victim_asns)[0]].count
-        #BGPsecAS.count = 0
-        #print('\naa', engine.as_dict[list(scenario.victim_asns)[0]].count)
-        #engine.as_dict[list(scenario.victim_asns)[0]].total_signature_verifications = 0
-        return super()._add_traceback_to_shared_data(shared, engine, scenario, outcomes)
+        shared["overhead_all"] = engine.as_dict[list(
+            scenario.victim_asns)[0]].count
+        return super()._add_traceback_to_shared_data(
+            shared, engine, scenario, outcomes)
 
     def _get_subgraph_key(self,
                           scenario: Scenario,

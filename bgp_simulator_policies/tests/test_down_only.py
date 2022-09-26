@@ -52,4 +52,4 @@ def test_populate_send_q_do(b_relationship, community_len):
                             scenario=None)
     a._populate_send_q(b_relationship, [Relationships.CUSTOMERS])
     assert (len(a._send_q.get_send_info(b, prefix).ann.do_communities) ==
-           community_len)
+            community_len)

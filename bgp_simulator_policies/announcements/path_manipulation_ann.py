@@ -74,7 +74,7 @@ class PathManipulationAnn(Announcement):
     # Note, the attacker must update this attribute if modifying the
     # announcement in a way that would make an announcement invalid by path
     # end. See https://dl.acm.org/doi/pdf/10.1145/2934872.2934883 for details
-    # of the path end mechanism. 
+    # of the path end mechanism.
 
 
 # We set equal to false here so that it can inherit __eq__ from parent

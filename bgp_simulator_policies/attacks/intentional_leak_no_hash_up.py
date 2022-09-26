@@ -1,5 +1,6 @@
 from .intentional_leak_no_hash import IntentionalLeakNoHash
 
+
 class IntentionalLeakNoHashUp(IntentionalLeakNoHash):
     """Same as IntentionalLeakNoHash, but with UP attributes.
 
