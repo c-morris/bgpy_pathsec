@@ -9,7 +9,7 @@ from bgp_simulator_policies import Aggregator, PathEndAS, BGPsecAggressiveAS, BG
 from bgp_simulator_policies import PathManipulationAnn
 
 
-sim = Simulation(num_trials=10,
+sim = Simulation(num_trials=100,
                  scenarios=[ShortestPathExportAllNoHash(AnnCls=PathManipulationAnn, 
                                                         AdoptASCls=BGPsecTransitiveTimidAS,
                                                         BaseASCls=BGPAS),

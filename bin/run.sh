@@ -5,4 +5,4 @@
 ln -s /data/caida_collector_cache /tmp/caida_collector_cache
 
 # Run the simulation
-pypy3 /python_sim/bgp-simulator-policies/bin/kubetest.py
+pypy3 /python_sim/bgp-simulator-policies/bin/do_up_comparison.py
