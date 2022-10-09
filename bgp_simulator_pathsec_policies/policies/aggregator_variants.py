@@ -3,44 +3,44 @@ from . import BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
 
 class BGPsecAggressiveAS(BGPsecAS):
     """For use with OriginHijack"""
-    name = "BGPsec, Aggressive"
+    name = "BGPsecAggressiveAS"
 
 
 class BGPsecTimidAS(BGPsecAS):
     """For use with IntentionalLeak"""
-    name = "BGPsec, Timid"
+    name = "BGPsecTimidAS"
 
 
 class BGPsecTransitiveAggressiveAS(BGPsecTransitiveAS):
     """For use with OriginHijack"""
-    name = "PaBGPsec, No Leak Prevention Aggressive"
+    name = "BGPsecTransitiveAggressiveAS"
 
 
 class BGPsecTransitiveDownOnlyAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with OriginHijack"""
-    name = "PaBGPsec, Aggressive"
+    name = "BGPsecTransitiveDownOnlyAggressiveAS"
 
 
 class BGPsecTransitiveTimidAS(BGPsecTransitiveAS):
     """For use with IntentionalLeak"""
-    name = "PaBGPsec, No Leak Prevention or Path Shortening Timid"
+    name = "BGPsecTransitiveTimidAS"
 
 
 class BGPsecTransitiveDownOnlyTimidAS(BGPsecTransitiveDownOnlyAS):
     """For use with IntentionalLeak"""
-    name = "PaBGPsec, Timid"
+    name = "BGPsecTransitiveDownOnlyTimidAS"
 
 
 class BGPsecTransitiveDownOnlyNoHashTimidAS(BGPsecTransitiveDownOnlyAS):
     """For use with IntentionalLeakNoHash"""
-    name = "PaBGPsec, No Path Shortening Defense Timid"
+    name = "BGPsecTransitiveDownOnlyNoHashTimidAS"
 
 
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with Origin Hijack"""
-    name = "PaBGPsec, No Path Shortening Defense Aggressive"
+    name = "BGPsecTransitiveDownOnlyNoHashAggressiveAS"
 
 
 class BGPsecTransitiveDownOnlyTimidLeakAS(BGPsecTransitiveDownOnlyAS):
     """For use with IntentionalLeakTimid"""
-    name = "PaBGPsec, Timid Leak"
+    name = "BGPsecTransitiveDownOnlyTimidLeakAS"
