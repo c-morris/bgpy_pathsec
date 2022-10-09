@@ -52,7 +52,7 @@ class OriginHijack(MHPathManipulation):
                                     withdraw=False,
                                     traceback_end=True,
                                     communities=tuple(),
-                                    path_end_valid = False
+                                    path_end_valid=False
                                     ))
 
         return tuple(anns)
