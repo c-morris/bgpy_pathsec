@@ -51,7 +51,8 @@ class OriginHijack(MHPathManipulation):
                                     removed_signatures=(list(self.victim_asns)[0],), # noqa E501
                                     withdraw=False,
                                     traceback_end=True,
-                                    communities=tuple()
+                                    communities=tuple(),
+                                    path_end_valid = False
                                     ))
 
         return tuple(anns)

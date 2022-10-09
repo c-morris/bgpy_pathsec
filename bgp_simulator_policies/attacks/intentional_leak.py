@@ -47,6 +47,10 @@ class IntentionalLeak(MHLeak):
                     atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS) # noqa E501
                 attack_anns.append(atk_ann)
 
+            def pathlen(ann):
+                return len(ann.as_path)
+            attack_anns = sorted(attack_anns, key=pathlen)
+
             if len(attack_anns) == 0:
                 print("Attacker did not receive announcement from victim, cannot attack") # noqa E501
                 return
