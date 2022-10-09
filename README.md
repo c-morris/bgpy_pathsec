@@ -1,3 +1,3 @@
-# bgp_simulator_policies
+# bgp_simulator_pathsec_policies
 
 This package contains policies for 
