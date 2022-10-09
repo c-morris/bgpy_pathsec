@@ -17,7 +17,7 @@ class OverheadAllSubgraph(Subgraph):
         """Adds traceback info to shared data"""
 
         shared["overhead_all"] = engine.as_dict[list(
-            scenario.victim_asns)[0]].count
+            scenario.victim_asns)[0]].count / len(outcomes)
         return super()._add_traceback_to_shared_data(
             shared, engine, scenario, outcomes)
 

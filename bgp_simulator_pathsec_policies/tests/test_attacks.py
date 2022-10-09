@@ -2,8 +2,8 @@ import pytest
 
 from bgp_simulator_pkg import Relationships
 
-from bgp_simulator_policies import PTestAnn, IntentionalLeak
-from bgp_simulator_policies import IntentionalLeakNoHash, TwoHopAttack
+from bgp_simulator_pathsec_policies import PTestAnn, IntentionalLeak
+from bgp_simulator_pathsec_policies import IntentionalLeakNoHash, TwoHopAttack
 
 t1 = ([[(2,), (0, 2,), (2,)],
        [(2, 3), (0, 2, 3), (2, 3)],

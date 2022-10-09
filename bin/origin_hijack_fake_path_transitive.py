@@ -1,7 +1,7 @@
 from bgp_simulator_pkg import Simulator, Graph, BGPPolicy, BGPRIBSPolicy
 from bgp_simulator_pkg import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
-from bgp_simulator_policies import OriginHijack, LeakGraph, PAnn, BGPsecPolicy, BGPsecTransitivePolicy
+from bgp_simulator_pathsec_policies import OriginHijack, LeakGraph, PAnn, BGPsecPolicy, BGPsecTransitivePolicy
 
 from bgp_simulator_pkg import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
 

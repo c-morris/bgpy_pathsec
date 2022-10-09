@@ -2,7 +2,7 @@ import pytest
 
 from bgp_simulator_pkg import Relationships
 
-from bgp_simulator_policies import PTestAnn, BGPsecTransitiveAS
+from bgp_simulator_pathsec_policies import PTestAnn, BGPsecTransitiveAS
 
 
 t1 = ([[(1, 3), (1, 2, 3), 1],

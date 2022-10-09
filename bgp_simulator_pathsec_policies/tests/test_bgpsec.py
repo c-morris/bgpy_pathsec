@@ -2,9 +2,9 @@ import pytest
 
 from bgp_simulator_pkg import Relationships
 
-from bgp_simulator_policies import PTestAnn, BGPsecAS
-from bgp_simulator_policies import BGPsecTransitiveAS
-from bgp_simulator_policies import BGPsecTransitiveDownOnlyAS
+from bgp_simulator_pathsec_policies import PTestAnn, BGPsecAS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveAS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAS
 
 
 # In BGPsec, an attacker should never send an invalid signature. It is always

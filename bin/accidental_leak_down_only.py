@@ -2,7 +2,7 @@ from pathlib import Path
 
 from bgp_simulator_pkg import Simulation, BGPSimpleAS, BGPAS
 
-from bgp_simulator_policies import AccidentalLeak, PathManipulationAnn, DownOnlyAS
+from bgp_simulator_pathsec_policies import AccidentalLeak, PathManipulationAnn, DownOnlyAS
 
 sim = Simulation(num_trials=2,
                  scenarios=[AccidentalLeak(AnnCls=PathManipulationAnn, 

@@ -2,7 +2,7 @@ import pytest
 
 from bgp_simulator_pkg import Relationships
 
-from bgp_simulator_policies import PTestAnn, DownOnlyAS
+from bgp_simulator_pathsec_policies import PTestAnn, DownOnlyAS
 
 
 def test_process_incoming_anns_do_reject():

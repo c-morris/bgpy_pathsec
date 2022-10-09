@@ -3,7 +3,7 @@ from pathlib import Path
 from bgp_simulator_pkg import Simulator, Graph, BGPAS
 from bgp_simulator_pkg import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
-from bgp_simulator_policies import OriginHijack, LeakGraph, PAnn, DownOnlyAS, BGPsecTransitiveAS, BGPsecAS, BGPsecTransitiveDownOnlyAS
+from bgp_simulator_pathsec_policies import OriginHijack, LeakGraph, PAnn, DownOnlyAS, BGPsecTransitiveAS, BGPsecAS, BGPsecTransitiveDownOnlyAS
 
 from bgp_simulator_pkg import Simulator, Graph, ROVAS, SubprefixHijack, BGPAS, MPMethod
 
