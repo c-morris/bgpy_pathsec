@@ -32,4 +32,4 @@ class OverheadAllSubgraph(Subgraph):
     def y_axis_label(self) -> str:
         """returns y axis label"""
 
-        return "Total signatures verified"
+        return "Avg signatures verified per AS"

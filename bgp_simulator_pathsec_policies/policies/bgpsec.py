@@ -1,4 +1,5 @@
 from typing import Optional
+from copy import deepcopy
 
 from bgp_simulator_pkg import BGPAS, Relationships
 from bgp_simulator_pkg import Announcement as Ann
@@ -10,7 +11,11 @@ opt_bool = Optional[bool]
 class BGPsecAS(BGPAS):
 
     name = "BGPsec"
+
+    # Total number of signatures verified 
     count = 0
+    # Total number of signatures verified (BPO)
+    bpo_count = 0
 
     __slots__ = tuple()
 
@@ -18,6 +23,7 @@ class BGPsecAS(BGPAS):
         """Determine if an announcement is valid or should be dropped"""
         if len(ann.bgpsec_path) == len(ann.as_path):
             BGPsecAS.count += len(ann.bgpsec_path)
+            print(f"Added {len(ann.bgpsec_path)} at {self.asn} for total {BGPsecAS.count}")
         return super(BGPsecAS, self)._valid_ann(ann, recv_relationship)
 
     def _process_outgoing_ann(self, as_obj, ann, *args):
@@ -29,9 +35,9 @@ class BGPsecAS(BGPAS):
                                                     ann.copy(overwrite_default_kwargs={'next_as':next_as}), # noqa E501
                                                     *args)
 
-    # Rename function and comment out the other one for security second
     # As of July 2022 the preferred behavior is security third
     # The function below does not run, but is saved as an example
+    # Rename function and comment out the other one for security second
     def _security_second_new_ann_better(self,
                                         current_ann,
                                         current_processed,
@@ -138,3 +144,21 @@ class BGPsecAS(BGPAS):
         # NOTE that after this point ann has been deep copied and processed
         # This means the AS path has 1 extra ASN that you don't need to check
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, overwrite_default_kwargs) # noqa E501
+
+
+    def process_incoming_anns(self,
+                              *,
+                              from_rel: Relationships,
+                              propagation_round: int,
+                              scenario: "Scenario",
+                              reset_q: bool = True):
+        """Increment BPO counter when the local rib changes"""
+        previous_local_rib = deepcopy(self._local_rib)
+        super(BGPsecAS, self).process_incoming_anns(from_rel=from_rel,
+                                                    propagation_round=propagation_round,
+                                                    scenario=scenario,
+                                                    reset_q=reset_q)
+        for prefix, ann in self._local_rib.prefix_anns():
+            if previous_local_rib.get_ann(prefix) != ann:
+                BGPsecAS.bpo_count += len(ann.bgpsec_path)
+                print(f"BPO Added {len(ann.bgpsec_path)} at {self.asn} for total {BGPsecAS.bpo_count}")

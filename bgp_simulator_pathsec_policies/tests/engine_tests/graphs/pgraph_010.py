@@ -5,8 +5,6 @@ from bgp_simulator_pkg import GraphInfo
 
 class PGraph010(GraphInfo):
     r"""
-      4
-     / \
     7   6
     |\  |
     2 5 666
@@ -16,9 +14,7 @@ class PGraph010(GraphInfo):
     def __init__(self):
         # Graph data
         peers = []
-        customer_providers = [CPLink(provider_asn=4, customer_asn=7),
-                              CPLink(provider_asn=4, customer_asn=6),
-                              CPLink(provider_asn=7, customer_asn=5),
+        customer_providers = [CPLink(provider_asn=7, customer_asn=5),
                               CPLink(provider_asn=5, customer_asn=3),
                               CPLink(provider_asn=7, customer_asn=2),
                               CPLink(provider_asn=2, customer_asn=777),
