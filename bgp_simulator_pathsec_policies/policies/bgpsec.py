@@ -12,7 +12,7 @@ class BGPsecAS(BGPAS):
 
     name = "BGPsec"
 
-    # Total number of signatures verified 
+    # Total number of signatures verified
     count = 0
     # Total number of signatures verified (BPO)
     bpo_count = 0
@@ -23,7 +23,8 @@ class BGPsecAS(BGPAS):
         """Determine if an announcement is valid or should be dropped"""
         if len(ann.bgpsec_path) == len(ann.as_path):
             BGPsecAS.count += len(ann.bgpsec_path)
-            print(f"Added {len(ann.bgpsec_path)} at {self.asn} for total {BGPsecAS.count}")
+            # print(f"Added {len(ann.bgpsec_path)} at {self.asn} for total")
+            # print(f" {BGPsecAS.count}")
         return super(BGPsecAS, self)._valid_ann(ann, recv_relationship)
 
     def _process_outgoing_ann(self, as_obj, ann, *args):
@@ -145,20 +146,18 @@ class BGPsecAS(BGPAS):
         # This means the AS path has 1 extra ASN that you don't need to check
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship, overwrite_default_kwargs) # noqa E501
 
-
     def process_incoming_anns(self,
                               *,
                               from_rel: Relationships,
                               propagation_round: int,
-                              scenario: "Scenario",
+                              scenario,
                               reset_q: bool = True):
         """Increment BPO counter when the local rib changes"""
         previous_local_rib = deepcopy(self._local_rib)
         super(BGPsecAS, self).process_incoming_anns(from_rel=from_rel,
-                                                    propagation_round=propagation_round,
+                                                    propagation_round=propagation_round, # noqa E501
                                                     scenario=scenario,
                                                     reset_q=reset_q)
         for prefix, ann in self._local_rib.prefix_anns():
             if previous_local_rib.get_ann(prefix) != ann:
                 BGPsecAS.bpo_count += len(ann.bgpsec_path)
-                print(f"BPO Added {len(ann.bgpsec_path)} at {self.asn} for total {BGPsecAS.bpo_count}")

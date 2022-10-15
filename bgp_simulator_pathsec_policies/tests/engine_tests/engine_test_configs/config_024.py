@@ -1,6 +1,5 @@
 from .config_022 import EavesdropperUpTest22
 from ..graphs import PGraph010
-from ....attacks import IntentionalLeakNoHashUp
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
@@ -22,4 +21,3 @@ class Config024(EngineTestConfig):
                                6: BGPsecTransitiveDownOnlyAS,
                                777: BGPsecTransitiveDownOnlyAS}
     propagation_rounds = 2
-

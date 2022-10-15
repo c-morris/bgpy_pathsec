@@ -32,7 +32,6 @@ class BGPsecTransitiveAS(BGPsecAS):
     def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""
         BGPsecTransitiveAS.count += len(ann.bgpsec_path)
-        print(f"Added {len(ann.bgpsec_path)} at {self.asn} for total {BGPsecTransitiveAS.count}")
         return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and  # noqa E501
                 len(ann.removed_signatures) == 0)
 
@@ -94,23 +93,21 @@ class BGPsecTransitiveAS(BGPsecAS):
         return super(BGPsecAS, self)._copy_and_process(ann, recv_relationship,
                                                        overwrite_default_kwargs) # noqa E501
 
-
     def process_incoming_anns(self,
                               *,
                               from_rel: Relationships,
                               propagation_round: int,
-                              scenario: "Scenario",
+                              scenario,
                               reset_q: bool = True):
         """Increment BPO counter when the local rib changes"""
         previous_local_rib = deepcopy(self._local_rib)
         super(BGPsecAS, self).process_incoming_anns(from_rel=from_rel,
-                                                    propagation_round=propagation_round,
+                                                    propagation_round=propagation_round, # noqa E501
                                                     scenario=scenario,
                                                     reset_q=reset_q)
         for prefix, ann in self._local_rib.prefix_anns():
             if previous_local_rib.get_ann(prefix) != ann:
                 BGPsecTransitiveAS.bpo_count += len(ann.bgpsec_path)
-                print(f"BPO Added {len(ann.bgpsec_path)} at {self.asn} for total {BGPsecTransitiveAS.bpo_count}")
 
     def _partial_path_metric(self, partial, full):
         """Count the number of non-adopting segments"""
@@ -135,4 +132,3 @@ class BGPsecTransitiveAS(BGPsecAS):
             # count last segment
             segments += 1
         return segments
-
