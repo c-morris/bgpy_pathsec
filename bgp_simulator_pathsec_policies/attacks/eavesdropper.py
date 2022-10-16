@@ -25,21 +25,26 @@ class Eavesdropper(ShortestPathExportAllNoHash):
             attacker = engine.as_dict[attacker_asn]
             for asn in [attacker_asn] + self.vantage_points:
                 current_as = engine.as_dict[asn]
-                for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
-                    atk_ann = attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS) # noqa E501
-                    # Truncate path as much as possible, which is to the AS
-                    # after the most recent BGPsec Transitive adopter on the
-                    # path
-                    prev_len = len(atk_ann.as_path)
-                    self._truncate_ann(atk_ann)
+                atk_ann_candidates = []
+                if asn == attacker_asn:
+                    for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
+                        atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
+                else:
+                    atk_ann_candidates.append(attacker._copy_and_process(current_as._local_rib.get(Prefixes.PREFIX.value))) # noqa E501
+            for atk_ann in atk_ann_candidates:
+                # Truncate path as much as possible, which is to the AS
+                # after the most recent BGPsec Transitive adopter on the
+                # path
+                prev_len = len(atk_ann.as_path)
+                self._truncate_ann(atk_ann)
 
-                    # Clear any down only communities
-                    self._trim_do_communities(atk_ann)
+                # Clear any down only communities
+                self._trim_do_communities(atk_ann)
 
-                    # Reprocess atk_ann to add the attacker's ASN
-                    if prev_len != len(atk_ann.as_path):
-                        atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS) # noqa E501
-                    attack_anns.append(atk_ann)
+                # Reprocess atk_ann to add the attacker's ASN
+                if prev_len != len(atk_ann.as_path):
+                    atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS) # noqa E501
+                attack_anns.append(atk_ann)
 
             def bestpath(ann):
                 # In BGP, paths cannot be longer than 255 because it would
