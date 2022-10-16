@@ -25,6 +25,8 @@ class Eavesdropper(ShortestPathExportAllNoHash):
             attacker = engine.as_dict[attacker_asn]
             for asn in [attacker_asn] + self.vantage_points:
                 current_as = engine.as_dict[asn]
+                if current_as.name != "BGP" and asn != attacker_asn: # if adopting and not attacker
+                    continue
                 atk_ann_candidates = []
                 if asn == attacker_asn:
                     for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
