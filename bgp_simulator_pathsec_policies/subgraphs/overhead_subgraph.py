@@ -9,17 +9,17 @@ class OverheadAllSubgraph(Subgraph):
 
     name: str = "overhead_all"
 
-    def _add_traceback_to_shared_data(self,
-                                      shared: Dict[Any, Any],
-                                      engine: SimulationEngine,
-                                      scenario: Scenario,
-                                      outcomes):
-        """Adds traceback info to shared data"""
+    #def _add_traceback_to_shared_data(self,
+    #                                  shared: Dict[Any, Any],
+    #                                  engine: SimulationEngine,
+    #                                  scenario: Scenario,
+    #                                  outcomes):
+    #    """Adds traceback info to shared data"""
 
-        shared["overhead_all"] = engine.as_dict[list(
-            scenario.victim_asns)[0]].count / len(outcomes)
-        return super()._add_traceback_to_shared_data(
-            shared, engine, scenario, outcomes)
+    #    shared["overhead_all"] = engine.as_dict[list(
+    #        scenario.victim_asns)[0]].count / len(outcomes)
+    #    return super()._add_traceback_to_shared_data(
+    #        shared, engine, scenario, outcomes)
 
     def _get_subgraph_key(self,
                           scenario: Scenario,
