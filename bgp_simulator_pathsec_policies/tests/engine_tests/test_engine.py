@@ -4,8 +4,6 @@ import pytest
 from bgp_simulator_pkg import EngineTester
 from bgp_simulator_pkg import EngineTestConfig
 
-from ... import BGPsecAS, BGPsecTransitiveAS
-
 from .engine_test_configs import Config001
 from .engine_test_configs import Config002
 from .engine_test_configs import Config003
@@ -71,10 +69,6 @@ class TestEngine:
         See README for in depth details
         """
 
-        BGPsecAS.count = 0
-        BGPsecAS.bpo_count = 0
-        BGPsecTransitiveAS.count = 0
-        BGPsecTransitiveAS.bpo_count = 0
         EngineTester(base_dir=self.base_dir,
                      conf=conf,
                      overwrite=overwrite).test_engine()

@@ -1,5 +1,7 @@
 from bgp_simulator_pkg import Scenario, Prefixes, Relationships, Timestamps
 
+from ..policies import BGPsecAS, BGPsecTransitiveAS
+
 
 class MHPathManipulation(Scenario):
 
@@ -45,3 +47,15 @@ class MHPathManipulation(Scenario):
         assert len(self.victim_asns) == 1, err
 
         return tuple(anns)
+
+    def setup_engine(self,
+                     engine,
+                     percent_adoption: float,
+                     prev_scenario=None):
+        """Setup engine. Also clear BGPsec Performance Metric Counters."""
+
+        BGPsecAS.count = 0
+        BGPsecAS.bpo_count = 0
+        BGPsecTransitiveAS.count = 0
+        BGPsecTransitiveAS.bpo_count = 0
+        super().setup_engine(engine, percent_adoption, prev_scenario)
