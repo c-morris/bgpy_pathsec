@@ -9,7 +9,7 @@ from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressi
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 
 
-sim = Simulation(num_trials=10,
+sim = Simulation(num_trials=2,
                  scenarios=[OriginHijack(AnnCls=PathManipulationAnn, 
                                          AdoptASCls=BGPsecTransitiveDownOnlyAS,
                                          BaseASCls=BGPAS),
@@ -23,7 +23,7 @@ sim = Simulation(num_trials=10,
                    OverheadAllSubgraph(),
                    AttackerSuccessAllSubgraph(),
                  ],
-                 percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
+                 percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99, 0.9999],
                  output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
                  parse_cpus=1)
 sim.run()
