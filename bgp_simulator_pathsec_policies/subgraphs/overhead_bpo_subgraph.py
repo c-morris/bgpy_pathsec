@@ -16,10 +16,17 @@ class OverheadBPOAllSubgraph(Subgraph):
                                       outcomes):
         """Adds traceback info to shared data"""
 
+
+        total_non_adopting = 0
+        for as_obj, outcome in outcomes.items():
+            if as_obj.__class__ == "BGPAS":
+                total_non_adopting += 1
+        total_adopting = len(outcomes) - total_non_adopting
+
         shared["overhead_bpo_all"] = engine.as_dict[list(
-            scenario.victim_asns)[0]].bpo_count / len(outcomes)
+            scenario.victim_asns)[0]].bpo_count / total_adopting
         shared["overhead_all"] = engine.as_dict[list(
-            scenario.victim_asns)[0]].count / len(outcomes)
+            scenario.victim_asns)[0]].count / total_adopting
         return super()._add_traceback_to_shared_data(
             shared, engine, scenario, outcomes)
 
