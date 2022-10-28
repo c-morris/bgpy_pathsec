@@ -84,7 +84,8 @@ class BGPsecTransitiveAS(BGPsecAS):
             overwrite_default_kwargs = dict()
         # Update the BGPsec path, but since attributes are transitive, the path
         # is always updated unlike BGPsec.
-        overwrite_default_kwargs.update({"bgpsec_path": (self.asn, *ann.bgpsec_path)}) # noqa E501
+        if len(ann.bgpsec_path) == len(ann.as_path):
+            overwrite_default_kwargs.update({"bgpsec_path": (self.asn, *ann.bgpsec_path)}) # noqa E501
 
         # NOTE that after this point ann has been deep copied and processed
         # This means the AS path has 1 extra ASN that you don't need to check.

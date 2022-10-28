@@ -10,14 +10,15 @@ from bgp_simulator_pathsec_policies import PathManipulationAnn
 
 
 sim = Simulation(num_trials=2,
-                 scenarios=[OriginHijack(AnnCls=PathManipulationAnn, 
-                                         AdoptASCls=BGPsecTransitiveDownOnlyAS,
-                                         BaseASCls=BGPAS),
+                 scenarios=[
                             OriginHijack(AnnCls=PathManipulationAnn, 
                                          AdoptASCls=BGPsecAS,
                                          BaseASCls=BGPAS),
+                            OriginHijack(AnnCls=PathManipulationAnn, 
+                                         AdoptASCls=BGPsecTransitiveDownOnlyAS,
+                                         BaseASCls=BGPAS),
                             ],
-                 propagation_rounds=2,
+                 propagation_rounds=1,
                  subgraphs=[
                    OverheadBPOAllSubgraph(),
                    OverheadAllSubgraph(),

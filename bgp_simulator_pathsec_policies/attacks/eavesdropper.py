@@ -32,7 +32,9 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                     for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
                         atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
                 else:
-                    atk_ann_candidates.append(attacker._copy_and_process(current_as._local_rib.get_ann(Prefixes.PREFIX.value), Relationships.CUSTOMERS)) # noqa E501
+                    potential_ann_to_add = current_as._local_rib.get_ann(Prefixes.PREFIX.value)
+                    if potential_ann_to_add is not None:
+                        atk_ann_candidates.append(attacker._copy_and_process(potential_ann_to_add, Relationships.CUSTOMERS)) # noqa E501
             for atk_ann in atk_ann_candidates:
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
