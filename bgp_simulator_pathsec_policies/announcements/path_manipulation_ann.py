@@ -26,7 +26,7 @@ class PathManipulationAnn(Announcement):
                  roa_valid_length: Optional[bool],
                  roa_origin: Optional[int],
                  recv_relationship: Relationships,
-                 next_as: int,
+                 next_as: int = 0,
                  withdraw: bool = False,
                  traceback_end: bool = False,
                  communities: Tuple[str, ...] = (),

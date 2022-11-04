@@ -32,6 +32,8 @@ class BGPsecTransitiveAS(BGPsecAS):
     def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""
         BGPsecTransitiveAS.count += len(ann.bgpsec_path)
+        # print(f"Added {len(ann.bgpsec_path)} at {self.asn} for total")
+        # print(f"BGPsecTransitiveAS {BGPsecTransitiveAS.count}, {self.count}")
         return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and  # noqa E501
                 len(ann.removed_signatures) == 0)
 

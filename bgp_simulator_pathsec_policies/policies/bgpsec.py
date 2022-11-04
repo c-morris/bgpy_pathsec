@@ -24,7 +24,7 @@ class BGPsecAS(BGPAS):
         if len(ann.bgpsec_path) == len(ann.as_path):
             BGPsecAS.count += len(ann.bgpsec_path)
             # print(f"Added {len(ann.bgpsec_path)} at {self.asn} for total")
-            # print(f" {BGPsecAS.count}")
+            # print(f"BGPsecAS {BGPsecAS.count}")
         return super(BGPsecAS, self)._valid_ann(ann, recv_relationship)
 
     def _process_outgoing_ann(self, as_obj, ann, *args):

@@ -57,11 +57,7 @@ class OriginHijack(MHPathManipulation):
 
         return tuple(anns)
 
-    def post_propagation_hook(self,
-                              engine,
-                              propagation_round,
-                              trial, scenario,
-                              *args,
+    def post_propagation_hook(*args,
                               **kwargs):
         """Add the route leak from the attacker"""
         pass
