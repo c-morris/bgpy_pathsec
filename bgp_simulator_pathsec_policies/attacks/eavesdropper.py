@@ -25,14 +25,15 @@ class Eavesdropper(ShortestPathExportAllNoHash):
             attacker = engine.as_dict[attacker_asn]
             for asn in [attacker_asn] + self.vantage_points:
                 current_as = engine.as_dict[asn]
-                if current_as.name != "BGP" and asn != attacker_asn: # if adopting and not attacker
+                if current_as.name != "BGP" and asn != attacker_asn:
+                    # if adopting and not attacker
                     continue
                 atk_ann_candidates = []
                 if asn == attacker_asn:
                     for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
                         atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
                 else:
-                    potential_ann_to_add = current_as._local_rib.get_ann(Prefixes.PREFIX.value)
+                    potential_ann_to_add = current_as._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
                     if potential_ann_to_add is not None:
                         atk_ann_candidates.append(attacker._copy_and_process(potential_ann_to_add, Relationships.CUSTOMERS)) # noqa E501
             for atk_ann in atk_ann_candidates:
