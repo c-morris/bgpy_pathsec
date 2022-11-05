@@ -12,9 +12,9 @@ class Config026(EngineTestConfig):
     name = "P026"
     desc = "Fig 6 test, with UP attributes, Overhead subgraph"
     scenario = OriginHijack(attacker_asns={ASNs.ATTACKER.value},
-                                       victim_asns={ASNs.VICTIM.value},
-                                       BaseASCls=BGPAS,
-                                       AnnCls=PathManipulationAnn)
+                            victim_asns={ASNs.VICTIM.value},
+                            BaseASCls=BGPAS,
+                            AnnCls=PathManipulationAnn)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecAS,
                                2: BGPsecAS,

@@ -17,7 +17,6 @@ class OverheadBPOAllSubgraph(Subgraph):
                                       outcomes):
         """Adds traceback info to shared data"""
 
-
         total_non_adopting = 0
         for as_obj, outcome in outcomes.items():
             if as_obj.__class__ == BGPAS:
