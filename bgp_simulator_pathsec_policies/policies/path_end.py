@@ -5,6 +5,11 @@ class PathEndAS(BGPAS):
 
     name = "Path End"
 
+    # These have no meaning for Path End
+    # They are only here so the overhead subgraphs don't error
+    count = 0
+    bpo_count = 0
+
     __slots__ = tuple()
 
     def _valid_ann(self, ann, recv_relationship: Relationships):

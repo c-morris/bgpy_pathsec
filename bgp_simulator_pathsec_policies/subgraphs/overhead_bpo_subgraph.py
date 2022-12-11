@@ -29,9 +29,9 @@ class OverheadBPOAllSubgraph(Subgraph):
             scenario.victim_asns)[0]].count / total_adopting
         shared["adopting_count"] = total_adopting
         shared["non_adopting_count"] = total_non_adopting
-        print()
-        print(shared["overhead_all"])
-        print()
+        #print()
+        #print(shared["overhead_all"])
+        #print()
         super()._add_traceback_to_shared_data(
             shared, engine, scenario, outcomes)
 

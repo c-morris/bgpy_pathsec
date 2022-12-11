@@ -1,4 +1,5 @@
 from . import BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
+from .path_end import PathEndAS
 
 
 class BGPsecAggressiveAS(BGPsecAS):
@@ -7,7 +8,7 @@ class BGPsecAggressiveAS(BGPsecAS):
 
 
 class BGPsecTimidAS(BGPsecAS):
-    """For use with IntentionalLeak"""
+    """For use with ShortestPathExportAll"""
     name = "BGPsecTimidAS"
 
 
@@ -16,24 +17,29 @@ class BGPsecTransitiveAggressiveAS(BGPsecTransitiveAS):
     name = "BGPsecTransitiveAggressiveAS"
 
 
+class BGPsecTransitiveTimidAS(BGPsecTransitiveAS):
+    """For use with ShortestPathExportAll"""
+    name = "BGPsecTransitiveTimidAS"
+
+
 class BGPsecTransitiveDownOnlyAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with OriginHijack"""
     name = "BGPsecTransitiveDownOnlyAggressiveAS"
 
 
-class BGPsecTransitiveTimidAS(BGPsecTransitiveAS):
-    """For use with IntentionalLeak"""
-    name = "BGPsecTransitiveTimidAS"
-
-
 class BGPsecTransitiveDownOnlyTimidAS(BGPsecTransitiveDownOnlyAS):
-    """For use with IntentionalLeak"""
+    """For use with ShortestPathExportAll"""
     name = "BGPsecTransitiveDownOnlyTimidAS"
 
 
 class BGPsecTransitiveDownOnlyNoHashTimidAS(BGPsecTransitiveDownOnlyAS):
-    """For use with IntentionalLeakNoHash"""
+    """For use with ShortestPathExportAllNoHash"""
     name = "BGPsecTransitiveDownOnlyNoHashTimidAS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidAS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHash"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidAS"
 
 
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
@@ -41,6 +47,21 @@ class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
     name = "BGPsecTransitiveDownOnlyNoHashAggressiveAS"
 
 
+class BGPsecTransitiveDownOnlyNoHashUpAggressiveAS(BGPsecTransitiveDownOnlyAS):
+    """For use with Origin Hijack"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpAggressiveAS"
+
+
 class BGPsecTransitiveDownOnlyTimidLeakAS(BGPsecTransitiveDownOnlyAS):
-    """For use with IntentionalLeakTimid"""
+    """For use with ShortestPathExportAllTimid"""
     name = "BGPsecTransitiveDownOnlyTimidLeakAS"
+
+
+class PathEndAggressiveAS(PathEndAS):
+    """For use with Origin Hijack"""
+    name = "PathEndAggressiveAS"
+
+
+class PathEndTimidAS(PathEndAS):
+    """For use with TwoHopAttack"""
+    name = "PathEndTimidAS"
