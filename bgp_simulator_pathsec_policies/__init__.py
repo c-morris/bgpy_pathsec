@@ -34,6 +34,7 @@ from .policies import BGPsecTransitiveDownOnlyTimidLeakAS
 from .policies import PathEndAS
 from .policies import PathEndAggressiveAS
 from .policies import PathEndTimidAS
+from .policies import PathEndTimidUpAS
 from .policies import BaselineBGPAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpAggressiveAS

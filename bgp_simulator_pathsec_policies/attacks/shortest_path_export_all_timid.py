@@ -8,5 +8,5 @@ class ShortestPathExportAllTimid(IntentionalLeakTimid):
     Will only attack if it can leak an announcement with no DO communities.
     """
 
-    ShortestPathExportAllTimid.leak_announcements_to_providers = \
-        ShortestPathExportAll.leak_announcements_to_providers
+ShortestPathExportAllTimid.leak_announcements_to_providers = \
+    ShortestPathExportAll.leak_announcements_to_providers
