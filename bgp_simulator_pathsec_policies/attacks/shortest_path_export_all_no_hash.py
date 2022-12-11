@@ -7,4 +7,3 @@ class ShortestPathExportAllNoHash(IntentionalLeakNoHash, ShortestPathExportAll):
     Only leaks a single path (the shortest one) to providers.
     Assumes no hash chain to prevent path shortening.
     """
-

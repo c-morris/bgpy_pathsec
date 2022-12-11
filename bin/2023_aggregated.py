@@ -4,7 +4,7 @@ from pathlib import Path
 from bgp_simulator_pkg import Simulation, BGPAS
 from bgp_simulator_pkg import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, AttackerSuccessAllSubgraph, DisconnectedAllSubgraph, VictimSuccessAllSubgraph
 
-from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS, OriginHijack, IntentionalLeak, IntentionalLeakNoHash, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, ShortestPathExportAllNoHash, ShortestPathExportAllNoHashUp, TwoHopAttack, IntentionalLeakNoHashUp, RISEavesdropperUp, TwoHopAttack, OverheadAllSubgraph, OverheadBPOAllSubgraph, AdoptingCountSubgraph, NonAdoptingCountSubgraph, ShortestPathExportAll, BGPsecTransitiveDownOnlyNoHashUpTimidAS, PathEndAggressiveAS, PathEndTimidAS
+from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS, OriginHijack, IntentionalLeak, IntentionalLeakNoHash, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, ShortestPathExportAllNoHash, ShortestPathExportAllNoHashUp, TwoHopAttack, IntentionalLeakNoHashUp, RISEavesdropperUp, TwoHopAttackUp, OverheadAllSubgraph, OverheadBPOAllSubgraph, AdoptingCountSubgraph, NonAdoptingCountSubgraph, ShortestPathExportAll, BGPsecTransitiveDownOnlyNoHashUpTimidAS, PathEndAggressiveAS, PathEndTimidAS, BaselineBGPAS, ShortestPathExportAllNoHashTimid
 
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 
@@ -16,9 +16,10 @@ sim = Simulation(
             AdoptASCls=BGPsecAggressiveAS,
             BaseASCls=BGPAS),
         # BGPsec Timid never makes sense, aggressive is always better
-        # ShortestPathExportAll(AnnCls=PathManipulationAnn, 
-        #                       AdoptASCls=BGPsecTimidAS,
-        #                       BaseASCls=BGPAS),
+        # ShortestPathExportAll(
+        #     AnnCls=PathManipulationAnn, 
+        #     AdoptASCls=BGPsecTimidAS,
+        #     BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
             # NoHash doesn't matter for aggressive 
@@ -42,11 +43,11 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
             BaseASCls=BGPAS),
-        # duplicate?
-        #ShortestPathExportAllNoHashUp(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
-        #    BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashTimid(
+            AnnCls=PathManipulationAnn, 
+            # This says TimidLeak, it's really NoHashTimidLeak
+            AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
+            BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=PathEndAggressiveAS,
@@ -55,11 +56,15 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=PathEndTimidAS,
             BaseASCls=BGPAS),
-        # NEED TWO HOP UP VARIANT
-        # ALSO NEED UP VARIANTS WITHOUT NO HASH (or do we?)
-        #IntentionalLeakNoHash(AnnCls=PathManipulationAnn, 
-        #               AdoptASCls=BGPsecTransitiveAS,
-        #               BaseASCls=BGPAS),
+        TwoHopAttackUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndTimidUpAS,
+            BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BaselineBGPAS,
+            BaseASCls=BGPAS),
+        # Do we need UP variants without NoHash?
         ],
     propagation_rounds=2,
     subgraphs=[

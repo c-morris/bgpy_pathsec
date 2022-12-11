@@ -11,6 +11,7 @@ from .attacks import IntentionalLeakNoHashUp
 from .attacks import ShortestPathExportAll
 from .attacks import ShortestPathExportAllNoHash
 from .attacks import ShortestPathExportAllNoHashUp
+from .attacks import ShortestPathExportAllNoHashTimid
 from .attacks import TwoHopAttack
 from .attacks import TwoHopAttackUp
 from .attacks import Eavesdropper
@@ -33,6 +34,7 @@ from .policies import BGPsecTransitiveDownOnlyTimidLeakAS
 from .policies import PathEndAS
 from .policies import PathEndAggressiveAS
 from .policies import PathEndTimidAS
+from .policies import BaselineBGPAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpAggressiveAS
 

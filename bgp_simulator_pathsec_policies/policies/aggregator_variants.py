@@ -1,3 +1,4 @@
+from bgp_simulator_pkg import BGPAS
 from . import BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
 from .path_end import PathEndAS
 
@@ -65,3 +66,13 @@ class PathEndAggressiveAS(PathEndAS):
 class PathEndTimidAS(PathEndAS):
     """For use with TwoHopAttack"""
     name = "PathEndTimidAS"
+
+
+class PathEndTimidUpAS(PathEndAS):
+    """For use with TwoHopAttackUp"""
+    name = "PathEndTimidUpAS"
+
+
+class BaselineBGPAS(BGPAS):
+    """For use with Origin Hijack"""
+    name = "BaselineBGPAS"
