@@ -22,7 +22,6 @@ sim = Simulation(
         #     BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
-            # NoHash doesn't matter for aggressive 
             AdoptASCls=BGPsecTransitiveAggressiveAS,
             BaseASCls=BGPAS),
         ShortestPathExportAllNoHash(
@@ -32,7 +31,6 @@ sim = Simulation(
             BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
-            # The aggressive case covers both NoHash and Up
             AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
             BaseASCls=BGPAS),
         ShortestPathExportAll(
