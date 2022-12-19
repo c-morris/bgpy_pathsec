@@ -39,7 +39,7 @@ class OriginHijack(MHPathManipulation):
 
         for attacker_asn in self.attacker_asns:
             anns.append(self.AnnCls(prefix=Prefixes.PREFIX.value,
-                                    as_path=(attacker_asn,),
+                                    as_path=(attacker_asn,list(self.victim_asns)[0]),
                                     timestamp=Timestamps.ATTACKER.value,
                                     seed_asn=attacker_asn,
                                     roa_valid_length=True,

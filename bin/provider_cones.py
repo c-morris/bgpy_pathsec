@@ -22,7 +22,7 @@ class ProviderConeComputation:
         for provider_obj in as_obj.providers:
             if len(self.provider_cones[provider_obj.asn]) == 0:
                 self.get_cone(provider_obj)
-            asns_in_cone.union(self.provider_cones[provider_obj.asn])
+            asns_in_cone = asns_in_cone.union(self.provider_cones[provider_obj.asn])
             asns_in_cone.add(provider_obj.asn)
         self.provider_cones[as_obj.asn] = asns_in_cone
 
@@ -32,14 +32,38 @@ class ProviderConeComputation:
             self.get_cone(as_obj)
 
 
+def test_provider_cones():
+    a = ProviderConeComputation()
+    a.engine.ases[0].providers = (a.engine.ases[1], a.engine.ases[2])
+    a.engine.ases[1].providers = tuple()
+    a.engine.ases[2].providers = tuple()
+    a.get_cone(a.engine.ases[0])
+    if len(a.provider_cones[a.engine.ases[0].asn]) != 2:
+        print("Error 1")
+        exit()
+    a = ProviderConeComputation()
+    a.engine.ases[0].providers = (a.engine.ases[1], a.engine.ases[2])
+    a.engine.ases[1].providers = tuple()
+    a.engine.ases[2].providers = (a.engine.ases[3],)
+    a.engine.ases[3].providers = tuple()
+    a.get_cone(a.engine.ases[0])
+    if len(a.provider_cones[a.engine.ases[0].asn]) != 3:
+        print("Error 2")
+        exit()
+
+
 if __name__ == "__main__":
     a = ProviderConeComputation()
     a.get_all_cones()
-    h_max = 11
+    h_max = 200
+    s_max = 0
     histogram = [0 for i in range(h_max)]
     for asn, cone in a.provider_cones.items():
         if len(cone) < h_max:
             histogram[len(cone)] += 1
+        if len(cone) > s_max:
+            s_max = len(cone)
     print("Number of provider cones of size x")
     for i in range(h_max):
         print(f"{i}\t{histogram[i]}")
+    print("Max:", s_max)
