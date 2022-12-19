@@ -76,3 +76,5 @@ class PathEndTimidUpAS(PathEndAS):
 class BaselineBGPAS(BGPAS):
     """For use with Origin Hijack"""
     name = "BaselineBGPAS"
+    count = 0
+    bpo_count = 0
