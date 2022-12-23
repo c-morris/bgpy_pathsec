@@ -1,5 +1,4 @@
 # http for github actions, and I believe github no longer supports ssh with pip
-git+https://github.com/jfuruness/lib_bgp_simulator.git#fd77477ca859c722d5caca1a7e780e81c72b93b2
-matplotlib==3.5.1
-pytest==6.2.5
-tikzplotlib==0.9.17
+git+https://github.com/jfuruness/bgp_simulator_pkg.git@4c7cea449c466cc5d9142b4c2cca9aeaa93f3085
+matplotlib==3.5.2
+pytest==7.1.2
