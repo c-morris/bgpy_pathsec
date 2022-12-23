@@ -39,7 +39,7 @@ class BGPsecTransitiveDownOnlyNoHashTimidAS(BGPsecTransitiveDownOnlyAS):
 
 
 class BGPsecTransitiveDownOnlyNoHashUpTimidAS(BGPsecTransitiveDownOnlyAS):
-    """For use with ShortestPathExportAllNoHash"""
+    """For use with ShortestPathExportAllNoHashUp"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidAS"
 
 

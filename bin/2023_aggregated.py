@@ -9,7 +9,7 @@ from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressi
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 
 sim = Simulation(
-    num_trials=2,
+    num_trials=15,
     scenarios=[
         OriginHijack(
             AnnCls=PathManipulationAnn, 
@@ -41,6 +41,10 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
             BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
+            BaseASCls=BGPAS),
         ShortestPathExportAllNoHashTimid(
             AnnCls=PathManipulationAnn, 
             # This says TimidLeak, it's really NoHashTimidLeak
@@ -62,7 +66,7 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BaselineBGPAS,
             BaseASCls=BGPAS),
-        # Do we need UP variants without NoHash?
+        # Do we need UP variants without NoHash? No.
         ],
     propagation_rounds=2,
     subgraphs=[
@@ -75,9 +79,9 @@ sim = Simulation(
         DisconnectedAllSubgraph()
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    #output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    parse_cpus=2)
+    output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    parse_cpus=1)
 
 sim.run()
 
