@@ -1,5 +1,4 @@
 from .intentional_leak import IntentionalLeak
-from .mixins import leak_announcements_to_providers_spea
 
 
 class ShortestPathExportAll(IntentionalLeak):
@@ -7,7 +6,7 @@ class ShortestPathExportAll(IntentionalLeak):
     Only leaks a single path (the shortest one) to providers.
     """
 
-    def leak_announcements_to_providers_spea(self,
+    def leak_announcements_to_providers(self,
                                         attack_anns,
                                         attacker,
                                         propagation_round):
@@ -23,5 +22,3 @@ class ShortestPathExportAll(IntentionalLeak):
             attack_anns,
             attacker,
             propagation_round)
-
-

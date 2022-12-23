@@ -1,11 +1,8 @@
-import random
-from typing import List, Optional
-
 from .transitive_dropping import TransitiveDroppingAS
 
 
 class TransitiveDroppingAlwaysAS(TransitiveDroppingAS):
-    """Drops transitive attributes with some probability""" 
+    """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingAlwaysAS"
 
     def __init__(self,

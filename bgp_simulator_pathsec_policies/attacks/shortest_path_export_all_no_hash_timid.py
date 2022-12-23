@@ -1,5 +1,5 @@
-from .intentional_leak_no_hash import IntentionalLeakNoHash
 from .shortest_path_export_all_timid import ShortestPathExportAllTimid
+from .mixins import _truncate_ann_up
 
 
 class ShortestPathExportAllNoHashTimid(ShortestPathExportAllTimid):
@@ -7,5 +7,4 @@ class ShortestPathExportAllNoHashTimid(ShortestPathExportAllTimid):
     Only leaks a single path (the shortest one) to providers.
     Will only attack if it can leak an announcement with no DO communities.
     """
-ShortestPathExportAllNoHashTimid._truncate_ann = \
-    IntentionalLeakNoHash._truncate_ann
+    _truncate_ann = _truncate_ann_up

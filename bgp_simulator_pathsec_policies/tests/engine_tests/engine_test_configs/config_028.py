@@ -2,7 +2,7 @@ from ..graphs import PGraph001
 from ....attacks import ShortestPathExportAll
 from ....policies import TransitiveDroppingAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
-from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
+from bgp_simulator_pkg import EngineTestConfig, ASNs
 
 
 class Config028(EngineTestConfig):

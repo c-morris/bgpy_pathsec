@@ -9,4 +9,3 @@ class ShortestPathExportAllNoHashUp(ShortestPathExportAllNoHash):
     """
 
     _trim_do_communities = _trim_do_communities_up
-

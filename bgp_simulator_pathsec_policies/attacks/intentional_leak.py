@@ -134,7 +134,7 @@ class IntentionalLeak(MHLeak):
             if (j > 0 and
                 i+1 < len(ann.bgpsec_path) and
                 (j+1 == len(ann.as_path) or
-                ann.bgpsec_path[i+1] == ann.as_path[j+1])):
+                 ann.bgpsec_path[i+1] == ann.as_path[j+1])):
                 case1path = ann.as_path[j-1:]
                 break
             i += 1
