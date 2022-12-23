@@ -4,7 +4,7 @@ from pathlib import Path
 from bgp_simulator_pkg import Simulation, BGPAS
 from bgp_simulator_pkg import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, AttackerSuccessAllSubgraph, DisconnectedAllSubgraph, VictimSuccessAllSubgraph
 
-from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS, OriginHijack, IntentionalLeak, IntentionalLeakNoHash, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, ShortestPathExportAllNoHash, ShortestPathExportAllNoHashUp, TwoHopAttack, IntentionalLeakNoHashUp, RISEavesdropperUp, TwoHopAttackUp, OverheadAllSubgraph, OverheadBPOAllSubgraph, AdoptingCountSubgraph, NonAdoptingCountSubgraph, ShortestPathExportAll, BGPsecTransitiveDownOnlyNoHashUpTimidAS, PathEndAggressiveAS, PathEndTimidAS, BaselineBGPAS, ShortestPathExportAllNoHashTimid, PathEndTimidUpAS
+from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS, OriginHijack, IntentionalLeak, IntentionalLeakNoHash, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, ShortestPathExportAllNoHash, ShortestPathExportAllNoHashUp, TwoHopAttack, IntentionalLeakNoHashUp, RISEavesdropperUp, TwoHopAttackUp, OverheadAllSubgraph, OverheadBPOAllSubgraph, AdoptingCountSubgraph, NonAdoptingCountSubgraph, ShortestPathExportAll, BGPsecTransitiveDownOnlyNoHashUpTimidAS, PathEndAggressiveAS, PathEndTimidAS, BaselineBGPAS, ShortestPathExportAllNoHashTimid, PathEndTimidUpAS, ShortestPathExportAllUp, BGPsecTransitiveDownOnlyUpTimidAS
 
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 
@@ -36,6 +36,10 @@ sim = Simulation(
         ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
             BaseASCls=BGPAS),
         ShortestPathExportAllNoHash(
             AnnCls=PathManipulationAnn, 
