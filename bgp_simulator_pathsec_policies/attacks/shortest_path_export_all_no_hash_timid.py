@@ -7,4 +7,4 @@ class ShortestPathExportAllNoHashTimid(ShortestPathExportAllTimid):
     Only leaks a single path (the shortest one) to providers.
     Will only attack if it can leak an announcement with no DO communities.
     """
-    _truncate_ann = _truncate_ann_up
+    _truncate_ann = _truncate_ann_no_hash

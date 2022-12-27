@@ -53,7 +53,7 @@ from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
 
 
 sim = Simulation(
-    num_trials=15,
+    num_trials=20,
     scenarios=[
         OriginHijack(
             AnnCls=PathManipulationAnn, 
