@@ -1,5 +1,5 @@
 from .shortest_path_export_all_timid import ShortestPathExportAllTimid
-from .mixins import _truncate_ann_up
+from .mixins import _truncate_ann_no_hash
 
 
 class ShortestPathExportAllNoHashTimid(ShortestPathExportAllTimid):
