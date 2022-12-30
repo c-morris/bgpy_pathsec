@@ -78,6 +78,16 @@ class PathEndTimidUpAS(PathEndAS):
     name = "PathEndTimidUpAS"
 
 
+class OverheadBGPsecAS(BGPsecAS):
+    """For use with ValidPrefix"""
+    name = "OverheadBGPsecAS"
+
+
+class OverheadBGPsecTransitiveDownOnlyAS(BGPsecTransitiveDownOnlyAS):
+    """For use with ValidPrefix"""
+    name = "OverheadBGPsecTransitiveDownOnlyAS"
+
+
 class BaselineBGPAS(BGPAS):
     """For use with Origin Hijack"""
     name = "BaselineBGPAS"
