@@ -1,6 +1,5 @@
 # flake8: noqa
 from .announcements import PathManipulationAnn
-from .announcements import PTestAnn
 
 from .attacks import AccidentalLeak
 from .attacks import IntentionalLeak

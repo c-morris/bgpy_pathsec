@@ -15,7 +15,8 @@ class PathManipulationAnn(Announcement):
     __slots__ = ("do_communities",
                  "bgpsec_path",
                  "next_as",
-                 "removed_signatures")
+                 "removed_signatures",
+                 "path_end_valid")
 
     def __init__(self,
                  *,
@@ -75,22 +76,3 @@ class PathManipulationAnn(Announcement):
     # announcement in a way that would make an announcement invalid by path
     # end. See https://dl.acm.org/doi/pdf/10.1145/2934872.2934883 for details
     # of the path end mechanism.
-
-
-# We set equal to false here so that it can inherit __eq__ from parent
-@dataclass(eq=False, unsafe_hash=True)
-class PTestAnn(PathManipulationAnn):
-    prefix: str = None
-    as_path: tuple = None
-    timestamp: int = 0
-    seed_asn: int = None
-    roa_valid_length: bool = None
-    roa_origin: int = None
-    recv_relationship: Relationships = Relationships.CUSTOMERS
-    withdraw: bool = False
-    traceback_end: bool = False
-    do_communities: tuple = tuple()
-    communities: tuple = tuple()
-    bgpsec_path: tuple = tuple()
-    removed_signatures: tuple = tuple()
-    next_as: int = 0

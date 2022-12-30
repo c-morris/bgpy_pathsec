@@ -1,1 +1,1 @@
-from .path_manipulation_ann import PathManipulationAnn, PTestAnn # noqa F401
+from .path_manipulation_ann import PathManipulationAnn # noqa F401
