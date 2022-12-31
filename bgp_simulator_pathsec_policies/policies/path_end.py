@@ -15,5 +15,4 @@ class PathEndAS(BGPAS):
     def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""
         return (ann.path_end_valid and
-                super(BGPAS, self)._valid_ann(ann, recv_relationship))
-
+                super(PathEndAS, self)._valid_ann(ann, recv_relationship))

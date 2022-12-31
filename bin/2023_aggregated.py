@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPAS, ValidPrefix
+from bgp_simulator_pkg import Simulation, BGPAS
 from bgp_simulator_pkg import Prefixes
 from bgp_simulator_pkg import Timestamps
 from bgp_simulator_pkg import ASNs
@@ -50,6 +50,7 @@ from bgp_simulator_pathsec_policies import ShortestPathExportAllUp
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyUpTimidAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
+from bgp_simulator_pathsec_policies import ValidSignature
 
 
 sim = Simulation(
@@ -114,11 +115,11 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BaselineBGPAS,
             BaseASCls=BGPAS),
-        ValidPrefix(
+        ValidSignature(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=OverheadBGPsecAS,
             BaseASCls=BGPAS),
-        ValidPrefix(
+        ValidSignature(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
             BaseASCls=BGPAS),
