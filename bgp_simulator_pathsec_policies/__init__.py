@@ -18,6 +18,7 @@ from .attacks import TwoHopAttackUp
 from .attacks import Eavesdropper
 from .attacks import EavesdropperUp
 from .attacks import RISEavesdropperUp
+from .attacks import ValidSignature
 
 from .policies import BGPsecAS
 from .policies import DownOnlyAS
@@ -41,8 +42,13 @@ from .policies import BaselineBGPAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpAggressiveAS
 from .policies import TransitiveDroppingAS
+from .policies import TransitiveDropping2AS
+from .policies import TransitiveDropping4AS
 from .policies import OverheadBGPsecAS
 from .policies import OverheadBGPsecTransitiveDownOnlyAS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS
 
 from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph

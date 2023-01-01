@@ -20,7 +20,7 @@ def _truncate_ann_no_hash(self, ann):
     full = ann.as_path
     i = len(partial) - 1
     j = len(full) - 1
-    while partial[i] == full[j] and i >= 0 and j > 0:
+    while i >= 0 and j > 0 and partial[i] == full[j]:
         i -= 1
         j -= 1
     ann.as_path = ann.as_path[j:]

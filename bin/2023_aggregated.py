@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPAS, ValidPrefix
+from bgp_simulator_pkg import Simulation, BGPAS
 from bgp_simulator_pkg import Prefixes
 from bgp_simulator_pkg import Timestamps
 from bgp_simulator_pkg import ASNs
@@ -20,6 +20,9 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAggressiveAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashTimidAS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashAggressiveAS
 from bgp_simulator_pathsec_policies import BGPsecTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidLeakAS
@@ -50,6 +53,10 @@ from bgp_simulator_pathsec_policies import ShortestPathExportAllUp
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyUpTimidAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
+from bgp_simulator_pathsec_policies import ValidSignature
+from bgp_simulator_pathsec_policies import TransitiveDroppingAS
+from bgp_simulator_pathsec_policies import TransitiveDropping2AS
+from bgp_simulator_pathsec_policies import TransitiveDropping4AS
 
 
 sim = Simulation(
@@ -114,14 +121,26 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BaselineBGPAS,
             BaseASCls=BGPAS),
-        ValidPrefix(
+        ValidSignature(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=OverheadBGPsecAS,
             BaseASCls=BGPAS),
-        ValidPrefix(
+        ValidSignature(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
             BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS,
+            BaseASCls=TransitiveDroppingAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS,
+            BaseASCls=TransitiveDropping2AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
+            BaseASCls=TransitiveDropping4AS),
         ],
     propagation_rounds=2,
     subgraphs=[

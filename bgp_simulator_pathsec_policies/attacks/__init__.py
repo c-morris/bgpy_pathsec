@@ -17,3 +17,4 @@ from .eavesdropper import Eavesdropper # noqa F401
 from .eavesdropper_up import EavesdropperUp # noqa F401
 from .ris_eavesdropper import RISEavesdropper # noqa F401
 from .ris_eavesdropper_up import RISEavesdropperUp # noqa F401
+from .valid_signature import ValidSignature # noqa F401

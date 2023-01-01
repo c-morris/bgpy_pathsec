@@ -48,6 +48,21 @@ class BGPsecTransitiveDownOnlyNoHashUpTimidAS(BGPsecTransitiveDownOnlyAS):
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidAS"
 
 
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 1% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 2% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 4% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppint4AS"
+
+
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with Origin Hijack"""
     name = "BGPsecTransitiveDownOnlyNoHashAggressiveAS"

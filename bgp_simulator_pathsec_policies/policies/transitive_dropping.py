@@ -6,15 +6,14 @@ from bgp_simulator_pkg import BGPAS
 class TransitiveDroppingAS(BGPAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingAS"
+    transitive_dropping_percent=1.0
 
     def __init__(self,
                  *args,
-                 transitive_dropping_percent=1.0,
                  **kwargs):
         # Set the probability of dropping transitive attrs for *this* AS only
-        # TODO make this more uniform random
         self.transitive_dropping = (
-            random.random() < (transitive_dropping_percent / 100.0))
+            random.SystemRandom().random() < (self.transitive_dropping_percent / 100.0))
 
         super(TransitiveDroppingAS, self).__init__(*args,
                                                    **kwargs)
@@ -28,3 +27,13 @@ class TransitiveDroppingAS(BGPAS):
             ann_to_send.removed_signatures = ann_to_send.bgpsec_path
             ann_to_send.bgpsec_path = tuple()
         super(TransitiveDroppingAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs) # noqa E501
+
+class TransitiveDropping2AS(BGPAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDropping2AS"
+    transitive_dropping_percent=2.0
+
+class TransitiveDropping4AS(BGPAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDropping4AS"
+    transitive_dropping_percent=4.0
