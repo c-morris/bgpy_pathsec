@@ -41,6 +41,8 @@ from .policies import BaselineBGPAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpAggressiveAS
 from .policies import TransitiveDroppingAS
+from .policies import OverheadBGPsecAS
+from .policies import OverheadBGPsecTransitiveDownOnlyAS
 
 from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph
