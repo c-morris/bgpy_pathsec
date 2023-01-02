@@ -14,8 +14,6 @@ class TransitiveDroppingAS(BGPAS):
         # Set the probability of dropping transitive attrs for *this* AS only
         self.transitive_dropping = (
             random.SystemRandom().random() < (self.transitive_dropping_percent / 100.0))
-        if self.transitive_dropping:
-            print('initialized transitive dropping')
 
         super(TransitiveDroppingAS, self).__init__(*args,
                                                    **kwargs)
@@ -38,4 +36,4 @@ class TransitiveDropping2AS(TransitiveDroppingAS):
 class TransitiveDropping4AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping4AS"
-    transitive_dropping_percent=4.0
+    transitive_dropping_percent=40.0
