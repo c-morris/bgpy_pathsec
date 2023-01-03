@@ -17,9 +17,13 @@ class OverheadBPOAllSubgraph(Subgraph):
                                       outcomes):
         """Adds traceback info to shared data"""
 
+        uncountable_asns = scenario._preset_asns
+
         total_non_adopting = 0
         for as_obj, outcome in outcomes.items():
-            if as_obj.__class__ == BGPAS:
+            if as_obj.asn in uncountable_asns:
+                continue
+            if as_obj.__class__ != scenario.AdoptASCls:
                 total_non_adopting += 1
         total_adopting = len(outcomes) - total_non_adopting
 

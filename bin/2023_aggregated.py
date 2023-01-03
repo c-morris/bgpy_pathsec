@@ -12,6 +12,27 @@ from bgp_simulator_pkg import AttackerSuccessAllSubgraph
 from bgp_simulator_pkg import DisconnectedAllSubgraph
 from bgp_simulator_pkg import VictimSuccessAllSubgraph
 
+from bgp_simulator_pkg import AttackerSuccessAdoptingEtcSubgraph
+from bgp_simulator_pkg import AttackerSuccessAdoptingInputCliqueSubgraph
+from bgp_simulator_pkg import AttackerSuccessAdoptingStubsAndMHSubgraph
+from bgp_simulator_pkg import AttackerSuccessNonAdoptingEtcSubgraph
+from bgp_simulator_pkg import AttackerSuccessNonAdoptingInputCliqueSubgraph
+from bgp_simulator_pkg import AttackerSuccessNonAdoptingStubsAndMHSubgraph
+
+from bgp_simulator_pkg import DisconnectedAdoptingEtcSubgraph
+from bgp_simulator_pkg import DisconnectedAdoptingInputCliqueSubgraph
+from bgp_simulator_pkg import DisconnectedAdoptingStubsAndMHSubgraph
+from bgp_simulator_pkg import DisconnectedNonAdoptingEtcSubgraph
+from bgp_simulator_pkg import DisconnectedNonAdoptingInputCliqueSubgraph
+from bgp_simulator_pkg import DisconnectedNonAdoptingStubsAndMHSubgraph
+
+from bgp_simulator_pkg import VictimSuccessAdoptingEtcSubgraph
+from bgp_simulator_pkg import VictimSuccessAdoptingInputCliqueSubgraph
+from bgp_simulator_pkg import VictimSuccessAdoptingStubsAndMHSubgraph
+from bgp_simulator_pkg import VictimSuccessNonAdoptingEtcSubgraph
+from bgp_simulator_pkg import VictimSuccessNonAdoptingInputCliqueSubgraph
+from bgp_simulator_pkg import VictimSuccessNonAdoptingStubsAndMHSubgraph
+
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 from bgp_simulator_pathsec_policies import PathEndAS
 from bgp_simulator_pathsec_policies import BGPsecAggressiveAS
@@ -150,7 +171,25 @@ sim = Simulation(
         NonAdoptingCountSubgraph(),
         AttackerSuccessAllSubgraph(),
         VictimSuccessAllSubgraph(),
-        DisconnectedAllSubgraph()
+        DisconnectedAllSubgraph(),
+        AttackerSuccessAdoptingEtcSubgraph(),
+        AttackerSuccessAdoptingInputCliqueSubgraph(),
+        AttackerSuccessAdoptingStubsAndMHSubgraph(),
+        AttackerSuccessNonAdoptingEtcSubgraph(),
+        AttackerSuccessNonAdoptingInputCliqueSubgraph(),
+        AttackerSuccessNonAdoptingStubsAndMHSubgraph(),
+        DisconnectedAdoptingEtcSubgraph(),
+        DisconnectedAdoptingInputCliqueSubgraph(),
+        DisconnectedAdoptingStubsAndMHSubgraph(),
+        DisconnectedNonAdoptingEtcSubgraph(),
+        DisconnectedNonAdoptingInputCliqueSubgraph(),
+        DisconnectedNonAdoptingStubsAndMHSubgraph(),
+        VictimSuccessAdoptingEtcSubgraph(),
+        VictimSuccessAdoptingInputCliqueSubgraph(),
+        VictimSuccessAdoptingStubsAndMHSubgraph(),
+        VictimSuccessNonAdoptingEtcSubgraph(),
+        VictimSuccessNonAdoptingInputCliqueSubgraph(),
+        VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
     output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
