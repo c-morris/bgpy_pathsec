@@ -1,4 +1,5 @@
 import os
+import random
 from pathlib import Path
 
 from bgp_simulator_pkg import Simulation, BGPAS
@@ -80,64 +81,65 @@ from bgp_simulator_pathsec_policies import TransitiveDropping2AS
 from bgp_simulator_pathsec_policies import TransitiveDropping4AS
 
 
+random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=20,
+    num_trials=5,
     scenarios=[
-        OriginHijack(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecAggressiveAS,
-            BaseASCls=BGPAS),
-        # BGPsec Timid never makes sense, aggressive is always better
-        # ShortestPathExportAll(
-        #     AnnCls=PathManipulationAnn, 
-        #     AdoptASCls=BGPsecTimidAS,
-        #     BaseASCls=BGPAS),
-        OriginHijack(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveAggressiveAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllNoHash(
-            AnnCls=PathManipulationAnn, 
-            # All BGPsecTransitive attacks must be NoHash
-            AdoptASCls=BGPsecTransitiveTimidAS,
-            BaseASCls=BGPAS),
-        OriginHijack(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAll(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllNoHash(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
-            BaseASCls=BGPAS),
+        #OriginHijack(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecAggressiveAS,
+        #    BaseASCls=BGPAS),
+        ## BGPsec Timid never makes sense, aggressive is always better
+        ## ShortestPathExportAll(
+        ##     AnnCls=PathManipulationAnn, 
+        ##     AdoptASCls=BGPsecTimidAS,
+        ##     BaseASCls=BGPAS),
+        #OriginHijack(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveAggressiveAS,
+        #    BaseASCls=BGPAS),
+        #ShortestPathExportAllNoHash(
+        #    AnnCls=PathManipulationAnn, 
+        #    # All BGPsecTransitive attacks must be NoHash
+        #    AdoptASCls=BGPsecTransitiveTimidAS,
+        #    BaseASCls=BGPAS),
+        #OriginHijack(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
+        #    BaseASCls=BGPAS),
+        #ShortestPathExportAll(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
+        #    BaseASCls=BGPAS),
+        #ShortestPathExportAllUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
+        #    BaseASCls=BGPAS),
+        #ShortestPathExportAllNoHash(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
+        #    BaseASCls=BGPAS),
         ShortestPathExportAllNoHashUp(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
             BaseASCls=BGPAS),
-        ShortestPathExportAllNoHashTimid(
-            AnnCls=PathManipulationAnn, 
-            # This says TimidLeak, it's really NoHashTimidLeak
-            AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
-            BaseASCls=BGPAS),
-        OriginHijack(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=PathEndAggressiveAS,
-            BaseASCls=BGPAS),
-        TwoHopAttack(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=PathEndTimidAS,
-            BaseASCls=BGPAS),
-        TwoHopAttackUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=PathEndTimidUpAS,
-            BaseASCls=BGPAS),
+        #ShortestPathExportAllNoHashTimid(
+        #    AnnCls=PathManipulationAnn, 
+        #    # This says TimidLeak, it's really NoHashTimidLeak
+        #    AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
+        #    BaseASCls=BGPAS),
+        #OriginHijack(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=PathEndAggressiveAS,
+        #    BaseASCls=BGPAS),
+        #TwoHopAttack(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=PathEndTimidAS,
+        #    BaseASCls=BGPAS),
+        #TwoHopAttackUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=PathEndTimidUpAS,
+        #    BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BaselineBGPAS,

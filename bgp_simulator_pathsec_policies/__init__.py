@@ -44,11 +44,19 @@ from .policies import BGPsecTransitiveDownOnlyNoHashUpAggressiveAS
 from .policies import TransitiveDroppingAS
 from .policies import TransitiveDropping2AS
 from .policies import TransitiveDropping4AS
+from .policies import TransitiveDropping8AS
+from .policies import TransitiveDropping16AS
+from .policies import TransitiveDropping32AS
+from .policies import TransitiveDropping64AS
 from .policies import OverheadBGPsecAS
 from .policies import OverheadBGPsecTransitiveDownOnlyAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS
 
 from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph

@@ -60,7 +60,27 @@ class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS(BGPsecTransitiv
 
 class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS(BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 4% transitive dropping"""
-    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppint4AS"
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 8% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 16% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 32% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS"
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 64% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS"
 
 
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
