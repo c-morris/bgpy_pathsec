@@ -68,6 +68,7 @@ from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
 from bgp_simulator_pathsec_policies import AdoptingCountSubgraph
 from bgp_simulator_pathsec_policies import NonAdoptingCountSubgraph
+from bgp_simulator_pathsec_policies import PathLengthSubgraph
 from bgp_simulator_pathsec_policies import ShortestPathExportAll
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
 from bgp_simulator_pathsec_policies import PathEndAggressiveAS
@@ -198,6 +199,7 @@ sim = Simulation(
         AttackerSuccessAllSubgraph(),
         VictimSuccessAllSubgraph(),
         DisconnectedAllSubgraph(),
+        PathLengthSubgraph(),
         AttackerSuccessAdoptingEtcSubgraph(),
         AttackerSuccessAdoptingInputCliqueSubgraph(),
         AttackerSuccessAdoptingStubsAndMHSubgraph(),

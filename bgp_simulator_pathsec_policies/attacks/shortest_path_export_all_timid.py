@@ -1,12 +1,18 @@
 from .intentional_leak_timid import IntentionalLeakTimid
+from .mixins import _truncate_ann_no_hash
+from .mixins import _trim_do_communities_up
 
 
 class ShortestPathExportAllTimid(IntentionalLeakTimid):
     """Shortest path Export all strategy, from other works.
     Only leaks a single path (the shortest one) to providers.
     Will only attack if it can leak an announcement with no DO communities.
+
+    This is the NoHashUp variant.
     """
 
+    _truncate_ann = _truncate_ann_no_hash
+    _trim_do_communities = _trim_do_communities_up
     def leak_announcements_to_providers(self,
                                         attack_anns,
                                         attacker,
@@ -23,3 +29,4 @@ class ShortestPathExportAllTimid(IntentionalLeakTimid):
             attack_anns,
             attacker,
             propagation_round)
+

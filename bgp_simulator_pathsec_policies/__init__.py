@@ -62,3 +62,4 @@ from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph
 from .subgraphs import AdoptingCountSubgraph
 from .subgraphs import NonAdoptingCountSubgraph
+from .subgraphs import PathLengthSubgraph
