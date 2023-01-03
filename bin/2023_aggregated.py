@@ -45,6 +45,10 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashAggressiveAS
 from bgp_simulator_pathsec_policies import BGPsecTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidLeakAS
@@ -79,11 +83,15 @@ from bgp_simulator_pathsec_policies import ValidSignature
 from bgp_simulator_pathsec_policies import TransitiveDroppingAS
 from bgp_simulator_pathsec_policies import TransitiveDropping2AS
 from bgp_simulator_pathsec_policies import TransitiveDropping4AS
+from bgp_simulator_pathsec_policies import TransitiveDropping8AS
+from bgp_simulator_pathsec_policies import TransitiveDropping16AS
+from bgp_simulator_pathsec_policies import TransitiveDropping32AS
+from bgp_simulator_pathsec_policies import TransitiveDropping64AS
 
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=5,
+    num_trials=3,
     scenarios=[
         #OriginHijack(
         #    AnnCls=PathManipulationAnn, 
@@ -164,6 +172,22 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
             BaseASCls=TransitiveDropping4AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS,
+            BaseASCls=TransitiveDropping8AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS,
+            BaseASCls=TransitiveDropping16AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS,
+            BaseASCls=TransitiveDropping32AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS,
+            BaseASCls=TransitiveDropping64AS),
         ],
     propagation_rounds=2,
     subgraphs=[
