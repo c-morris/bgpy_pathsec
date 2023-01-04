@@ -13,7 +13,7 @@ class TransitiveDroppingAS(BGPAS):
                  **kwargs):
         # Set the probability of dropping transitive attrs for *this* AS only
         self.transitive_dropping = (
-            random.SystemRandom().random() < (self.transitive_dropping_percent / 100.0))
+            random.random() < (self.transitive_dropping_percent / 100.0))
 
         super(TransitiveDroppingAS, self).__init__(*args,
                                                    **kwargs)
