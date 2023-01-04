@@ -34,6 +34,7 @@ from .graphs import PGraph007
 from .graphs import PGraph008
 from .graphs import PGraph009
 from .graphs import PGraph010
+from .graphs import PGraph011
 
 __all__ = [
     "TestEngine",

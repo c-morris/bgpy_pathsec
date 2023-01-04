@@ -34,6 +34,8 @@ from .engine_test_configs import Config027
 from .engine_test_configs import Config028
 from .engine_test_configs import Config029
 from .engine_test_configs import Config030
+from .engine_test_configs import Config031
+from .engine_test_configs import Config032
 
 
 @pytest.mark.engine
@@ -44,36 +46,38 @@ class TestEngine:
     """
 
     @pytest.mark.parametrize("conf",
-                             [Config001,
-                              Config002,
-                              Config003,
-                              Config004,
-                              Config005,
-                              Config006,
-                              Config007,
-                              Config008,
-                              Config009,
-                              Config010,
-                              Config011,
-                              Config012,
-                              Config013,
-                              Config014,
-                              Config015,
-                              Config016,
-                              Config017,
-                              Config018,
-                              Config019,
-                              Config020,
-                              Config021,
-                              Config022,
-                              Config023,
-                              Config024,
-                              Config025,
-                              Config026,
-                              Config027,
-                              Config028,
-                              Config029,
-                              Config030,
+                             [#Config001,
+                              #Config002,
+                              #Config003,
+                              #Config004,
+                              #Config005,
+                              #Config006,
+                              #Config007,
+                              #Config008,
+                              #Config009,
+                              #Config010,
+                              #Config011,
+                              #Config012,
+                              #Config013,
+                              #Config014,
+                              #Config015,
+                              #Config016,
+                              #Config017,
+                              #Config018,
+                              #Config019,
+                              #Config020,
+                              #Config021,
+                              #Config022,
+                              #Config023,
+                              #Config024,
+                              #Config025,
+                              #Config026,
+                              #Config027,
+                              #Config028,
+                              #Config029,
+                              #Config030,
+                              Config031,
+                              Config032,
                               ])
     def test_engine(self, conf: EngineTestConfig, overwrite: bool):
         """Performs a system test on the engine

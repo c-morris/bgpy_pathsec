@@ -18,32 +18,66 @@ class OverheadBPOAllSubgraph(Subgraph):
                                       engine: SimulationEngine,
                                       scenario: Scenario,
                                       outcomes):
-        """Adds traceback info to shared data"""
+        """Adds traceback info to shared data
+
+        All the statistics for all the subgraphs need to be computed here. This
+        is because the _add_traceback_to_shared_data function is only called
+        for the *first* subgraph class specified in the simulation. The rest
+        use the shared_data structure set by the first subgraph. 
+        """
 
         uncountable_asns = scenario._preset_asns
         total_path_len = 0
         n_path_len = 0
         total_non_adopting = 0
+        total_adopting = 0
+        n_ases = 0
+        ribs_in_total = 0
+        adopting_ribs_in_valid = 0
+        non_adopting_ribs_in_valid = 0
         for as_obj, outcome in outcomes.items():
             if as_obj.asn in uncountable_asns:
                 continue
-            if as_obj.__class__ != scenario.AdoptASCls:
+            ribs_in = list(as_obj._ribs_in.get_ann_infos(scenario.announcements[0].prefix))
+            ribs_in_total += len(ribs_in)
+            ribs_in_valid = 0
+            ribs_in_invalid = 0
+            for ann_info in ribs_in:
+                if as_obj._valid_ann(ann_info.unprocessed_ann,
+                                     ann_info.recv_relationship):
+                    ribs_in_valid += 1
+                else:
+                    ribs_in_invalid += 1
+            if as_obj.name in scenario.AdoptASCls.name:
+                # use of 'in' here because of pseudo adopt AS class
                 total_non_adopting += 1
+                adopting_ribs_in_valid += ribs_in_valid
+            else:
+                total_adopting += 1
+                non_adopting_ribs_in_valid += ribs_in_valid
             # Check AS path length
             most_specific_ann = self._get_most_specific_ann(
                 as_obj, scenario.ordered_prefix_subprefix_dict)
             if most_specific_ann is not None:
                 total_path_len += len(most_specific_ann.as_path)
                 n_path_len += 1
-        total_adopting = len(outcomes) - total_non_adopting
 
-        shared["overhead_bpo_all"] = engine.as_dict[list(
-            scenario.victim_asns)[0]].bpo_count / total_adopting
-        shared["overhead_all"] = engine.as_dict[list(
-            scenario.victim_asns)[0]].count / total_adopting
+        n_ases = total_adopting + total_non_adopting
+
         shared["adopting_count"] = total_adopting
         shared["non_adopting_count"] = total_non_adopting
-        shared["path_len_all"] = total_path_len / n_path_len
+        if total_adopting != 0:
+            shared["overhead_bpo_all"] = engine.as_dict[list(
+                scenario.victim_asns)[0]].bpo_count / total_adopting
+            shared["overhead_all"] = engine.as_dict[list(
+                scenario.victim_asns)[0]].count / total_adopting
+            shared["ribs_in_valid_adopting"] = adopting_ribs_in_valid / total_adopting
+        if total_non_adopting != 0:
+            shared["ribs_in_valid_non_adopting"] = non_adopting_ribs_in_valid / total_non_adopting
+        if n_ases != 0:
+            shared["ribs_in_size_all"] = ribs_in_total / n_ases 
+        if total_path_len != 0:
+            shared["path_len_all"] = total_path_len / n_path_len
         super()._add_traceback_to_shared_data(
             shared, engine, scenario, outcomes)
 
