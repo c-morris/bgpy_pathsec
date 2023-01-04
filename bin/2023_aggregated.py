@@ -62,6 +62,9 @@ from bgp_simulator_pathsec_policies import RISEavesdropperUp
 from bgp_simulator_pathsec_policies import TwoHopAttackUp
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
+from bgp_simulator_pathsec_policies import RibsInSizeSubgraph
+from bgp_simulator_pathsec_policies import RibsInValidAdoptingSubgraph
+from bgp_simulator_pathsec_policies import RibsInValidNonAdoptingSubgraph
 from bgp_simulator_pathsec_policies import AdoptingCountSubgraph
 from bgp_simulator_pathsec_policies import NonAdoptingCountSubgraph
 from bgp_simulator_pathsec_policies import PathLengthSubgraph
@@ -176,6 +179,9 @@ sim = Simulation(
         VictimSuccessAllSubgraph(),
         DisconnectedAllSubgraph(),
         PathLengthSubgraph(),
+        RibsInSizeSubgraph(),
+        RibsInValidAdoptingSubgraph(),
+        RibsInValidNonAdoptingSubgraph(),
         AttackerSuccessAdoptingEtcSubgraph(),
         AttackerSuccessAdoptingInputCliqueSubgraph(),
         AttackerSuccessAdoptingStubsAndMHSubgraph(),
