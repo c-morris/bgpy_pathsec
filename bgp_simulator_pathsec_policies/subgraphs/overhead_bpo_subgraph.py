@@ -49,7 +49,7 @@ class OverheadBPOAllSubgraph(Subgraph):
                         ribs_in_valid += 1
                     else:
                         ribs_in_invalid += 1
-            if as_obj.name in scenario.AdoptASCls.name:
+            if ("Pseudo " + as_obj.name) == scenario.AdoptASCls.name:
                 # use of 'in' here because of pseudo adopt AS class
                 total_non_adopting += 1
                 adopting_ribs_in_valid += ribs_in_valid
