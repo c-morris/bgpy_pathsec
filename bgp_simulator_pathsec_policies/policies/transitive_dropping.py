@@ -24,7 +24,8 @@ class TransitiveDroppingAS(BGPAS):
             ann_to_send.next_as = 0
             ann_to_send.do_communities = tuple()
             # The signatures removed, if any, will be detected by adopting ASes
-            ann_to_send.removed_signatures = ann_to_send.bgpsec_path
+            if len(ann_to_send.removed_signatures) == 0:
+                ann_to_send.removed_signatures = ann_to_send.bgpsec_path
             ann_to_send.bgpsec_path = tuple()
         super(TransitiveDroppingAS, self)._process_outgoing_ann(as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs) # noqa E501
 

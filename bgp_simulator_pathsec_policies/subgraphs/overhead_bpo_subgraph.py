@@ -47,9 +47,12 @@ class OverheadBPOAllSubgraph(Subgraph):
                     if as_obj._valid_ann(ann_info.unprocessed_ann,
                                          ann_info.recv_relationship):
                         ribs_in_valid += 1
+                        #print('Path:', ann_info.unprocessed_ann.as_path)
+                        #print('RMS:', ann_info.unprocessed_ann.removed_signatures)
                     else:
                         ribs_in_invalid += 1
-            if as_obj.name == scenario.AdoptASCls.name:
+            if (as_obj.name == scenario.AdoptASCls.name or
+                    as_obj.name == "Pseudo" + scenario.AdoptASCls.name):
                 # use of 'in' here because of pseudo adopt AS class
                 total_adopting += 1
                 adopting_ribs_in_valid += ribs_in_valid
