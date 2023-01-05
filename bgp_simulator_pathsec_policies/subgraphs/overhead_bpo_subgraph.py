@@ -49,13 +49,15 @@ class OverheadBPOAllSubgraph(Subgraph):
                         ribs_in_valid += 1
                     else:
                         ribs_in_invalid += 1
-            if ("Pseudo " + as_obj.name) == scenario.AdoptASCls.name:
+            if as_obj.name == scenario.AdoptASCls.name:
                 # use of 'in' here because of pseudo adopt AS class
-                total_non_adopting += 1
+                total_adopting += 1
                 adopting_ribs_in_valid += ribs_in_valid
             else:
-                total_adopting += 1
+                total_non_adopting += 1
                 non_adopting_ribs_in_valid += ribs_in_valid
+            ribs_in_valid = 0
+            ribs_in_invalid = 0
             # Check AS path length
             most_specific_ann = self._get_most_specific_ann(
                 as_obj, scenario.ordered_prefix_subprefix_dict)
