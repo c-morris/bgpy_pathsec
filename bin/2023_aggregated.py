@@ -87,7 +87,7 @@ from bgp_simulator_pathsec_policies import TransitiveDropping4AS
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=5,
+    num_trials=1,
     scenarios=[
         #OriginHijack(
         #    AnnCls=PathManipulationAnn, 
@@ -202,9 +202,9 @@ sim = Simulation(
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    parse_cpus=1)
+    #output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    parse_cpus=12)
 
 sim.run()
 
