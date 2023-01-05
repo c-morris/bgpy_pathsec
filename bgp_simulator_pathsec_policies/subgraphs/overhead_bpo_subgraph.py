@@ -43,11 +43,12 @@ class OverheadBPOAllSubgraph(Subgraph):
             ribs_in_valid = 0
             ribs_in_invalid = 0
             for ann_info in ribs_in:
-                if as_obj._valid_ann(ann_info.unprocessed_ann,
-                                     ann_info.recv_relationship):
-                    ribs_in_valid += 1
-                else:
-                    ribs_in_invalid += 1
+                if ann_info.unprocessed_ann is not None:
+                    if as_obj._valid_ann(ann_info.unprocessed_ann,
+                                         ann_info.recv_relationship):
+                        ribs_in_valid += 1
+                    else:
+                        ribs_in_invalid += 1
             if as_obj.name in scenario.AdoptASCls.name:
                 # use of 'in' here because of pseudo adopt AS class
                 total_non_adopting += 1
