@@ -14,6 +14,7 @@ class Config031(EngineTestConfig):
     scenario = ShortestPathExportAll(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=TransitiveDroppingAlwaysAS,
+                                     AdoptASCls=BGPsecTransitiveAS,
                                      AnnCls=PathManipulationAnn)
     graph = PGraph011()
     non_default_as_cls_dict = {2: BGPsecTransitiveAS,

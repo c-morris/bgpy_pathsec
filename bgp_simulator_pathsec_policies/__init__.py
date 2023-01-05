@@ -48,6 +48,7 @@ from .policies import TransitiveDropping8AS
 from .policies import TransitiveDropping16AS
 from .policies import TransitiveDropping32AS
 from .policies import TransitiveDropping64AS
+from .policies import TransitiveDroppingAlwaysAS
 from .policies import OverheadBGPsecAS
 from .policies import OverheadBGPsecTransitiveDownOnlyAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
