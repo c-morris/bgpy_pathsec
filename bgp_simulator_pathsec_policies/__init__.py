@@ -48,6 +48,7 @@ from .policies import TransitiveDropping8AS
 from .policies import TransitiveDropping16AS
 from .policies import TransitiveDropping32AS
 from .policies import TransitiveDropping64AS
+from .policies import TransitiveDropping99AS
 from .policies import TransitiveDroppingAlwaysAS
 from .policies import OverheadBGPsecAS
 from .policies import OverheadBGPsecTransitiveDownOnlyAS
@@ -58,6 +59,7 @@ from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS
+from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS
 
 from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph

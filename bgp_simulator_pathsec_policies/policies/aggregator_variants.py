@@ -83,6 +83,11 @@ class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS(BGPsecTransiti
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS"
 
 
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS(BGPsecTransitiveDownOnlyAS):
+    """For use with ShortestPathExportAllNoHashUp, 99% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS"
+
+
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with Origin Hijack"""
     name = "BGPsecTransitiveDownOnlyNoHashAggressiveAS"
