@@ -83,6 +83,7 @@ from bgp_simulator_pathsec_policies import ValidSignature
 from bgp_simulator_pathsec_policies import TransitiveDroppingAS
 from bgp_simulator_pathsec_policies import TransitiveDropping2AS
 from bgp_simulator_pathsec_policies import TransitiveDropping4AS
+from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
 
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
@@ -168,6 +169,10 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
             BaseASCls=TransitiveDropping4AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS,
+            BaseASCls=TransitiveDropping99AS),
         ],
     propagation_rounds=2,
     subgraphs=[
