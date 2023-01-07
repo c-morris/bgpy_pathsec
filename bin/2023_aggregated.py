@@ -119,10 +119,10 @@ sim = Simulation(
         #    AnnCls=PathManipulationAnn, 
         #    AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
         #    BaseASCls=BGPAS),
-        #ShortestPathExportAll(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
-        #    BaseASCls=BGPAS),
+        ShortestPathExportAll(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
+            BaseASCls=BGPAS),
         #ShortestPathExportAllUp(
         #    AnnCls=PathManipulationAnn, 
         #    AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
@@ -131,10 +131,10 @@ sim = Simulation(
         #    AnnCls=PathManipulationAnn, 
         #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
         #    BaseASCls=BGPAS),
-        ShortestPathExportAllNoHashUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
-            BaseASCls=BGPAS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
+        #    BaseASCls=BGPAS),
         #ShortestPathExportAllNoHashTimid(
         #    AnnCls=PathManipulationAnn, 
         #    # This says TimidLeak, it's really NoHashTimidLeak
@@ -152,18 +152,18 @@ sim = Simulation(
         #    AnnCls=PathManipulationAnn, 
         #    AdoptASCls=PathEndTimidUpAS,
         #    BaseASCls=BGPAS),
-        OriginHijack(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BaselineBGPAS,
-            BaseASCls=BGPAS),
-        ValidSignature(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=OverheadBGPsecAS,
-            BaseASCls=BGPAS),
-        ValidSignature(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
-            BaseASCls=BGPAS),
+        #OriginHijack(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BaselineBGPAS,
+        #    BaseASCls=BGPAS),
+        #ValidSignature(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=OverheadBGPsecAS,
+        #    BaseASCls=BGPAS),
+        #ValidSignature(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
+        #    BaseASCls=BGPAS),
         ShortestPathExportAllNoHashUp(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS,
@@ -226,9 +226,9 @@ sim = Simulation(
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    #output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    parse_cpus=12)
+    output_path=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    parse_cpus=1)
 
 sim.run()
 
