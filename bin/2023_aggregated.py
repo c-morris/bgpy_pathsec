@@ -87,7 +87,6 @@ from bgp_simulator_pathsec_policies import ValidSignature
 from bgp_simulator_pathsec_policies import TransitiveDroppingAS
 from bgp_simulator_pathsec_policies import TransitiveDropping2AS
 from bgp_simulator_pathsec_policies import TransitiveDropping4AS
-<<<<<<< HEAD
 from bgp_simulator_pathsec_policies import TransitiveDropping8AS
 from bgp_simulator_pathsec_policies import TransitiveDropping16AS
 from bgp_simulator_pathsec_policies import TransitiveDropping32AS
