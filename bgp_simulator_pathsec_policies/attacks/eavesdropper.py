@@ -24,7 +24,7 @@ class Eavesdropper(ShortestPathExportAllNoHash):
         if propagation_round == 0:
             attack_anns = []
             attacker = engine.as_dict[attacker_asn]
-            if global_eavesdropper:
+            if self.global_eavesdropper:
                 vantage_points = list(engine.as_dict.keys())
             else:
                 vantage_points = self.vantage_points
