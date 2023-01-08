@@ -14,6 +14,7 @@ from .two_hop_attack import TwoHopAttack # noqa F401
 from .two_hop_attack_up import TwoHopAttackUp # noqa F401
 from .aggregator import Aggregator # noqa F401
 from .eavesdropper import Eavesdropper # noqa F401
+from .global_eavesdropper import GlobalEavesdropper # noqa F401
 from .eavesdropper_up import EavesdropperUp # noqa F401
 from .ris_eavesdropper import RISEavesdropper # noqa F401
 from .ris_eavesdropper_up import RISEavesdropperUp # noqa F401

@@ -9,6 +9,7 @@ class Eavesdropper(ShortestPathExportAllNoHash):
     """
 
     vantage_points = []
+    global_eavesdropper = False
 
     def post_propagation_hook(self, engine,
                               propagation_round, *args, **kwargs):
@@ -23,19 +24,25 @@ class Eavesdropper(ShortestPathExportAllNoHash):
         if propagation_round == 0:
             attack_anns = []
             attacker = engine.as_dict[attacker_asn]
-            for asn in [attacker_asn] + self.vantage_points:
+            if global_eavesdropper:
+                vantage_points = list(engine.as_dict.keys())
+            else:
+                vantage_points = self.vantage_points
+            for asn in [attacker_asn] + vantage_points:
                 current_as = engine.as_dict[asn]
-                if current_as.name != "BGP" and asn != attacker_asn:
+                if ((current_as.name == self.AdoptASCls.name or
+                     current_as.name == "Pseudo" + self.AdoptASCls.name) and
+                     asn != attacker_asn):
                     # if adopting and not attacker
                     continue
                 atk_ann_candidates = []
-                if asn == attacker_asn:
-                    for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
-                        atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
-                else:
-                    potential_ann_to_add = current_as._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
-                    if potential_ann_to_add is not None:
-                        atk_ann_candidates.append(attacker._copy_and_process(potential_ann_to_add, Relationships.CUSTOMERS)) # noqa E501
+                for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
+                    atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
+                # Old code for using local RIB
+                #
+                #     potential_ann_to_add = current_as._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
+                #     if potential_ann_to_add is not None:
+                #         atk_ann_candidates.append(attacker._copy_and_process(potential_ann_to_add, Relationships.CUSTOMERS)) # noqa E501
             for atk_ann in atk_ann_candidates:
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
