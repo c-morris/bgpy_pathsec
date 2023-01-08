@@ -63,6 +63,7 @@ from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUp
 from bgp_simulator_pathsec_policies import TwoHopAttack
 from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
 from bgp_simulator_pathsec_policies import RISEavesdropperUp
+from bgp_simulator_pathsec_policies import GlobalEavesdropper
 from bgp_simulator_pathsec_policies import TwoHopAttackUp
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
@@ -92,79 +93,84 @@ from bgp_simulator_pathsec_policies import TransitiveDropping16AS
 from bgp_simulator_pathsec_policies import TransitiveDropping32AS
 from bgp_simulator_pathsec_policies import TransitiveDropping64AS
 from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=3,
+    num_trials=1,
     scenarios=[
-        #OriginHijack(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecAggressiveAS,
-        #    BaseASCls=BGPAS),
-        ## BGPsec Timid never makes sense, aggressive is always better
-        ## ShortestPathExportAll(
-        ##     AnnCls=PathManipulationAnn, 
-        ##     AdoptASCls=BGPsecTimidAS,
-        ##     BaseASCls=BGPAS),
-        #OriginHijack(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveAggressiveAS,
-        #    BaseASCls=BGPAS),
-        #ShortestPathExportAllNoHash(
-        #    AnnCls=PathManipulationAnn, 
-        #    # All BGPsecTransitive attacks must be NoHash
-        #    AdoptASCls=BGPsecTransitiveTimidAS,
-        #    BaseASCls=BGPAS),
-        #OriginHijack(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
-        #    BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecAggressiveAS,
+            BaseASCls=BGPAS),
+        # BGPsec Timid never makes sense, aggressive is always better
+        # ShortestPathExportAll(
+        #     AnnCls=PathManipulationAnn, 
+        #     AdoptASCls=BGPsecTimidAS,
+        #     BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveAggressiveAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHash(
+            AnnCls=PathManipulationAnn, 
+            # All BGPsecTransitive attacks must be NoHash
+            AdoptASCls=BGPsecTransitiveTimidAS,
+            BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
+            BaseASCls=BGPAS),
         ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
             BaseASCls=BGPAS),
-        #ShortestPathExportAllUp(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
-        #    BaseASCls=BGPAS),
-        #ShortestPathExportAllNoHash(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
-        #    BaseASCls=BGPAS),
-        #ShortestPathExportAllNoHashUp(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
-        #    BaseASCls=BGPAS),
-        #ShortestPathExportAllNoHashTimid(
-        #    AnnCls=PathManipulationAnn, 
-        #    # This says TimidLeak, it's really NoHashTimidLeak
-        #    AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
-        #    BaseASCls=BGPAS),
-        #OriginHijack(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=PathEndAggressiveAS,
-        #    BaseASCls=BGPAS),
-        #TwoHopAttack(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=PathEndTimidAS,
-        #    BaseASCls=BGPAS),
-        #TwoHopAttackUp(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=PathEndTimidUpAS,
-        #    BaseASCls=BGPAS),
+        ShortestPathExportAllUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHash(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashTimid(
+            AnnCls=PathManipulationAnn, 
+            # This says TimidLeak, it's really NoHashTimidLeak
+            AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
+            BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndAggressiveAS,
+            BaseASCls=BGPAS),
+        TwoHopAttack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndTimidAS,
+            BaseASCls=BGPAS),
+        TwoHopAttackUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndTimidUpAS,
+            BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BaselineBGPAS,
             BaseASCls=BGPAS),
-        #ValidSignature(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=OverheadBGPsecAS,
-        #    BaseASCls=BGPAS),
-        #ValidSignature(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
-        #    BaseASCls=BGPAS),
+        ValidSignature(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=OverheadBGPsecAS,
+            BaseASCls=BGPAS),
+        ValidSignature(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropper(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyGlobalEavesdropperAS,
+            BaseASCls=BGPAS),
         ShortestPathExportAllNoHashUp(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS,
@@ -177,26 +183,26 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
             BaseASCls=TransitiveDropping4AS),
-        ShortestPathExportAllNoHashUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS,
-            BaseASCls=TransitiveDropping8AS),
-        ShortestPathExportAllNoHashUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS,
-            BaseASCls=TransitiveDropping16AS),
-        ShortestPathExportAllNoHashUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS,
-            BaseASCls=TransitiveDropping32AS),
-        ShortestPathExportAllNoHashUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS,
-            BaseASCls=TransitiveDropping64AS),
-        ShortestPathExportAllNoHashUp(
-            AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS,
-            BaseASCls=TransitiveDropping99AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS,
+        #    BaseASCls=TransitiveDropping8AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS,
+        #    BaseASCls=TransitiveDropping16AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS,
+        #    BaseASCls=TransitiveDropping32AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS,
+        #    BaseASCls=TransitiveDropping64AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS,
+        #    BaseASCls=TransitiveDropping99AS),
         ],
     propagation_rounds=2,
     subgraphs=[

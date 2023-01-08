@@ -128,6 +128,11 @@ class OverheadBGPsecTransitiveDownOnlyAS(BGPsecTransitiveDownOnlyAS):
     name = "OverheadBGPsecTransitiveDownOnlyAS"
 
 
+class BGPsecTransitiveDownOnlyGlobalEavesdropperAS(BGPsecTransitiveDownOnlyAS):
+    """For use with GlobalEavesdropper"""
+    name = "BGPsecTransitiveDownOnlyGlobalEavesdropperAS"
+
+
 class BaselineBGPAS(BGPAS):
     """For use with Origin Hijack"""
     name = "BaselineBGPAS"

@@ -35,6 +35,13 @@ class OverheadBPOAllSubgraph(Subgraph):
         ribs_in_total = 0
         adopting_ribs_in_valid = 0
         non_adopting_ribs_in_valid = 0
+
+        # Set overhead results before checking valid announcements
+        bpo_count = engine.as_dict[list(
+                scenario.victim_asns)[0]].bpo_count
+        overhead_count = engine.as_dict[list(
+                scenario.victim_asns)[0]].count
+
         for as_obj, outcome in outcomes.items():
             if as_obj.asn in uncountable_asns:
                 continue
@@ -73,10 +80,8 @@ class OverheadBPOAllSubgraph(Subgraph):
         shared["adopting_count"] = total_adopting
         shared["non_adopting_count"] = total_non_adopting
         if total_adopting != 0:
-            shared["overhead_bpo_all"] = engine.as_dict[list(
-                scenario.victim_asns)[0]].bpo_count / total_adopting
-            shared["overhead_all"] = engine.as_dict[list(
-                scenario.victim_asns)[0]].count / total_adopting
+            shared["overhead_bpo_all"] = bpo_count / total_adopting
+            shared["overhead_all"] = overhead_count / total_adopting
             shared["ribs_in_valid_adopting"] = adopting_ribs_in_valid / total_adopting
         if total_non_adopting != 0:
             shared["ribs_in_valid_non_adopting"] = non_adopting_ribs_in_valid / total_non_adopting

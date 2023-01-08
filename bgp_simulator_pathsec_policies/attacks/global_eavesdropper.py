@@ -1,6 +1,6 @@
 from bgp_simulator_pkg import Prefixes, Relationships
 
-from .shortest_path_export_all_no_hash import ShortestPathExportAllNoHash
+from .eavesdropper import Eavesdropper
 
 
 class GlobalEavesdropper(Eavesdropper):

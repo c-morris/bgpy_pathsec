@@ -16,6 +16,7 @@ from .attacks import ShortestPathExportAllNoHashTimid
 from .attacks import TwoHopAttack
 from .attacks import TwoHopAttackUp
 from .attacks import Eavesdropper
+from .attacks import GlobalEavesdropper
 from .attacks import EavesdropperUp
 from .attacks import RISEavesdropperUp
 from .attacks import ValidSignature
@@ -60,6 +61,7 @@ from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16A
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS
+from .policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 
 from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph
