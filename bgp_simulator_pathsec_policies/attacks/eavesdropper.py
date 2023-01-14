@@ -28,6 +28,7 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                 vantage_points = list(engine.as_dict.keys())
             else:
                 vantage_points = self.vantage_points
+            atk_ann_candidates = []
             for asn in [attacker_asn] + vantage_points:
                 current_as = engine.as_dict[asn]
                 if ((current_as.name == self.AdoptASCls.name or
@@ -35,7 +36,6 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                      asn != attacker_asn):
                     # if adopting and not attacker
                     continue
-                atk_ann_candidates = []
                 for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
                     atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
                 # Old code for using local RIB
