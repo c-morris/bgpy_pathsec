@@ -1,6 +1,6 @@
 from bgp_simulator_pkg import Relationships
 
-from ..policies import BGPsecTransitiveDownOnlyAS
+from ..policies import BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
 
 
 class BGPsecTransitiveDownOnlyEncrUpAS(BGPsecTransitiveDownOnlyAS):
