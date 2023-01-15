@@ -13,6 +13,7 @@ class PathManipulationAnn(Announcement):
     """
 
     __slots__ = ("do_communities",
+                 "up_pre",
                  "bgpsec_path",
                  "next_as",
                  "removed_signatures",
@@ -32,6 +33,7 @@ class PathManipulationAnn(Announcement):
                  traceback_end: bool = False,
                  communities: Tuple[str, ...] = (),
                  do_communities: Tuple[int, ...] = (),
+                 up_pre: bool = True,
                  bgpsec_path: Tuple[int, ...] = (),
                  removed_signatures: Tuple[int, ...] = (),
                  path_end_valid: bool = True):
@@ -46,6 +48,7 @@ class PathManipulationAnn(Announcement):
         self.traceback_end: bool = traceback_end
         self.communities: Tuple[str, ...] = communities
         self.do_communities: Tuple[int, ...] = do_communities
+        self.up_pre: bool = up_pre
         self.bgpsec_path: Tuple[int, ...] = bgpsec_path
         self.next_as: int = next_as
         self.removed_signatures: Tuple[int, ...] = removed_signatures
@@ -76,3 +79,5 @@ class PathManipulationAnn(Announcement):
     # announcement in a way that would make an announcement invalid by path
     # end. See https://dl.acm.org/doi/pdf/10.1145/2934872.2934883 for details
     # of the path end mechanism.
+
+    # The do_communities and up_pre attributes are for route leak prevention.

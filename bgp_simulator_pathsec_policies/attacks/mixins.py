@@ -1,7 +1,7 @@
 # Mix-In methods for including in attack classes
 
 def _trim_do_communities_up(self, ann):
-    """With UP attributes, this becomes a no-op.
+    """With UP attributes, no DO communities are removed.
 
     The reasoning for this is as follows:
       Since the origin is always adopting, there is always at least one UP
@@ -10,7 +10,7 @@ def _trim_do_communities_up(self, ann):
       will be detected. Therefore, if any down-only communities are
       present, they should not be removed.
     """
-    pass
+    ann.up_pre = False
 
 
 def _truncate_ann_no_hash(self, ann):
@@ -26,3 +26,4 @@ def _truncate_ann_no_hash(self, ann):
     ann.as_path = ann.as_path[j:]
     # update BGPsec path to match new AS path
     ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+

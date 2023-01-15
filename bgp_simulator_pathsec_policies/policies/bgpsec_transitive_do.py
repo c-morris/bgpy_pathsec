@@ -1,3 +1,5 @@
+from bgp_simulator_pkg import Relationships
+
 from ..policies import BGPsecTransitiveAS, DownOnlyAS
 
 
@@ -8,6 +10,15 @@ class BGPsecTransitiveDownOnlyAS(BGPsecTransitiveAS, DownOnlyAS):
     name = "BGPsec Transitive Down Only"
 
     __slots__ = tuple()
+
+    def _valid_ann(self, ann, recv_relationship: Relationships):
+        """Determine if an announcement is valid or should be dropped"""
+        BGPsecTransitiveAS.count += len(ann.bgpsec_path)
+        return (super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship) and  # noqa E501
+                self.passes_down_only_checks(ann, recv_relationship) and
+                len(ann.removed_signatures) == 0)
+
+
 
     def _process_outgoing_ann(self, as_obj, ann, propagate_to, send_rels, *args, **kwargs): # noqa E501
         ann_to_send = ann.copy()

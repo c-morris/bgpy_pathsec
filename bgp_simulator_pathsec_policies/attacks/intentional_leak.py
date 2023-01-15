@@ -169,7 +169,6 @@ class IntentionalLeak(MHLeak):
         if len(ann.as_path) < 2:
             ann.path_end_valid = False
 
-    # This can't be a static method because of the aggregator
     def _trim_do_communities(self, ann):
         ann.do_communities = tuple(x for x in ann.do_communities
                                    if x in ann.bgpsec_path)

@@ -1,5 +1,6 @@
 from bgp_simulator_pkg import BGPAS
 from . import BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS
+from . import BGPsecTransitiveDownOnlyEncrUpAS
 from .path_end import PathEndAS
 
 
@@ -131,6 +132,11 @@ class OverheadBGPsecTransitiveDownOnlyAS(BGPsecTransitiveDownOnlyAS):
 class BGPsecTransitiveDownOnlyGlobalEavesdropperAS(BGPsecTransitiveDownOnlyAS):
     """For use with GlobalEavesdropper"""
     name = "BGPsecTransitiveDownOnlyGlobalEavesdropperAS"
+
+
+class BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS(BGPsecTransitiveDownOnlyEncrUpAS):
+    """For use with GlobalEavesdropperUp"""
+    name = "BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS"
 
 
 class BaselineBGPAS(BGPAS):

@@ -27,6 +27,7 @@ class OriginHijack(MHPathManipulation):
                                     recv_relationship=Relationships.ORIGIN,
                                     next_as=victim_asn,
                                     do_communities=tuple(),
+                                    up_pre=True,
                                     bgpsec_path=(victim_asn,),
                                     removed_signatures=tuple(),
                                     withdraw=False,
@@ -48,6 +49,7 @@ class OriginHijack(MHPathManipulation):
                                     recv_relationship=Relationships.ORIGIN,
                                     next_as=0,
                                     do_communities=tuple(),
+                                    up_pre=False,
                                     bgpsec_path=tuple(),
                                     removed_signatures=(list(self.victim_asns)[0],), # noqa E501
                                     withdraw=False,

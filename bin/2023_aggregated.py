@@ -65,6 +65,7 @@ from bgp_simulator_pathsec_policies import TwoHopAttack
 from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
 from bgp_simulator_pathsec_policies import RISEavesdropperUp
 from bgp_simulator_pathsec_policies import GlobalEavesdropper
+from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
 from bgp_simulator_pathsec_policies import TwoHopAttackUp
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
@@ -96,6 +97,7 @@ from bgp_simulator_pathsec_policies import TransitiveDropping64AS
 from bgp_simulator_pathsec_policies import TransitiveDropping99AS
 from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
 
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
@@ -142,7 +144,7 @@ sim = Simulation(
             BaseASCls=BGPAS),
         ShortestPathExportAllNoHashTimid(
             AnnCls=PathManipulationAnn, 
-            # This says TimidLeak, it's really NoHashTimidLeak
+            # This says TimidLeak, it's really NoHashUpTimidLeak
             AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
             BaseASCls=BGPAS),
         OriginHijack(
@@ -172,6 +174,10 @@ sim = Simulation(
         GlobalEavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyGlobalEavesdropperAS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
             BaseASCls=BGPAS),
         ShortestPathExportAllNoHashUp(
             AnnCls=PathManipulationAnn, 
