@@ -54,7 +54,7 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                 self._trim_do_communities(atk_ann)
 
                 # Reprocess atk_ann to add the attacker's ASN
-                if prev_len != len(atk_ann.as_path):
+                if atk_ann.as_path[0] != attacker_asn:
                     atk_ann = attacker._copy_and_process(atk_ann, Relationships.CUSTOMERS) # noqa E501
                 attack_anns.append(atk_ann)
 
@@ -71,3 +71,29 @@ class Eavesdropper(ShortestPathExportAllNoHash):
 
             self.leak_announcements_to_providers(
                 attack_anns, attacker, propagation_round)
+
+    def _truncate_ann(self, ann):
+        """Truncate to the first non-adopting ASN.
+        
+        This needs to be redefined here because the attacker searches through RIBs
+        In for other ASes. This means it needs to account for the case where an
+        adopting origin sends to a non-adopting neighbor which isn't the attacker,
+        but also can't be removed because of the signature. 
+        """
+        ann.as_path = ann.as_path[1:]  # remove attacker ASN
+        if len(ann.as_path) == 1:
+            if ann.next_as != 0:
+                # announcement cannot be shortened because of origin signature
+                ann.as_path = tuple([ann.next_as, ann.as_path[0]])
+                ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+                return
+        partial = ann.bgpsec_path
+        full = ann.as_path
+        i = len(partial) - 1
+        j = len(full) - 1
+        while i >= 0 and j > 0 and partial[i] == full[j]:
+            i -= 1
+            j -= 1
+        ann.as_path = ann.as_path[j:]
+        # update BGPsec path to match new AS path
+        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
