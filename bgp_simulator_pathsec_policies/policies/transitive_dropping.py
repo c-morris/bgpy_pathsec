@@ -7,13 +7,16 @@ class TransitiveDroppingAS(BGPAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingAS"
     transitive_dropping_percent=1.0
+    # Specific random generator for TransitiveDroppingAS and its subclasses
+    # for reproduceable experiments
+    rand_gen = random.Random('TransitiveDroppingAS')
 
     def __init__(self,
                  *args,
                  **kwargs):
         # Set the probability of dropping transitive attrs for *this* AS only
         self.transitive_dropping = (
-            random.random() < (self.transitive_dropping_percent / 100.0))
+            self.rand_gen.random() < (self.transitive_dropping_percent / 100.0))
 
         super(TransitiveDroppingAS, self).__init__(*args,
                                                    **kwargs)
