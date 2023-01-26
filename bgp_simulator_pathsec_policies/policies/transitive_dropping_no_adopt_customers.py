@@ -1,5 +1,7 @@
 from .transitive_dropping import TransitiveDroppingAS, TransitiveDroppingNeverAS
 
+from bgp_simulator_pkg import Relationships
+
 
 class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability.
@@ -17,14 +19,15 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
         # If this is a transitive dropping AS, switch all adopting customers
         # to non-adopting. 
         if self.transitive_dropping:
-            print('gawt here')
             for as_ in self.customers:
-                #if not (isinstance(as_, TransitiveDroppingAS) or
-                #        isinstance(as_, BGPAS)):
-                    print(isinstance(as_, TransitiveDroppingAS))
-                    as_.__class__ = TransitiveDroppingNeverAS
-                    #as_.__init__(reset_base=False)
-                    print('got here', as_.asn)
+                if not (isinstance(as_, TransitiveDroppingAS)):
+                    # The origin must stay adopting
+                    origin = False
+                    for prefix, ann in as_._local_rib.prefix_anns():
+                        if ann.recv_relationship == Relationships.ORIGIN:
+                            origin = True
+                    if not origin:
+                        as_.__class__ = TransitiveDroppingNeverAS
         super().propagate_to_customers()
 
 class TransitiveDroppingNoAdoptCustomersAlwaysAS(TransitiveDroppingNoAdoptCustomersAS):

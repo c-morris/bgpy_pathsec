@@ -89,9 +89,12 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                 return
         partial = ann.bgpsec_path
         full = ann.as_path
+        removed = ann.removed_signatures
+        if len(partial) < len(removed):
+            partial = removed
         i = len(partial) - 1
         j = len(full) - 1
-        while i >= 0 and j > 0 and partial[i] == full[j]:
+        while (i >= 0 and j > 0 and partial[i] == full[j]):
             i -= 1
             j -= 1
         ann.as_path = ann.as_path[j:]
