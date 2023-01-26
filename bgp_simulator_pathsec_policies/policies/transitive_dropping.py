@@ -6,6 +6,8 @@ from bgp_simulator_pkg import BGPAS
 class TransitiveDroppingAS(BGPAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingAS"
+    count = 0
+    bpo_count = 0
     transitive_dropping_percent=1.0
     # Specific random generator for TransitiveDroppingAS and its subclasses
     # for reproduceable experiments
@@ -73,3 +75,9 @@ class TransitiveDropping99AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping99AS"
     transitive_dropping_percent=99.0
+
+
+class TransitiveDroppingNeverAS(TransitiveDroppingAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDroppingNeverAS"
+    transitive_dropping_percent=0.0

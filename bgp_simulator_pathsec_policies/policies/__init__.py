@@ -7,3 +7,4 @@ from .aggregator_variants import * # noqa F401
 from .path_end import PathEndAS # noqa F401
 from .transitive_dropping import * # noqa F401
 from .transitive_dropping_always import TransitiveDroppingAlwaysAS # noqa F401
+from .transitive_dropping_no_adopt_customers import * # noqa F401
