@@ -31,10 +31,21 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                         as_.__class__ = TransitiveDroppingNeverAS
                         as_.transitive_dropping = False
                         best_ann = as_._select_best_ribs_in(Prefixes.PREFIX.value)
+                        # Re-process ribs_in with new AS class
+                        current_ann = as_._local_rib.get_ann(Prefixes.PREFIX.value)
                         if best_ann is not None:
+                            if current_ann is not None and \
+                               not best_ann.prefix_path_attributes_eq(current_ann):
+                                withdraw_ann: Ann = as_._copy_and_process(
+                                    current_ann,
+                                    current_ann.recv_relationship,
+                                    overwrite_default_kwargs={'withdraw': True})
+                                as_._local_rib.remove_ann(Prefixes.PREFIX.value)
+                                # Also remove from neighbors
+                                as_._withdraw_ann_from_neighbors(withdraw_ann)
+                            # Add new best ann to local RIB
                             as_._local_rib.add_ann(best_ann)
                         TransitiveDroppingNoAdoptCustomersAS.convert_count += 1
-                        
         super().propagate_to_customers()
 
 class TransitiveDroppingNoAdoptCustomersAlwaysAS(TransitiveDroppingNoAdoptCustomersAS):
