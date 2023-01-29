@@ -47,6 +47,7 @@ class OverheadBPOAllSubgraph(Subgraph):
         if hasattr(attacker_as, "convert_count"):
             transitive_dropping_conversions_count = \
                 attacker_as.convert_count
+        shared["transitive_dropping_conversions_all"] = transitive_dropping_conversions_count
 
         for as_obj, outcome in outcomes.items():
             if as_obj.asn in uncountable_asns:
