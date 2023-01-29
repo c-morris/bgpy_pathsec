@@ -33,8 +33,7 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                         best_ann = as_._select_best_ribs_in(Prefixes.PREFIX.value)
                         # Re-process ribs_in with new AS class
                         current_ann = as_._local_rib.get_ann(Prefixes.PREFIX.value)
-                        if best_ann is not None and \
-                           not best_ann.prefix_path_attributes_eq(current_ann):
+                        if best_ann is not None:
                             if current_ann is not None:
                                 withdraw_ann: Ann = as_._copy_and_process(
                                     current_ann,
