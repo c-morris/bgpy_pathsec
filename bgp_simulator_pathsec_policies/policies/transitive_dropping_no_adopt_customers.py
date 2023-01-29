@@ -15,8 +15,9 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
     convert_count = 0
 
     def propagate_to_customers(self):
-        """Before sending, switch customer to BGPAS if necessary."""
+        """After sending, switch customer to BGPAS if necessary."""
 
+        super().propagate_to_customers()
         # If this is a transitive dropping AS, switch all adopting customers
         # to non-adopting. 
         if self.transitive_dropping:
@@ -45,7 +46,6 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                             # Add new best ann to local RIB
                             as_._local_rib.add_ann(best_ann)
                         TransitiveDroppingNoAdoptCustomersAS.convert_count += 1
-        super().propagate_to_customers()
 
 class TransitiveDroppingNoAdoptCustomersAlwaysAS(TransitiveDroppingNoAdoptCustomersAS):
     """Drops transitive attributes with some probability"""
