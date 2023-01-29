@@ -124,7 +124,7 @@ sim = Simulation(
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS,
             BaseASCls=TransitiveDroppingNoAdoptCustomers4AS),
             ],
-    propagation_rounds=2,
+    propagation_rounds=3,
     subgraphs=[
         OverheadBPOAllSubgraph(),
         OverheadAllSubgraph(),

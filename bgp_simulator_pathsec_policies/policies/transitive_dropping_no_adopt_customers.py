@@ -1,6 +1,6 @@
 from .transitive_dropping import TransitiveDroppingAS, TransitiveDroppingNeverAS
 
-from bgp_simulator_pkg import Relationships
+from bgp_simulator_pkg import Relationships, Prefixes
 
 
 class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
@@ -30,6 +30,9 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                     if not origin:
                         as_.__class__ = TransitiveDroppingNeverAS
                         as_.transitive_dropping = False
+                        best_ann = as_._select_best_ribs_in(Prefixes.PREFIX.value)
+                        if best_ann is not None:
+                            as_._local_rib.add_ann(best_ann)
                         TransitiveDroppingNoAdoptCustomersAS.convert_count += 1
                         
         super().propagate_to_customers()

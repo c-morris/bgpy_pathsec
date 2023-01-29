@@ -25,5 +25,5 @@ class Config037(EngineTestConfig):
                                5: BGPsecTransitiveDownOnlyAS,
                                7: BGPsecTransitiveDownOnlyAS,
                                777: BGPsecTransitiveDownOnlyAS}
-    propagation_rounds = 2
+    propagation_rounds = 3
     SubgraphCls = OverheadBPOAllSubgraph
