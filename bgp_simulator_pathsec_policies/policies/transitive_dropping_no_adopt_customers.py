@@ -36,9 +36,7 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                         current_ann = as_._local_rib.get_ann(Prefixes.PREFIX.value)
                         if best_ann is not None and not best_ann.prefix_path_attributes_eq(current_ann):
                             if current_ann is not None:
-                                withdraw_ann: Ann = as_._copy_and_process(
-                                    current_ann,
-                                    current_ann.recv_relationship,
+                                withdraw_ann: Ann = as_.copy(
                                     overwrite_default_kwargs={'withdraw': True})
                                 as_._local_rib.remove_ann(Prefixes.PREFIX.value)
                                 # Also remove from neighbors
