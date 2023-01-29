@@ -12,6 +12,7 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
     """
 
     name = "TransitiveDroppingNoAdoptCustomersAS"
+    convert_count = 0
 
     def propagate_to_customers(self):
         """Before sending, switch customer to BGPAS if necessary."""
@@ -28,10 +29,25 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                             origin = True
                     if not origin:
                         as_.__class__ = TransitiveDroppingNeverAS
+                        as_.transitive_dropping = False
+                        TransitiveDroppingNoAdoptCustomersAS.convert_count += 1
+                        
         super().propagate_to_customers()
 
 class TransitiveDroppingNoAdoptCustomersAlwaysAS(TransitiveDroppingNoAdoptCustomersAS):
-
+    """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingNoAdoptCustomersAlwaysAS"
     transitive_dropping_percent = 100.0
+
+
+class TransitiveDroppingNoAdoptCustomers2AS(TransitiveDroppingNoAdoptCustomersAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDroppingNoAdoptCustomers2AS"
+    transitive_dropping_percent=2.0
+
+
+class TransitiveDroppingNoAdoptCustomers4AS(TransitiveDroppingNoAdoptCustomersAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDroppingNoAdoptCustomers4AS"
+    transitive_dropping_percent=4.0
 

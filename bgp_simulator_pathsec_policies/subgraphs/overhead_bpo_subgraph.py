@@ -41,6 +41,12 @@ class OverheadBPOAllSubgraph(Subgraph):
                 scenario.victim_asns)[0]].bpo_count
         overhead_count = engine.as_dict[list(
                 scenario.victim_asns)[0]].count
+        # Set the number of adopting ASes that were converted to non-adopting
+        attacker_as = engine.as_dict[list(scenario.attacker_asns)[0]]
+        transitive_dropping_conversions_count = 0
+        if hasattr(attacker_as, "convert_count"):
+            transitive_dropping_conversions_count = \
+                attacker_as.convert_count
 
         for as_obj, outcome in outcomes.items():
             if as_obj.asn in uncountable_asns:

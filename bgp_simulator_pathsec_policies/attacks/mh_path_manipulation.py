@@ -23,7 +23,7 @@ class MHPathManipulation(Scenario):
 
         return set([x.asn for x in engine if x.multihomed])
 
-    def _get_announcements(self):
+    def _get_announcements(self, *args, **kwargs):
         """Returns the two announcements seeded for this engine input
 
         This engine input is for a prefix hijack,

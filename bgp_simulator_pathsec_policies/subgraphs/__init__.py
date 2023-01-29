@@ -4,3 +4,4 @@ from .adopting_count_subgraph import AdoptingCountSubgraph # noqa F401
 from .non_adopting_count_subgraph import NonAdoptingCountSubgraph # noqa F401
 from .path_length_subgraph import PathLengthSubgraph
 from .ribs_in_size_subgraph import *
+from .transitive_conversions import TransitiveDroppingConversionsAllSubgraph
