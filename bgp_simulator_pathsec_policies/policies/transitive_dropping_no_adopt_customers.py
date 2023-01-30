@@ -28,7 +28,10 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
                     for prefix, ann in as_._local_rib.prefix_anns():
                         if ann.recv_relationship == Relationships.ORIGIN:
                             origin = True
-                    if not origin:
+                    if origin:
+                        # If the origin is a customer, don't drop attrs 
+                        self.transitive_dropping = False
+                    else:
                         as_.__class__ = TransitiveDroppingNeverAS
                         as_.transitive_dropping = False
                         best_ann = as_._select_best_ribs_in(Prefixes.PREFIX.value)
