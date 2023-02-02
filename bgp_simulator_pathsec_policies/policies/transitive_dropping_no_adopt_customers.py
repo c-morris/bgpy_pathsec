@@ -14,6 +14,18 @@ class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):
     name = "TransitiveDroppingNoAdoptCustomersAS"
     convert_count = 0
 
+    def propagate_to_providers(self):
+        if self.transitive_dropping:
+            for as_ in self.customers:
+                if not (isinstance(as_, TransitiveDroppingAS)):
+                    # The origin must stay adopting
+                    origin = False
+                    for prefix, ann in as_._local_rib.prefix_anns():
+                        if ann.recv_relationship == Relationships.ORIGIN:
+                            # If the origin is a customer, don't drop attrs 
+                            self.transitive_dropping = False
+        super().propagate_to_providers()
+
     def propagate_to_customers(self):
         """After sending, switch customer to BGPAS if necessary."""
 
