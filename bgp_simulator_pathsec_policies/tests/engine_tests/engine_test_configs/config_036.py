@@ -10,7 +10,7 @@ class Config036(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P036"
-    desc = "GlobalEavesdropper test"
+    desc = "GlobalEavesdropper with otherwise unseen announcement test. The attack announcement should be from AS 8."
     scenario = GlobalEavesdropper(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=BGPAS,

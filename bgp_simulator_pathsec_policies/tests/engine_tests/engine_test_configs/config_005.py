@@ -9,7 +9,7 @@ class Config005(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P005"
-    desc = "Down Only test"
+    desc = "Down Only attribute test. AS 1 should add a DO community when sending to AS 2 (verify in YAML)"
     scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
                                victim_asns={ASNs.VICTIM.value},
                                BaseASCls=BGPAS,

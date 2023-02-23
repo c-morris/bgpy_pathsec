@@ -10,7 +10,7 @@ class Config026(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P026"
-    desc = "Fig 6 test, with UP attributes, Overhead subgraph"
+    desc = "Fig 6 test, 1-hop attack to test BGPsec overhead metrics. Check shared_data YAML to confirm correctness."
     scenario = OriginHijack(attacker_asns={ASNs.ATTACKER.value},
                             victim_asns={ASNs.VICTIM.value},
                             BaseASCls=BGPAS,

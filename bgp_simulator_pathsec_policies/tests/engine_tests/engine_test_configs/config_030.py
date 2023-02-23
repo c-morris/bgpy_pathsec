@@ -10,7 +10,7 @@ class Config030(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P030"
-    desc = "Fig 6 test, BGPsecTransitiveAS, Overhead subgraph"
+    desc = "Fig 6 test. 1-hop attack against BGPsec Transitive AS to test custom metrics."
     scenario = OriginHijack(attacker_asns={ASNs.ATTACKER.value},
                             victim_asns={ASNs.VICTIM.value},
                             BaseASCls=BGPAS,

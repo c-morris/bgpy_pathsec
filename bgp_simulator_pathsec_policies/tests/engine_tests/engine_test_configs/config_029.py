@@ -10,7 +10,7 @@ class Config029(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P029"
-    desc = "Fig 6 test, PathEndAS, Overhead subgraph"
+    desc = "Fig 6 test, 1-hop attack against Path End"
     scenario = OriginHijack(attacker_asns={ASNs.ATTACKER.value},
                             victim_asns={ASNs.VICTIM.value},
                             BaseASCls=BGPAS,

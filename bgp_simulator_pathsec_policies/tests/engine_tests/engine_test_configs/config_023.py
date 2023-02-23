@@ -9,7 +9,7 @@ class Config023(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P023"
-    desc = "Fig 6 test, no eavesdropper"
+    desc = "Duplicate of P021, to be removed"
     scenario = IntentionalLeakNoHashUp(attacker_asns={ASNs.ATTACKER.value},
                                        victim_asns={ASNs.VICTIM.value},
                                        BaseASCls=BGPAS,

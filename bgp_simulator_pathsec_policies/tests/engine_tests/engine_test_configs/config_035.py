@@ -10,7 +10,7 @@ class Config035(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P035"
-    desc = "GlobalEavesdropperUp test"
+    desc = "GlobalEavesdropper with Encrypted UP attributes test"
     scenario = GlobalEavesdropperUp(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=BGPAS,

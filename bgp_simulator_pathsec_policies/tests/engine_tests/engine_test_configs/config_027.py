@@ -10,7 +10,7 @@ class Config027(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P027"
-    desc = "Fig 6 test, with UP attributes, Overhead subgraph, Valid Prefix"
+    desc = "Fig 6 test, 1-hop attack to test BGPsec overhead metrics with no attack. Check shared_data YAML to confirm correctness."
     scenario = ValidPrefix(attacker_asns={ASNs.ATTACKER.value},
                            victim_asns={ASNs.VICTIM.value},
                            BaseASCls=BGPAS,

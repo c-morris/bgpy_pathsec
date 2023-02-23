@@ -9,7 +9,7 @@ class Config011(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P011"
-    desc = "Small Graph test"
+    desc = "Graph 6 test, BGPsec Transitive"
     scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
                                victim_asns={ASNs.VICTIM.value},
                                BaseASCls=BGPAS,

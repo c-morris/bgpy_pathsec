@@ -11,7 +11,7 @@ class Config037(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P037"
-    desc = "GlobalEavesdropper test"
+    desc = "GlobalEavesdropper attack with Transitive Dropping ASes with no adopting customers. Adopting customers are converted to TransitiveDroppingNeverAS nodes, except for the origin."
     scenario = GlobalEavesdropper(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS,

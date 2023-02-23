@@ -14,7 +14,7 @@ class Config017(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P017"
-    desc = "Path Shortening Defense test"
+    desc = "Path Shortening Defense test. The attack announcement should have an AS path length of 4 (including the attacker ASN)"
     scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
                                victim_asns={ASNs.VICTIM.value},
                                BaseASCls=BGPAS,
