@@ -8,7 +8,7 @@ class TransitiveDroppingAS(BGPAS):
     name = "TransitiveDroppingAS"
     count = 0
     bpo_count = 0
-    transitive_dropping_percent=1.0
+    transitive_dropping_percent = 1.0
     # Specific random generator for TransitiveDroppingAS and its subclasses
     # for reproduceable experiments
     rand_gen = random.Random('TransitiveDroppingAS')
@@ -18,7 +18,7 @@ class TransitiveDroppingAS(BGPAS):
                  **kwargs):
         # Set the probability of dropping transitive attrs for *this* AS only
         self.transitive_dropping = (
-            self.rand_gen.random() < (self.transitive_dropping_percent / 100.0))
+           self.rand_gen.random() < (self.transitive_dropping_percent / 100.0))
 
         super(TransitiveDroppingAS, self).__init__(*args,
                                                    **kwargs)
@@ -38,46 +38,46 @@ class TransitiveDroppingAS(BGPAS):
 class TransitiveDropping2AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping2AS"
-    transitive_dropping_percent=2.0
+    transitive_dropping_percent = 2.0
 
 
 class TransitiveDropping4AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping4AS"
-    transitive_dropping_percent=4.0
+    transitive_dropping_percent = 4.0
 
 
 class TransitiveDropping8AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping8AS"
-    transitive_dropping_percent=8.0
+    transitive_dropping_percent = 8.0
 
 
 class TransitiveDropping16AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping16AS"
-    transitive_dropping_percent=16.0
+    transitive_dropping_percent = 16.0
 
 
 class TransitiveDropping32AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping32AS"
-    transitive_dropping_percent=32.0
+    transitive_dropping_percent = 32.0
 
 
 class TransitiveDropping64AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping64AS"
-    transitive_dropping_percent=64.0
+    transitive_dropping_percent = 64.0
 
 
 class TransitiveDropping99AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDropping99AS"
-    transitive_dropping_percent=99.0
+    transitive_dropping_percent = 99.0
 
 
 class TransitiveDroppingNeverAS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingNeverAS"
-    transitive_dropping_percent=0.0
+    transitive_dropping_percent = 0.0

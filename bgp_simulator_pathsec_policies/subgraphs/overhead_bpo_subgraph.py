@@ -1,7 +1,6 @@
 from bgp_simulator_pkg import Subgraph
 from bgp_simulator_pkg import Scenario
 from bgp_simulator_pkg import SimulationEngine
-from bgp_simulator_pkg import BGPAS
 from typing import Any, Dict
 
 
@@ -23,7 +22,7 @@ class OverheadBPOAllSubgraph(Subgraph):
         All the statistics for all the subgraphs need to be computed here. This
         is because the _add_traceback_to_shared_data function is only called
         for the *first* subgraph class specified in the simulation. The rest
-        use the shared_data structure set by the first subgraph. 
+        use the shared_data structure set by the first subgraph.
         """
 
         uncountable_asns = scenario._preset_asns
@@ -47,12 +46,14 @@ class OverheadBPOAllSubgraph(Subgraph):
         if hasattr(attacker_as, "convert_count"):
             transitive_dropping_conversions_count = \
                 attacker_as.convert_count
-        shared["transitive_dropping_conversions_all"] = transitive_dropping_conversions_count
+        shared["transitive_dropping_conversions_all"] = \
+            transitive_dropping_conversions_count
 
         for as_obj, outcome in outcomes.items():
             if as_obj.asn in uncountable_asns:
                 continue
-            ribs_in = list(as_obj._ribs_in.get_ann_infos(scenario.announcements[0].prefix))
+            ribs_in = list(as_obj._ribs_in.get_ann_infos(
+                scenario.announcements[0].prefix))
             ribs_in_total += len(ribs_in)
             ribs_in_valid = 0
             ribs_in_invalid = 0
@@ -61,8 +62,6 @@ class OverheadBPOAllSubgraph(Subgraph):
                     if as_obj._valid_ann(ann_info.unprocessed_ann,
                                          ann_info.recv_relationship):
                         ribs_in_valid += 1
-                        #print('Path:', ann_info.unprocessed_ann.as_path)
-                        #print('RMS:', ann_info.unprocessed_ann.removed_signatures)
                     else:
                         ribs_in_invalid += 1
             if (as_obj.name == scenario.AdoptASCls.name or
@@ -89,11 +88,13 @@ class OverheadBPOAllSubgraph(Subgraph):
         if total_adopting != 0:
             shared["overhead_bpo_all"] = bpo_count / total_adopting
             shared["overhead_all"] = overhead_count / total_adopting
-            shared["ribs_in_valid_adopting"] = adopting_ribs_in_valid / total_adopting
+            shared["ribs_in_valid_adopting"] = \
+                adopting_ribs_in_valid / total_adopting
         if total_non_adopting != 0:
-            shared["ribs_in_valid_non_adopting"] = non_adopting_ribs_in_valid / total_non_adopting
+            shared["ribs_in_valid_non_adopting"] = \
+                non_adopting_ribs_in_valid / total_non_adopting
         if n_ases != 0:
-            shared["ribs_in_size_all"] = ribs_in_total / n_ases 
+            shared["ribs_in_size_all"] = ribs_in_total / n_ases
         if total_path_len != 0:
             shared["path_len_all"] = total_path_len / n_path_len
         super()._add_traceback_to_shared_data(

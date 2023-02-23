@@ -9,7 +9,8 @@ class Config006(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P006"
-    desc = "Down Only with BGPsec Transitive Attributes test. Confirm in YAML all attributes are set correctly."
+    desc = ("Down Only with BGPsec Transitive Attributes test. "
+            "Confirm in YAML all attributes are set correctly.")
     scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
                                victim_asns={ASNs.VICTIM.value},
                                BaseASCls=BGPAS,

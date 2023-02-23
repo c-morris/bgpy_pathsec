@@ -9,7 +9,8 @@ class Config002(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P002"
-    desc = "BGPsec Transitive security third preference test. AS 1 should prefer the path via AS 3."
+    desc = ("BGPsec Transitive security third preference test. "
+            "AS 1 should prefer the path via AS 3.")
     scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
                                victim_asns={ASNs.VICTIM.value},
                                BaseASCls=BGPAS,

@@ -49,58 +49,68 @@ class BGPsecTransitiveDownOnlyNoHashUpTimidAS(BGPsecTransitiveDownOnlyAS):
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidAS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 1% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 2% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 4% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 8% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 16% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 32% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 64% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS"
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS(
+          BGPsecTransitiveDownOnlyAS):
     """For use with ShortestPathExportAllNoHashUp, 99% transitive dropping"""
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS"
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS(BGPsecTransitiveDownOnlyAS):
+# TODO these class names are getting out of hand...
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS(BGPsecTransitiveDownOnlyAS): # noqa E501
     """For use with ShortestPathExportAllNoHashUp, 1% transitive dropping"""
-    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS"
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS" # noqa E501
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS(BGPsecTransitiveDownOnlyAS): # noqa E501
     """For use with ShortestPathExportAllNoHashUp, 2% transitive dropping"""
-    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS"
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS" # noqa E501
 
 
-class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS(BGPsecTransitiveDownOnlyAS):
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS(BGPsecTransitiveDownOnlyAS): # noqa E501
     """For use with ShortestPathExportAllNoHashUp, 4% transitive dropping"""
-    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS"
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS" # noqa E501
 
 
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
@@ -148,7 +158,8 @@ class BGPsecTransitiveDownOnlyGlobalEavesdropperAS(BGPsecTransitiveDownOnlyAS):
     name = "BGPsecTransitiveDownOnlyGlobalEavesdropperAS"
 
 
-class BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS(BGPsecTransitiveDownOnlyEncrUpAS):
+class BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS(
+          BGPsecTransitiveDownOnlyEncrUpAS):
     """For use with GlobalEavesdropperUp"""
     name = "BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS"
 

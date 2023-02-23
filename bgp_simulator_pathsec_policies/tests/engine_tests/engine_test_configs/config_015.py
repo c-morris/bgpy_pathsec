@@ -9,7 +9,8 @@ class Config015(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P015"
-    desc = "Intentional Leak Timid-All attack, BGPsec Transitive Down Only Graph 7 test"
+    desc = ("Intentional Leak Timid-All attack, "
+            "BGPsec Transitive Down Only Graph 7 test")
     scenario = IntentionalLeakTimid(attacker_asns={ASNs.ATTACKER.value},
                                     victim_asns={ASNs.VICTIM.value},
                                     BaseASCls=BGPAS,
