@@ -1,0 +1,18 @@
+all_DISCONNECTED: 9
+all_DISCONNECTED_perc: 50.0
+all_VICTIM_SUCCESS: 7
+all_VICTIM_SUCCESS_perc: 38.888888888888886
+etc_BGPsec Transitive Down Only: 10
+etc_BGPsec Transitive Down Only_DISCONNECTED: 7
+etc_BGPsec Transitive Down Only_DISCONNECTED_percent: 70.0
+etc_BGPsec Transitive Down Only_VICTIM_SUCCESS: 3
+etc_BGPsec Transitive Down Only_VICTIM_SUCCESS_percent: 30.0
+set: true
+stubs_or_mh_BGP: 3
+stubs_or_mh_BGP_VICTIM_SUCCESS: 3
+stubs_or_mh_BGP_VICTIM_SUCCESS_percent: 100.0
+stubs_or_mh_BGPsec Transitive Down Only: 3
+stubs_or_mh_BGPsec Transitive Down Only_DISCONNECTED: 2
+stubs_or_mh_BGPsec Transitive Down Only_DISCONNECTED_percent: 66.66666666666667
+stubs_or_mh_BGPsec Transitive Down Only_VICTIM_SUCCESS: 1
+stubs_or_mh_BGPsec Transitive Down Only_VICTIM_SUCCESS_percent: 33.333333333333336

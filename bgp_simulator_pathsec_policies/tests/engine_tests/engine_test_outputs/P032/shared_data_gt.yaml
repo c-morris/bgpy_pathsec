@@ -1,0 +1,31 @@
+adopting_count: 3
+all_DISCONNECTED: 2
+all_DISCONNECTED_perc: 18.181818181818183
+all_VICTIM_SUCCESS: 7
+all_VICTIM_SUCCESS_perc: 63.63636363636363
+etc_BGP: 3
+etc_BGP_VICTIM_SUCCESS: 3
+etc_BGP_VICTIM_SUCCESS_percent: 100.0
+etc_BGPsec Transitive: 2
+etc_BGPsec Transitive_DISCONNECTED: 1
+etc_BGPsec Transitive_DISCONNECTED_percent: 50.0
+etc_BGPsec Transitive_VICTIM_SUCCESS: 1
+etc_BGPsec Transitive_VICTIM_SUCCESS_percent: 50.0
+etc_TransitiveDroppingAlwaysAS: 2
+etc_TransitiveDroppingAlwaysAS_VICTIM_SUCCESS: 2
+etc_TransitiveDroppingAlwaysAS_VICTIM_SUCCESS_percent: 100.0
+non_adopting_count: 6
+overhead_all: 0.3333333333333333
+overhead_bpo_all: 0.6666666666666666
+path_len_all: 3.142857142857143
+ribs_in_size_all: 1.4444444444444444
+ribs_in_valid_adopting: 0.3333333333333333
+ribs_in_valid_non_adopting: 1.0
+set: true
+stubs_or_mh_BGPsec Transitive: 1
+stubs_or_mh_BGPsec Transitive_DISCONNECTED: 1
+stubs_or_mh_BGPsec Transitive_DISCONNECTED_percent: 100.0
+stubs_or_mh_TransitiveDroppingAlwaysAS: 1
+stubs_or_mh_TransitiveDroppingAlwaysAS_VICTIM_SUCCESS: 1
+stubs_or_mh_TransitiveDroppingAlwaysAS_VICTIM_SUCCESS_percent: 100.0
+transitive_dropping_conversions_all: 0

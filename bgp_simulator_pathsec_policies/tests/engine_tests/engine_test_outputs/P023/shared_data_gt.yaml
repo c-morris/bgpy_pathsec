@@ -1,0 +1,12 @@
+all_VICTIM_SUCCESS: 6
+all_VICTIM_SUCCESS_perc: 75.0
+etc_BGP: 3
+etc_BGP_VICTIM_SUCCESS: 3
+etc_BGP_VICTIM_SUCCESS_percent: 100.0
+etc_BGPsec Transitive Down Only: 2
+etc_BGPsec Transitive Down Only_VICTIM_SUCCESS: 2
+etc_BGPsec Transitive Down Only_VICTIM_SUCCESS_percent: 100.0
+set: true
+stubs_or_mh_BGPsec Transitive Down Only: 1
+stubs_or_mh_BGPsec Transitive Down Only_VICTIM_SUCCESS: 1
+stubs_or_mh_BGPsec Transitive Down Only_VICTIM_SUCCESS_percent: 100.0

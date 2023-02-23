@@ -1,0 +1,20 @@
+adopting_count: 0
+all_ATTACKER_SUCCESS: 1
+all_ATTACKER_SUCCESS_perc: 12.5
+all_VICTIM_SUCCESS: 5
+all_VICTIM_SUCCESS_perc: 62.5
+etc_BGP: 1
+etc_BGP_ATTACKER_SUCCESS: 1
+etc_BGP_ATTACKER_SUCCESS_percent: 100.0
+etc_BGPsec Transitive: 4
+etc_BGPsec Transitive_VICTIM_SUCCESS: 4
+etc_BGPsec Transitive_VICTIM_SUCCESS_percent: 100.0
+non_adopting_count: 6
+path_len_all: 3.5
+ribs_in_size_all: 1.8333333333333333
+ribs_in_valid_non_adopting: 1.1666666666666667
+set: true
+stubs_or_mh_BGPsec Transitive: 1
+stubs_or_mh_BGPsec Transitive_VICTIM_SUCCESS: 1
+stubs_or_mh_BGPsec Transitive_VICTIM_SUCCESS_percent: 100.0
+transitive_dropping_conversions_all: 0

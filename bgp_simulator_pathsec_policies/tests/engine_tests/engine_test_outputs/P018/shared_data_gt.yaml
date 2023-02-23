@@ -1,0 +1,15 @@
+all_ATTACKER_SUCCESS: 7
+all_ATTACKER_SUCCESS_perc: 63.63636363636363
+all_VICTIM_SUCCESS: 2
+all_VICTIM_SUCCESS_perc: 18.181818181818183
+etc_BGP: 4
+etc_BGP-Isec with Path Shortening Defense: 5
+etc_BGP-Isec with Path Shortening Defense_ATTACKER_SUCCESS: 4
+etc_BGP-Isec with Path Shortening Defense_ATTACKER_SUCCESS_percent: 80.0
+etc_BGP-Isec with Path Shortening Defense_VICTIM_SUCCESS: 1
+etc_BGP-Isec with Path Shortening Defense_VICTIM_SUCCESS_percent: 20.0
+etc_BGP_ATTACKER_SUCCESS: 3
+etc_BGP_ATTACKER_SUCCESS_percent: 75.0
+etc_BGP_VICTIM_SUCCESS: 1
+etc_BGP_VICTIM_SUCCESS_percent: 25.0
+set: true

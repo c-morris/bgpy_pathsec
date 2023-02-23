@@ -1,0 +1,16 @@
+all_ATTACKER_SUCCESS: 1
+all_ATTACKER_SUCCESS_perc: 14.285714285714286
+all_VICTIM_SUCCESS: 4
+all_VICTIM_SUCCESS_perc: 57.142857142857146
+etc_BGP: 2
+etc_BGP_VICTIM_SUCCESS: 2
+etc_BGP_VICTIM_SUCCESS_percent: 100.0
+etc_BGPsec Transitive Down Only Encrypted UP: 1
+etc_BGPsec Transitive Down Only Encrypted UP_VICTIM_SUCCESS: 1
+etc_BGPsec Transitive Down Only Encrypted UP_VICTIM_SUCCESS_percent: 100.0
+set: true
+stubs_or_mh_BGPsec Transitive Down Only Encrypted UP: 2
+stubs_or_mh_BGPsec Transitive Down Only Encrypted UP_ATTACKER_SUCCESS: 1
+stubs_or_mh_BGPsec Transitive Down Only Encrypted UP_ATTACKER_SUCCESS_percent: 50.0
+stubs_or_mh_BGPsec Transitive Down Only Encrypted UP_VICTIM_SUCCESS: 1
+stubs_or_mh_BGPsec Transitive Down Only Encrypted UP_VICTIM_SUCCESS_percent: 50.0

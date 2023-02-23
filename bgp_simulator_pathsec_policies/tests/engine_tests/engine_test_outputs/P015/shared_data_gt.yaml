@@ -1,0 +1,23 @@
+all_ATTACKER_SUCCESS: 8
+all_ATTACKER_SUCCESS_perc: 44.44444444444444
+all_DISCONNECTED: 3
+all_DISCONNECTED_perc: 16.666666666666668
+all_VICTIM_SUCCESS: 5
+all_VICTIM_SUCCESS_perc: 27.77777777777778
+etc_BGP: 1
+etc_BGP_VICTIM_SUCCESS: 1
+etc_BGP_VICTIM_SUCCESS_percent: 100.0
+etc_BGPsec Transitive Down Only: 11
+etc_BGPsec Transitive Down Only_ATTACKER_SUCCESS: 8
+etc_BGPsec Transitive Down Only_ATTACKER_SUCCESS_percent: 72.72727272727273
+etc_BGPsec Transitive Down Only_VICTIM_SUCCESS: 3
+etc_BGPsec Transitive Down Only_VICTIM_SUCCESS_percent: 27.272727272727273
+set: true
+stubs_or_mh_BGP: 2
+stubs_or_mh_BGP_DISCONNECTED: 2
+stubs_or_mh_BGP_DISCONNECTED_percent: 100.0
+stubs_or_mh_BGPsec Transitive Down Only: 2
+stubs_or_mh_BGPsec Transitive Down Only_DISCONNECTED: 1
+stubs_or_mh_BGPsec Transitive Down Only_DISCONNECTED_percent: 50.0
+stubs_or_mh_BGPsec Transitive Down Only_VICTIM_SUCCESS: 1
+stubs_or_mh_BGPsec Transitive Down Only_VICTIM_SUCCESS_percent: 50.0

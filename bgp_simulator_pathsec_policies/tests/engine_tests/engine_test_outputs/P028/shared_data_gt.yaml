@@ -1,0 +1,15 @@
+adopting_count: 0
+all_VICTIM_SUCCESS: 5
+all_VICTIM_SUCCESS_perc: 71.42857142857143
+etc_BGPsec Transitive: 4
+etc_BGPsec Transitive_VICTIM_SUCCESS: 4
+etc_BGPsec Transitive_VICTIM_SUCCESS_percent: 100.0
+etc_TransitiveDroppingAlwaysAS: 1
+etc_TransitiveDroppingAlwaysAS_VICTIM_SUCCESS: 1
+etc_TransitiveDroppingAlwaysAS_VICTIM_SUCCESS_percent: 100.0
+non_adopting_count: 5
+path_len_all: 3.2
+ribs_in_size_all: 1.8
+ribs_in_valid_non_adopting: 1.2
+set: true
+transitive_dropping_conversions_all: 0
