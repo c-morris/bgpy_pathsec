@@ -10,7 +10,8 @@ class Config028(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P028"
-    desc = "TransitiveDroppingAS test. AS 2 should choose the longer path from its provider."
+    desc = ("TransitiveDroppingAS test. "
+            "AS 2 should choose the longer path from its provider.")
     scenario = ShortestPathExportAll(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=TransitiveDroppingAlwaysAS,

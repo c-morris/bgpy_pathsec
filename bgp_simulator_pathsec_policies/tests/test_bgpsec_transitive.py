@@ -2,7 +2,8 @@ import pytest
 
 from bgp_simulator_pkg import Relationships
 
-from bgp_simulator_pathsec_policies import PathManipulationAnn, BGPsecTransitiveAS
+from bgp_simulator_pathsec_policies import PathManipulationAnn
+from bgp_simulator_pathsec_policies import BGPsecTransitiveAS
 
 
 t1 = ([[(1, 3), (1, 2, 3), 1],
@@ -23,9 +24,13 @@ def test_partial_path_metric(partial, full, segments):
 def test_process_incoming_anns_bgpsec_transitive_reject():
     """Test rejection of bgpsec transitive ann with missing signature"""
     prefix = '137.99.0.0/16'
-    ann = PathManipulationAnn(prefix=prefix, as_path=(13795,), timestamp=0,
-                   recv_relationship=Relationships.ORIGIN, seed_asn=None,
-                   roa_valid_length=None, roa_origin=None)
+    ann = PathManipulationAnn(prefix=prefix,
+                              as_path=(13795,),
+                              timestamp=0,
+                              recv_relationship=Relationships.ORIGIN,
+                              seed_asn=None,
+                              roa_valid_length=None,
+                              roa_origin=None)
     ann.bgpsec_path = tuple()
     ann.next_as = 1
     ann.removed_signatures = (13795,)

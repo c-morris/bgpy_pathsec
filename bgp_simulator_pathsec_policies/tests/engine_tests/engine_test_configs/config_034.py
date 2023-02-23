@@ -12,11 +12,10 @@ class Config034(EngineTestConfig):
     name = "P034"
     desc = "Global Eavesdropper test"
     scenario = GlobalEavesdropper(attacker_asns={ASNs.ATTACKER.value},
-                                     victim_asns={ASNs.VICTIM.value},
-                                     BaseASCls=BGPAS,
-                                     AdoptASCls=BGPsecTransitiveDownOnlyAS,
-                                     AnnCls=PathManipulationAnn)
-
+                                  victim_asns={ASNs.VICTIM.value},
+                                  BaseASCls=BGPAS,
+                                  AdoptASCls=BGPsecTransitiveDownOnlyAS,
+                                  AnnCls=PathManipulationAnn)
 
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,

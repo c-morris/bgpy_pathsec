@@ -4,20 +4,21 @@ from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
 from ....policies import TransitiveDroppingNoAdoptCustomersAlwaysAS
-from bgp_simulator_pkg import EngineTestConfig, ASNs, BGPAS
+from bgp_simulator_pkg import EngineTestConfig, ASNs
 
 
 class Config037(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P037"
-    desc = "GlobalEavesdropper attack with Transitive Dropping ASes with no adopting customers. Adopting customers are converted to TransitiveDroppingNeverAS nodes, except for the origin."
+    desc = ("GlobalEavesdropper attack with Transitive Dropping ASes with no "
+            "adopting customers. Adopting customers are converted to "
+            "TransitiveDroppingNeverAS nodes, except for the origin.")
     scenario = GlobalEavesdropper(attacker_asns={ASNs.ATTACKER.value},
-                                     victim_asns={ASNs.VICTIM.value},
-                                     BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS,
-                                     AdoptASCls=BGPsecTransitiveDownOnlyAS,
-                                     AnnCls=PathManipulationAnn)
-
+                                  victim_asns={ASNs.VICTIM.value},
+                                  BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS, # noqa E501
+                                  AdoptASCls=BGPsecTransitiveDownOnlyAS,
+                                  AnnCls=PathManipulationAnn)
 
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,

@@ -1,5 +1,3 @@
-from bgp_simulator_pkg import Prefixes, Relationships
-
 from .eavesdropper import Eavesdropper
 from .mixins import _trim_do_communities_up
 

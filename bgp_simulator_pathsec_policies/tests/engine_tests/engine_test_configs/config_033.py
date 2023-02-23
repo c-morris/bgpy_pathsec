@@ -10,7 +10,8 @@ class Config033(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P033"
-    desc = "Transitive Dropping AS test, with AS 2 dropping transitive attributes."
+    desc = ("Transitive Dropping AS test, with AS 2 dropping transitive "
+            "attributes.")
     scenario = ShortestPathExportAll(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=TransitiveDroppingAlwaysAS,

@@ -29,4 +29,3 @@ def _truncate_ann_no_hash(self, ann):
     ann.as_path = ann.as_path[j:]
     # update BGPsec path to match new AS path
     ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
-

@@ -13,6 +13,7 @@ class ShortestPathExportAllTimid(IntentionalLeakTimid):
 
     _truncate_ann = _truncate_ann_no_hash
     _trim_do_communities = _trim_do_communities_up
+
     def leak_announcements_to_providers(self,
                                         attack_anns,
                                         attacker,
@@ -29,4 +30,3 @@ class ShortestPathExportAllTimid(IntentionalLeakTimid):
             attack_anns,
             attacker,
             propagation_round)
-

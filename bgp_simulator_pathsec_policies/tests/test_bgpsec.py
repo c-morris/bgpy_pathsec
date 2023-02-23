@@ -16,12 +16,20 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAS
 def test_process_incoming_anns_bgpsec_depref():
     """Test preference of ann from customer with a BGPsec signature"""
     prefix = '137.99.0.0/16'
-    ann1 = PathManipulationAnn(prefix=prefix, as_path=(2, 13796), timestamp=0,
-                    recv_relationship=Relationships.ORIGIN, seed_asn=None,
-                    roa_valid_length=None, roa_origin=None)
-    ann2 = PathManipulationAnn(prefix=prefix, as_path=(13795,), timestamp=0,
-                    recv_relationship=Relationships.ORIGIN, seed_asn=None,
-                    roa_valid_length=None, roa_origin=None)
+    ann1 = PathManipulationAnn(prefix=prefix,
+                               as_path=(2, 13796),
+                               timestamp=0,
+                               recv_relationship=Relationships.ORIGIN,
+                               seed_asn=None,
+                               roa_valid_length=None,
+                               roa_origin=None)
+    ann2 = PathManipulationAnn(prefix=prefix,
+                               as_path=(13795,),
+                               timestamp=0,
+                               recv_relationship=Relationships.ORIGIN,
+                               seed_asn=None,
+                               roa_valid_length=None,
+                               roa_origin=None)
     ann2.bgpsec_path = ann2.as_path
     ann2.next_as = 1
     a = BGPsecAS(1)
@@ -51,9 +59,13 @@ pols = [BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS]
 def test_bgpsec_update_attrs(BasePolicyCls):
     """Test updating of bgpsec attributes when forwarding a bgpsec ann"""
     prefix = '137.99.0.0/16'
-    ann = PathManipulationAnn(prefix=prefix, as_path=(13796,), timestamp=0,
-                   recv_relationship=Relationships.ORIGIN, seed_asn=None,
-                   roa_valid_length=None, roa_origin=None)
+    ann = PathManipulationAnn(prefix=prefix,
+                              as_path=(13796,),
+                              timestamp=0,
+                              recv_relationship=Relationships.ORIGIN,
+                              seed_asn=None,
+                              roa_valid_length=None,
+                              roa_origin=None)
     ann.bgpsec_path = ann.as_path
     ann.next_as = 1
     a = BasePolicyCls(1)
@@ -76,9 +88,13 @@ def test_bgpsec_remove_attrs():
     """Test removal of bgpsec attributes when a non-adopting AS is detected on
     the path"""
     prefix = '137.99.0.0/16'
-    ann = PathManipulationAnn(prefix=prefix, as_path=(13795, 13796), timestamp=0,
-                   recv_relationship=Relationships.ORIGIN, seed_asn=None,
-                   roa_valid_length=None, roa_origin=None)
+    ann = PathManipulationAnn(prefix=prefix,
+                              as_path=(13795, 13796),
+                              timestamp=0,
+                              recv_relationship=Relationships.ORIGIN,
+                              seed_asn=None,
+                              roa_valid_length=None,
+                              roa_origin=None)
     ann.bgpsec_path = (13796,)
     ann.next_as = 13795
     a = BGPsecAS(1)

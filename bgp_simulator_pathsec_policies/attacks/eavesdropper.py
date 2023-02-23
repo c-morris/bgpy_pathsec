@@ -33,7 +33,7 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                 current_as = engine.as_dict[asn]
                 if ((current_as.name == self.AdoptASCls.name or
                      current_as.name == "Pseudo" + self.AdoptASCls.name) and
-                     asn != attacker_asn):
+                        asn != attacker_asn):
                     # if adopting and not attacker
                     continue
                 for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
@@ -47,7 +47,6 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
                 # path
-                prev_len = len(atk_ann.as_path)
                 self._truncate_ann(atk_ann)
 
                 # Clear any down only communities
@@ -74,18 +73,19 @@ class Eavesdropper(ShortestPathExportAllNoHash):
 
     def _truncate_ann(self, ann):
         """Truncate to the first non-adopting ASN.
-        
-        This needs to be redefined here because the attacker searches through RIBs
-        In for other ASes. This means it needs to account for the case where an
-        adopting origin sends to a non-adopting neighbor which isn't the attacker,
-        but also can't be removed because of the signature. 
+
+        This needs to be redefined here because the attacker searches through
+        RIBs_In for other ASes. This means it needs to account for the case
+        where an adopting origin sends to a non-adopting neighbor which isn't
+        the attacker, but also can't be removed because of the signature.
         """
         ann.as_path = ann.as_path[1:]  # remove attacker ASN
         if len(ann.as_path) == 1:
             if ann.next_as != 0:
                 # announcement cannot be shortened because of origin signature
                 ann.as_path = tuple([ann.next_as, ann.as_path[0]])
-                ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+                ann.bgpsec_path = tuple(x for x in ann.bgpsec_path
+                                        if x in ann.as_path)
                 return
         partial = ann.bgpsec_path
         full = ann.as_path

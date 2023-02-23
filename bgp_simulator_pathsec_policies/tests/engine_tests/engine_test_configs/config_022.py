@@ -14,7 +14,8 @@ class Config022(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P022"
-    desc = "Fig 6 test, eavesdropper attacker with 7 as vantage point. UP attributes do not stop the attack."
+    desc = ("Fig 6 test, eavesdropper attacker with 7 as vantage point. "
+            "UP attributes do not stop the attack.")
     scenario = EavesdropperUpTest22(attacker_asns={ASNs.ATTACKER.value},
                                     victim_asns={ASNs.VICTIM.value},
                                     BaseASCls=BGPAS,

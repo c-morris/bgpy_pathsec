@@ -9,7 +9,9 @@ class Config019(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P019"
-    desc = "BGPsec Transitive with no Path Shortening Defense test. The attack AS path should be shortened to the first non-adopting AS, which is 1 in this scenario."
+    desc = ("BGPsec Transitive with no Path Shortening Defense test. "
+            "The attack AS path should be shortened to the first "
+            "non-adopting AS, which is 1 in this scenario.")
     scenario = IntentionalLeakNoHash(attacker_asns={ASNs.ATTACKER.value},
                                      victim_asns={ASNs.VICTIM.value},
                                      BaseASCls=BGPAS,

@@ -1,10 +1,11 @@
 from bgp_simulator_pkg import Prefixes, Relationships, Timestamps, ValidPrefix
 
+
 class ValidSignature(ValidPrefix):
     """ValidPrefix, but with valid BGPsec Signatures.
 
     This is for comparing overhead (without attacks) between BGPsec and BGPsec
-    Transitive variants. 
+    Transitive variants.
     """
 
     def _get_announcements(self,
@@ -30,5 +31,3 @@ class ValidSignature(ValidPrefix):
                                     communities=tuple(),
                                     ))
         return tuple(anns)
-
-
