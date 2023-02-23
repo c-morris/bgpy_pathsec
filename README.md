@@ -1,3 +1,5 @@
+![Tests](https://github.com/c-morris/bgp_simulator_pathsec_policies/actions/workflows/tests.yml/badge.svg)
+
 # bgp_simulator_pathsec_policies
 
 This package is for simulating defenses against BGP Path Manipulation attacks
