@@ -113,6 +113,16 @@ class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS
     name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS" # noqa E501
 
 
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers8AS(BGPsecTransitiveDownOnlyAS): # noqa E501
+    """For use with ShortestPathExportAllNoHashUp, 8% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers8AS" # noqa E501
+
+
+class BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS(BGPsecTransitiveDownOnlyAS): # noqa E501
+    """For use with ShortestPathExportAllNoHashUp, 16% transitive dropping"""
+    name = "BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS" # noqa E501
+
+
 class BGPsecTransitiveDownOnlyNoHashAggressiveAS(BGPsecTransitiveDownOnlyAS):
     """For use with Origin Hijack"""
     name = "BGPsecTransitiveDownOnlyNoHashAggressiveAS"

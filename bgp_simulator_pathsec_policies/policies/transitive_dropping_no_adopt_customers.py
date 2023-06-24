@@ -84,3 +84,15 @@ class TransitiveDroppingNoAdoptCustomers4AS(
     """Drops transitive attributes with some probability"""
     name = "TransitiveDroppingNoAdoptCustomers4AS"
     transitive_dropping_percent = 4.0
+
+class TransitiveDroppingNoAdoptCustomers8AS(
+          TransitiveDroppingNoAdoptCustomersAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDroppingNoAdoptCustomers8AS"
+    transitive_dropping_percent = 8.0
+
+class TransitiveDroppingNoAdoptCustomers16AS(
+          TransitiveDroppingNoAdoptCustomersAS):
+    """Drops transitive attributes with some probability"""
+    name = "TransitiveDroppingNoAdoptCustomers16AS"
+    transitive_dropping_percent = 16.0
