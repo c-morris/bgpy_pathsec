@@ -77,6 +77,11 @@ from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoA
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS
 from .policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from .policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
+from .policies import KAPKFalseAS
+from .policies import KAPKFalse2AS
+from .policies import KAPKFalse4AS
+from .policies import KAPKFalseAlwaysAS
+from .policies import KAPKFalseNeverAS
 
 from .subgraphs import OverheadAllSubgraph
 from .subgraphs import OverheadBPOAllSubgraph

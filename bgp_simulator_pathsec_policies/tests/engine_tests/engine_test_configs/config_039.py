@@ -1,28 +1,30 @@
-from ..graphs import PGraph011
-from ....attacks import ShortestPathExportAll
-from ....policies import TransitiveDroppingAlwaysAS, BGPsecTransitiveAS
+from ..graphs import PGraph009
+from ....attacks import OriginHijack
+from ....policies import KAPKFalseAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
 from bgp_simulator_pkg import EngineTestConfig, ASNs, BGPAS
 
 
-class Config033(EngineTestConfig):
+class Config039(EngineTestConfig):
     """Contains config options to run a test"""
 
-    name = "P033"
-    desc = ("Transitive Dropping AS test, with AS 2 dropping transitive "
-            "attributes.")
-    scenario = ShortestPathExportAll(attacker_asns={ASNs.ATTACKER.value},
-                                     victim_asns={ASNs.VICTIM.value},
-                                     BaseASCls=TransitiveDroppingAlwaysAS,
-                                     AdoptASCls=BGPsecTransitiveAS,
-                                     AnnCls=PathManipulationAnn)
-    graph = PGraph011()
-    non_default_as_cls_dict = {3: BGPsecTransitiveAS,
-                               5: BGPAS,
-                               6: BGPAS,
+    name = "P039"
+    desc = ("KAPK False AS test, with the origin having unknown adoption"
+            "status.")
+    scenario = OriginHijack(attacker_asns={ASNs.ATTACKER.value},
+                            victim_asns={ASNs.VICTIM.value},
+                            BaseASCls=BGPAS,
+                            AnnCls=PathManipulationAnn)
+    graph = PGraph009()
+    non_default_as_cls_dict = {1: BGPsecTransitiveAS,
+                               2: BGPsecTransitiveAS,
+                               3: BGPsecTransitiveAS,
+                               4: BGPsecTransitiveAS,
+                               5: BGPsecTransitiveAS,
+                               6: BGPsecTransitiveAS,
                                7: BGPsecTransitiveAS,
-                               9: BGPsecTransitiveAS,
-                               777: BGPsecTransitiveAS}
+                               777: KAPKFalseAlwaysAS}
+
     propagation_rounds = 1
     SubgraphCls = OverheadBPOAllSubgraph
