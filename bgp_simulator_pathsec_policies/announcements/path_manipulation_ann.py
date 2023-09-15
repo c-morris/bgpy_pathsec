@@ -16,7 +16,8 @@ class PathManipulationAnn(Announcement):
                  "bgpsec_path",
                  "next_as",
                  "removed_signatures",
-                 "path_end_valid")
+                 "path_end_valid",
+                 "unknown_adopters")
 
     def __init__(self,
                  *,
@@ -35,7 +36,8 @@ class PathManipulationAnn(Announcement):
                  up_pre: bool = True,
                  bgpsec_path: Tuple[int, ...] = (),
                  removed_signatures: Tuple[int, ...] = (),
-                 path_end_valid: bool = True):
+                 path_end_valid: bool = True,
+                 unknown_adopters: Tuple[int, ...] = ()):
         self.prefix: str = prefix
         self.as_path: Tuple[int, ...] = as_path
         self.timestamp: int = timestamp
@@ -52,6 +54,7 @@ class PathManipulationAnn(Announcement):
         self.next_as: int = next_as
         self.removed_signatures: Tuple[int, ...] = removed_signatures
         self.path_end_valid: bool = path_end_valid
+        self.unknown_adopters: Tuple[int, ...] = unknown_adopters
 
     # The BGPsec path is like the BGPsec_PATH attribute with some
     # modifications. First, unlike in real BGPsec, it can coexist with the

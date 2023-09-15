@@ -108,17 +108,18 @@ from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
 
 random.seed(0)
 sim = Simulation(
-    num_trials=1,
+    num_trials=100,
     scenarios=[
         OriginHijack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecAggressiveAS,
             BaseASCls=BGPAS),
         # TODO: Replace this commented out block below with the new policy
-        #ShortestPathExportAllNoHashUp(
-        #    AnnCls=PathManipulationAnn, 
-        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS,
-        #    BaseASCls=TransitiveDropping99AS),
+        #       Rename
+        ShortestPathExportAllNoHashUp(
+           AnnCls=PathManipulationAnn, 
+           AdoptASCls=KAPKFalseAlwaysAS,
+           BaseASCls=BGPsecTransitiveAS),
         ],
     propagation_rounds=2,
     subgraphs=[
