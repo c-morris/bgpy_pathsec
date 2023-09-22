@@ -103,6 +103,7 @@ from bgp_simulator_pathsec_policies import KAPKFalse2AS
 from bgp_simulator_pathsec_policies import KAPKFalse4AS
 from bgp_simulator_pathsec_policies import KAPKFalseAlwaysAS
 from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
+from bgp_simulator_pathsec_policies import ShortestPathExportAllUpUnknownAdopters
 
 
 
@@ -114,11 +115,9 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecAggressiveAS,
             BaseASCls=BGPAS),
-        # TODO: Replace this commented out block below with the new policy
-        #       Rename
-        ShortestPathExportAllNoHashUp(
+        ShortestPathExportAllUpUnknownAdopters(
            AnnCls=PathManipulationAnn, 
-           AdoptASCls=KAPKFalseAlwaysAS,
+           AdoptASCls=KAPKFalseAS,  
            BaseASCls=BGPsecTransitiveAS),
         ],
     propagation_rounds=2,

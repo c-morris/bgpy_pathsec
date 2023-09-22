@@ -55,6 +55,7 @@ class TestEngine:
                               #Config037,
                               #Config038,
                               Config039,
+                              Config040,
                               ])
     def test_engine(self, conf: EngineTestConfig, overwrite: bool):
         """Performs a system test on the engine

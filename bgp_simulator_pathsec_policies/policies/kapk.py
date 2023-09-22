@@ -48,14 +48,13 @@ class KAPKFalseAS(BGPsecTransitiveDownOnlyEncrUpAS):
             if signature not in ann.unknown_adopters:
                 return False
             
-            # run BGP as normal?
-            BGPsecTransitiveAS.count += len(ann.bgpsec_path)
-            return (super(BGPsecTransitiveAS, self)._valid_ann(ann,
-                                                            recv_relationship)
-                    and self.passes_down_only_checks(ann, recv_relationship)
-                    and (recv_relationship != Relationships.CUSTOMERS
-                        or (recv_relationship == Relationships.CUSTOMERS
-                            and ann.up_pre)))
+        BGPsecTransitiveAS.count += len(ann.bgpsec_path)
+        return (super(BGPsecTransitiveAS, self)._valid_ann(ann,
+                                                        recv_relationship)
+                and self.passes_down_only_checks(ann, recv_relationship)
+                and (recv_relationship != Relationships.CUSTOMERS
+                    or (recv_relationship == Relationships.CUSTOMERS
+                        and ann.up_pre)))
 
         
 class KAPKFalse2AS(KAPKFalseAS):

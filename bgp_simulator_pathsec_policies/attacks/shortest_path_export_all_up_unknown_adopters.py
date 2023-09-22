@@ -13,12 +13,11 @@ class ShortestPathExportAllUpUnknownAdopters(ShortestPathExportAllUp):
         """
 
         ann_to_send = ann.copy()
-        
         ann_to_send.bgpsec_path = tuple()
 
-        for _as in ann_to_send.bgpsec_path:
-            if not _as.unknown_adopting:
-                ann_to_send.bgpsec_path += (_as.asn,)
+        for _asn in ann.bgpsec_path:
+            if _asn not in ann.unknown_adopters:
+                ann_to_send.bgpsec_path += (_asn,)
 
         super(ShortestPathExportAllUp, self)._truncate_ann(ann_to_send)
 
