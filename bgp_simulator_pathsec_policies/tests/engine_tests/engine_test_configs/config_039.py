@@ -10,7 +10,7 @@ class Config039(EngineTestConfig):
     """Contains config options to run a test"""
 
     name = "P039"
-    desc = ("KAPK False AS test, with the origin having unknown adoption"
+    desc = ("KAPK False AS test, with the origin having unknown adoption "
             "status.")
     scenario = OriginHijack(attacker_asns={ASNs.ATTACKER.value},
                             victim_asns={ASNs.VICTIM.value},
@@ -23,8 +23,8 @@ class Config039(EngineTestConfig):
                                4: BGPsecTransitiveAS,
                                5: BGPsecTransitiveAS,
                                6: BGPsecTransitiveAS,
-                               7: BGPsecTransitiveAS,
-                               777: KAPKFalseAlwaysAS}
+                               7: KAPKFalseAlwaysAS,
+                               777: BGPsecTransitiveAS}
 
     propagation_rounds = 1
     SubgraphCls = OverheadBPOAllSubgraph
