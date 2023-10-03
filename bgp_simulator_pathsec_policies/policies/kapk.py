@@ -71,7 +71,7 @@ class KAPKFalse4AS(KAPKFalseAS):
 
 class KAPKFalseAlwaysAS(KAPKFalseAS):
     """Has unknown adopting status with some probability"""
-    name = "KAPKFalse8AS"
+    name = "KAPKFalseAlwaysAS"
     unknown_adopting_percent = 100.0
     def __init__(self,
                  *args,
