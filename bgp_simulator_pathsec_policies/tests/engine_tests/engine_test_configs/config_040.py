@@ -1,5 +1,5 @@
 from ..graphs import PGraph009
-from ....attacks import ShortestPathExportAllUpUnknownAdopters
+from ....attacks import ShortestPathExportAllNoHashUpUnknownAdopters
 from ....policies import KAPKFalseAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
@@ -12,10 +12,10 @@ class Config040(EngineTestConfig):
     name = "P040"
     desc = ("KAPK False AS test, with the origin having unknown adoption "
             "status.")
-    scenario = ShortestPathExportAllUpUnknownAdopters(attacker_asns={ASNs.ATTACKER.value},
-                                                      victim_asns={ASNs.VICTIM.value},
-                                                      BaseASCls=BGPAS,
-                                                      AnnCls=PathManipulationAnn)
+    scenario = ShortestPathExportAllNoHashUpUnknownAdopters(attacker_asns={ASNs.ATTACKER.value},
+                                                            victim_asns={ASNs.VICTIM.value},
+                                                            BaseASCls=BGPAS,
+                                                            AnnCls=PathManipulationAnn)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveAS,
                                2: BGPsecTransitiveAS,
