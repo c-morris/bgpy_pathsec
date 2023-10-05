@@ -3,7 +3,7 @@ import subprocess
 
 import pytest
 
-from bgp_simulator_pkg import DiagramAggregator
+from bgpy import DiagramAggregator
 
 
 DIAGRAM_PATH = Path(__file__).parent / "engine_tests" / "engine_test_outputs"

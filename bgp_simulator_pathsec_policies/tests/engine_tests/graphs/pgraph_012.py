@@ -1,6 +1,6 @@
 from caida_collector_pkg import CustomerProviderLink as CPLink
 
-from bgp_simulator_pkg import GraphInfo
+from bgpy import GraphInfo
 
 
 class PGraph012(GraphInfo):

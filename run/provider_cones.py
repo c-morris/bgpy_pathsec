@@ -1,5 +1,5 @@
 from caida_collector_pkg import CaidaCollector
-from bgp_simulator_pkg import BGPSimpleAS, SimulationEngine
+from bgpy import BGPSimpleAS, SimulationEngine
 
 
 class ProviderConeComputation:

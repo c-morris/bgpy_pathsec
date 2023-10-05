@@ -1,4 +1,4 @@
-from bgp_simulator_pkg import Prefixes, Relationships, Timestamps, ValidPrefix
+from bgpy import Prefixes, Relationships, Timestamps, ValidPrefix
 
 
 class ValidSignature(ValidPrefix):

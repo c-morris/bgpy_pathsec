@@ -6,7 +6,7 @@ This package is for simulating defenses against BGP Path Manipulation attacks
 and Route Leaks. Additional documentation can be found in the docs directory.
 
 BGP propagation according to valley-free routing rules is provided by
-[https://github.com/jfuruness/bgp_simulator_pkg](https://github.com/jfuruness/bgp_simulator_pkg).
+[https://github.com/jfuruness/bgpy](https://github.com/jfuruness/bgpy).
 
 ## Installation
 

@@ -1,5 +1,5 @@
-from bgp_simulator_pkg import Subgraph
-from bgp_simulator_pkg import Scenario
+from bgpy import Subgraph
+from bgpy import Scenario
 
 
 class RibsInSizeSubgraph(Subgraph):

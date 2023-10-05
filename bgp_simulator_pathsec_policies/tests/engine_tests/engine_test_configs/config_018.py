@@ -1,7 +1,7 @@
 from ..graphs import PGraph008
 from ....attacks import IntentionalLeak
 from ....announcements import PathManipulationAnn
-from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
+from bgpy import EngineTestConfig, BGPAS, ASNs
 
 from .config_017 import BGPsecTransitiveWithPathShorteningDefenseAS
 

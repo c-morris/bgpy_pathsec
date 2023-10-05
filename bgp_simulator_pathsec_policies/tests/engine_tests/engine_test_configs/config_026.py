@@ -3,7 +3,7 @@ from ....attacks import OriginHijack
 from ....policies import BGPsecAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
-from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
+from bgpy import EngineTestConfig, BGPAS, ASNs
 
 
 class Config026(EngineTestConfig):

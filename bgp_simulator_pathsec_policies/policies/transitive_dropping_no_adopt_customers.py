@@ -1,7 +1,7 @@
 from .transitive_dropping import TransitiveDroppingAS
 from .transitive_dropping import TransitiveDroppingNeverAS
 
-from bgp_simulator_pkg import Relationships, Prefixes
+from bgpy import Relationships, Prefixes
 
 
 class TransitiveDroppingNoAdoptCustomersAS(TransitiveDroppingAS):

@@ -1,6 +1,6 @@
 import pytest
 
-from bgp_simulator_pkg import Relationships
+from bgpy import Relationships
 
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 from bgp_simulator_pathsec_policies import DownOnlyAS

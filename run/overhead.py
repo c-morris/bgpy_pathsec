@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPAS
-from bgp_simulator_pkg import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, AttackerSuccessAllSubgraph
+from bgpy import Simulation, BGPAS
+from bgpy import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario, AttackerSuccessAllSubgraph
 
 from bgp_simulator_pathsec_policies import Aggregator, PathEndAS, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS, OriginHijack, IntentionalLeak, IntentionalLeakNoHash, BGPsecAS, BGPsecTransitiveAS, BGPsecTransitiveDownOnlyAS, ShortestPathExportAllNoHash, TwoHopAttack, IntentionalLeakNoHashUp, OverheadAllSubgraph, OverheadBPOAllSubgraph, AdoptingCountSubgraph, NonAdoptingCountSubgraph
 

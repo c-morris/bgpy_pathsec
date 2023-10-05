@@ -1,5 +1,5 @@
 from copy import deepcopy
-from bgp_simulator_pkg import Relationships
+from bgpy import Relationships
 
 from .bgpsec import BGPsecAS
 

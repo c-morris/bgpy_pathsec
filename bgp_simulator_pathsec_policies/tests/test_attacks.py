@@ -1,6 +1,6 @@
 import pytest
 
-from bgp_simulator_pkg import Relationships
+from bgpy import Relationships
 
 from .. import PathManipulationAnn, IntentionalLeak
 from .. import IntentionalLeakNoHash, TwoHopAttack

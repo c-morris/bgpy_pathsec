@@ -1,14 +1,14 @@
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPAS
-from bgp_simulator_pkg import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
-from bgp_simulator_pkg import AttackerSuccessAdoptingEtcSubgraph
-from bgp_simulator_pkg import AttackerSuccessAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import AttackerSuccessAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import AttackerSuccessAllSubgraph
+from bgpy import Simulation, BGPAS
+from bgpy import Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from bgpy import AttackerSuccessAdoptingEtcSubgraph
+from bgpy import AttackerSuccessAdoptingInputCliqueSubgraph
+from bgpy import AttackerSuccessAdoptingStubsAndMHSubgraph
+from bgpy import AttackerSuccessNonAdoptingEtcSubgraph
+from bgpy import AttackerSuccessNonAdoptingInputCliqueSubgraph
+from bgpy import AttackerSuccessNonAdoptingStubsAndMHSubgraph
+from bgpy import AttackerSuccessAllSubgraph
 
 from bgp_simulator_pathsec_policies import Aggregator, BGPsecAggressiveAS, BGPsecTransitiveAggressiveAS, BGPsecTransitiveDownOnlyAggressiveAS, BGPsecTransitiveTimidAS, BGPsecTransitiveDownOnlyTimidAS, BGPsecTransitiveDownOnlyNoHashTimidAS, BGPsecTransitiveDownOnlyNoHashAggressiveAS, BGPsecTimidAS, BGPsecTransitiveDownOnlyTimidLeakAS
 

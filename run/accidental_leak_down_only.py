@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPSimpleAS, BGPAS
+from bgpy import Simulation, BGPSimpleAS, BGPAS
 
 from bgp_simulator_pathsec_policies import AccidentalLeak, PathManipulationAnn, DownOnlyAS
 

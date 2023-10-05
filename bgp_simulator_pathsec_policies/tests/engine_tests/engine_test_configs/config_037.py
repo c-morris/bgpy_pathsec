@@ -4,7 +4,7 @@ from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
 from ....policies import TransitiveDroppingNoAdoptCustomersAlwaysAS
-from bgp_simulator_pkg import EngineTestConfig, ASNs
+from bgpy import EngineTestConfig, ASNs
 
 
 class Config037(EngineTestConfig):

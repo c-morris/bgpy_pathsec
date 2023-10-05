@@ -1,6 +1,6 @@
 import random
 
-from bgp_simulator_pkg import BGPAS
+from bgpy import BGPAS
 
 
 class TransitiveDroppingAS(BGPAS):

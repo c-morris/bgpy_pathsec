@@ -1,4 +1,4 @@
-from bgp_simulator_pkg import Scenario, Prefixes, Relationships, Timestamps
+from bgpy import Scenario, Prefixes, Relationships, Timestamps
 
 from ..policies import BGPsecAS, BGPsecTransitiveAS
 from ..policies import TransitiveDroppingNoAdoptCustomersAS

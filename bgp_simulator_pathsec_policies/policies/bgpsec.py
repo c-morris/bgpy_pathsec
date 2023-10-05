@@ -1,8 +1,8 @@
 from typing import Optional
 from copy import deepcopy
 
-from bgp_simulator_pkg import BGPAS, Relationships
-from bgp_simulator_pkg import Announcement as Ann
+from bgpy import BGPAS, Relationships
+from bgpy import Announcement as Ann
 
 
 opt_bool = Optional[bool]

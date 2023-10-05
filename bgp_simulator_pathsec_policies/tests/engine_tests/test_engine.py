@@ -2,8 +2,8 @@
 from pathlib import Path
 import pytest
 
-from bgp_simulator_pkg import EngineTester
-from bgp_simulator_pkg import EngineTestConfig
+from bgpy import EngineTester
+from bgpy import EngineTestConfig
 
 from .engine_test_configs import *
 

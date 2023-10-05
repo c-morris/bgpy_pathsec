@@ -1,4 +1,4 @@
-from bgp_simulator_pkg import Prefixes, Timestamps, Relationships
+from bgpy import Prefixes, Timestamps, Relationships
 
 from .mh_path_manipulation import MHPathManipulation
 

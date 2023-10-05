@@ -3,7 +3,7 @@ from ....attacks import GlobalEavesdropperUp
 from ....policies import BGPsecTransitiveDownOnlyEncrUpAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
-from bgp_simulator_pkg import EngineTestConfig, ASNs, BGPAS
+from bgpy import EngineTestConfig, ASNs, BGPAS
 
 
 class Config035(EngineTestConfig):

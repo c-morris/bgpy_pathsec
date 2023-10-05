@@ -1,9 +1,9 @@
-from bgp_simulator_pkg import Simulator, Graph, BGPPolicy, BGPRIBSPolicy
-from bgp_simulator_pkg import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
+from bgpy import Simulator, Graph, BGPPolicy, BGPRIBSPolicy
+from bgpy import Attack, Prefixes, Timestamps, ASNs, Announcement, Relationships, Scenario
 
 from bgp_simulator_pathsec_policies import OriginHijack, LeakGraph, PAnn, BGPsecPolicy, BGPsecTransitivePolicy
 
-from bgp_simulator_pkg import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
+from bgpy import Simulator, Graph, ROVPolicy, SubprefixHijack, BGPPolicy
 
 graphs = [LeakGraph(
                 percent_adoptions=[0, 10, 20, 50, 80, 100],
@@ -23,4 +23,3 @@ Simulator().run(graphs=graphs, graph_path="/home/cam/graphs/graphs.tar.gz")
 #        for scenario in list_of_scenarios:
 #            print(scenario.data)
 #
-

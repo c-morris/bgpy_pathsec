@@ -3,7 +3,7 @@ from ....attacks import ShortestPathExportAll
 from ....policies import TransitiveDroppingAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
-from bgp_simulator_pkg import EngineTestConfig, ASNs
+from bgpy import EngineTestConfig, ASNs
 
 
 class Config028(EngineTestConfig):

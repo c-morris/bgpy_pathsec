@@ -1,4 +1,4 @@
-from bgp_simulator_pkg import Relationships
+from bgpy import Relationships
 
 from ..policies import BGPsecTransitiveAS, DownOnlyAS
 

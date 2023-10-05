@@ -1,4 +1,4 @@
-from bgp_simulator_pkg import Relationships, BGPAS
+from bgpy import Relationships, BGPAS
 
 
 class PathEndAS(BGPAS):

@@ -2,8 +2,8 @@ from ..graphs import PGraph009
 from ....policies import BGPsecAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
-from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
-from bgp_simulator_pkg import ValidPrefix
+from bgpy import EngineTestConfig, BGPAS, ASNs
+from bgpy import ValidPrefix
 
 
 class Config027(EngineTestConfig):

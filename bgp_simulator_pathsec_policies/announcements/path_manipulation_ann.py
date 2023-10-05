@@ -1,8 +1,8 @@
 from yamlable import yaml_info
 from typing import Optional, Tuple
 
-from bgp_simulator_pkg import Relationships
-from bgp_simulator_pkg import Announcement
+from bgpy import Relationships
+from bgpy import Announcement
 
 
 @yaml_info(yaml_tag="PathManipulationAnn")

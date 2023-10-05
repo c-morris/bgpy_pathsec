@@ -1,7 +1,7 @@
 from .test_engine import TestEngine
 
 # Graphs
-from bgp_simulator_pkg import GraphInfo
+from bgpy import GraphInfo
 from .graphs import PGraph001
 from .graphs import PGraph002
 from .graphs import PGraph003

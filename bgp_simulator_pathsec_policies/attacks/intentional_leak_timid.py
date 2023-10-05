@@ -1,4 +1,4 @@
-from bgp_simulator_pkg import Prefixes, Relationships
+from bgpy import Prefixes, Relationships
 
 from .intentional_leak import IntentionalLeak
 

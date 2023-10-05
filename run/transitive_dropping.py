@@ -2,37 +2,37 @@ import os
 import random
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPAS
-from bgp_simulator_pkg import Prefixes
-from bgp_simulator_pkg import Timestamps
-from bgp_simulator_pkg import ASNs
-from bgp_simulator_pkg import Announcement
-from bgp_simulator_pkg import Relationships
-from bgp_simulator_pkg import Scenario
-from bgp_simulator_pkg import AttackerSuccessAllSubgraph
-from bgp_simulator_pkg import DisconnectedAllSubgraph
-from bgp_simulator_pkg import VictimSuccessAllSubgraph
+from bgpy import Simulation, BGPAS
+from bgpy import Prefixes
+from bgpy import Timestamps
+from bgpy import ASNs
+from bgpy import Announcement
+from bgpy import Relationships
+from bgpy import Scenario
+from bgpy import AttackerSuccessAllSubgraph
+from bgpy import DisconnectedAllSubgraph
+from bgpy import VictimSuccessAllSubgraph
 
-from bgp_simulator_pkg import AttackerSuccessAdoptingEtcSubgraph
-from bgp_simulator_pkg import AttackerSuccessAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import AttackerSuccessAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingStubsAndMHSubgraph
+from bgpy import AttackerSuccessAdoptingEtcSubgraph
+from bgpy import AttackerSuccessAdoptingInputCliqueSubgraph
+from bgpy import AttackerSuccessAdoptingStubsAndMHSubgraph
+from bgpy import AttackerSuccessNonAdoptingEtcSubgraph
+from bgpy import AttackerSuccessNonAdoptingInputCliqueSubgraph
+from bgpy import AttackerSuccessNonAdoptingStubsAndMHSubgraph
 
-from bgp_simulator_pkg import DisconnectedAdoptingEtcSubgraph
-from bgp_simulator_pkg import DisconnectedAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import DisconnectedAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import DisconnectedNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import DisconnectedNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import DisconnectedNonAdoptingStubsAndMHSubgraph
+from bgpy import DisconnectedAdoptingEtcSubgraph
+from bgpy import DisconnectedAdoptingInputCliqueSubgraph
+from bgpy import DisconnectedAdoptingStubsAndMHSubgraph
+from bgpy import DisconnectedNonAdoptingEtcSubgraph
+from bgpy import DisconnectedNonAdoptingInputCliqueSubgraph
+from bgpy import DisconnectedNonAdoptingStubsAndMHSubgraph
 
-from bgp_simulator_pkg import VictimSuccessAdoptingEtcSubgraph
-from bgp_simulator_pkg import VictimSuccessAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import VictimSuccessAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import VictimSuccessNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import VictimSuccessNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import VictimSuccessNonAdoptingStubsAndMHSubgraph
+from bgpy import VictimSuccessAdoptingEtcSubgraph
+from bgpy import VictimSuccessAdoptingInputCliqueSubgraph
+from bgpy import VictimSuccessAdoptingStubsAndMHSubgraph
+from bgpy import VictimSuccessNonAdoptingEtcSubgraph
+from bgpy import VictimSuccessNonAdoptingInputCliqueSubgraph
+from bgpy import VictimSuccessNonAdoptingStubsAndMHSubgraph
 
 from bgp_simulator_pathsec_policies import PathManipulationAnn
 from bgp_simulator_pathsec_policies import PathEndAS
@@ -163,4 +163,3 @@ sim = Simulation(
     parse_cpus=1)
 
 sim.run()
-
