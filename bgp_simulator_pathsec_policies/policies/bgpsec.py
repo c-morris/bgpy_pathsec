@@ -58,13 +58,13 @@ class BGPsecAS(BGPAS):
         if new_rel_better is not None:
             return new_rel_better
         else:
-            bgpsec_better = self._new_ann_better_bgpsec(current_ann,
-                                                        current_processed,
-                                                        new_ann,
-                                                        new_processed)
-            if (bgpsec_better is not None):
-                return bgpsec_better
-            else:
+            # bgpsec_better = self._new_ann_better_bgpsec(current_ann,
+            #                                             current_processed,
+            #                                             new_ann,
+            #                                             new_processed)
+            # if (bgpsec_better is not None):
+            #     return bgpsec_better
+            # else:
                 return self._new_as_path_ties_better(current_ann,
                                                      current_processed,
                                                      new_ann,
@@ -83,13 +83,13 @@ class BGPsecAS(BGPAS):
             return new_as_path_shorter
         else:
             # Security Third
-            bgpsec_better = self._new_ann_better_bgpsec(current_ann,
-                                                        current_processed,
-                                                        new_ann,
-                                                        new_processed)
-            if (bgpsec_better is not None):
-                return bgpsec_better
-            else:
+            # bgpsec_better = self._new_ann_better_bgpsec(current_ann,
+            #                                             current_processed,
+            #                                             new_ann,
+            #                                             new_processed)
+            # if (bgpsec_better is not None):
+            #     return bgpsec_better
+            # else:
                 return self._new_wins_ties(current_ann,
                                            current_processed,
                                            new_ann,
