@@ -105,13 +105,13 @@ from bgp_simulator_pathsec_policies import KAPKFalse2AS
 from bgp_simulator_pathsec_policies import KAPKFalse4AS
 from bgp_simulator_pathsec_policies import KAPKFalseAlwaysAS
 from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllUpUnknownAdopters
+from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUpUnknownAdopters
 
 
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=70,
+    num_trials=5,
     scenarios=[
         #ShortestPathExportAllUpUnknownAdopters(
         #   AnnCls=PathManipulationAnn, 

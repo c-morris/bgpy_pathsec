@@ -1,9 +1,9 @@
 from .shortest_path_export_all_no_hash_up import ShortestPathExportAllNoHashUp
 from .global_eavesdropper import GlobalEavesdropperUp
 
-# TODO: Rename class to ShortestPathExportAllNoHashUpUnknownAdopters
 
-class ShortestPathExportAllUpUnknownAdopters(ShortestPathExportAllNoHashUp):
+
+class ShortestPathExportAllNoHashUpUnknownAdopters(ShortestPathExportAllNoHashUp):
     """Shortest path Export all strategy, from other works.
     Only leaks a single path (the shortest one) to providers.
     This version accounts for UP attributes.
