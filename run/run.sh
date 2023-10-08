@@ -2,7 +2,13 @@
 
 # Symlink the Caida Collector cache into a common directory
 # This prevents it from running once per container
-ln -s /data/caida_collector_cache /tmp/caida_collector_cache
+#ln -s /data/caida_collector_cache /tmp/caida_collector_cache
+
+# Source Virtual Environment
+source ~/env/bin/activate
+
+# Set Job Completion Index
+export JOB_COMPLETION_INDEX=$SLURM_ARRAY_TASK_ID
 
 # Run the simulation
-pypy3 /python_sim/bgp-simulator-policies/bin/2023_aggregated.py
+python ~/bgp-simulator-pathsec-policies/run/kapk.py

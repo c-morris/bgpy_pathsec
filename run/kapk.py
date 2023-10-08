@@ -66,6 +66,7 @@ from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
 from bgp_simulator_pathsec_policies import RISEavesdropperUp
 from bgp_simulator_pathsec_policies import GlobalEavesdropper
 from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
+from bgp_simulator_pathsec_policies import GlobalEavesdropperUpUnknownAdopters
 from bgp_simulator_pathsec_policies import TwoHopAttackUp
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
@@ -98,6 +99,7 @@ from bgp_simulator_pathsec_policies import TransitiveDropping99AS
 from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS
 from bgp_simulator_pathsec_policies import KAPKFalseAS
 from bgp_simulator_pathsec_policies import KAPKFalse2AS
 from bgp_simulator_pathsec_policies import KAPKFalse4AS
@@ -107,18 +109,22 @@ from bgp_simulator_pathsec_policies import ShortestPathExportAllUpUnknownAdopter
 
 
 
-random.seed(0)
+random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=100,
+    num_trials=70,
     scenarios=[
-        OriginHijack(
+        #ShortestPathExportAllUpUnknownAdopters(
+        #   AnnCls=PathManipulationAnn, 
+        #   AdoptASCls=KAPKFalseAS,  
+        #   BaseASCls=BGPsecTransitiveAS),
+        GlobalEavesdropperUpUnknownAdopters(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecAggressiveAS,
+            AdoptASCls=KAPKFalseAS,
             BaseASCls=BGPAS),
-        ShortestPathExportAllUpUnknownAdopters(
-           AnnCls=PathManipulationAnn, 
-           AdoptASCls=KAPKFalseAS,  
-           BaseASCls=BGPsecTransitiveAS),
+        GlobalEavesdropperUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
+            BaseASCls=BGPAS),
         ],
     propagation_rounds=2,
     subgraphs=[
@@ -153,8 +159,9 @@ sim = Simulation(
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    output_path=Path("/tmp/kapkgraphs0"),
-    parse_cpus=2)
+    output_path=Path(f"kapkgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    #output_path=Path("/tmp/kapkgraphs0"),
+    parse_cpus=1)
 
 sim.run()
 

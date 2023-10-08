@@ -13,11 +13,13 @@ from .attacks import ShortestPathExportAllNoHash
 from .attacks import ShortestPathExportAllNoHashUp
 from .attacks import ShortestPathExportAllUp
 from .attacks import ShortestPathExportAllNoHashTimid
+from .attacks import ShortestPathExportAllUpUnknownAdopters
 from .attacks import TwoHopAttack
 from .attacks import TwoHopAttackUp
 from .attacks import Eavesdropper
 from .attacks import GlobalEavesdropper
 from .attacks import GlobalEavesdropperUp
+from .attacks import GlobalEavesdropperUpUnknownAdopters
 from .attacks import EavesdropperUp
 from .attacks import RISEavesdropperUp
 from .attacks import ValidSignature
@@ -77,6 +79,7 @@ from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoA
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS
 from .policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from .policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
+from .policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS
 from .policies import KAPKFalseAS
 from .policies import KAPKFalse2AS
 from .policies import KAPKFalse4AS

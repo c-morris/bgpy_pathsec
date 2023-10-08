@@ -174,6 +174,12 @@ class BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS(
     name = "BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS"
 
 
+class BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS(
+          BGPsecTransitiveDownOnlyEncrUpAS):
+    """For use with GlobalEavesdropperUpUnknownAdopters"""
+    name = "BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS"
+
+
 class BaselineBGPAS(BGPAS):
     """For use with Origin Hijack"""
     name = "BaselineBGPAS"
