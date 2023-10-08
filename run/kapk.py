@@ -101,8 +101,9 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdr
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS
 from bgp_simulator_pathsec_policies import KAPKFalseAS
-from bgp_simulator_pathsec_policies import KAPKFalse2AS
-from bgp_simulator_pathsec_policies import KAPKFalse4AS
+from bgp_simulator_pathsec_policies import KAPKFalse01AS
+from bgp_simulator_pathsec_policies import KAPKFalse05AS
+from bgp_simulator_pathsec_policies import KAPKFalse5AS
 from bgp_simulator_pathsec_policies import KAPKFalseAlwaysAS
 from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
 from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUpUnknownAdopters
@@ -119,7 +120,19 @@ sim = Simulation(
         #   BaseASCls=BGPsecTransitiveAS),
         GlobalEavesdropperUpUnknownAdopters(
             AnnCls=PathManipulationAnn, 
+            AdoptASCls=KAPKFalse01AS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUpUnknownAdopters(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=KAPKFalse05AS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUpUnknownAdopters(
+            AnnCls=PathManipulationAnn, 
             AdoptASCls=KAPKFalseAS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUpUnknownAdopters(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=KAPKFalse5AS,
             BaseASCls=BGPAS),
         GlobalEavesdropperUp(
             AnnCls=PathManipulationAnn, 

@@ -57,16 +57,22 @@ class KAPKFalseAS(BGPsecTransitiveDownOnlyEncrUpAS):
                         and ann.up_pre)))
 
         
-class KAPKFalse2AS(KAPKFalseAS):
+class KAPKFalse01AS(KAPKFalseAS):
     """Has unknown adopting status with some probability"""
-    name = "KAPKFalse2AS"
-    unknown_adopting_percent = 2.0
+    name = "KAPKFalse01AS"
+    unknown_adopting_percent = 0.01
 
 
-class KAPKFalse4AS(KAPKFalseAS):
+class KAPKFalse05AS(KAPKFalseAS):
     """Has unknown adopting status with some probability"""
-    name = "KAPKFalse4AS"
-    unknown_adopting_percent = 4.0
+    name = "KAPKFalse05AS"
+    unknown_adopting_percent = 0.05
+
+
+class KAPKFalse5AS(KAPKFalseAS):
+    """Has unknown adopting status with some probability"""
+    name = "KAPKFalse5AS"
+    unknown_adopting_percent = 5.0
 
 
 class KAPKFalseAlwaysAS(KAPKFalseAS):

@@ -1,5 +1,8 @@
+# Test generates these automatically
 *.gv
-*.png
+*.pdf
+*.gv.png
+*guess.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
