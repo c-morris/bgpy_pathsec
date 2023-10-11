@@ -112,7 +112,7 @@ from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUpUnknownA
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=5,
+    num_trials=70,
     scenarios=[
         #ShortestPathExportAllUpUnknownAdopters(
         #   AnnCls=PathManipulationAnn, 

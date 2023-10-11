@@ -29,3 +29,21 @@ def _truncate_ann_no_hash(self, ann):
     ann.as_path = ann.as_path[j:]
     # update BGPsec path to match new AS path
     ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+
+class UnknownAdoptersMixin:
+
+    def _truncate_ann(self, ann):
+        """
+        
+        """
+
+        old_bgpsec_path = ann.bgpsec_path
+        ann.bgpsec_path = tuple()
+
+        for _asn in old_bgpsec_path:
+            if _asn not in ann.unknown_adopters:
+                ann.bgpsec_path += (_asn,)
+
+        super()._truncate_ann(ann)
+
+
