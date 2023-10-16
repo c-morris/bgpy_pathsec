@@ -1,5 +1,28 @@
-from bgpy import Subgraph
-from bgpy import Scenario
+from typing import Union
+from bgpy.bgpy import Scenario
+from bgpy.bgpy import MetricTracker
+from bgpy.bgpy import Subgraph
+from bgpy.bgpy import SimulationEngine
+from bgpy.bgpy.enums import SpecialPercentAdoptions
+
+class AdoptingCountMetricTracker(MetricTracker):
+    """A metric tracker for showing the number of adopting ASes"""
+    
+    name: str = "adopting_count"
+    
+    def _track_trial_metrics_hook(
+        self,
+        *,
+        engine: SimulationEngine,
+        percent_adopt: Union[float, SpecialPercentAdoptions],
+        trial: int,
+        scenario: Scenario,
+        propagation_round: int,
+        outcomes,
+    ) -> None:
+        """Hook function for easy subclassing by a user"""
+
+        pass
 
 
 class AdoptingCountSubgraph(Subgraph):

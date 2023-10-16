@@ -1,4 +1,4 @@
-from bgpy import BGPAS
+from bgpy.bgpy import BGPAS
 
 from . import OriginHijack, IntentionalLeak, IntentionalLeakNoHash
 from . import IntentionalLeakTimid
@@ -69,4 +69,6 @@ class Aggregator(OriginHijack):
         Aggregator._trim_do_communities = getattr(Atk_cls, "_trim_do_communities", self.nullfunc) # noqa E501
         # Reset anns
         self.announcements = self._get_announcements()
+
+        # TODO: Why is super being called here?
         return super(Aggregator, self).seed(engine)

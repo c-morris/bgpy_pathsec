@@ -1,8 +1,8 @@
 from typing import Optional
 from copy import deepcopy
 
-from bgpy import BGPAS, Relationships
-from bgpy import Announcement as Ann
+from bgpy.bgpy import BGPAS, Relationships
+from bgpy.bgpy import Announcement as Ann
 
 
 opt_bool = Optional[bool]

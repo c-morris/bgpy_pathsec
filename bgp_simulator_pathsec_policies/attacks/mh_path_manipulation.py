@@ -1,4 +1,4 @@
-from bgpy import Scenario, Prefixes, Relationships, Timestamps
+from bgpy.bgpy import Scenario, Prefixes, Relationships, Timestamps
 
 from ..policies import BGPsecAS, BGPsecTransitiveAS
 from ..policies import TransitiveDroppingNoAdoptCustomersAS
@@ -36,6 +36,7 @@ class MHPathManipulation(Scenario):
 
         anns = list()
         for victim_asn in self.victim_asns:
+            # TODO: Determine what AnnCls have become
             anns.append(self.AnnCls(prefix=Prefixes.PREFIX.value,
                                     as_path=(victim_asn,),
                                     timestamp=Timestamps.VICTIM.value,
@@ -51,13 +52,13 @@ class MHPathManipulation(Scenario):
 
     def setup_engine(self,
                      engine,
-                     percent_adoption: float,
                      prev_scenario=None):
         """Setup engine. Also clear BGPsec Performance Metric Counters."""
 
+        # TODO: Why calling class directly here?
         BGPsecAS.count = 0
         BGPsecAS.bpo_count = 0
         BGPsecTransitiveAS.count = 0
         BGPsecTransitiveAS.bpo_count = 0
         TransitiveDroppingNoAdoptCustomersAS.convert_count = 0
-        super().setup_engine(engine, percent_adoption, prev_scenario)
+        super().setup_engine(engine, prev_scenario)

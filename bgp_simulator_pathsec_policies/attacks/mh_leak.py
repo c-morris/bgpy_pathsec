@@ -1,4 +1,4 @@
-from bgpy import Prefixes, Timestamps, Relationships
+from bgpy.bgpy import Prefixes, Timestamps, Relationships
 
 from .mh_path_manipulation import MHPathManipulation
 
@@ -16,6 +16,7 @@ class MHLeak(MHPathManipulation):
 
         anns = list()
         for victim_asn in self.victim_asns:
+            # TODO: Determine what has replaced AnnCls
             anns.append(self.AnnCls(prefix=Prefixes.PREFIX.value,
                                     as_path=(victim_asn,),
                                     timestamp=Timestamps.VICTIM.value,

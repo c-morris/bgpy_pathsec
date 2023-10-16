@@ -1,4 +1,4 @@
-from bgpy import Prefixes, Relationships, Timestamps, ValidPrefix
+from bgpy.bgpy import Prefixes, Relationships, Timestamps, ValidPrefix
 
 
 class ValidSignature(ValidPrefix):
@@ -15,6 +15,7 @@ class ValidSignature(ValidPrefix):
 
         anns = list()
         for victim_asn in self.victim_asns:
+            # TODO: Determine what has replaced AnnCls
             anns.append(self.AnnCls(prefix=Prefixes.PREFIX.value,
                                     as_path=(victim_asn,),
                                     timestamp=Timestamps.VICTIM.value,

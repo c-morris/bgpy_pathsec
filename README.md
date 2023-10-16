@@ -19,6 +19,22 @@ cd bgp_simulator_pathsec_policies
 pip install -e .
 ```
 
+1. Download pypy 3.10: wget https://downloads.python.org/pypy/pypy3.10-v7.3.12-linux64.tar.bz2
+2. `/path/to/pypy3 -m venv env`
+3. `source env/bin/activate`
+
+1. `git clone git@github.com:jfuruness/caida_collector_pkg.git`
+2. `cd caida_collector_pkg`, edit setup.cfg to change PyYAML version to 5.3.1 (in both places!)
+3. `pip install -e .`
+
+1. `git clone git@github.com:jfuruness/bgpy.git`
+2. `git checkout f1d388afd9460de2d15ec8a6189bf4a66a26ae8a`
+3. `cd bgpy`, edit setup.cfg to change PyYAML version to 5.3.1 (in both places!) and comment out caida_collector dependency
+4. `pip install -e .`
+
+1.` git clone git@github.com:c-morris/bgp-simulator-pathsec-policies.git`
+2. `pypy3 setup.py develop`
+
 ## Usage
 
 Runnable scripts are located in the `run` directory. Run them with either Python

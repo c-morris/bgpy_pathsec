@@ -99,6 +99,23 @@ from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
 
+from bgpy.bgpy import Simulation
+from bgpy.bgpy import ScenarioConfig
+
+# TODO: Finish updating simulation
+sim = Simulation(
+    percent_adoptions=(0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99),
+    num_trials=1,
+    scenario_configs=(
+        ScenarioConfig(ScenarioCls=OriginHijack, AdoptASCls=BGPsecAggressiveAS, BaseASCls=BGPAS)
+    ),
+
+    propagation_rounds=2,
+    output_dir=Path(f"/data/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    parse_cpus=1
+)
+
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
@@ -118,7 +135,7 @@ sim = Simulation(
             AdoptASCls=BGPsecTransitiveAggressiveAS,
             BaseASCls=BGPAS),
         ShortestPathExportAllNoHash(
-            AnnCls=PathManipulationAnn, 
+            AnnCls=PathManipulationAnn,
             # All BGPsecTransitive attacks must be NoHash
             AdoptASCls=BGPsecTransitiveTimidAS,
             BaseASCls=BGPAS),
