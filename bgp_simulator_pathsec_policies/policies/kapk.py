@@ -23,7 +23,7 @@ class KAPKFalseAS(BGPsecTransitiveDownOnlyEncrUpAS):
     def __init__(self,
                  *args,
                  **kwargs):
-        # Set the probability of dropping transitive attrs for *this* AS only
+        # Set the property of being an unknown adopter for *this* AS only
         self.unknown_adopting = (
            self.rand_gen.random() < (self.unknown_adopting_percent / 100.0))
 
@@ -83,7 +83,7 @@ class KAPKFalseAlwaysAS(KAPKFalseAS):
                  *args,
                  unknown_adopting_percent=1.0,
                  **kwargs):
-        # Set the probability of dropping transitive attrs for *this* AS only
+        # Set the property of being an unknown adopter for *this* AS only
         # For this test class, this is always true
         self.unknown_adopting = True
 
