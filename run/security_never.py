@@ -66,6 +66,7 @@ from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
 from bgp_simulator_pathsec_policies import RISEavesdropperUp
 from bgp_simulator_pathsec_policies import GlobalEavesdropper
 from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
+from bgp_simulator_pathsec_policies import GlobalEavesdropperUpUnknownAdopters
 from bgp_simulator_pathsec_policies import TwoHopAttackUp
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
@@ -75,7 +76,6 @@ from bgp_simulator_pathsec_policies import RibsInValidNonAdoptingSubgraph
 from bgp_simulator_pathsec_policies import AdoptingCountSubgraph
 from bgp_simulator_pathsec_policies import NonAdoptingCountSubgraph
 from bgp_simulator_pathsec_policies import PathLengthSubgraph
-from bgp_simulator_pathsec_policies import TransitiveDroppingConversionsAllSubgraph
 from bgp_simulator_pathsec_policies import ShortestPathExportAll
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
 from bgp_simulator_pathsec_policies import PathEndAggressiveAS
@@ -97,34 +97,49 @@ from bgp_simulator_pathsec_policies import TransitiveDropping32AS
 from bgp_simulator_pathsec_policies import TransitiveDropping64AS
 from bgp_simulator_pathsec_policies import TransitiveDropping99AS
 from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomersAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomersAS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomers2AS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomers4AS
+from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS
+from bgp_simulator_pathsec_policies import KAPKFalseAS
+from bgp_simulator_pathsec_policies import KAPKFalse01AS
+from bgp_simulator_pathsec_policies import KAPKFalse05AS
+from bgp_simulator_pathsec_policies import KAPKFalse5AS
+from bgp_simulator_pathsec_policies import KAPKFalseAlwaysAS
+from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
+from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUpUnknownAdopters
+
+
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=7,
+    num_trials=70,
     scenarios=[
-        ShortestPathExportAllNoHashUp(
+        #ShortestPathExportAllUpUnknownAdopters(
+        #   AnnCls=PathManipulationAnn, 
+        #   AdoptASCls=KAPKFalseAS,  
+        #   BaseASCls=BGPsecTransitiveAS),
+        GlobalEavesdropperUpUnknownAdopters(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS,
-            BaseASCls=TransitiveDroppingNoAdoptCustomersAS),
-        ShortestPathExportAllNoHashUp(
+            AdoptASCls=KAPKFalse01AS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUpUnknownAdopters(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS,
-            BaseASCls=TransitiveDroppingNoAdoptCustomers2AS),
-        ShortestPathExportAllNoHashUp(
+            AdoptASCls=KAPKFalse05AS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUpUnknownAdopters(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS,
-            BaseASCls=TransitiveDroppingNoAdoptCustomers4AS),
-            ],
-    propagation_rounds=3,
+            AdoptASCls=KAPKFalseAS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUpUnknownAdopters(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=KAPKFalse5AS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropperUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
+            BaseASCls=BGPAS),
+        ],
+    propagation_rounds=2,
     subgraphs=[
         OverheadBPOAllSubgraph(),
         OverheadAllSubgraph(),
@@ -137,7 +152,6 @@ sim = Simulation(
         RibsInSizeSubgraph(),
         RibsInValidAdoptingSubgraph(),
         RibsInValidNonAdoptingSubgraph(),
-        TransitiveDroppingConversionsAllSubgraph(),
         AttackerSuccessAdoptingEtcSubgraph(),
         AttackerSuccessAdoptingInputCliqueSubgraph(),
         AttackerSuccessAdoptingStubsAndMHSubgraph(),
@@ -158,8 +172,8 @@ sim = Simulation(
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    output_path=Path(f"tdgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    output_path=Path(f"kapkgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    #output_path=Path("/tmp/kapkgraphs0"),
     parse_cpus=1)
 
 sim.run()
