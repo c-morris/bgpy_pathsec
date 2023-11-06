@@ -38,9 +38,10 @@ class Eavesdropper(ShortestPathExportAllNoHash):
                     continue
                 for ann_info in current_as._ribs_in.get_ann_infos(Prefixes.PREFIX.value): # noqa E501
                     if ann_info.unprocessed_ann.next_as == current_as.asn:
-                        # if this ann has a signature on it, we can't use it
-                        continue
-                    atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
+                        # if this ann has a signature on it, we have to process it first
+                        atk_ann_candidates.append(attacker._copy_and_process(current_as._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS), Relationships.CUSTOMERS)) # noqa E501
+                    else:
+                        atk_ann_candidates.append(attacker._copy_and_process(ann_info.unprocessed_ann, Relationships.CUSTOMERS)) # noqa E501
                 # Old code for using local RIB
                 #
                 #     potential_ann_to_add = current_as._local_rib.get_ann(Prefixes.PREFIX.value) # noqa E501
