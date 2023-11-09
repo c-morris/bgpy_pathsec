@@ -1,7 +1,7 @@
-from .shortest_path_export_all_no_hash import ShortestPathExportAllNoHash
+from .shortest_path_export_all import ShortestPathExportAll
 
 
-class TwoHopAttack(ShortestPathExportAllNoHash):
+class TwoHopAttack(ShortestPathExportAll):
     """Same as ShortestPathExportAllNoHash, but always do a two hop attack.
     """
 

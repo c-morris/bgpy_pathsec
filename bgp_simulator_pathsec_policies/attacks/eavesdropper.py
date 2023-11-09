@@ -1,15 +1,18 @@
 from bgp_simulator_pkg import Prefixes, Relationships
 
-from .shortest_path_export_all_no_hash import ShortestPathExportAllNoHash
+from .shortest_path_export_all import ShortestPathExportAll
 
 
-class Eavesdropper(ShortestPathExportAllNoHash):
+class Eavesdropper(ShortestPathExportAll):
     """Attacker has visibility into other AS RIBs.
        Vantage points must be defined in subclasses.
     """
 
     vantage_points = []
-    global_eavesdropper = False
+
+    def __init__(self, global_eavesdropper=True):
+        super().__init__()
+        self.global_eavesdropper = global_eavesdropper
 
     def post_propagation_hook(self, engine,
                               propagation_round, *args, **kwargs):

@@ -19,6 +19,12 @@ class IntentionalLeak(MHLeak):
     provider's ASN on them).
     """
 
+    def __init__(self, no_hash=True, communities_up=True, unknown_adopter=False):
+        super().__init__()
+        self.no_hash = no_hash
+        self.communities_up = communities_up
+        self.unknown_adopter = unknown_adopter
+
     def post_propagation_hook(self, engine,
                               propagation_round, *args, **kwargs):
         """Add the route leak from the attacker"""
@@ -91,6 +97,14 @@ class IntentionalLeak(MHLeak):
                                                scenario=self)
 
     def _truncate_ann(self, ann):
+        if self.no_hash and self.unknown_adopter:
+            self._truncate_ann_unknown_adopter(self, ann)
+        elif self.no_hash:
+            self._truncate_ann_no_hash(self, ann)
+        else:
+            self._truncate_ann_hash(self, ann)
+
+    def _truncate_ann_hash(self, ann):
         """
 
         This must tuncate to two cases: either the last adopting AS on the path
@@ -169,6 +183,51 @@ class IntentionalLeak(MHLeak):
         if len(ann.as_path) < 2:
             ann.path_end_valid = False
 
+    def _truncate_ann_no_hash(self, ann):
+        """Truncate to the first non-adopting ASN."""
+        ann.as_path = ann.as_path[1:]  # remove attacker ASN
+        partial = ann.bgpsec_path
+        full = ann.as_path
+        removed = ann.removed_signatures
+        if len(partial) < len(removed):
+            partial = removed
+        i = len(partial) - 1
+        j = len(full) - 1
+        while i >= 0 and j > 0 and partial[i] == full[j]:
+            i -= 1
+            j -= 1
+        ann.as_path = ann.as_path[j:]
+        # update BGPsec path to match new AS path
+        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+
+    def _truncate_ann_unknown_adopter(self, ann):
+        old_bgpsec_path = ann.bgpsec_path
+        ann.bgpsec_path = tuple()
+
+        for _asn in old_bgpsec_path:
+            if _asn not in ann.unknown_adopters:
+                ann.bgpsec_path += (_asn,)
+
+        super()._truncate_ann(ann)
+
     def _trim_do_communities(self, ann):
+        if self.communities_up:
+            self._trim_do_communities_up(self, ann)
+        else:
+            self._trim_do_communities_down(self, ann)
+
+    def _trim_do_communities_down(self, ann):
         ann.do_communities = tuple(x for x in ann.do_communities
                                    if x in ann.bgpsec_path)
+        
+    def _trim_do_communities_up(self, ann):
+        """With UP attributes, no DO communities are removed.
+
+        The reasoning for this is as follows:
+        Since the origin is always adopting, there is always at least one UP
+        attribute on the announcement. If any down-only communities are also
+        present, it means the UP preimage was also removed, and any leaks
+        will be detected. Therefore, if any down-only communities are
+        present, they should not be removed.
+        """
+        ann.up_pre = False
