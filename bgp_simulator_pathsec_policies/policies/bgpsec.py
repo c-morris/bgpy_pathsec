@@ -16,6 +16,9 @@ class BGPsecAS(BGPAS):
     count = 0
     # Total number of signatures verified (BPO)
     bpo_count = 0
+    # True if running security third, false if whether a path is signed or not
+    # is not part of the path selection process
+    security_third = True
 
     __slots__ = tuple()
 
@@ -83,17 +86,17 @@ class BGPsecAS(BGPAS):
             return new_as_path_shorter
         else:
             # Security Third
-            bgpsec_better = self._new_ann_better_bgpsec(current_ann,
-                                                        current_processed,
-                                                        new_ann,
-                                                        new_processed)
-            if (bgpsec_better is not None):
-                return bgpsec_better
-            else:
-                return self._new_wins_ties(current_ann,
-                                           current_processed,
-                                           new_ann,
-                                           new_processed)
+            if self.security_third:
+                bgpsec_better = self._new_ann_better_bgpsec(current_ann,
+                                                            current_processed,
+                                                            new_ann,
+                                                            new_processed)
+                if (bgpsec_better is not None):
+                    return bgpsec_better
+            return self._new_wins_ties(current_ann,
+                                       current_processed,
+                                       new_ann,
+                                       new_processed)
 
     def _new_ann_better_bgpsec(self,
                                current_ann,

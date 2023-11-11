@@ -101,7 +101,7 @@ from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=70,
+    num_trials=7,
     scenarios=[
         #ShortestPathExportAllUpUnknownAdopters(
         #   AnnCls=PathManipulationAnn, 
