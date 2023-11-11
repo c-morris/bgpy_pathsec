@@ -1,17 +1,17 @@
 from bgpy import EngineTestConfig, ASNs, BGPAS
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_009
 from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
-from ....subgraphs import OverheadBPOAllSubgraph
+# from ....subgraphs import OverheadBPOAllSubgraph
 
 config_p_034 = EngineTestConfig(
     name="P034",
     desc="Global Eavesdropper test",
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=Eavesdropper,
         BaseASCls=BGPAS,
         AdoptASCls=BGPsecTransitiveDownOnlyAS,
@@ -30,5 +30,5 @@ config_p_034 = EngineTestConfig(
     ),
     graph=p_graph_009,
     propagation_rounds=2,
-    SubgraphCls=OverheadBPOAllSubgraph,
+    # SubgraphCls=OverheadBPOAllSubgraph,
 )

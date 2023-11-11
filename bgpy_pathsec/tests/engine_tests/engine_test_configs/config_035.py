@@ -1,5 +1,5 @@
 from bgpy import EngineTestConfig, ASNs, BGPAS
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_009
@@ -11,7 +11,7 @@ from ....announcements import PathManipulationAnn
 config_p_035 = EngineTestConfig(
     name="P035",
     desc="GlobalEavesdropper with Encrypted UP attributes test",
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=Eavesdropper,
         BaseASCls=BGPAS,
         AdoptASCls=BGPsecTransitiveDownOnlyEncrUpAS,

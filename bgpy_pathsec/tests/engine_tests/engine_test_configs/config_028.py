@@ -1,12 +1,12 @@
 from bgpy import EngineTestConfig, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_001
 from ....attacks import ShortestPathExportAll
 from ....policies import TransitiveDroppingAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
-from ....subgraphs import OverheadBPOAllSubgraph
+# from ....subgraphs import OverheadBPOAllSubgraph
 
 config_p_028 = EngineTestConfig(
     name="P028",
@@ -14,7 +14,7 @@ config_p_028 = EngineTestConfig(
         "TransitiveDroppingAS test. "
         "AS 2 should choose the longer path from its provider."
     ),
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=ShortestPathExportAll,
         BaseASCls=TransitiveDroppingAlwaysAS,
         AnnCls=PathManipulationAnn,
@@ -30,5 +30,5 @@ config_p_028 = EngineTestConfig(
     ),
     graph=p_graph_001,
     propagation_rounds=1,
-    SubgraphCls=OverheadBPOAllSubgraph,
+    # SubgraphCls=OverheadBPOAllSubgraph,
 )

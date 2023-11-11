@@ -20,7 +20,6 @@ from .config_019 import config_p_019
 from .config_020 import config_p_020
 from .config_021 import config_p_021
 from .config_022 import config_p_022
-from .config_023 import config_p_023
 from .config_024 import config_p_024
 from .config_025 import config_p_025
 from .config_026 import config_p_026
@@ -66,7 +65,6 @@ __all__ = [
     "config_p_020",
     "config_p_021",
     "config_p_022",
-    "config_p_023",
     "config_p_024",
     "config_p_025",
     "config_p_026",

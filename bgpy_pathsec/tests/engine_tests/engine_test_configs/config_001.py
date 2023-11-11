@@ -1,5 +1,5 @@
 from bgpy import EngineTestConfig, BGPAS, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_001
@@ -13,7 +13,7 @@ config_p_001 = EngineTestConfig(
         "BGPsec security third preference test, "
         "AS 1 should prefer the path via AS 3"
     ),
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=IntentionalLeak,
         AnnCls=PathManipulationAnn,
         BaseASCls=BGPAS,

@@ -1,5 +1,5 @@
 from bgpy import EngineTestConfig, ASNs, BGPAS
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_011
@@ -11,7 +11,7 @@ from ....announcements import PathManipulationAnn
 config_p_032 = EngineTestConfig(
     name="P032",
     desc="Transitive Dropping AS test, with fewer adopting ASes",
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=ShortestPathExportAll,
         BaseASCls=TransitiveDroppingAlwaysAS,
         AdoptASCls=BGPsecTransitiveAS,

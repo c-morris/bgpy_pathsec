@@ -1,8 +1,9 @@
 from bgpy import EngineTestConfig, BGPAS, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_009
+from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 
@@ -17,7 +18,7 @@ config_p_022 = EngineTestConfig(
         "Fig 6 test, eavesdropper attacker with 7 as vantage point. "
         "UP attributes do not stop the attack."
     ),
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=EavesdropperUpTest22,
         AnnCls=PathManipulationAnn,
         BaseASCls=BGPAS,

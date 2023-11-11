@@ -1,11 +1,17 @@
 from bgpy import EngineTestConfig, BGPAS, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_008
 from ....attacks import IntentionalLeak
-from ....policies import BGPsecTransitiveWithPathShorteningDefenseAS
+from ....policies import BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
+
+
+class BGPsecTransitiveWithPathShorteningDefenseAS(BGPsecTransitiveAS):
+    """For use with IntentionalLeak"""
+    name = "BGP-Isec with Path Shortening Defense"
+
 
 config_p_017 = EngineTestConfig(
     name="P017",
@@ -13,7 +19,7 @@ config_p_017 = EngineTestConfig(
         "Path Shortening Defense test. The attack announcement should "
         "have an AS path length of 4 (including the attacker ASN)"
     ),
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=IntentionalLeak,
         AnnCls=PathManipulationAnn,
         BaseASCls=BGPAS,

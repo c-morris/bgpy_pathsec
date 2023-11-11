@@ -1,5 +1,5 @@
 from bgpy import EngineTestConfig, BGPAS, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_009
@@ -11,7 +11,7 @@ from ....announcements import PathManipulationAnn
 config_p_029 = EngineTestConfig(
     name="P029",
     desc="Fig 6 test, 1-hop attack against Path End",
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=OriginHijack,
         AnnCls=PathManipulationAnn,
         BaseASCls=BGPAS,

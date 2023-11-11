@@ -1,8 +1,8 @@
 from bgpy import EngineTestConfig, BGPAS, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
-from ..graphs import p_graph_039
+from ..graphs import p_graph_009
 from ....attacks import OriginHijack
 from ....policies import KAPKFalseAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
@@ -14,8 +14,8 @@ config_p_039 = EngineTestConfig(
     desc = (
         "BGPsec security third preference test, "
         "AS 1 should prefer the path via AS 3"
-    )
-    scenario_config=ScenarioConfig(
+    ),
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=OriginHijack,
         AnnCls=PathManipulationAnn,
         BaseASCls=BGPAS,
@@ -32,6 +32,6 @@ config_p_039 = EngineTestConfig(
             777: BGPsecTransitiveAS,
         }),
     ),
-    graph=p_graph_039,
+    graph=p_graph_009,
     propagation_rounds=1,
 )

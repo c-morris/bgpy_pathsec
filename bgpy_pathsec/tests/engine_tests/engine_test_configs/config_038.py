@@ -1,5 +1,5 @@
 from bgpy import EngineTestConfig, BGPAS, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_010
@@ -12,8 +12,8 @@ config_p_038 = EngineTestConfig(
     name="P038",
     desc = (
         "Fig 6 test, eavesdropper on otherwise unseen announcement"
-    )
-    scenario_config=ScenarioConfig(
+    ),
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=Eavesdropper,
         AnnCls=PathManipulationAnn,
         BaseASCls=BGPAS,
@@ -27,6 +27,6 @@ config_p_038 = EngineTestConfig(
             777: BGPsecTransitiveDownOnlyEncrUpAS,
         }),
     ),
-    graph=graph_010,
+    graph=p_graph_010,
     propagation_rounds=2,
 )

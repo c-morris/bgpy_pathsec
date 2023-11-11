@@ -1,5 +1,5 @@
 from bgpy import EngineTestConfig, ASNs
-from bgpy.simulation_framework import ScenarioConfig
+from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_009
@@ -15,7 +15,7 @@ config_p_037 = EngineTestConfig(
         "adopting customers. Adopting customers are converted to "
         "TransitiveDroppingNeverAS nodes, except for the origin."
     ),
-    scenario_config=ScenarioConfig(
+    scenario_config=PathsecScenarioConfig(
         ScenarioCls=Eavesdropper,
         BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS,
         AdoptASCls=BGPsecTransitiveDownOnlyAS,
