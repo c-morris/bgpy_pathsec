@@ -11,4 +11,4 @@ source ~/env/bin/activate
 export JOB_COMPLETION_INDEX=$SLURM_ARRAY_TASK_ID
 
 # Run the simulation
-python ~/bgp-simulator-pathsec-policies/run/2023_aggregated.py
+python ~/bgp-simulator-pathsec-policies/run/security_never.py

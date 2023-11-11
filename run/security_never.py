@@ -66,7 +66,6 @@ from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
 from bgp_simulator_pathsec_policies import RISEavesdropperUp
 from bgp_simulator_pathsec_policies import GlobalEavesdropper
 from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
-from bgp_simulator_pathsec_policies import GlobalEavesdropperUpUnknownAdopters
 from bgp_simulator_pathsec_policies import TwoHopAttackUp
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
@@ -99,45 +98,121 @@ from bgp_simulator_pathsec_policies import TransitiveDropping99AS
 from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperUnknownAdoptersAS
-from bgp_simulator_pathsec_policies import KAPKFalseAS
-from bgp_simulator_pathsec_policies import KAPKFalse01AS
-from bgp_simulator_pathsec_policies import KAPKFalse05AS
-from bgp_simulator_pathsec_policies import KAPKFalse5AS
-from bgp_simulator_pathsec_policies import KAPKFalseAlwaysAS
-from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUpUnknownAdopters
 
-
+# security never
+BGPsecAS.security_third = False
 
 random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
-    num_trials=70,
+    num_trials=7,
     scenarios=[
-        #ShortestPathExportAllUpUnknownAdopters(
-        #   AnnCls=PathManipulationAnn, 
-        #   AdoptASCls=KAPKFalseAS,  
-        #   BaseASCls=BGPsecTransitiveAS),
-        GlobalEavesdropperUpUnknownAdopters(
+        OriginHijack(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=KAPKFalse01AS,
+            AdoptASCls=BGPsecAggressiveAS,
             BaseASCls=BGPAS),
-        GlobalEavesdropperUpUnknownAdopters(
+        # BGPsec Timid never makes sense, aggressive is always better
+        # ShortestPathExportAll(
+        #     AnnCls=PathManipulationAnn, 
+        #     AdoptASCls=BGPsecTimidAS,
+        #     BaseASCls=BGPAS),
+        OriginHijack(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=KAPKFalse05AS,
+            AdoptASCls=BGPsecTransitiveAggressiveAS,
             BaseASCls=BGPAS),
-        GlobalEavesdropperUpUnknownAdopters(
+        ShortestPathExportAllNoHash(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=KAPKFalseAS,
+            # All BGPsecTransitive attacks must be NoHash
+            AdoptASCls=BGPsecTransitiveTimidAS,
             BaseASCls=BGPAS),
-        GlobalEavesdropperUpUnknownAdopters(
+        OriginHijack(
             AnnCls=PathManipulationAnn, 
-            AdoptASCls=KAPKFalse5AS,
+            AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAll(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHash(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
+            BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashTimid(
+            AnnCls=PathManipulationAnn, 
+            # This says TimidLeak, it's really NoHashUpTimidLeak
+            AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
+            BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndAggressiveAS,
+            BaseASCls=BGPAS),
+        TwoHopAttack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndTimidAS,
+            BaseASCls=BGPAS),
+        TwoHopAttackUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=PathEndTimidUpAS,
+            BaseASCls=BGPAS),
+        OriginHijack(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BaselineBGPAS,
+            BaseASCls=BGPAS),
+        ValidSignature(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=OverheadBGPsecAS,
+            BaseASCls=BGPAS),
+        ValidSignature(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
+            BaseASCls=BGPAS),
+        GlobalEavesdropper(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyGlobalEavesdropperAS,
             BaseASCls=BGPAS),
         GlobalEavesdropperUp(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
             BaseASCls=BGPAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS,
+            BaseASCls=TransitiveDroppingAS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS,
+            BaseASCls=TransitiveDropping2AS),
+        ShortestPathExportAllNoHashUp(
+            AnnCls=PathManipulationAnn, 
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
+            BaseASCls=TransitiveDropping4AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS,
+        #    BaseASCls=TransitiveDropping8AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS,
+        #    BaseASCls=TransitiveDropping16AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS,
+        #    BaseASCls=TransitiveDropping32AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS,
+        #    BaseASCls=TransitiveDropping64AS),
+        #ShortestPathExportAllNoHashUp(
+        #    AnnCls=PathManipulationAnn, 
+        #    AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS,
+        #    BaseASCls=TransitiveDropping99AS),
         ],
     propagation_rounds=2,
     subgraphs=[
@@ -172,8 +247,8 @@ sim = Simulation(
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    output_path=Path(f"kapkgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    #output_path=Path("/tmp/kapkgraphs0"),
+    output_path=Path(f"ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
     parse_cpus=1)
 
 sim.run()
