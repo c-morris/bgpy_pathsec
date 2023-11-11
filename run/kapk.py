@@ -51,31 +51,31 @@ sim = Simulation(
     num_trials=7,
     scenarios=[
         #ShortestPathExportAllUpUnknownAdopters(
-        #   AnnCls=PathManipulationAnn, 
-        #   AdoptASCls=KAPKFalseAS,  
+        #   AnnCls=PathManipulationAnn,
+        #   AdoptASCls=KAPKFalseAS,
         #   BaseASCls=BGPsecTransitiveAS),
         Eavesdropper(
-            AnnCls=PathManipulationAnn, 
+            AnnCls=PathManipulationAnn,
             AdoptASCls=KAPKFalse01AS,
             BaseASCls=BGPAS,
             unknown_adopter=True),
         Eavesdropper(
-            AnnCls=PathManipulationAnn, 
+            AnnCls=PathManipulationAnn,
             AdoptASCls=KAPKFalse05AS,
             BaseASCls=BGPAS,
             unknown_adopter=True),
         Eavesdropper(
-            AnnCls=PathManipulationAnn, 
+            AnnCls=PathManipulationAnn,
             AdoptASCls=KAPKFalseAS,
             BaseASCls=BGPAS,
             unknown_adopter=True),
         Eavesdropper(
-            AnnCls=PathManipulationAnn, 
+            AnnCls=PathManipulationAnn,
             AdoptASCls=KAPKFalse5AS,
             BaseASCls=BGPAS,
             unknown_adopter=True),
         Eavesdropper(
-            AnnCls=PathManipulationAnn, 
+            AnnCls=PathManipulationAnn,
             AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
             BaseASCls=BGPAS),
         ],

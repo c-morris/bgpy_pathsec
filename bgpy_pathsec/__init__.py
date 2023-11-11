@@ -8,6 +8,7 @@ from .attacks import ShortestPathExportAll
 from .attacks import TwoHopAttack
 from .attacks import Eavesdropper
 from .attacks import ValidSignature
+from .attacks import PathsecScenarioConfig
 
 from .policies import BGPsecAS
 from .policies import DownOnlyAS

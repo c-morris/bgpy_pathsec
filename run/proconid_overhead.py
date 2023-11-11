@@ -2,20 +2,22 @@ import os
 import random
 import functools
 import logging
-from caida_collector_pkg import CaidaCollector
+
+from bgpy.caida_collector import CaidaCollector
 from bgpy import BGPSimpleAS, SimulationEngine
+from tqdm import tqdm
 
 class ProviderConeNode:
     """
     Class for creating simple trees that can be pruned without modifying the
     AS graph. These are used for computing ProConID Overhead.
     """
-    
+
     def __init__(self, asn):
         self.asn = asn
         self.providers = set()
         self.do_not_prune = False
-    
+
     def __eq__(self, other):
         return self.asn == other.asn
 
@@ -40,10 +42,10 @@ class ProviderConeComputation:
         # map of ASNs to the set of ASNs verified as part of their provider
         # cone during initial adoption by that AS
         self.initial_overheads = dict()
-        # map of ASNs to the set of additional ASNs verified as other ASes 
+        # map of ASNs to the set of additional ASNs verified as other ASes
         # adopt
         self.maintenance_overheads = dict()
-        # temporary list of ProviderConeNodes that need to be reset after 
+        # temporary list of ProviderConeNodes that need to be reset after
         # pruning to determine overhead
         self.modified_nodes = []
         # list of ASNs that we are tracking the maintenance overhead of
@@ -51,7 +53,7 @@ class ProviderConeComputation:
         # dict mapping ASNs to ProviderConeNodes that we are tracking the maintenance
         # overhead of
         self.maint_ovh_tracking = dict()
-        # dictionary mapping ASNs to a list of ProviderConeNodes they are in 
+        # dictionary mapping ASNs to a list of ProviderConeNodes they are in
         # the provider cone of
         self.proconid_reversemap = dict()
         # cache of nodes checked for not pruning
@@ -78,7 +80,7 @@ class ProviderConeComputation:
 
     def get_all_cones(self):
         """Populate self.provider_cones for every AS"""
-        for as_obj in self.engine.ases:
+        for as_obj in tqdm(self.engine.ases, desc="getting cones", total=len(self.engine.ases)):
             self.get_cone(as_obj)
 
 
@@ -95,7 +97,7 @@ class ProviderConeComputation:
 
         # traverse and prune tree
         as_obj = self.engine.as_dict[asn]
-        cone_list = self.provider_cones[asn] 
+        cone_list = self.provider_cones[asn]
         cone = ProviderConeNode(as_obj.asn)
 
         # add to ovh tracking dict and list
@@ -143,7 +145,7 @@ class ProviderConeComputation:
     def check_node_for_not_pruning(self, node):
         """Recursively check if the current node and its providers should be
            left un-pruned.
-        """ 
+        """
         logging.debug(f'checking {node.asn}')
         logging.debug(f'already validated providers {self.already_validated_providers}')
         if node in self.checked_nodes:
@@ -169,8 +171,8 @@ class ProviderConeComputation:
         else:
             self.modified_nodes.append(node)
         return do_not_prune
-            
-    
+
+
     def get_non_pruned_ovh(self, node, overhead_set):
         """Recursively count overhead based on an already pruned graph"""
         logging.debug(f'getting ovh for as {node.asn} with providers {[x.asn for x in node.providers]}')
@@ -204,7 +206,7 @@ class ProviderConeComputation:
                     n.do_not_prune = False
                 self.modified_nodes.clear()
                 logging.debug(f'Addl OVH {self.maintenance_overheads[tracked_asn] - self.initial_overheads[tracked_asn]}')
-        
+
 
 def test_provider_cones():
     """Test functionality to generate provider cones"""
@@ -344,7 +346,7 @@ if __name__ == "__main__":
     all_asns = []
     for asn, cone in a.provider_cones.items():
         all_asns.append(asn)
-    random.seed(os.environ['SLURM_ARRAY_TASK_ID'])
+    random.seed(os.environ.get('SLURM_ARRAY_TASK_ID', 0))
     random.shuffle(all_asns)
     # skip to 1%
     i = 0

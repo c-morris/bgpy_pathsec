@@ -5,6 +5,7 @@ from .origin_hijack import OriginHijack
 from .two_hop_attack import TwoHopAttack
 from .eavesdropper import Eavesdropper
 from .valid_signature import ValidSignature
+from .pathsec_scenario_config import PathsecScenarioConfig
 
 __all__ = [
     "AccidentalLeak",
@@ -14,4 +15,5 @@ __all__ = [
     "TwoHopAttack",
     "Eavesdropper",
     "ValidSignature",
+    "PathsecScenarioConfig",
 ]
