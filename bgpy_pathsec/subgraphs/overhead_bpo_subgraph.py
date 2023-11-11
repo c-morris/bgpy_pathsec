@@ -45,7 +45,9 @@ class OverheadBPOAllSubgraph(Subgraph):
             attacker_as = engine.as_dict[list(scenario.attacker_asns)[0]]
             transitive_dropping_conversions_count = 0
             if hasattr(attacker_as, "convert_count"):
-                transitive_dropping_conversions_count = attacker_as.convert_count
+                transitive_dropping_conversions_count = (
+                    attacker_as.convert_count
+                )
         else:
             transitive_dropping_conversions_count = 0
         shared[

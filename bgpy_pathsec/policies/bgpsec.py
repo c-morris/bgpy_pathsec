@@ -1,5 +1,4 @@
 from typing import Optional
-from copy import deepcopy
 
 from bgpy import BGPAS, Relationships
 from bgpy import Announcement as Ann
@@ -167,7 +166,7 @@ class BGPsecAS(BGPAS):
         reset_q: bool = True
     ):
         """Increment BPO counter when the local rib changes"""
-        previous_local_rib = deepcopy(self._local_rib)
+        previous_local_rib_dict = self._local_rib._info.copy()
         super(BGPsecAS, self).process_incoming_anns(
             from_rel=from_rel,
             propagation_round=propagation_round,  # noqa E501
@@ -175,5 +174,5 @@ class BGPsecAS(BGPAS):
             reset_q=reset_q,
         )
         for prefix, ann in self._local_rib.prefix_anns():
-            if previous_local_rib.get_ann(prefix) != ann:
+            if previous_local_rib_dict.get(prefix) != ann:
                 BGPsecAS.bpo_count += len(ann.bgpsec_path)
