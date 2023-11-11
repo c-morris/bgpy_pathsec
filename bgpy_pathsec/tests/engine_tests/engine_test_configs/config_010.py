@@ -1,36 +1,38 @@
-from ..graphs import PGraph006
+from bgpy import EngineTestConfig, BGPAS, ASNs
+from bgpy.simulation_framework import ScenarioConfig
+from frozendict import frozendict
+
+from ..graphs import p_graph_006
 from ....attacks import IntentionalLeak
 from ....policies import BGPsecAS
 from ....announcements import PathManipulationAnn
-from bgpy import EngineTestConfig, BGPAS, ASNs
 
-
-class Config010(EngineTestConfig):
-    """Contains config options to run a test"""
-
-    name = "P010"
-    desc = "Graph 6 test, BGPsec"
-    scenario = IntentionalLeak(
-        attacker_asns={ASNs.ATTACKER.value},
-        victim_asns={ASNs.VICTIM.value},
-        BaseASCls=BGPAS,
+config_p_010 = EngineTestConfig(
+    name="P010",
+    desc="Graph 6 test, BGPsec",
+    scenario_config=ScenarioConfig(
+        ScenarioCls=IntentionalLeak,
         AnnCls=PathManipulationAnn,
-    )
-    graph = PGraph006()
-    non_default_as_cls_dict = {
-        1: BGPsecAS,
-        2: BGPsecAS,
-        3: BGPsecAS,
-        4: BGPsecAS,
-        5: BGPsecAS,
-        6: BGPsecAS,
-        7: BGPsecAS,
-        8: BGPsecAS,
-        9: BGPsecAS,
-        10: BGPsecAS,
-        11: BGPsecAS,
-        12: BGPsecAS,
-        14: BGPsecAS,
-        777: BGPsecAS,
-    }
-    propagation_rounds = 1
+        BaseASCls=BGPAS,
+        override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
+        override_victim_asns=frozenset({ASNs.VICTIM.value}),
+        override_non_default_asn_cls_dict=frozendict({
+            1: BGPsecAS,
+            2: BGPsecAS,
+            3: BGPsecAS,
+            4: BGPsecAS,
+            5: BGPsecAS,
+            6: BGPsecAS,
+            7: BGPsecAS,
+            8: BGPsecAS,
+            9: BGPsecAS,
+            10: BGPsecAS,
+            11: BGPsecAS,
+            12: BGPsecAS,
+            14: BGPsecAS,
+            777: BGPsecAS,
+        }),
+    ),
+    graph=p_graph_006,
+    propagation_rounds=1,
+)

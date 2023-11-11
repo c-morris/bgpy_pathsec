@@ -1,32 +1,34 @@
-from ..graphs import PGraph009
+from bgpy import EngineTestConfig, ASNs, BGPAS
+from bgpy.simulation_framework import ScenarioConfig
+from frozendict import frozendict
+
+from ..graphs import p_graph_009
 from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
-from bgpy import EngineTestConfig, ASNs, BGPAS
 
-
-class Config034(EngineTestConfig):
-    """Contains config options to run a test"""
-
-    name = "P034"
-    desc = "Global Eavesdropper test"
-    scenario = Eavesdropper(
-        attacker_asns={ASNs.ATTACKER.value},
-        victim_asns={ASNs.VICTIM.value},
+config_p_034 = EngineTestConfig(
+    name="P034",
+    desc="Global Eavesdropper test",
+    scenario_config=ScenarioConfig(
+        ScenarioCls=Eavesdropper,
         BaseASCls=BGPAS,
         AdoptASCls=BGPsecTransitiveDownOnlyAS,
         AnnCls=PathManipulationAnn,
+        override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
+        override_victim_asns=frozenset({ASNs.VICTIM.value}),
+        override_non_default_asn_cls_dict=frozendict({
+            1: BGPsecTransitiveDownOnlyAS,
+            3: BGPsecTransitiveDownOnlyAS,
+            4: BGPsecTransitiveDownOnlyAS,
+            5: BGPsecTransitiveDownOnlyAS,
+            7: BGPsecTransitiveDownOnlyAS,
+            777: BGPsecTransitiveDownOnlyAS,
+        }),
         communities_up=False,
-    )
-    graph = PGraph009()
-    non_default_as_cls_dict = {
-        1: BGPsecTransitiveDownOnlyAS,
-        3: BGPsecTransitiveDownOnlyAS,
-        4: BGPsecTransitiveDownOnlyAS,
-        5: BGPsecTransitiveDownOnlyAS,
-        7: BGPsecTransitiveDownOnlyAS,
-        777: BGPsecTransitiveDownOnlyAS,
-    }
-    propagation_rounds = 2
-    SubgraphCls = OverheadBPOAllSubgraph
+    ),
+    graph=p_graph_009,
+    propagation_rounds=2,
+    SubgraphCls=OverheadBPOAllSubgraph,
+)

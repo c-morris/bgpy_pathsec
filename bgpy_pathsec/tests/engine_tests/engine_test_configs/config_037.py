@@ -1,36 +1,37 @@
-from ..graphs import PGraph009
-from ....attacks import Eavesdropper
-from ....policies import BGPsecTransitiveDownOnlyAS
-from ....announcements import PathManipulationAnn
-from ....subgraphs import OverheadBPOAllSubgraph
-from ....policies import TransitiveDroppingNoAdoptCustomersAlwaysAS
 from bgpy import EngineTestConfig, ASNs
+from bgpy.simulation_framework import ScenarioConfig
+from frozendict import frozendict
 
+from ..graphs import p_graph_009
+from ....attacks import Eavesdropper
+from ....policies import BGPsecTransitiveDownOnlyAS, TransitiveDroppingNoAdoptCustomersAlwaysAS
+from ....announcements import PathManipulationAnn
+# from ....subgraphs import OverheadBPOAllSubgraph
 
-class Config037(EngineTestConfig):
-    """Contains config options to run a test"""
-
-    name = "P037"
-    desc = (
+config_p_037 = EngineTestConfig(
+    name="P037",
+    desc=(
         "GlobalEavesdropper attack with Transitive Dropping ASes with no "
         "adopting customers. Adopting customers are converted to "
         "TransitiveDroppingNeverAS nodes, except for the origin."
-    )
-    scenario = Eavesdropper(
-        attacker_asns={ASNs.ATTACKER.value},
-        victim_asns={ASNs.VICTIM.value},
-        BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS,  # noqa E501
+    ),
+    scenario_config=ScenarioConfig(
+        ScenarioCls=Eavesdropper,
+        BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS,
         AdoptASCls=BGPsecTransitiveDownOnlyAS,
         AnnCls=PathManipulationAnn,
+        override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
+        override_victim_asns=frozenset({ASNs.VICTIM.value}),
+        override_non_default_asn_cls_dict=frozendict({
+            1: BGPsecTransitiveDownOnlyAS,
+            3: BGPsecTransitiveDownOnlyAS,
+            5: BGPsecTransitiveDownOnlyAS,
+            7: BGPsecTransitiveDownOnlyAS,
+            777: BGPsecTransitiveDownOnlyAS,
+        }),
         communities_up=False,
-    )
-    graph = PGraph009()
-    non_default_as_cls_dict = {
-        1: BGPsecTransitiveDownOnlyAS,
-        3: BGPsecTransitiveDownOnlyAS,
-        5: BGPsecTransitiveDownOnlyAS,
-        7: BGPsecTransitiveDownOnlyAS,
-        777: BGPsecTransitiveDownOnlyAS,
-    }
-    propagation_rounds = 3
-    SubgraphCls = OverheadBPOAllSubgraph
+    ),
+    graph=p_graph_009,
+    propagation_rounds=3,
+    # SubgraphCls=OverheadBPOAllSubgraph,
+)

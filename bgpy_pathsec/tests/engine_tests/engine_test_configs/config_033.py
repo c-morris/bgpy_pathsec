@@ -1,34 +1,36 @@
-from ..graphs import PGraph011
+from bgpy import EngineTestConfig, ASNs, BGPAS
+from bgpy.simulation_framework import ScenarioConfig
+from frozendict import frozendict
+
+from ..graphs import p_graph_011
 from ....attacks import ShortestPathExportAll
 from ....policies import TransitiveDroppingAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
-from ....subgraphs import OverheadBPOAllSubgraph
-from bgpy import EngineTestConfig, ASNs, BGPAS
+# from ....subgraphs import OverheadBPOAllSubgraph
 
-
-class Config033(EngineTestConfig):
-    """Contains config options to run a test"""
-
-    name = "P033"
-    desc = (
+config_p_033 = EngineTestConfig(
+    name="P033",
+    desc=(
         "Transitive Dropping AS test, with AS 2 dropping transitive "
         "attributes."
-    )
-    scenario = ShortestPathExportAll(
-        attacker_asns={ASNs.ATTACKER.value},
-        victim_asns={ASNs.VICTIM.value},
+    ),
+    scenario_config=ScenarioConfig(
+        ScenarioCls=ShortestPathExportAll,
         BaseASCls=TransitiveDroppingAlwaysAS,
         AdoptASCls=BGPsecTransitiveAS,
         AnnCls=PathManipulationAnn,
-    )
-    graph = PGraph011()
-    non_default_as_cls_dict = {
-        3: BGPsecTransitiveAS,
-        5: BGPAS,
-        6: BGPAS,
-        7: BGPsecTransitiveAS,
-        9: BGPsecTransitiveAS,
-        777: BGPsecTransitiveAS,
-    }
-    propagation_rounds = 1
-    SubgraphCls = OverheadBPOAllSubgraph
+        override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
+        override_victim_asns=frozenset({ASNs.VICTIM.value}),
+        override_non_default_asn_cls_dict=frozendict({
+            3: BGPsecTransitiveAS,
+            5: BGPAS,
+            6: BGPAS,
+            7: BGPsecTransitiveAS,
+            9: BGPsecTransitiveAS,
+            777: BGPsecTransitiveAS,
+        }),
+    ),
+    graph=p_graph_011,
+    propagation_rounds=1,
+    # SubgraphCls=OverheadBPOAllSubgraph,
+)

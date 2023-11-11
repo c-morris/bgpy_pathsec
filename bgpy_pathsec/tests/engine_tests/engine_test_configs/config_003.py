@@ -1,33 +1,35 @@
-from ..graphs import PGraph002
+from bgpy import EngineTestConfig, BGPAS, ASNs
+from bgpy.simulation_framework import ScenarioConfig
+from frozendict import frozendict
+
+from ..graphs import p_graph_002
 from ....attacks import IntentionalLeak
 from ....policies import BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
-from bgpy import EngineTestConfig, BGPAS, ASNs
 
-
-class Config003(EngineTestConfig):
-    """Contains config options to run a test"""
-
-    name = "P003"
-    desc = (
+config_p_003 = EngineTestConfig(
+    name="P003",
+    desc=(
         "BGPsec Transitive contiguous adopting preference test, "
         "AS 1 should prefer the path via AS 3."
-    )
-    scenario = IntentionalLeak(
-        attacker_asns={ASNs.ATTACKER.value},
-        victim_asns={ASNs.VICTIM.value},
-        BaseASCls=BGPAS,
+    ),
+    scenario_config=ScenarioConfig(
+        ScenarioCls=IntentionalLeak,
         AnnCls=PathManipulationAnn,
-    )
-    graph = PGraph002()
-    non_default_as_cls_dict = {
-        1: BGPsecTransitiveAS,
-        2: BGPsecTransitiveAS,
-        3: BGPsecTransitiveAS,
-        4: BGPsecTransitiveAS,
-        7: BGPsecTransitiveAS,
-        8: BGPsecTransitiveAS,
-        9: BGPsecTransitiveAS,
-        777: BGPsecTransitiveAS,
-    }
-    propagation_rounds = 1
+        BaseASCls=BGPAS,
+        override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
+        override_victim_asns=frozenset({ASNs.VICTIM.value}),
+        override_non_default_asn_cls_dict=frozendict({
+            1: BGPsecTransitiveAS,
+            2: BGPsecTransitiveAS,
+            3: BGPsecTransitiveAS,
+            4: BGPsecTransitiveAS,
+            7: BGPsecTransitiveAS,
+            8: BGPsecTransitiveAS,
+            9: BGPsecTransitiveAS,
+            777: BGPsecTransitiveAS,
+        }),
+    ),
+    graph=p_graph_002,
+    propagation_rounds=1,
+)

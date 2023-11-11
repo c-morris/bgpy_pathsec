@@ -1,32 +1,34 @@
-from ..graphs import PGraph009
+from bgpy import EngineTestConfig, ASNs, BGPAS
+from bgpy.simulation_framework import ScenarioConfig
+from frozendict import frozendict
+
+from ..graphs import p_graph_009
 from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyEncrUpAS
 from ....announcements import PathManipulationAnn
-from ....subgraphs import OverheadBPOAllSubgraph
-from bgpy import EngineTestConfig, ASNs, BGPAS
+# from ....subgraphs import OverheadBPOAllSubgraph
 
-
-class Config035(EngineTestConfig):
-    """Contains config options to run a test"""
-
-    name = "P035"
-    desc = "GlobalEavesdropper with Encrypted UP attributes test"
-    scenario = Eavesdropper(
-        attacker_asns={ASNs.ATTACKER.value},
-        victim_asns={ASNs.VICTIM.value},
+config_p_035 = EngineTestConfig(
+    name="P035",
+    desc="GlobalEavesdropper with Encrypted UP attributes test",
+    scenario_config=ScenarioConfig(
+        ScenarioCls=Eavesdropper,
         BaseASCls=BGPAS,
-        AdoptASCls=BGPsecTransitiveDownOnlyEncrUpAS,  # noqa E501
+        AdoptASCls=BGPsecTransitiveDownOnlyEncrUpAS,
         AnnCls=PathManipulationAnn,
+        override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
+        override_victim_asns=frozenset({ASNs.VICTIM.value}),
+        override_non_default_asn_cls_dict=frozendict({
+            1: BGPsecTransitiveDownOnlyEncrUpAS,
+            3: BGPsecTransitiveDownOnlyEncrUpAS,
+            4: BGPsecTransitiveDownOnlyEncrUpAS,
+            5: BGPsecTransitiveDownOnlyEncrUpAS,
+            7: BGPsecTransitiveDownOnlyEncrUpAS,
+            777: BGPsecTransitiveDownOnlyEncrUpAS,
+        }),
         no_hash=False,
-    )
-    graph = PGraph009()
-    non_default_as_cls_dict = {
-        1: BGPsecTransitiveDownOnlyEncrUpAS,
-        3: BGPsecTransitiveDownOnlyEncrUpAS,
-        4: BGPsecTransitiveDownOnlyEncrUpAS,
-        5: BGPsecTransitiveDownOnlyEncrUpAS,
-        7: BGPsecTransitiveDownOnlyEncrUpAS,
-        777: BGPsecTransitiveDownOnlyEncrUpAS,
-    }
-    propagation_rounds = 2
-    SubgraphCls = OverheadBPOAllSubgraph
+    ),
+    graph=p_graph_009,
+    propagation_rounds=2,
+    # SubgraphCls=OverheadBPOAllSubgraph,
+)
