@@ -280,15 +280,15 @@ sim = SubgraphSimulation(
     parse_cpus=1,#cpu_count(),
 )
 print("about to run sims")
-import cProfile
-import pstats
+# import cProfile
+# import pstats
 
-profiler = cProfile.Profile()
-profiler.enable()
+# profiler = cProfile.Profile()
+# profiler.enable()
 sim.run(include_graphs=False)
-profiler.disable()
-# Write the stats to a file, sorted by 'cumulative' time
-with open('/tmp/profile_stats.txt', 'w') as file:
-    stats = pstats.Stats(profiler, stream=file)
-    stats.sort_stats('cumulative')
-    stats.print_stats()
+# profiler.disable()
+# # Write the stats to a file, sorted by 'cumulative' time
+# with open('/tmp/profile_stats.txt', 'w') as file:
+#     stats = pstats.Stats(profiler, stream=file)
+#     stats.sort_stats('cumulative')
+#     stats.print_stats()
