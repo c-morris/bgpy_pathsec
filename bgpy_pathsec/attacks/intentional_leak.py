@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 from bgpy import Prefixes, Relationships
 
 from .mh_leak import MHLeak
@@ -28,7 +30,7 @@ class IntentionalLeak(MHLeak):
             Prefixes.PREFIX.value
         )
         if attacker_ann is not None:
-            attacker_ann.seed_asn = attacker_asn
+            attacker_ann = replace(attacker_ann, seed_asn=attacker_asn)
         attacker = engine.as_dict[attacker_asn]
         if propagation_round == 0:
             attack_anns = []
@@ -42,10 +44,10 @@ class IntentionalLeak(MHLeak):
                 # after the most recent BGPsec Transitive adopter on the
                 # path
                 prev_len = len(atk_ann.as_path)
-                self._truncate_ann(atk_ann)
+                atk_ann = self._truncate_ann(atk_ann)
 
                 # Clear any down only communities
-                self._trim_do_communities(atk_ann)
+                atk_ann = self._trim_do_communities(atk_ann)
 
                 # Reprocess atk_ann to add the attacker's ASN
                 if prev_len != len(atk_ann.as_path):
@@ -105,11 +107,11 @@ class IntentionalLeak(MHLeak):
 
     def _truncate_ann(self, ann):
         if self.scenario_config.unknown_adopter:
-            self._truncate_ann_unknown_adopter(ann)
+            return self._truncate_ann_unknown_adopter(ann)
         elif self.scenario_config.no_hash:
-            self._truncate_ann_no_hash(ann)
+            return self._truncate_ann_no_hash(ann)
         else:
-            self._truncate_ann_hash(ann)
+            return self._truncate_ann_hash(ann)
 
     def _truncate_ann_hash(self, ann):
         """
@@ -133,7 +135,7 @@ class IntentionalLeak(MHLeak):
         The announcement will be reprocessed after, so the attacker's ASN will
         be re-added to the AS path.
         """
-        ann.as_path = ann.as_path[1:]  # remove attacker ASN
+        ann = replace(ann, as_path=ann.as_path[1:])  # remove attacker ASN
         # Case 0: if path is un-truncatable
         if (
             len(ann.as_path) < 2
@@ -145,7 +147,7 @@ class IntentionalLeak(MHLeak):
             or len(ann.as_path) == len(ann.bgpsec_path)
         ):  # noqa E129
             # Return without modifying path
-            return
+            return ann
 
         # Case 1
         i = 0  # bgpsec path
@@ -190,18 +192,19 @@ class IntentionalLeak(MHLeak):
         if case1path == [] and case2path == []:
             return
         if len(case1path) > len(case2path):
-            ann.as_path = case1path
+            ann = replace(ann, as_path=case1path)
         else:
-            ann.as_path = case2path
-        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+            ann = replace(ann, as_path=case2path)
+        ann = replace(ann, bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path]))
 
         # Set the path_end attribute
         if len(ann.as_path) < 2:
-            ann.path_end_valid = False
+            replace(ann, path_end_valid=False)
+        return ann
 
     def _truncate_ann_no_hash(self, ann):
         """Truncate to the first non-adopting ASN."""
-        ann.as_path = ann.as_path[1:]  # remove attacker ASN
+        ann = replace(ann, as_path=ann.as_path[1:])  # remove attacker ASN
         partial = ann.bgpsec_path
         full = ann.as_path
         removed = ann.removed_signatures
@@ -212,29 +215,37 @@ class IntentionalLeak(MHLeak):
         while i >= 0 and j > 0 and partial[i] == full[j]:
             i -= 1
             j -= 1
-        ann.as_path = ann.as_path[j:]
-        # update BGPsec path to match new AS path
-        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+        return replace(
+            ann,
+            as_path=ann.as_path[j:],
+            # update BGPsec path to match new AS path
+            bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path])
+        )
 
     def _truncate_ann_unknown_adopter(self, ann):
         old_bgpsec_path = ann.bgpsec_path
-        ann.bgpsec_path = tuple()
+        bgpsec_path = list()
 
-        for _asn in old_bgpsec_path:
-            if _asn not in ann.unknown_adopters:
-                ann.bgpsec_path += (_asn,)
 
-        self._truncate_ann_no_hash(ann)
+        for asn in old_bgpsec_path:
+            if asn not in ann.unknown_adopters:
+                bgpsec_path.append(asn)
+
+        ann = replace(ann, bgpsec_path=tuple(bgpsec_path))
+        return self._truncate_ann_no_hash(ann)
 
     def _trim_do_communities(self, ann):
         if self.scenario_config.communities_up:
-            self._trim_do_communities_up(ann)
+            return self._trim_do_communities_up(ann)
         else:
-            self._trim_do_communities_down(ann)
+            return self._trim_do_communities_down(ann)
 
     def _trim_do_communities_down(self, ann):
-        ann.do_communities = tuple(
-            x for x in ann.do_communities if x in ann.bgpsec_path
+        return replace(
+            ann,
+            do_communities=tuple([
+                x for x in ann.do_communities if x in ann.bgpsec_path
+            ])
         )
 
     def _trim_do_communities_up(self, ann):
@@ -247,4 +258,4 @@ class IntentionalLeak(MHLeak):
         will be detected. Therefore, if any down-only communities are
         present, they should not be removed.
         """
-        ann.up_pre = False
+        return replace(ann, up_pre=False)

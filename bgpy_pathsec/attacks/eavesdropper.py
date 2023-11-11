@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 from bgpy import Prefixes, Relationships
 
 from .shortest_path_export_all import ShortestPathExportAll
@@ -21,7 +23,7 @@ class Eavesdropper(ShortestPathExportAll):
             Prefixes.PREFIX.value
         )
         if attacker_ann is not None:
-            attacker_ann.seed_asn = attacker_asn
+            attacker_ann = replace(attacker_ann, seed_asn=attacker_asn)
             attacker = engine.as_dict[attacker_asn]
         if propagation_round == 0:
             attack_anns = []
@@ -69,7 +71,7 @@ class Eavesdropper(ShortestPathExportAll):
                 # Truncate path as much as possible, which is to the AS
                 # after the most recent BGPsec Transitive adopter on the
                 # path
-                self._truncate_ann(atk_ann)
+                atk_ann = self._truncate_ann(atk_ann)
 
                 # Clear any down only communities
                 self._trim_do_communities(atk_ann)
@@ -107,15 +109,19 @@ class Eavesdropper(ShortestPathExportAll):
         where an adopting origin sends to a non-adopting neighbor which isn't
         the attacker, but also can't be removed because of the signature.
         """
-        ann.as_path = ann.as_path[1:]  # remove attacker ASN
+        ann = replace(ann, as_path=ann.as_path[1:])  # remove attacker ASN
         if len(ann.as_path) == 1:
             if ann.next_as != 0:
                 # announcement cannot be shortened because of origin signature
-                ann.as_path = tuple([ann.next_as, ann.as_path[0]])
-                ann.bgpsec_path = tuple(
+                # ann.as_path = tuple([ann.next_as, ann.as_path[0]])
+                ann = replace(ann, as_path=tuple([ann.next_as, ann.as_path[0]]))
+                # ann.bgpsec_path = tuple(
+                #     x for x in ann.bgpsec_path if x in ann.as_path
+                # )
+                ann = replace(ann, bgp_sec_path=tuple([i
                     x for x in ann.bgpsec_path if x in ann.as_path
-                )
-                return
+                ]))
+                return ann
         partial = ann.bgpsec_path
         full = ann.as_path
         removed = ann.removed_signatures
@@ -126,6 +132,9 @@ class Eavesdropper(ShortestPathExportAll):
         while i >= 0 and j > 0 and partial[i] == full[j]:
             i -= 1
             j -= 1
-        ann.as_path = ann.as_path[j:]
-        # update BGPsec path to match new AS path
-        ann.bgpsec_path = tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+        return replace(
+            ann
+            as_path=ann.as_path[j:]
+            # update BGPsec path to match new AS path
+            bgpsec_path=tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+        )
