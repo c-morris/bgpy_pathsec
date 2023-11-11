@@ -1,5 +1,5 @@
 from ..graphs import PGraph009
-from ....attacks import GlobalEavesdropper
+from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
@@ -14,12 +14,12 @@ class Config037(EngineTestConfig):
     desc = ("GlobalEavesdropper attack with Transitive Dropping ASes with no "
             "adopting customers. Adopting customers are converted to "
             "TransitiveDroppingNeverAS nodes, except for the origin.")
-    scenario = GlobalEavesdropper(attacker_asns={ASNs.ATTACKER.value},
-                                  victim_asns={ASNs.VICTIM.value},
-                                  BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS, # noqa E501
-                                  AdoptASCls=BGPsecTransitiveDownOnlyAS,
-                                  AnnCls=PathManipulationAnn)
-
+    scenario = Eavesdropper(attacker_asns={ASNs.ATTACKER.value},
+                            victim_asns={ASNs.VICTIM.value},
+                            BaseASCls=TransitiveDroppingNoAdoptCustomersAlwaysAS, # noqa E501
+                            AdoptASCls=BGPsecTransitiveDownOnlyAS,
+                            AnnCls=PathManipulationAnn,
+                            communities_up=False)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,
                                3: BGPsecTransitiveDownOnlyAS,

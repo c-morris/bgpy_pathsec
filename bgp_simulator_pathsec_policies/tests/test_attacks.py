@@ -3,8 +3,8 @@ import pytest
 from bgp_simulator_pkg import Relationships
 
 from .. import PathManipulationAnn, IntentionalLeak
-from .. import IntentionalLeakNoHash, TwoHopAttack
-from .. import ShortestPathExportAllNoHashUp
+from .. import TwoHopAttack
+from .. import ShortestPathExportAll
 
 
 t1 = ([[(2,), (0, 2,), (2,)],
@@ -33,7 +33,7 @@ def test_truncate_path_hash(bgpsec_path, as_path, result):
                               seed_asn=None,
                               roa_valid_length=None,
                               roa_origin=None)
-    IntentionalLeak._truncate_ann(None, ann)
+    IntentionalLeak._truncate_ann_hash(None, ann)
     assert (ann.as_path == result)
 
 
@@ -61,7 +61,7 @@ def test_truncate_path_nohash(bgpsec_path, as_path, result):
                               seed_asn=None,
                               roa_valid_length=None,
                               roa_origin=None)
-    IntentionalLeakNoHash._truncate_ann(None, ann)
+    IntentionalLeak._truncate_ann_no_hash(None, ann)
     assert (ann.as_path == result)
 
 
@@ -102,5 +102,5 @@ def test_trim_do_communities_up(as_path, result):
                               seed_asn=None,
                               roa_valid_length=None,
                               roa_origin=None)
-    ShortestPathExportAllNoHashUp._trim_do_communities(None, ann)
+    ShortestPathExportAll._trim_do_communities(None, ann)
     assert (ann.do_communities == result)

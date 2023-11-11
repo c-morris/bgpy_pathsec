@@ -1,5 +1,5 @@
 from ..graphs import PGraph009
-from ....attacks import GlobalEavesdropperUpUnknownAdopters
+from ....attacks import Eavesdropper
 from ....policies import KAPKFalseAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
@@ -12,10 +12,11 @@ class Config041(EngineTestConfig):
     name = "P041"
     desc = ("KAPK False AS test, with the origin having unknown adoption "
             "status.")
-    scenario = GlobalEavesdropperUpUnknownAdopters(attacker_asns={ASNs.ATTACKER.value},
-                                                   victim_asns={ASNs.VICTIM.value},
-                                                   BaseASCls=BGPAS,
-                                                   AnnCls=PathManipulationAnn)
+    scenario = Eavesdropper(attacker_asns={ASNs.ATTACKER.value},
+                            victim_asns={ASNs.VICTIM.value},
+                            BaseASCls=BGPAS,
+                            AnnCls=PathManipulationAnn,
+                            unknown_adopter=True)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveAS,
                                2: BGPsecTransitiveAS,

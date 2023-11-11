@@ -1,11 +1,11 @@
 from ..graphs import PGraph009
-from ....attacks import EavesdropperUp
+from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
 
 
-class EavesdropperUpTest22(EavesdropperUp):
+class EavesdropperUpTest22(Eavesdropper):
 
     vantage_points = [7]
 
@@ -19,7 +19,8 @@ class Config022(EngineTestConfig):
     scenario = EavesdropperUpTest22(attacker_asns={ASNs.ATTACKER.value},
                                     victim_asns={ASNs.VICTIM.value},
                                     BaseASCls=BGPAS,
-                                    AnnCls=PathManipulationAnn)
+                                    AnnCls=PathManipulationAnn,
+                                    no_hash=False)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,
                                3: BGPsecTransitiveDownOnlyAS,

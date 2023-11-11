@@ -55,18 +55,11 @@ from bgp_simulator_pathsec_policies import BGPsecTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidLeakAS
 from bgp_simulator_pathsec_policies import OriginHijack
 from bgp_simulator_pathsec_policies import IntentionalLeak
-from bgp_simulator_pathsec_policies import IntentionalLeakNoHash
 from bgp_simulator_pathsec_policies import BGPsecAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHash
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUp
 from bgp_simulator_pathsec_policies import TwoHopAttack
-from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
-from bgp_simulator_pathsec_policies import RISEavesdropperUp
-from bgp_simulator_pathsec_policies import GlobalEavesdropper
-from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
-from bgp_simulator_pathsec_policies import TwoHopAttackUp
+from bgp_simulator_pathsec_policies import Eavesdropper
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
 from bgp_simulator_pathsec_policies import RibsInSizeSubgraph
@@ -80,9 +73,7 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimid
 from bgp_simulator_pathsec_policies import PathEndAggressiveAS
 from bgp_simulator_pathsec_policies import PathEndTimidAS
 from bgp_simulator_pathsec_policies import BaselineBGPAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashTimid
 from bgp_simulator_pathsec_policies import PathEndTimidUpAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllUp
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyUpTimidAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
@@ -117,11 +108,12 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveAggressiveAS,
             BaseASCls=BGPAS),
-        ShortestPathExportAllNoHash(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             # All BGPsecTransitive attacks must be NoHash
             AdoptASCls=BGPsecTransitiveTimidAS,
-            BaseASCls=BGPAS),
+            BaseASCls=BGPAS,
+            communities_up=False),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyAggressiveAS,
@@ -130,22 +122,19 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyTimidAS,
             BaseASCls=BGPAS),
-        ShortestPathExportAllUp(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyUpTimidAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllNoHash(
+            BaseASCls=BGPAS,
+            no_hash=False),
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashTimidAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllNoHashUp(
+            BaseASCls=BGPAS,
+            communities_up=False),
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllNoHashTimid(
-            AnnCls=PathManipulationAnn, 
-            # This says TimidLeak, it's really NoHashUpTimidLeak
-            AdoptASCls=BGPsecTransitiveDownOnlyTimidLeakAS,
             BaseASCls=BGPAS),
         OriginHijack(
             AnnCls=PathManipulationAnn, 
@@ -154,8 +143,9 @@ sim = Simulation(
         TwoHopAttack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=PathEndTimidAS,
-            BaseASCls=BGPAS),
-        TwoHopAttackUp(
+            BaseASCls=BGPAS,
+            communities_up=False),
+        TwoHopAttack(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=PathEndTimidUpAS,
             BaseASCls=BGPAS),
@@ -171,23 +161,26 @@ sim = Simulation(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
             BaseASCls=BGPAS),
-        GlobalEavesdropper(
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyGlobalEavesdropperAS,
-            BaseASCls=BGPAS),
-        GlobalEavesdropperUp(
+            BaseASCls=BGPAS,
+            no_hash=False,
+            communities_up=False),
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
-            BaseASCls=BGPAS),
-        ShortestPathExportAllNoHashUp(
+            BaseASCls=BGPAS,
+            no_hash=False),
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS,
             BaseASCls=TransitiveDroppingAS),
-        ShortestPathExportAllNoHashUp(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS,
             BaseASCls=TransitiveDropping2AS),
-        ShortestPathExportAllNoHashUp(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
             BaseASCls=TransitiveDropping4AS),

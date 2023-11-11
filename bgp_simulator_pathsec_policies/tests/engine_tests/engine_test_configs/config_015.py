@@ -1,5 +1,5 @@
 from ..graphs import PGraph007
-from ....attacks import IntentionalLeakTimid
+from ....attacks import IntentionalLeak
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
@@ -11,10 +11,10 @@ class Config015(EngineTestConfig):
     name = "P015"
     desc = ("Intentional Leak Timid-All attack, "
             "BGPsec Transitive Down Only Graph 7 test")
-    scenario = IntentionalLeakTimid(attacker_asns={ASNs.ATTACKER.value},
-                                    victim_asns={ASNs.VICTIM.value},
-                                    BaseASCls=BGPAS,
-                                    AnnCls=PathManipulationAnn)
+    scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
+                               victim_asns={ASNs.VICTIM.value},
+                               BaseASCls=BGPAS,
+                               AnnCls=PathManipulationAnn)
     graph = PGraph007()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,
                                2: BGPsecTransitiveDownOnlyAS,

@@ -16,7 +16,9 @@ class Config018(EngineTestConfig):
     scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
                                victim_asns={ASNs.VICTIM.value},
                                BaseASCls=BGPAS,
-                               AnnCls=PathManipulationAnn)
+                               AnnCls=PathManipulationAnn,
+                               no_hash=False,
+                               communities_up=False)
     graph = PGraph008()
     non_default_as_cls_dict = {5: BGPsecTransitiveWithPathShorteningDefenseAS,
                                6: BGPsecTransitiveWithPathShorteningDefenseAS,

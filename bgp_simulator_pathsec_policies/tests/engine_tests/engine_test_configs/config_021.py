@@ -1,5 +1,5 @@
 from ..graphs import PGraph009
-from ....attacks import IntentionalLeakNoHashUp
+from ....attacks import IntentionalLeak
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from bgp_simulator_pkg import EngineTestConfig, BGPAS, ASNs
@@ -11,10 +11,10 @@ class Config021(EngineTestConfig):
     name = "P021"
     desc = ("Fig 6 test, Intentional Leak "
             "attack with UP attributes but no path shortening defense.")
-    scenario = IntentionalLeakNoHashUp(attacker_asns={ASNs.ATTACKER.value},
-                                       victim_asns={ASNs.VICTIM.value},
-                                       BaseASCls=BGPAS,
-                                       AnnCls=PathManipulationAnn)
+    scenario = IntentionalLeak(attacker_asns={ASNs.ATTACKER.value},
+                               victim_asns={ASNs.VICTIM.value},
+                               BaseASCls=BGPAS,
+                               AnnCls=PathManipulationAnn)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,
                                3: BGPsecTransitiveDownOnlyAS,

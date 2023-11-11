@@ -10,8 +10,8 @@ class Eavesdropper(ShortestPathExportAll):
 
     vantage_points = []
 
-    def __init__(self, global_eavesdropper=True):
-        super().__init__()
+    def __init__(self, global_eavesdropper=True, **kwargs):
+        super().__init__(**kwargs)
         self.global_eavesdropper = global_eavesdropper
 
     def post_propagation_hook(self, engine,

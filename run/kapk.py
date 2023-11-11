@@ -55,19 +55,11 @@ from bgp_simulator_pathsec_policies import BGPsecTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidLeakAS
 from bgp_simulator_pathsec_policies import OriginHijack
 from bgp_simulator_pathsec_policies import IntentionalLeak
-from bgp_simulator_pathsec_policies import IntentionalLeakNoHash
 from bgp_simulator_pathsec_policies import BGPsecAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHash
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUp
 from bgp_simulator_pathsec_policies import TwoHopAttack
-from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
-from bgp_simulator_pathsec_policies import RISEavesdropperUp
-from bgp_simulator_pathsec_policies import GlobalEavesdropper
-from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
-from bgp_simulator_pathsec_policies import GlobalEavesdropperUpUnknownAdopters
-from bgp_simulator_pathsec_policies import TwoHopAttackUp
+from bgp_simulator_pathsec_policies import Eavesdropper
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
 from bgp_simulator_pathsec_policies import RibsInSizeSubgraph
@@ -81,9 +73,7 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimid
 from bgp_simulator_pathsec_policies import PathEndAggressiveAS
 from bgp_simulator_pathsec_policies import PathEndTimidAS
 from bgp_simulator_pathsec_policies import BaselineBGPAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashTimid
 from bgp_simulator_pathsec_policies import PathEndTimidUpAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllUp
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyUpTimidAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
@@ -106,7 +96,6 @@ from bgp_simulator_pathsec_policies import KAPKFalse05AS
 from bgp_simulator_pathsec_policies import KAPKFalse5AS
 from bgp_simulator_pathsec_policies import KAPKFalseAlwaysAS
 from bgp_simulator_pathsec_policies import KAPKFalseNeverAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUpUnknownAdopters
 
 
 
@@ -118,23 +107,27 @@ sim = Simulation(
         #   AnnCls=PathManipulationAnn, 
         #   AdoptASCls=KAPKFalseAS,  
         #   BaseASCls=BGPsecTransitiveAS),
-        GlobalEavesdropperUpUnknownAdopters(
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=KAPKFalse01AS,
-            BaseASCls=BGPAS),
-        GlobalEavesdropperUpUnknownAdopters(
+            BaseASCls=BGPAS,
+            unknown_adopter=True),
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=KAPKFalse05AS,
-            BaseASCls=BGPAS),
-        GlobalEavesdropperUpUnknownAdopters(
+            BaseASCls=BGPAS,
+            unknown_adopter=True),
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=KAPKFalseAS,
-            BaseASCls=BGPAS),
-        GlobalEavesdropperUpUnknownAdopters(
+            BaseASCls=BGPAS,
+            unknown_adopter=True),
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=KAPKFalse5AS,
-            BaseASCls=BGPAS),
-        GlobalEavesdropperUp(
+            BaseASCls=BGPAS,
+            unknown_adopter=True),
+        Eavesdropper(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS,
             BaseASCls=BGPAS),

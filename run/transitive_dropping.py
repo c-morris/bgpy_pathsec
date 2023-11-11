@@ -55,18 +55,11 @@ from bgp_simulator_pathsec_policies import BGPsecTimidAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidLeakAS
 from bgp_simulator_pathsec_policies import OriginHijack
 from bgp_simulator_pathsec_policies import IntentionalLeak
-from bgp_simulator_pathsec_policies import IntentionalLeakNoHash
 from bgp_simulator_pathsec_policies import BGPsecAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveAS
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHash
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashUp
 from bgp_simulator_pathsec_policies import TwoHopAttack
-from bgp_simulator_pathsec_policies import IntentionalLeakNoHashUp
-from bgp_simulator_pathsec_policies import RISEavesdropperUp
-from bgp_simulator_pathsec_policies import GlobalEavesdropper
-from bgp_simulator_pathsec_policies import GlobalEavesdropperUp
-from bgp_simulator_pathsec_policies import TwoHopAttackUp
+from bgp_simulator_pathsec_policies import Eavesdropper
 from bgp_simulator_pathsec_policies import OverheadAllSubgraph
 from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
 from bgp_simulator_pathsec_policies import RibsInSizeSubgraph
@@ -81,9 +74,7 @@ from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimid
 from bgp_simulator_pathsec_policies import PathEndAggressiveAS
 from bgp_simulator_pathsec_policies import PathEndTimidAS
 from bgp_simulator_pathsec_policies import BaselineBGPAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllNoHashTimid
 from bgp_simulator_pathsec_policies import PathEndTimidUpAS
-from bgp_simulator_pathsec_policies import ShortestPathExportAllUp
 from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyUpTimidAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecAS
 from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
@@ -111,15 +102,15 @@ random.seed(os.environ['JOB_COMPLETION_INDEX'])
 sim = Simulation(
     num_trials=70,
     scenarios=[
-        ShortestPathExportAllNoHashUp(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS,
             BaseASCls=TransitiveDroppingNoAdoptCustomersAS),
-        ShortestPathExportAllNoHashUp(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS,
             BaseASCls=TransitiveDroppingNoAdoptCustomers2AS),
-        ShortestPathExportAllNoHashUp(
+        ShortestPathExportAll(
             AnnCls=PathManipulationAnn, 
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS,
             BaseASCls=TransitiveDroppingNoAdoptCustomers4AS),

@@ -19,8 +19,8 @@ class IntentionalLeak(MHLeak):
     provider's ASN on them).
     """
 
-    def __init__(self, no_hash=True, communities_up=True, unknown_adopter=False):
-        super().__init__()
+    def __init__(self, no_hash=True, communities_up=True, unknown_adopter=False, **kwargs):
+        super().__init__(**kwargs)
         self.no_hash = no_hash
         self.communities_up = communities_up
         self.unknown_adopter = unknown_adopter
@@ -97,12 +97,12 @@ class IntentionalLeak(MHLeak):
                                                scenario=self)
 
     def _truncate_ann(self, ann):
-        if self.no_hash and self.unknown_adopter:
-            self._truncate_ann_unknown_adopter(self, ann)
+        if self.unknown_adopter:
+            self._truncate_ann_unknown_adopter(ann)
         elif self.no_hash:
-            self._truncate_ann_no_hash(self, ann)
+            self._truncate_ann_no_hash(ann)
         else:
-            self._truncate_ann_hash(self, ann)
+            self._truncate_ann_hash(ann)
 
     def _truncate_ann_hash(self, ann):
         """
@@ -208,13 +208,13 @@ class IntentionalLeak(MHLeak):
             if _asn not in ann.unknown_adopters:
                 ann.bgpsec_path += (_asn,)
 
-        super()._truncate_ann(ann)
+        self._truncate_ann_no_hash(ann)
 
     def _trim_do_communities(self, ann):
         if self.communities_up:
-            self._trim_do_communities_up(self, ann)
+            self._trim_do_communities_up(ann)
         else:
-            self._trim_do_communities_down(self, ann)
+            self._trim_do_communities_down(ann)
 
     def _trim_do_communities_down(self, ann):
         ann.do_communities = tuple(x for x in ann.do_communities

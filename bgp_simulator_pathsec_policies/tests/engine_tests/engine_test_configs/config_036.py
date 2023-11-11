@@ -1,5 +1,5 @@
 from ..graphs import PGraph012
-from ....attacks import GlobalEavesdropper
+from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
 from ....subgraphs import OverheadBPOAllSubgraph
@@ -12,12 +12,13 @@ class Config036(EngineTestConfig):
     name = "P036"
     desc = ("GlobalEavesdropper with otherwise unseen announcement test. "
             "The attack announcement should be from AS 8.")
-    scenario = GlobalEavesdropper(attacker_asns={ASNs.ATTACKER.value},
-                                  victim_asns={ASNs.VICTIM.value},
-                                  BaseASCls=BGPAS,
-                                  AdoptASCls=BGPsecTransitiveDownOnlyAS,
-                                  AnnCls=PathManipulationAnn)
-
+    scenario = Eavesdropper(attacker_asns={ASNs.ATTACKER.value},
+                            victim_asns={ASNs.VICTIM.value},
+                            BaseASCls=BGPAS,
+                            AdoptASCls=BGPsecTransitiveDownOnlyAS,
+                            AnnCls=PathManipulationAnn,
+                            no_hash=False,
+                            communities_up=False)
     graph = PGraph012()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,
                                2: BGPsecTransitiveDownOnlyAS,
