@@ -1,8 +1,6 @@
 from bgpy import Scenario, Prefixes, Relationships, Timestamps
 
 from ..policies import BGPsecAS, BGPsecTransitiveAS
-from ..policies import TransitiveDroppingNoAdoptCustomersAS
-from ..policies import TransitiveDroppingNoAdoptCustomersAlwaysAS
 from ..policies import TransitiveDroppingNeverAS
 
 
@@ -45,10 +43,3 @@ class MHPathManipulation(Scenario):
         BGPsecTransitiveAS.bpo_count = 0
         TransitiveDroppingNoAdoptCustomersAS.convert_count = 0
         super().setup_engine(*args, **kwargs)
-        if (
-            self.scenario_config.BaseASCls
-            == TransitiveDroppingNoAdoptCustomersAlwaysAS
-        ):
-            self.as_classes_used = self.as_classes_used | frozenset(
-                [TransitiveDroppingNeverAS]
-            )

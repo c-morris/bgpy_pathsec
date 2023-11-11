@@ -9,6 +9,7 @@ from .attacks import TwoHopAttack
 from .attacks import Eavesdropper
 from .attacks import ValidSignature
 from .attacks import PathsecScenarioConfig
+from .attacks import TransitiveDroppingNoAdoptCustomers
 
 from .policies import BGPsecAS
 from .policies import DownOnlyAS
@@ -42,12 +43,6 @@ from .policies import TransitiveDropping64AS
 from .policies import TransitiveDropping99AS
 from .policies import TransitiveDroppingAlwaysAS
 from .policies import TransitiveDroppingNeverAS
-from .policies import TransitiveDroppingNoAdoptCustomersAS
-from .policies import TransitiveDroppingNoAdoptCustomersAlwaysAS
-from .policies import TransitiveDroppingNoAdoptCustomers2AS
-from .policies import TransitiveDroppingNoAdoptCustomers4AS
-from .policies import TransitiveDroppingNoAdoptCustomers8AS
-from .policies import TransitiveDroppingNoAdoptCustomers16AS
 from .policies import OverheadBGPsecAS
 from .policies import OverheadBGPsecTransitiveDownOnlyAS
 from .policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS

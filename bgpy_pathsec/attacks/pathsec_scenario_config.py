@@ -12,4 +12,4 @@ class PathsecScenarioConfig(ScenarioConfig):
     unknown_adopter: bool = False
     attacker_subcategory_attr: str = ASGroups.MULTIHOMED.value
     victim_subcategory_attr: str = ASGroups.MULTIHOMED.value
-    transitive_dropping_percent = 0
+    transitive_dropping_percent: int = 0
