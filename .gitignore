@@ -2,6 +2,7 @@
 *.gv
 *.pdf
 *.gv.png
+*.png
 *guess.yaml
 
 # Byte-compiled / optimized / DLL files

@@ -1,11 +1,1 @@
-# http for github actions, and I believe github no longer supports ssh with pip
-git+https://github.com/jfuruness/bgp_simulator_pkg.git@f1d388afd9460de2d15ec8a6189bf4a66a26ae8a
-matplotlib==3.5.2
-pytest==7.1.2
-# Dev
-types-requests==2.26.1
-pytest-cov==3.0.0
-mypy==0.910
-flake8==4.0.1
-tox==3.24.4
-pytest-xdist==2.5.0
+bgpy_pkg[test]

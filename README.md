@@ -1,6 +1,6 @@
 ![Tests](https://github.com/c-morris/bgp-simulator-pathsec-policies/actions/workflows/tests.yml/badge.svg)
 
-# bgp_simulator_pathsec_policies
+# bgpy_pathsec
 
 This package is for simulating defenses against BGP Path Manipulation attacks
 and Route Leaks. Additional documentation can be found in the docs directory.
@@ -15,7 +15,7 @@ This package requires Python >= 3.7.
 To install for development
 ```sh
 git clone https://github.com/c-morris/bgp-simulator-policies.git
-cd bgp_simulator_pathsec_policies
+cd bgpy_pathsec
 pip install -e .
 ```
 
@@ -41,7 +41,7 @@ pytest
 Human-readable results of the system integration tests can be found in
 tests/engine_tests/engine_test_outputs/aggregated_diagrams.pdf. More detailed
 test results are stored as YAML in each subdirectory of the engine_test_outputs
-directory. 
+directory.
 
 When the tests run, the running simulator output is saved in a \*-guess.yml
 file and compared to a known-good ground truth (\*-gt.yml) file. Any difference
@@ -50,4 +50,4 @@ keep in mind when modifying data structures, especially the announcement class,
 because these modifications will change the yaml without necessarily making the
 simulator behave incorrectly. In cases like this where a large number of false
 failures are created, the \*-gt.yml files can be deleted and the next run of
-`pytest` will re-generate them.   
+`pytest` will re-generate them.
