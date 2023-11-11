@@ -8,6 +8,7 @@
       bgpsec_path: !!python/tuple
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 2
       path_end_valid: true
@@ -40,6 +41,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 7
           next_as: 2
@@ -68,6 +70,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 2
           path_end_valid: true
@@ -78,9 +81,9 @@
           removed_signatures: !!python/tuple []
           roa_origin: 777
           roa_valid_length: true
-          seed_asn: null
+          seed_asn: 777
           timestamp: 0
-          traceback_end: false
+          traceback_end: true
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
@@ -93,6 +96,7 @@
         bgpsec_path: !!python/tuple
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 7
         path_end_valid: true
@@ -117,6 +121,7 @@
         bgpsec_path: !!python/tuple
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 777
         path_end_valid: true
@@ -159,6 +164,7 @@
       - 7
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple
       - 7
       next_as: 3
@@ -195,6 +201,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 7
           next_as: 3
@@ -232,6 +239,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 666
           path_end_valid: true
@@ -242,7 +250,7 @@
           removed_signatures: !!python/tuple []
           roa_origin: 777
           roa_valid_length: true
-          seed_asn: 666
+          seed_asn: null
           timestamp: 0
           traceback_end: false
           unknown_adopters: !!python/tuple
@@ -274,6 +282,7 @@
       - 7
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 4
       path_end_valid: true
@@ -307,6 +316,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 4
           path_end_valid: true
@@ -337,6 +347,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 6
         path_end_valid: true
@@ -366,6 +377,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 7
         path_end_valid: true
@@ -407,6 +419,7 @@
       - 7
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple
       - 7
       next_as: 5
@@ -441,6 +454,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 7
           next_as: 5
@@ -472,6 +486,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 7
         next_as: 3
@@ -511,8 +526,12 @@
       - 2
       - 777
       bgpsec_path: !!python/tuple
+      - 6
+      - 6
+      - 4
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 666
       path_end_valid: true
@@ -548,6 +567,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 6
           path_end_valid: true
@@ -577,8 +597,11 @@
           - 2
           - 777
           bgpsec_path: !!python/tuple
+          - 6
+          - 4
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 666
           path_end_valid: true
@@ -615,6 +638,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 6
           path_end_valid: true
@@ -653,6 +677,7 @@
       - 7
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 7
       path_end_valid: true
@@ -683,6 +708,7 @@
           bgpsec_path: !!python/tuple
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 7
           path_end_valid: true
@@ -715,6 +741,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 7
           path_end_valid: true
@@ -743,6 +770,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 7
         next_as: 2
@@ -771,6 +799,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 4
         path_end_valid: true
@@ -798,6 +827,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 7
         next_as: 5
@@ -844,6 +874,7 @@
       - 7
       - 2
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 666
       path_end_valid: true
@@ -854,7 +885,7 @@
       removed_signatures: !!python/tuple []
       roa_origin: 777
       roa_valid_length: true
-      seed_asn: 666
+      seed_asn: null
       timestamp: 0
       traceback_end: false
       unknown_adopters: !!python/tuple
@@ -881,6 +912,7 @@
           - 7
           - 2
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 666
           path_end_valid: true
@@ -914,6 +946,7 @@
         - 7
         - 2
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 666
         path_end_valid: true
@@ -924,7 +957,7 @@
         removed_signatures: !!python/tuple []
         roa_origin: 777
         roa_valid_length: true
-        seed_asn: 666
+        seed_asn: null
         timestamp: 0
         traceback_end: false
         unknown_adopters: !!python/tuple
@@ -949,6 +982,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 777
       path_end_valid: true
@@ -974,6 +1008,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 2
         path_end_valid: true
@@ -984,9 +1019,9 @@
         removed_signatures: !!python/tuple []
         roa_origin: 777
         roa_valid_length: true
-        seed_asn: null
+        seed_asn: 777
         timestamp: 0
-        traceback_end: false
+        traceback_end: true
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
