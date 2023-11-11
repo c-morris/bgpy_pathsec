@@ -51,7 +51,7 @@ def test_truncate_path_hash(bgpsec_path, as_path, result):
         roa_valid_length=None,
         roa_origin=None,
     )
-    IntentionalLeak._truncate_ann_hash(None, ann)
+    ann = IntentionalLeak._truncate_ann_hash(None, ann)
     assert ann.as_path == result
 
 
@@ -93,7 +93,7 @@ def test_truncate_path_nohash(bgpsec_path, as_path, result):
         roa_valid_length=None,
         roa_origin=None,
     )
-    IntentionalLeak._truncate_ann_no_hash(None, ann)
+    ann = IntentionalLeak._truncate_ann_no_hash(None, ann)
     assert ann.as_path == result
 
 
@@ -114,7 +114,7 @@ def test_truncate_path_twohop(as_path, result):
         roa_valid_length=None,
         roa_origin=None,
     )
-    TwoHopAttack._truncate_ann(None, ann)
+    ann = TwoHopAttack._truncate_ann(None, ann)
     assert ann.as_path == result
 
 
@@ -136,5 +136,5 @@ def test_trim_do_communities_up(as_path, result):
         roa_valid_length=None,
         roa_origin=None,
     )
-    ShortestPathExportAll._trim_do_communities_up(None, ann)
+    ann = ShortestPathExportAll._trim_do_communities_up(None, ann)
     assert ann.do_communities == result

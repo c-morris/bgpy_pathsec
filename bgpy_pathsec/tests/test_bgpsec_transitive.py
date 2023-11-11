@@ -34,10 +34,10 @@ def test_process_incoming_anns_bgpsec_transitive_reject():
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
+        bgpsec_path = tuple(),
+        next_as = 1,
+        removed_signatures = (13795,),
     )
-    ann.bgpsec_path = tuple()
-    ann.next_as = 1
-    ann.removed_signatures = (13795,)
     a = BGPsecTransitiveAS(1)
     # Now add announcement with missing signatures
     a._recv_q.add_ann(ann)

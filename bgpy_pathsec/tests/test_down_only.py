@@ -16,8 +16,8 @@ def test_process_incoming_anns_do_reject():
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
+        do_communities = (13796,),
     )
-    ann.do_communities = (13796,)
     a = DownOnlyAS(1)
     a._recv_q.add_ann(ann)
     a.process_incoming_anns(
@@ -38,8 +38,8 @@ def test_process_incoming_anns_do_accept():
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
+        do_communities = (13796,),
     )
-    ann.do_communities = (13796,)
     a = DownOnlyAS(1)
     a._recv_q.add_ann(ann)
     a.process_incoming_anns(
