@@ -1,7 +1,7 @@
-from bgpy import Prefixes, Relationships, Timestamps, ValidPrefix
+from bgpy import Prefixes, Relationships, Timestamps, Scenario
 
 
-class ValidSignature(ValidPrefix):
+class ValidSignature(Scenario):
     """ValidPrefix, but with valid BGPsec Signatures.
 
     This is for comparing overhead (without attacks) between BGPsec and BGPsec

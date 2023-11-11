@@ -196,18 +196,6 @@ sim = SubgraphSimulation(
             BaseASCls=BGPAS,
         ),
         PathsecScenarioConfig(
-            ScenarioCls=ValidSignature,
-            AnnCls=PathManipulationAnn,
-            AdoptASCls=OverheadBGPsecAS,
-            BaseASCls=BGPAS,
-        ),
-        PathsecScenarioConfig(
-            ScenarioCls=ValidSignature,
-            AnnCls=PathManipulationAnn,
-            AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
-            BaseASCls=BGPAS,
-        ),
-        PathsecScenarioConfig(
             ScenarioCls=Eavesdropper,
             AnnCls=PathManipulationAnn,
             AdoptASCls=BGPsecTransitiveDownOnlyGlobalEavesdropperAS,
@@ -239,6 +227,19 @@ sim = SubgraphSimulation(
             AnnCls=PathManipulationAnn,
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS,
             BaseASCls=TransitiveDropping4AS,
+        ),
+        # Must be at the end since this has 0 attackers
+        PathsecScenarioConfig(
+            ScenarioCls=ValidSignature,
+            AnnCls=PathManipulationAnn,
+            AdoptASCls=OverheadBGPsecAS,
+            BaseASCls=BGPAS,
+        ),
+        PathsecScenarioConfig(
+            ScenarioCls=ValidSignature,
+            AnnCls=PathManipulationAnn,
+            AdoptASCls=OverheadBGPsecTransitiveDownOnlyAS,
+            BaseASCls=BGPAS,
         ),
     ],
     propagation_rounds=2,
@@ -278,5 +279,5 @@ sim = SubgraphSimulation(
     # output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
     parse_cpus=1,#cpu_count(),
 )
-
+print("about to run sims")
 sim.run()
