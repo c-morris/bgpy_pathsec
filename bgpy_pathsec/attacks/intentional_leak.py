@@ -195,7 +195,10 @@ class IntentionalLeak(MHLeak):
             ann = replace(ann, as_path=case1path)
         else:
             ann = replace(ann, as_path=case2path)
-        ann = replace(ann, bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path]))
+        ann = replace(
+            ann,
+            bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path]),
+        )
 
         # Set the path_end attribute
         if len(ann.as_path) < 2:
@@ -219,13 +222,12 @@ class IntentionalLeak(MHLeak):
             ann,
             as_path=ann.as_path[j:],
             # update BGPsec path to match new AS path
-            bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path])
+            bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path]),
         )
 
     def _truncate_ann_unknown_adopter(self, ann):
         old_bgpsec_path = ann.bgpsec_path
         bgpsec_path = list()
-
 
         for asn in old_bgpsec_path:
             if asn not in ann.unknown_adopters:
@@ -243,9 +245,9 @@ class IntentionalLeak(MHLeak):
     def _trim_do_communities_down(self, ann):
         return replace(
             ann,
-            do_communities=tuple([
-                x for x in ann.do_communities if x in ann.bgpsec_path
-            ])
+            do_communities=tuple(
+                [x for x in ann.do_communities if x in ann.bgpsec_path]
+            ),
         )
 
     def _trim_do_communities_up(self, ann):

@@ -12,7 +12,7 @@ class RibsInSizeSubgraph(Subgraph):
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
 
-        return f"ribs_in_size_all"
+        return "ribs_in_size_all"
 
     @property
     def y_axis_label(self) -> str:
@@ -31,7 +31,7 @@ class RibsInSizeAdoptingSubgraph(RibsInSizeSubgraph):
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
 
-        return f"ribs_in_size_adopting"
+        return "ribs_in_size_adopting"
 
 
 class RibsInSizeNonAdoptingSubgraph(RibsInSizeSubgraph):
@@ -44,7 +44,7 @@ class RibsInSizeNonAdoptingSubgraph(RibsInSizeSubgraph):
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
 
-        return f"ribs_in_size_non_adopting"
+        return "ribs_in_size_non_adopting"
 
 
 class RibsInValidNonAdoptingSubgraph(RibsInSizeSubgraph):
@@ -57,7 +57,7 @@ class RibsInValidNonAdoptingSubgraph(RibsInSizeSubgraph):
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
 
-        return f"ribs_in_valid_non_adopting"
+        return "ribs_in_valid_non_adopting"
 
 
 class RibsInValidAdoptingSubgraph(RibsInSizeSubgraph):
@@ -69,4 +69,4 @@ class RibsInValidAdoptingSubgraph(RibsInSizeSubgraph):
 
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
-        return f"ribs_in_valid_adopting"
+        return "ribs_in_valid_adopting"

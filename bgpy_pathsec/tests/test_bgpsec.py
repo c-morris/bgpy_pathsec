@@ -34,8 +34,8 @@ def test_process_incoming_anns_bgpsec_depref():
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
-        bgpsec_path = as_path,
-        next_as = 1,
+        bgpsec_path=as_path,
+        next_as=1,
     )
     a = BGPsecAS(1)
     # Remove these later when they're fixed
@@ -72,8 +72,9 @@ def test_bgpsec_update_attrs(BasePolicyCls):
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
-        bgpsec_path = (13796,),
-        next_as = 1    )
+        bgpsec_path=(13796,),
+        next_as=1,
+    )
     a = BasePolicyCls(1)
     b = BasePolicyCls(2)
     # Remove these later when they're fixed
@@ -104,8 +105,8 @@ def test_bgpsec_remove_attrs():
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
-        bgpsec_path = (13796,),
-        next_as = 13795
+        bgpsec_path=(13796,),
+        next_as=13795,
     )
     a = BGPsecAS(1)
     b = BGPsecAS(2)

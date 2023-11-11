@@ -37,7 +37,8 @@ class Eavesdropper(ShortestPathExportAll):
                 current_as = engine.as_dict[asn]
                 if (
                     current_as.name == self.scenario_config.AdoptASCls.name
-                    or current_as.name == "Pseudo" + self.scenario_config.AdoptASCls.name
+                    or current_as.name
+                    == "Pseudo" + self.scenario_config.AdoptASCls.name
                 ) and asn != attacker_asn:
                     # if adopting and not attacker
                     continue
@@ -118,9 +119,12 @@ class Eavesdropper(ShortestPathExportAll):
                 # ann.bgpsec_path = tuple(
                 #     x for x in ann.bgpsec_path if x in ann.as_path
                 # )
-                ann = replace(ann, bgp_sec_path=tuple([
-                    x for x in ann.bgpsec_path if x in ann.as_path
-                ]))
+                ann = replace(
+                    ann,
+                    bgp_sec_path=tuple(
+                        [x for x in ann.bgpsec_path if x in ann.as_path]
+                    ),
+                )
                 return ann
         partial = ann.bgpsec_path
         full = ann.as_path
@@ -136,5 +140,5 @@ class Eavesdropper(ShortestPathExportAll):
             ann,
             as_path=ann.as_path[j:],
             # update BGPsec path to match new AS path
-            bgpsec_path=tuple(x for x in ann.bgpsec_path if x in ann.as_path)
+            bgpsec_path=tuple(x for x in ann.bgpsec_path if x in ann.as_path),
         )

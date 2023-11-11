@@ -6,6 +6,7 @@ from ..graphs import p_graph_009
 from ....attacks import OriginHijack
 from ....policies import BGPsecAS
 from ....announcements import PathManipulationAnn
+
 # from ....subgraphs import OverheadBPOAllSubgraph
 
 config_p_026 = EngineTestConfig(
@@ -20,16 +21,18 @@ config_p_026 = EngineTestConfig(
         BaseASCls=BGPAS,
         override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
         override_victim_asns=frozenset({ASNs.VICTIM.value}),
-        override_non_default_asn_cls_dict=frozendict({
-            1: BGPsecAS,
-            2: BGPsecAS,
-            3: BGPsecAS,
-            4: BGPsecAS,
-            5: BGPsecAS,
-            6: BGPsecAS,
-            7: BGPsecAS,
-            777: BGPsecAS,
-        }),
+        override_non_default_asn_cls_dict=frozendict(
+            {
+                1: BGPsecAS,
+                2: BGPsecAS,
+                3: BGPsecAS,
+                4: BGPsecAS,
+                5: BGPsecAS,
+                6: BGPsecAS,
+                7: BGPsecAS,
+                777: BGPsecAS,
+            }
+        ),
     ),
     graph=p_graph_009,
     propagation_rounds=1,

@@ -10,6 +10,7 @@ from ....announcements import PathManipulationAnn
 
 class BGPsecTransitiveWithPathShorteningDefenseAS(BGPsecTransitiveAS):
     """For use with IntentionalLeak"""
+
     name = "BGP-Isec with Path Shortening Defense"
 
 
@@ -25,19 +26,21 @@ config_p_017 = EngineTestConfig(
         BaseASCls=BGPAS,
         override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
         override_victim_asns=frozenset({ASNs.VICTIM.value}),
-        override_non_default_asn_cls_dict=frozendict({
-            4: BGPsecTransitiveWithPathShorteningDefenseAS,
-            5: BGPsecTransitiveWithPathShorteningDefenseAS,
-            6: BGPsecTransitiveWithPathShorteningDefenseAS,
-            7: BGPsecTransitiveWithPathShorteningDefenseAS,
-            8: BGPsecTransitiveWithPathShorteningDefenseAS,
-            9: BGPsecTransitiveWithPathShorteningDefenseAS,
-            10: BGPsecTransitiveWithPathShorteningDefenseAS,
-            11: BGPsecTransitiveWithPathShorteningDefenseAS,
-            12: BGPsecTransitiveWithPathShorteningDefenseAS,
-            14: BGPsecTransitiveWithPathShorteningDefenseAS,
-            777: BGPsecTransitiveWithPathShorteningDefenseAS,
-        }),
+        override_non_default_asn_cls_dict=frozendict(
+            {
+                4: BGPsecTransitiveWithPathShorteningDefenseAS,
+                5: BGPsecTransitiveWithPathShorteningDefenseAS,
+                6: BGPsecTransitiveWithPathShorteningDefenseAS,
+                7: BGPsecTransitiveWithPathShorteningDefenseAS,
+                8: BGPsecTransitiveWithPathShorteningDefenseAS,
+                9: BGPsecTransitiveWithPathShorteningDefenseAS,
+                10: BGPsecTransitiveWithPathShorteningDefenseAS,
+                11: BGPsecTransitiveWithPathShorteningDefenseAS,
+                12: BGPsecTransitiveWithPathShorteningDefenseAS,
+                14: BGPsecTransitiveWithPathShorteningDefenseAS,
+                777: BGPsecTransitiveWithPathShorteningDefenseAS,
+            }
+        ),
         no_hash=False,
         communities_up=False,
     ),

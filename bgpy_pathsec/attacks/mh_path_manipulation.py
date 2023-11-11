@@ -5,7 +5,6 @@ from ..policies import TransitiveDroppingNoAdoptCustomersAS
 
 
 class MHPathManipulation(Scenario):
-
     def _get_announcements(self, *args, **kwargs):
         """Returns the two announcements seeded for this engine input
 

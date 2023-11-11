@@ -26,7 +26,9 @@ class BGPsecTransitiveDownOnlyEncrUpAS(BGPsecTransitiveDownOnlyAS):
     ):
         # UP preimage modifications
         if propagate_to in (Relationships.CUSTOMERS, Relationships.PEERS):
-            ann_to_send = replace(ann_to_send, up_pre = False)
-        return super(BGPsecTransitiveDownOnlyEncrUpAS, self).down_only_modifications(
+            ann_to_send = replace(ann_to_send, up_pre=False)
+        return super(
+            BGPsecTransitiveDownOnlyEncrUpAS, self
+        ).down_only_modifications(
             as_obj, ann_to_send, propagate_to, *args, **kwargs
         )

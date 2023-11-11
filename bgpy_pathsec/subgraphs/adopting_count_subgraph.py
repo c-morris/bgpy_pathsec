@@ -10,7 +10,7 @@ class AdoptingCountSubgraph(Subgraph):
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
 
-        return f"adopting_count"
+        return "adopting_count"
 
     @property
     def y_axis_label(self) -> str:

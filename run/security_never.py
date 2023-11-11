@@ -3,12 +3,6 @@ import random
 from pathlib import Path
 
 from bgpy import Simulation, BGPAS
-from bgpy import Prefixes
-from bgpy import Timestamps
-from bgpy import ASNs
-from bgpy import Announcement
-from bgpy import Relationships
-from bgpy import Scenario
 from bgpy import AttackerSuccessAllSubgraph
 from bgpy import DisconnectedAllSubgraph
 from bgpy import VictimSuccessAllSubgraph
@@ -35,7 +29,6 @@ from bgpy import VictimSuccessNonAdoptingInputCliqueSubgraph
 from bgpy import VictimSuccessNonAdoptingStubsAndMHSubgraph
 
 from bgpy_pathsec import PathManipulationAnn
-from bgpy_pathsec import PathEndAS
 from bgpy_pathsec import BGPsecAggressiveAS
 from bgpy_pathsec import BGPsecTransitiveAggressiveAS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyAggressiveAS
@@ -45,25 +38,12 @@ from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashTimidAS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashAggressiveAS
-from bgpy_pathsec import BGPsecTimidAS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyTimidLeakAS
 from bgpy_pathsec import OriginHijack
-from bgpy_pathsec import IntentionalLeak
-from bgpy_pathsec import IntentionalLeakNoHash
 from bgpy_pathsec import BGPsecAS
-from bgpy_pathsec import BGPsecTransitiveAS
-from bgpy_pathsec import BGPsecTransitiveDownOnlyAS
 from bgpy_pathsec import ShortestPathExportAllNoHash
 from bgpy_pathsec import ShortestPathExportAllNoHashUp
 from bgpy_pathsec import TwoHopAttack
-from bgpy_pathsec import IntentionalLeakNoHashUp
-from bgpy_pathsec import RISEavesdropperUp
 from bgpy_pathsec import GlobalEavesdropper
 from bgpy_pathsec import GlobalEavesdropperUp
 from bgpy_pathsec import TwoHopAttackUp
@@ -90,12 +70,6 @@ from bgpy_pathsec import ValidSignature
 from bgpy_pathsec import TransitiveDroppingAS
 from bgpy_pathsec import TransitiveDropping2AS
 from bgpy_pathsec import TransitiveDropping4AS
-from bgpy_pathsec import TransitiveDropping8AS
-from bgpy_pathsec import TransitiveDropping16AS
-from bgpy_pathsec import TransitiveDropping32AS
-from bgpy_pathsec import TransitiveDropping64AS
-from bgpy_pathsec import TransitiveDropping99AS
-from bgpy_pathsec import TransitiveDroppingAlwaysAS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
 

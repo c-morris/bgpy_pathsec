@@ -19,12 +19,14 @@ config_p_002 = EngineTestConfig(
         BaseASCls=BGPAS,
         override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
         override_victim_asns=frozenset({ASNs.VICTIM.value}),
-        override_non_default_asn_cls_dict=frozendict({
-            1: BGPsecTransitiveAS,
-            3: BGPsecTransitiveAS,
-            4: BGPsecTransitiveAS,
-            777: BGPsecTransitiveAS,
-        }),
+        override_non_default_asn_cls_dict=frozendict(
+            {
+                1: BGPsecTransitiveAS,
+                3: BGPsecTransitiveAS,
+                4: BGPsecTransitiveAS,
+                777: BGPsecTransitiveAS,
+            }
+        ),
     ),
     graph=p_graph_001,
     propagation_rounds=1,

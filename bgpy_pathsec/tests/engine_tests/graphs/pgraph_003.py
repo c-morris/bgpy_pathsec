@@ -18,5 +18,5 @@ p_graph_003 = GraphInfo(
             CPLink(provider_asn=2, customer_asn=4),
             CPLink(provider_asn=3, customer_asn=777),
         ]
-    )
+    ),
 )

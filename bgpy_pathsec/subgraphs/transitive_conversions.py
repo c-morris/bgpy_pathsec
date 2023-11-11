@@ -10,7 +10,7 @@ class TransitiveDroppingConversionsAllSubgraph(Subgraph):
     def _get_subgraph_key(self, scenario: Scenario, *args) -> str:  # type: ignore
         """Returns the key to be used in shared_data on the subgraph"""
 
-        return f"transitive_dropping_conversions_all"
+        return "transitive_dropping_conversions_all"
 
     @property
     def y_axis_label(self) -> str:

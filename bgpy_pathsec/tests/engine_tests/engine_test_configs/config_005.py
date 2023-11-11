@@ -19,13 +19,15 @@ config_p_005 = EngineTestConfig(
         BaseASCls=BGPAS,
         override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
         override_victim_asns=frozenset({ASNs.VICTIM.value}),
-        override_non_default_asn_cls_dict=frozendict({
-            1: DownOnlyAS,
-            2: DownOnlyAS,
-            3: DownOnlyAS,
-            4: DownOnlyAS,
-            777: DownOnlyAS,
-        }),
+        override_non_default_asn_cls_dict=frozendict(
+            {
+                1: DownOnlyAS,
+                2: DownOnlyAS,
+                3: DownOnlyAS,
+                4: DownOnlyAS,
+                777: DownOnlyAS,
+            }
+        ),
     ),
     graph=p_graph_003,
     propagation_rounds=1,

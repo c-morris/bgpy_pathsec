@@ -8,6 +8,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 777
       path_end_valid: true
@@ -21,6 +22,7 @@
       seed_asn: null
       timestamp: 0
       traceback_end: false
+      unknown_adopters: !!python/tuple []
       up_pre: true
       withdraw: false
   _recv_q: !yamlable/RecvQueue {}
@@ -36,6 +38,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 777
           path_end_valid: true
@@ -49,6 +52,7 @@
           seed_asn: null
           timestamp: 0
           traceback_end: false
+          unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
@@ -60,6 +64,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 1
         next_as: 777
@@ -74,6 +79,7 @@
         seed_asn: null
         timestamp: 0
         traceback_end: false
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
     3:
@@ -84,6 +90,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 1
         next_as: 777
@@ -98,6 +105,7 @@
         seed_asn: null
         timestamp: 0
         traceback_end: false
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
   _send_q: !yamlable/SendQueue {}
@@ -121,6 +129,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple
       - 1
       next_as: 777
@@ -135,6 +144,7 @@
       seed_asn: null
       timestamp: 0
       traceback_end: false
+      unknown_adopters: !!python/tuple []
       up_pre: true
       withdraw: false
   _recv_q: !yamlable/RecvQueue {}
@@ -151,6 +161,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 1
           next_as: 777
@@ -165,6 +176,7 @@
           seed_asn: null
           timestamp: 0
           traceback_end: false
+          unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
@@ -177,6 +189,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 2
         - 1
@@ -192,6 +205,7 @@
         seed_asn: null
         timestamp: 0
         traceback_end: false
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
   _send_q: !yamlable/SendQueue {}
@@ -213,6 +227,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 777
       path_end_valid: true
@@ -226,6 +241,7 @@
       seed_asn: null
       timestamp: 0
       traceback_end: false
+      unknown_adopters: !!python/tuple []
       up_pre: true
       withdraw: false
   _recv_q: !yamlable/RecvQueue {}
@@ -242,6 +258,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 1
           next_as: 777
@@ -256,6 +273,7 @@
           seed_asn: null
           timestamp: 0
           traceback_end: false
+          unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
     777:
@@ -268,6 +286,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple []
           next_as: 777
           path_end_valid: true
@@ -278,9 +297,10 @@
           removed_signatures: !!python/tuple []
           roa_origin: 777
           roa_valid_length: true
-          seed_asn: null
+          seed_asn: 777
           timestamp: 0
-          traceback_end: false
+          traceback_end: true
+          unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
   _ribs_out: !yamlable/RIBsOut
@@ -291,6 +311,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 777
         path_end_valid: true
@@ -304,6 +325,7 @@
         seed_asn: null
         timestamp: 0
         traceback_end: false
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
     777:
@@ -313,6 +335,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 3
         next_as: 777
@@ -327,6 +350,7 @@
         seed_asn: null
         timestamp: 0
         traceback_end: false
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
   _send_q: !yamlable/SendQueue {}
@@ -351,6 +375,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple
       - 2
       - 1
@@ -366,6 +391,7 @@
       seed_asn: null
       timestamp: 0
       traceback_end: false
+      unknown_adopters: !!python/tuple []
       up_pre: true
       withdraw: false
   _recv_q: !yamlable/RecvQueue {}
@@ -383,6 +409,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 2
           - 1
@@ -398,6 +425,7 @@
           seed_asn: null
           timestamp: 0
           traceback_end: false
+          unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
   _ribs_out: !yamlable/RIBsOut {}
@@ -434,6 +462,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple
       - 777
       next_as: 777
@@ -445,9 +474,10 @@
       removed_signatures: !!python/tuple []
       roa_origin: 777
       roa_valid_length: true
-      seed_asn: 666
+      seed_asn: null
       timestamp: 0
       traceback_end: false
+      unknown_adopters: !!python/tuple []
       up_pre: true
       withdraw: false
   _recv_q: !yamlable/RecvQueue {}
@@ -462,6 +492,7 @@
           - 777
           bgpsec_path: !!python/tuple
           - 777
+          communities: !!python/tuple []
           do_communities: !!python/tuple
           - 777
           next_as: 777
@@ -473,9 +504,10 @@
           removed_signatures: !!python/tuple []
           roa_origin: 777
           roa_valid_length: true
-          seed_asn: null
+          seed_asn: 777
           timestamp: 0
-          traceback_end: false
+          traceback_end: true
+          unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
   _ribs_out: !yamlable/RIBsOut {}
@@ -497,6 +529,7 @@
       - 777
       bgpsec_path: !!python/tuple
       - 777
+      communities: !!python/tuple []
       do_communities: !!python/tuple []
       next_as: 777
       path_end_valid: true
@@ -510,6 +543,7 @@
       seed_asn: 777
       timestamp: 0
       traceback_end: true
+      unknown_adopters: !!python/tuple []
       up_pre: true
       withdraw: false
   _recv_q: !yamlable/RecvQueue {}
@@ -521,6 +555,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple []
         next_as: 777
         path_end_valid: true
@@ -531,9 +566,10 @@
         removed_signatures: !!python/tuple []
         roa_origin: 777
         roa_valid_length: true
-        seed_asn: null
+        seed_asn: 777
         timestamp: 0
-        traceback_end: false
+        traceback_end: true
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
     666:
@@ -542,6 +578,7 @@
         - 777
         bgpsec_path: !!python/tuple
         - 777
+        communities: !!python/tuple []
         do_communities: !!python/tuple
         - 777
         next_as: 777
@@ -553,9 +590,10 @@
         removed_signatures: !!python/tuple []
         roa_origin: 777
         roa_valid_length: true
-        seed_asn: null
+        seed_asn: 777
         timestamp: 0
-        traceback_end: false
+        traceback_end: true
+        unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
   _send_q: !yamlable/SendQueue {}

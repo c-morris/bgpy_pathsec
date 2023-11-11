@@ -6,6 +6,7 @@ from ..graphs import p_graph_011
 from ....attacks import ShortestPathExportAll
 from ....policies import TransitiveDroppingAlwaysAS, BGPsecTransitiveAS
 from ....announcements import PathManipulationAnn
+
 # from ....subgraphs import OverheadBPOAllSubgraph
 
 config_p_032 = EngineTestConfig(
@@ -18,15 +19,17 @@ config_p_032 = EngineTestConfig(
         AnnCls=PathManipulationAnn,
         override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
         override_victim_asns=frozenset({ASNs.VICTIM.value}),
-        override_non_default_asn_cls_dict=frozendict({
-            2: BGPAS,
-            3: BGPsecTransitiveAS,
-            5: BGPAS,
-            6: BGPAS,
-            7: BGPsecTransitiveAS,
-            9: BGPsecTransitiveAS,
-            777: BGPsecTransitiveAS,
-        }),
+        override_non_default_asn_cls_dict=frozendict(
+            {
+                2: BGPAS,
+                3: BGPsecTransitiveAS,
+                5: BGPAS,
+                6: BGPAS,
+                7: BGPsecTransitiveAS,
+                9: BGPsecTransitiveAS,
+                777: BGPsecTransitiveAS,
+            }
+        ),
     ),
     graph=p_graph_011,
     propagation_rounds=1,

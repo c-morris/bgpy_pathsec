@@ -68,7 +68,8 @@ class OverheadBPOAllSubgraph(Subgraph):
                         ribs_in_invalid += 1
             if (
                 as_obj.name == scenario.scenario_config.AdoptASCls.name
-                or as_obj.name == "Pseudo" + scenario.scenario_config.AdoptASCls.name
+                or as_obj.name
+                == "Pseudo" + scenario.scenario_config.AdoptASCls.name
             ):
                 # use of 'in' here because of pseudo adopt AS class
                 total_adopting += 1

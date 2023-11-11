@@ -6,6 +6,7 @@ from ..graphs import p_graph_012
 from ....attacks import Eavesdropper
 from ....policies import BGPsecTransitiveDownOnlyAS
 from ....announcements import PathManipulationAnn
+
 # from ....subgraphs import OverheadBPOAllSubgraph
 
 config_p_036 = EngineTestConfig(
@@ -21,15 +22,17 @@ config_p_036 = EngineTestConfig(
         AnnCls=PathManipulationAnn,
         override_attacker_asns=frozenset({ASNs.ATTACKER.value}),
         override_victim_asns=frozenset({ASNs.VICTIM.value}),
-        override_non_default_asn_cls_dict=frozendict({
-            1: BGPsecTransitiveDownOnlyAS,
-            2: BGPsecTransitiveDownOnlyAS,
-            3: BGPsecTransitiveDownOnlyAS,
-            4: BGPsecTransitiveDownOnlyAS,
-            5: BGPsecTransitiveDownOnlyAS,
-            7: BGPsecTransitiveDownOnlyAS,
-            777: BGPsecTransitiveDownOnlyAS,
-        }),
+        override_non_default_asn_cls_dict=frozendict(
+            {
+                1: BGPsecTransitiveDownOnlyAS,
+                2: BGPsecTransitiveDownOnlyAS,
+                3: BGPsecTransitiveDownOnlyAS,
+                4: BGPsecTransitiveDownOnlyAS,
+                5: BGPsecTransitiveDownOnlyAS,
+                7: BGPsecTransitiveDownOnlyAS,
+                777: BGPsecTransitiveDownOnlyAS,
+            }
+        ),
         no_hash=False,
         communities_up=False,
     ),

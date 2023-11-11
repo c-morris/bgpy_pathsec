@@ -1,3 +1,4 @@
+from dataclasses import replace
 import random
 
 from bgpy import BGPAS
@@ -28,14 +29,17 @@ class TransitiveDroppingAS(BGPAS):
         """If this is a transitive dropping AS, drop transitive attributes"""
         ann_to_send = ann
         if self.transitive_dropping:
-            ann_to_send = replace(ann_to_send,
-                next_as = 0,
-                do_communities = tuple(),
+            ann_to_send = replace(
+                ann_to_send,
+                next_as=0,
+                do_communities=tuple(),
             )
             # The signatures removed, if any, will be detected by adopting ASes
             if len(ann_to_send.removed_signatures) == 0:
-                ann_to_send = replace(ann_to_send, removed_signatures = ann_to_send.bgpsec_path)
-            ann_to_send = replace(ann_to_send, bgpsec_path = tuple())
+                ann_to_send = replace(
+                    ann_to_send, removed_signatures=ann_to_send.bgpsec_path
+                )
+            ann_to_send = replace(ann_to_send, bgpsec_path=tuple())
         super(TransitiveDroppingAS, self)._process_outgoing_ann(
             as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs
         )

@@ -13,17 +13,19 @@ r"""
 """
 
 p_graph_006 = GraphInfo(
-    peer_links=set([
-        PeerLink(1, 666),
-        PeerLink(1, 6),
-        PeerLink(3, 4),
-        PeerLink(6, 7),
-        PeerLink(1, 7),
-        PeerLink(10, 11),
-        PeerLink(11, 15),
-        PeerLink(13, 14),
-        PeerLink(14, 16),
-    ]),
+    peer_links=set(
+        [
+            PeerLink(1, 666),
+            PeerLink(1, 6),
+            PeerLink(3, 4),
+            PeerLink(6, 7),
+            PeerLink(1, 7),
+            PeerLink(10, 11),
+            PeerLink(11, 15),
+            PeerLink(13, 14),
+            PeerLink(14, 16),
+        ]
+    ),
     customer_provider_links=set(
         [
             CPLink(provider_asn=1, customer_asn=2),
@@ -40,5 +42,5 @@ p_graph_006 = GraphInfo(
             CPLink(provider_asn=12, customer_asn=11),
             CPLink(provider_asn=14, customer_asn=777),
         ]
-    )
+    ),
 )

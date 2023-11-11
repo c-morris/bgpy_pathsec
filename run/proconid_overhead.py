@@ -2,7 +2,6 @@ import os
 import random
 import functools
 import logging
-from copy import deepcopy
 from caida_collector_pkg import CaidaCollector
 from bgpy import BGPSimpleAS, SimulationEngine
 

@@ -28,10 +28,13 @@ class DownOnlyAS(BGPAS):
     ):
         # Down Only modifications, defined in section 4.2
         if propagate_to in (Relationships.CUSTOMERS, Relationships.PEERS):
-            ann_to_send = replace(ann_to_send, do_communities =(
-                self.asn,
-                *ann_to_send.do_communities,
-            ))
+            ann_to_send = replace(
+                ann_to_send,
+                do_communities=(
+                    self.asn,
+                    *ann_to_send.do_communities,
+                ),
+            )
         return ann_to_send
 
     def passes_down_only_checks(self, ann, recv_relationship: Relationships):

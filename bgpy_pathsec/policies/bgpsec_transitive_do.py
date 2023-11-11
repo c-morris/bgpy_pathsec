@@ -14,9 +14,7 @@ class BGPsecTransitiveDownOnlyAS(BGPsecTransitiveAS, DownOnlyAS):
         BGPsecTransitiveAS.count += len(ann.bgpsec_path)
         return (
             super(BGPsecTransitiveAS, self)._valid_ann(ann, recv_relationship)
-            and self.passes_down_only_checks(
-                ann, recv_relationship
-            )
+            and self.passes_down_only_checks(ann, recv_relationship)
             and len(ann.removed_signatures) == 0
         )
 
