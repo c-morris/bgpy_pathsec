@@ -102,5 +102,5 @@ def test_trim_do_communities_up(as_path, result):
                               seed_asn=None,
                               roa_valid_length=None,
                               roa_origin=None)
-    ShortestPathExportAll._trim_do_communities(None, ann)
+    ShortestPathExportAll._trim_do_communities_up(None, ann)
     assert (ann.do_communities == result)

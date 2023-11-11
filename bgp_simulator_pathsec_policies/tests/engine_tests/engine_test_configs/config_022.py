@@ -20,6 +20,7 @@ class Config022(EngineTestConfig):
                                     victim_asns={ASNs.VICTIM.value},
                                     BaseASCls=BGPAS,
                                     AnnCls=PathManipulationAnn,
+                                    communities_up=False,
                                     no_hash=False)
     graph = PGraph009()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,

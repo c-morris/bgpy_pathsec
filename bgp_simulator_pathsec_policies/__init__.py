@@ -4,7 +4,6 @@ from .announcements import PathManipulationAnn
 from .attacks import AccidentalLeak
 from .attacks import IntentionalLeak
 from .attacks import OriginHijack
-from .attacks import Aggregator
 from .attacks import ShortestPathExportAll
 from .attacks import TwoHopAttack
 from .attacks import Eavesdropper

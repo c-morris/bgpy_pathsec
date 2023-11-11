@@ -13,7 +13,8 @@ class Config024(EngineTestConfig):
     scenario = EavesdropperUpTest22(attacker_asns={ASNs.ATTACKER.value},
                                     victim_asns={ASNs.VICTIM.value},
                                     BaseASCls=BGPAS,
-                                    AnnCls=PathManipulationAnn)
+                                    AnnCls=PathManipulationAnn,
+                                    communities_up=False)
     graph = PGraph010()
     non_default_as_cls_dict = {1: BGPsecTransitiveDownOnlyAS,
                                3: BGPsecTransitiveDownOnlyAS,
