@@ -24,7 +24,7 @@ class BGPsecTransitiveDownOnlyAS(BGPsecTransitiveAS, DownOnlyAS):
         self, as_obj, ann, propagate_to, send_rels, *args, **kwargs
     ):
         ann_to_send = self.down_only_modifications(
-            as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs
+            as_obj, ann, propagate_to, send_rels, *args, **kwargs
         )
         ann_to_send = self.bgpsec_transitive_modifications(
             as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs

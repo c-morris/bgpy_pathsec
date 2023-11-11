@@ -1,4 +1,6 @@
 from copy import deepcopy
+from dataclasses import replace
+
 from bgpy import Relationships
 
 from .bgpsec import BGPsecAS
@@ -13,7 +15,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         self, as_obj, ann, propagate_to, send_rels, *args, **kwargs
     ):
         ann_to_send = self.bgpsec_transitive_modifications(
-            as_obj, ann_to_send, *args, **kwargs
+            as_obj, ann, *args, **kwargs
         )
         # Although this looks weird, it is correct to call the BGPsecAS's
         # superclass here

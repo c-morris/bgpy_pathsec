@@ -118,7 +118,7 @@ class Eavesdropper(ShortestPathExportAll):
                 # ann.bgpsec_path = tuple(
                 #     x for x in ann.bgpsec_path if x in ann.as_path
                 # )
-                ann = replace(ann, bgp_sec_path=tuple([i
+                ann = replace(ann, bgp_sec_path=tuple([
                     x for x in ann.bgpsec_path if x in ann.as_path
                 ]))
                 return ann
@@ -133,8 +133,8 @@ class Eavesdropper(ShortestPathExportAll):
             i -= 1
             j -= 1
         return replace(
-            ann
-            as_path=ann.as_path[j:]
+            ann,
+            as_path=ann.as_path[j:],
             # update BGPsec path to match new AS path
             bgpsec_path=tuple(x for x in ann.bgpsec_path if x in ann.as_path)
         )

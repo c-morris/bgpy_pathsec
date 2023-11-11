@@ -25,15 +25,16 @@ def test_process_incoming_anns_bgpsec_depref():
         roa_valid_length=None,
         roa_origin=None,
     )
+    as_path = (13795,)
     ann2 = PathManipulationAnn(
         prefix=prefix,
-        as_path=(13795,),
+        as_path=as_path,
         timestamp=0,
         recv_relationship=Relationships.ORIGIN,
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
-        bgpsec_path = ann2.as_path,
+        bgpsec_path = as_path,
         next_as = 1,
     )
     a = BGPsecAS(1)
@@ -71,7 +72,7 @@ def test_bgpsec_update_attrs(BasePolicyCls):
         seed_asn=None,
         roa_valid_length=None,
         roa_origin=None,
-        bgpsec_path = ann.as_path,
+        bgpsec_path = (13796,),
         next_as = 1    )
     a = BasePolicyCls(1)
     b = BasePolicyCls(2)
