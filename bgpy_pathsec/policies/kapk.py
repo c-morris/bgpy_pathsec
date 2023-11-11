@@ -27,10 +27,10 @@ class KAPKFalseAS(BGPsecTransitiveDownOnlyEncrUpAS):
         self, as_obj, ann, propagate_to, send_rels, *args, **kwargs
     ):
         """If this is a unknown adopting AS, add self to list of unkown adopters and removed signatures"""
-        ann_to_send = ann.copy()
+        ann_to_send = ann
         if self.unknown_adopting:
             # If unknown adopter, add ASN to list of removed signatures and unknown adopting
-            ann_to_send.unknown_adopters += (self.asn,)
+            ann_to_send = replace(ann_to_send, ann_to_send.unknown_adopters + (self.asn,))
 
         super(KAPKFalseAS, self)._process_outgoing_ann(
             as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs

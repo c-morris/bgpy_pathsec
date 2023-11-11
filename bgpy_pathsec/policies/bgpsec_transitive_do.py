@@ -23,11 +23,10 @@ class BGPsecTransitiveDownOnlyAS(BGPsecTransitiveAS, DownOnlyAS):
     def _process_outgoing_ann(
         self, as_obj, ann, propagate_to, send_rels, *args, **kwargs
     ):
-        ann_to_send = ann.copy()
-        self.down_only_modifications(
+        ann_to_send = self.down_only_modifications(
             as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs
         )
-        self.bgpsec_transitive_modifications(
+        ann_to_send = self.bgpsec_transitive_modifications(
             as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs
         )
         # Although this looks weird, it is correct to call the DownOnlyAS's

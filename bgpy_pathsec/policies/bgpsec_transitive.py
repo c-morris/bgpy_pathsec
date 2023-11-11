@@ -12,8 +12,7 @@ class BGPsecTransitiveAS(BGPsecAS):
     def _process_outgoing_ann(
         self, as_obj, ann, propagate_to, send_rels, *args, **kwargs
     ):
-        ann_to_send = ann.copy()
-        self.bgpsec_transitive_modifications(
+        ann_to_send = self.bgpsec_transitive_modifications(
             as_obj, ann_to_send, *args, **kwargs
         )
         # Although this looks weird, it is correct to call the BGPsecAS's
@@ -26,7 +25,7 @@ class BGPsecTransitiveAS(BGPsecAS):
         self, as_obj, ann_to_send, *args, **kwargs
     ):
         # Set next_as for bgpsec
-        ann_to_send.next_as = as_obj.asn
+        return replace(ann_to_send, next_as=as_obj.asn)
 
     def _valid_ann(self, ann, recv_relationship: Relationships):
         """Determine if an announcement is valid or should be dropped"""
