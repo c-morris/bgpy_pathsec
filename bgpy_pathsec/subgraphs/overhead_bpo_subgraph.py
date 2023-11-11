@@ -1,4 +1,4 @@
-from bgpy import Subgraph
+from bgpy.subgraph_simulation_framework import Subgraph
 from bgpy import Scenario
 from bgpy import SimulationEngine
 from typing import Any, Dict

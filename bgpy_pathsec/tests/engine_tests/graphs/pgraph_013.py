@@ -1,23 +1,20 @@
-from caida_collector_pkg import CustomerProviderLink as CPLink
-
+from bgpy.caida_collector import CustomerProviderLink as CPLink
 from bgpy import GraphInfo
 
+r"""
+  4
+ / \
+7   6
+|\  |
+2 5 666
+|/  |
+777  3
+"""
 
-class PGraph013(GraphInfo):
-    r"""
-      4
-     / \
-    7   6
-    |\  |
-    2 5 666
-    |/  |
-   777  3
-    """
-
-    def __init__(self):
-        # Graph data
-        peers = []
-        customer_providers = [
+p_graph_013 = GraphInfo(
+    peer_links=set([]),
+    customer_provider_links=set(
+        [
             CPLink(provider_asn=4, customer_asn=7),
             CPLink(provider_asn=4, customer_asn=6),
             CPLink(provider_asn=7, customer_asn=5),
@@ -27,7 +24,5 @@ class PGraph013(GraphInfo):
             CPLink(provider_asn=666, customer_asn=3),
             CPLink(provider_asn=6, customer_asn=666),
         ]
-        super(PGraph013, self).__init__(
-            peer_links=set(peers),
-            customer_provider_links=set(customer_providers),
-        )
+    )
+)

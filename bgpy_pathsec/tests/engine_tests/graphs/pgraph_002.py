@@ -1,31 +1,29 @@
-from caida_collector_pkg import PeerLink, CustomerProviderLink as CPLink
-
+# New way
+from bgpy.caida_collector import PeerLink, CustomerProviderLink as CPLink
 from bgpy import GraphInfo
 
+r"""
+Test BGPsec transitive preference for fewer nonadopting segments.
+Horizontal lines are peer relationships, vertical lines are
+customer-provider.
 
-class PGraph002(GraphInfo):
-    r"""
-    Test BGPsec transitive preference for fewer nonadopting segments.
-    Horizontal lines are peer relationships, vertical lines are
-    customer-provider.
+  1
+ / \
+2   3
+|   |
+6   7
+|   |
+8   9
+ \  |
+  5 4
+   \|
+   777--666
+"""
 
-      1
-     / \
-    2   3
-    |   |
-    6   7
-    |   |
-    8   9
-     \  |
-      5 4
-       \|
-       777--666
-    """
-
-    def __init__(self):
-        # Graph data
-        peers = [PeerLink(777, 666)]
-        customer_providers = [
+p_graph_002 = GraphInfo(
+    peer_links=set([PeerLink(777, 666)]),
+    customer_provider_links=set(
+        [
             CPLink(provider_asn=1, customer_asn=2),
             CPLink(provider_asn=1, customer_asn=3),
             CPLink(provider_asn=2, customer_asn=6),
@@ -37,8 +35,5 @@ class PGraph002(GraphInfo):
             CPLink(provider_asn=5, customer_asn=777),
             CPLink(provider_asn=9, customer_asn=4),
         ]
-
-        super(PGraph002, self).__init__(
-            peer_links=set(peers),
-            customer_provider_links=set(customer_providers),
-        )
+    )
+)
