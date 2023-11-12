@@ -374,8 +374,8 @@
   asn: 4
   customer_cone_size: 7
   customers: !!python/tuple
-  - 6
   - 7
+  - 6
   input_clique: false
   ixp: false
   peers: !!python/tuple []
@@ -905,8 +905,8 @@
   asn: 7
   customer_cone_size: 3
   customers: !!python/tuple
-  - 2
   - 5
+  - 2
   input_clique: false
   ixp: false
   peers: !!python/tuple []
@@ -1115,5 +1115,5 @@
   peers: !!python/tuple []
   propagation_rank: 0
   providers: !!python/tuple
-  - 2
   - 5
+  - 2

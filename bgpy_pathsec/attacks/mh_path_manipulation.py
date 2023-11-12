@@ -41,5 +41,4 @@ class MHPathManipulation(Scenario):
         BGPsecAS.bpo_count = 0
         BGPsecTransitiveAS.count = 0
         BGPsecTransitiveAS.bpo_count = 0
-        TransitiveDroppingNoAdoptCustomersAS.convert_count = 0
         super().setup_engine(*args, **kwargs)

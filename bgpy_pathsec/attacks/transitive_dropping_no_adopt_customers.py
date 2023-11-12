@@ -28,6 +28,10 @@ class TransitiveDroppingNoAdoptCustomers(ValidSignature):
         prev_scenario: Optional["Scenario"],
     ) -> dict[int, type[AS]]:
 
+        # For testing purposes only
+        if override_non_default_asn_cls_dict:
+            return override_non_default_asn_cls_dict
+
 
         # DO NOT call super's _get_non_default_asn_cls_dict, instead just
         # get the randomized dictionary. since that relies on the prev_scenario's

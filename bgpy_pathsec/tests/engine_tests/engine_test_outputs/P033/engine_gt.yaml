@@ -159,8 +159,8 @@
   asn: 1
   customer_cone_size: 3
   customers: !!python/tuple
-  - 777
   - 6
+  - 777
   input_clique: false
   ixp: false
   peers: !!python/tuple []
@@ -660,8 +660,8 @@
   asn: 5
   customer_cone_size: 4
   customers: !!python/tuple
-  - 10
   - 4
+  - 10
   input_clique: false
   ixp: false
   peers: !!python/tuple []

@@ -82,8 +82,8 @@
   peers: !!python/tuple []
   propagation_rank: 0
   providers: !!python/tuple
-  - 3
   - 4
+  - 3
 6: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB {}
   _recv_q: !yamlable/RecvQueue {}
@@ -115,8 +115,8 @@
   input_clique: false
   ixp: false
   peers: !!python/tuple
-  - 1
   - 6
+  - 1
   propagation_rank: 2
   providers: !!python/tuple []
 8: !yamlable/BGPsecTransitiveAS
@@ -149,8 +149,8 @@
   peers: !!python/tuple []
   propagation_rank: 0
   providers: !!python/tuple
-  - 8
   - 6
+  - 8
 10: !yamlable/BGPsecTransitiveAS
   _local_rib: !yamlable/LocalRIB
     1.2.0.0/16: !yamlable/PathManipulationAnn
@@ -871,8 +871,8 @@
   input_clique: false
   ixp: false
   peers: !!python/tuple
-  - 16
   - 13
+  - 16
   propagation_rank: 1
   providers: !!python/tuple
   - 11
