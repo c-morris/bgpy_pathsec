@@ -26,7 +26,6 @@ class TransitiveDroppingNoAdoptCustomers(ValidSignature):
         engine: Optional[SimulationEngine],
         prev_scenario: Optional["Scenario"],
     ) -> dict[int, type[AS]]:
-
         # For testing purposes only
         if override_non_default_asn_cls_dict:
             return override_non_default_asn_cls_dict
@@ -40,9 +39,7 @@ class TransitiveDroppingNoAdoptCustomers(ValidSignature):
         # as other scenario_configs since this will make all scenario_configs
         # independent
         non_default_asn_cls_dict = (
-            self._get_randomized_non_default_asn_cls_dict(
-                engine
-            )
+            self._get_randomized_non_default_asn_cls_dict(engine)
         )
 
         ##################################
@@ -91,13 +88,16 @@ class TransitiveDroppingNoAdoptCustomers(ValidSignature):
             as_obj = engine.as_dict[asn]
             # For each customer, get the provider_asns
             for customer in as_obj.customers:
-
                 # If customer is adopting and all providers are dropping
                 # the AS no longer adopts
-                if ((customer.asn not in visited_asns)
+                if (
+                    (customer.asn not in visited_asns)
                     and isinstance(customer, self.scenario_config.AdoptASCls)
-                    and all(isinstance(x, TransitiveDroppingAlwaysAS) for x
-                            in customer.providers)):
+                    and all(
+                        isinstance(x, TransitiveDroppingAlwaysAS)
+                        for x in customer.providers
+                    )
+                ):
                     non_default_asn_cls_dict.pop(customer.asn)
                 visited_asns.add(customer.asn)
 

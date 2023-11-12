@@ -3,11 +3,12 @@ from bgpy_pathsec.attacks.pathsec_scenario_config import PathsecScenarioConfig
 from frozendict import frozendict
 
 from ..graphs import p_graph_009
+
 # from ....attacks import Eavesdropper
 from ....policies import (
     BGPsecTransitiveDownOnlyAS,
     TransitiveDroppingNeverAS,
-    TransitiveDroppingAlwaysAS
+    TransitiveDroppingAlwaysAS,
 )
 from ....attacks import TransitiveDroppingNoAdoptCustomers
 from ....announcements import PathManipulationAnn

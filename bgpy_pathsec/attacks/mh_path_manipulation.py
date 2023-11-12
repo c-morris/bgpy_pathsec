@@ -1,7 +1,6 @@
 from bgpy import Scenario, Prefixes, Relationships, Timestamps
 
 from ..policies import BGPsecAS, BGPsecTransitiveAS
-from ..policies import TransitiveDroppingNeverAS
 
 
 class MHPathManipulation(Scenario):

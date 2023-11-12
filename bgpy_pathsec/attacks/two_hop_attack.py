@@ -13,9 +13,8 @@ class TwoHopAttack(ShortestPathExportAll):
 
         new_as_path = ann.as_path
 
-
         if len(ann.as_path) > 1:
-            new_as_path = ann.as_path[-2:] # only save last two ASNs
+            new_as_path = ann.as_path[-2:]  # only save last two ASNs
         # check if there were signatures invalidated
         # if there were two or more signatures, at least one is now invalid
         if len(ann.bgpsec_path) > 1:
@@ -27,7 +26,9 @@ class TwoHopAttack(ShortestPathExportAll):
         #     bgpsec_path=tuple([x for x in ann.bgpsec_path if x in ann.as_path]),
         # )
 
-        new_kwargs["bgpsec_path"] = tuple([x for x in ann.bgpsec_path if x in new_as_path]),
+        new_kwargs["bgpsec_path"] = (
+            tuple([x for x in ann.bgpsec_path if x in new_as_path]),
+        )
 
         # Set the path_end attribute. This will rarely be set.
         if len(ann.as_path) < 2:
