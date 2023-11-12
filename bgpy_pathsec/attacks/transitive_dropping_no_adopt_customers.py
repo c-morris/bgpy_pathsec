@@ -5,7 +5,6 @@ from typing import Optional, Union
 from frozendict import frozendict
 
 from bgpy.caida_collector import AS
-from bgpy.enums import ASGroups
 from bgpy.simulation_engine import SimulationEngine
 from bgpy.simulation_framework import Scenario
 
@@ -32,16 +31,18 @@ class TransitiveDroppingNoAdoptCustomers(ValidSignature):
         if override_non_default_asn_cls_dict:
             return override_non_default_asn_cls_dict
 
-
         # DO NOT call super's _get_non_default_asn_cls_dict, instead just
-        # get the randomized dictionary. since that relies on the prev_scenario's
+        # get the randomized dictionary. since that relies on the
+        # prev_scenario's
         # adopting AS classes, which change based on the dropping ASes
         # so every time we need a completely new random set
         # NOTE: This also means this can NOT!!! be run in the same sim
         # as other scenario_configs since this will make all scenario_configs
         # independent
-        non_default_asn_cls_dict = self._get_randomized_non_default_asn_cls_dict(
-            engine
+        non_default_asn_cls_dict = (
+            self._get_randomized_non_default_asn_cls_dict(
+                engine
+            )
         )
 
         ##################################
@@ -55,6 +56,17 @@ class TransitiveDroppingNoAdoptCustomers(ValidSignature):
         possible_droppers = possible_droppers.difference(
             set(list(non_default_asn_cls_dict))
         )
+        preset_asns_providers = list()
+        for asn in self._preset_asns:
+            preset_asns_providers.extend(
+                [x.asn for x in engine.as_dict[asn].providers]
+            )
+        preset_asns_providers = set(preset_asns_providers)
+
+        # providers of the origin's should not be allowed to be droppers
+        # (this was a condition in the paper, and additionally if both of them
+        # end up dropping, then the AS would not adopt, which don't make sense)
+        possible_droppers = possible_droppers.difference(preset_asns_providers)
 
         k = math.ceil(len(possible_droppers) * (percent_drop_trans / 100))
 
