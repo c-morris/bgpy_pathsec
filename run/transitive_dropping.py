@@ -75,6 +75,8 @@ from bgpy_pathsec import TransitiveDroppingNoAdoptCustomers
 from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS
 from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers8AS
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS
 from bgpy_pathsec import TransitiveDroppingNoAdoptCustomers
 
 # New
@@ -84,7 +86,7 @@ from bgpy.subgraph_simulation_framework import SubgraphSimulation
 
 random.seed(os.environ.get('JOB_COMPLETION_INDEX', 0))
 sim = SubgraphSimulation(
-    num_trials=10,
+    num_trials=5,
     scenario_configs=[
         PathsecScenarioConfig(
             ScenarioCls=TransitiveDroppingNoAdoptCustomers,
@@ -107,6 +109,21 @@ sim = SubgraphSimulation(
             BaseASCls=BGPAS,
             transitive_dropping_percent=4
         ),
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers8AS,
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=8
+        ),
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS,
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=16
+        ),
+
             ],
     propagation_rounds=1,
     subgraphs=[
