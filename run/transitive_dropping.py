@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import date
 from pathlib import Path
 
 from bgpy import BGPAS
@@ -86,7 +87,7 @@ from bgpy.subgraph_simulation_framework import SubgraphSimulation
 
 random.seed(os.environ.get('JOB_COMPLETION_INDEX', 0))
 sim = SubgraphSimulation(
-    num_trials=5,
+    num_trials=7,
     scenario_configs=[
         PathsecScenarioConfig(
             ScenarioCls=TransitiveDroppingNoAdoptCustomers,
@@ -161,6 +162,11 @@ sim = SubgraphSimulation(
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
     output_path=Path(f"tdgraphs{ os.environ.get('JOB_COMPLETION_INDEX', 0) }"),
     #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
-    parse_cpus=10)
+    caida_run_kwargs={
+            "dl_time": date.fromisoformat('2022-09-01'),
+            "cache_dir": Path("caida_collector_cache"),
+            "tsv_path": Path("caida_collector.tsv")
+    },
+    parse_cpus=1)
 
 sim.run()
