@@ -274,9 +274,14 @@ sim = SubgraphSimulation(
         VictimSuccessNonAdoptingInputCliqueSubgraph(),
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
-    percent_adoptions=[.5],#[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    output_path=Path(f"ezgraphs{ os.environ.get('JOB_COMPLETION_INDEX', 0)}"),
-    # output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    [0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
+    output_path=Path(f"graphs{ os.environ.get('JOB_COMPLETION_INDEX', 0)}"),
+    # output_path=Path(f"/tmp/graphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    caida_run_kwargs={
+            "dl_time": date.fromisoformat('2022-09-01'),
+            "cache_dir": Path("caida_collector_cache"),
+            "tsv_path": Path("caida_collector.tsv")
+    },
     parse_cpus=1,#cpu_count(),
 )
 print("about to run sims")

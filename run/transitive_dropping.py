@@ -169,4 +169,4 @@ sim = SubgraphSimulation(
     },
     parse_cpus=1)
 
-sim.run()
+sim.run(include_graphs=False)
