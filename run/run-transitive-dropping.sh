@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 # Source Virtual Environment
-source ~/env/bin/activate
+source ~/newenv/bin/activate
 
 # Set Job Completion Index
 export JOB_COMPLETION_INDEX=$SLURM_ARRAY_TASK_ID

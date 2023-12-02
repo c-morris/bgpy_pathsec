@@ -1,5 +1,6 @@
-from caida_collector_pkg import CaidaCollector
-from bgp_simulator_pkg import BGPSimpleAS, SimulationEngine
+from bgpy.caida_collector import CaidaCollector
+from bgpy import BGPSimpleAS, SimulationEngine
+from tqdm import tqdm
 
 
 class ProviderConeComputation:
@@ -11,7 +12,7 @@ class ProviderConeComputation:
                                 ).run(tsv_path=None)
         # Initialize
         self.provider_cones = dict()
-        for as_obj in self.engine.ases:
+        for as_obj in tqdm(self.engine.ases, total=len(self.engine), desc="cones"):
             self.provider_cones[as_obj.asn] = set()
 
     def get_cone(self, as_obj):

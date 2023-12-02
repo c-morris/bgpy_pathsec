@@ -1,121 +1,132 @@
 import os
 import random
+from datetime import date
 from pathlib import Path
 
-from bgp_simulator_pkg import Simulation, BGPAS
-from bgp_simulator_pkg import Prefixes
-from bgp_simulator_pkg import Timestamps
-from bgp_simulator_pkg import ASNs
-from bgp_simulator_pkg import Announcement
-from bgp_simulator_pkg import Relationships
-from bgp_simulator_pkg import Scenario
-from bgp_simulator_pkg import AttackerSuccessAllSubgraph
-from bgp_simulator_pkg import DisconnectedAllSubgraph
-from bgp_simulator_pkg import VictimSuccessAllSubgraph
+from bgpy import BGPAS
+from bgpy.subgraph_simulation_framework import AttackerSuccessAllSubgraph
+from bgpy.subgraph_simulation_framework import DisconnectedAllSubgraph
+from bgpy.subgraph_simulation_framework import VictimSuccessAllSubgraph
 
-from bgp_simulator_pkg import AttackerSuccessAdoptingEtcSubgraph
-from bgp_simulator_pkg import AttackerSuccessAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import AttackerSuccessAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import AttackerSuccessNonAdoptingStubsAndMHSubgraph
+from bgpy.subgraph_simulation_framework import (
+    AttackerSuccessAdoptingEtcSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    AttackerSuccessAdoptingInputCliqueSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    AttackerSuccessAdoptingStubsAndMHSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    AttackerSuccessNonAdoptingEtcSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    AttackerSuccessNonAdoptingInputCliqueSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    AttackerSuccessNonAdoptingStubsAndMHSubgraph,
+)
 
-from bgp_simulator_pkg import DisconnectedAdoptingEtcSubgraph
-from bgp_simulator_pkg import DisconnectedAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import DisconnectedAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import DisconnectedNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import DisconnectedNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import DisconnectedNonAdoptingStubsAndMHSubgraph
+from bgpy.subgraph_simulation_framework import DisconnectedAdoptingEtcSubgraph
+from bgpy.subgraph_simulation_framework import (
+    DisconnectedAdoptingInputCliqueSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    DisconnectedAdoptingStubsAndMHSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    DisconnectedNonAdoptingEtcSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    DisconnectedNonAdoptingInputCliqueSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    DisconnectedNonAdoptingStubsAndMHSubgraph,
+)
 
-from bgp_simulator_pkg import VictimSuccessAdoptingEtcSubgraph
-from bgp_simulator_pkg import VictimSuccessAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import VictimSuccessAdoptingStubsAndMHSubgraph
-from bgp_simulator_pkg import VictimSuccessNonAdoptingEtcSubgraph
-from bgp_simulator_pkg import VictimSuccessNonAdoptingInputCliqueSubgraph
-from bgp_simulator_pkg import VictimSuccessNonAdoptingStubsAndMHSubgraph
+from bgpy.subgraph_simulation_framework import VictimSuccessAdoptingEtcSubgraph
+from bgpy.subgraph_simulation_framework import (
+    VictimSuccessAdoptingInputCliqueSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    VictimSuccessAdoptingStubsAndMHSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    VictimSuccessNonAdoptingEtcSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    VictimSuccessNonAdoptingInputCliqueSubgraph,
+)
+from bgpy.subgraph_simulation_framework import (
+    VictimSuccessNonAdoptingStubsAndMHSubgraph,
+)
 
-from bgp_simulator_pathsec_policies import PathManipulationAnn
-from bgp_simulator_pathsec_policies import PathEndAS
-from bgp_simulator_pathsec_policies import BGPsecAggressiveAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveAggressiveAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAggressiveAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveTimidAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashTimidAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping1AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping2AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping4AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping8AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping16AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping32AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping64AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDropping99AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashAggressiveAS
-from bgp_simulator_pathsec_policies import BGPsecTimidAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyTimidLeakAS
-from bgp_simulator_pathsec_policies import OriginHijack
-from bgp_simulator_pathsec_policies import IntentionalLeak
-from bgp_simulator_pathsec_policies import BGPsecAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyAS
-from bgp_simulator_pathsec_policies import TwoHopAttack
-from bgp_simulator_pathsec_policies import Eavesdropper
-from bgp_simulator_pathsec_policies import OverheadAllSubgraph
-from bgp_simulator_pathsec_policies import OverheadBPOAllSubgraph
-from bgp_simulator_pathsec_policies import RibsInSizeSubgraph
-from bgp_simulator_pathsec_policies import RibsInValidAdoptingSubgraph
-from bgp_simulator_pathsec_policies import RibsInValidNonAdoptingSubgraph
-from bgp_simulator_pathsec_policies import AdoptingCountSubgraph
-from bgp_simulator_pathsec_policies import NonAdoptingCountSubgraph
-from bgp_simulator_pathsec_policies import PathLengthSubgraph
-from bgp_simulator_pathsec_policies import TransitiveDroppingConversionsAllSubgraph
-from bgp_simulator_pathsec_policies import ShortestPathExportAll
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidAS
-from bgp_simulator_pathsec_policies import PathEndAggressiveAS
-from bgp_simulator_pathsec_policies import PathEndTimidAS
-from bgp_simulator_pathsec_policies import BaselineBGPAS
-from bgp_simulator_pathsec_policies import PathEndTimidUpAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyUpTimidAS
-from bgp_simulator_pathsec_policies import OverheadBGPsecAS
-from bgp_simulator_pathsec_policies import OverheadBGPsecTransitiveDownOnlyAS
-from bgp_simulator_pathsec_policies import ValidSignature
-from bgp_simulator_pathsec_policies import TransitiveDroppingAS
-from bgp_simulator_pathsec_policies import TransitiveDropping2AS
-from bgp_simulator_pathsec_policies import TransitiveDropping4AS
-from bgp_simulator_pathsec_policies import TransitiveDropping8AS
-from bgp_simulator_pathsec_policies import TransitiveDropping16AS
-from bgp_simulator_pathsec_policies import TransitiveDropping32AS
-from bgp_simulator_pathsec_policies import TransitiveDropping64AS
-from bgp_simulator_pathsec_policies import TransitiveDropping99AS
-from bgp_simulator_pathsec_policies import TransitiveDroppingAlwaysAS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomersAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyGlobalEavesdropperAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyEncrUpGlobalEavesdropperAS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS
-from bgp_simulator_pathsec_policies import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomersAS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomers2AS
-from bgp_simulator_pathsec_policies import TransitiveDroppingNoAdoptCustomers4AS
+from bgpy_pathsec import PathManipulationAnn
+from bgpy_pathsec import OverheadAllSubgraph
+from bgpy_pathsec import OverheadBPOAllSubgraph
+from bgpy_pathsec import RibsInSizeSubgraph
+from bgpy_pathsec import RibsInValidAdoptingSubgraph
+from bgpy_pathsec import RibsInValidNonAdoptingSubgraph
+from bgpy_pathsec import AdoptingCountSubgraph
+from bgpy_pathsec import NonAdoptingCountSubgraph
+from bgpy_pathsec import PathLengthSubgraph
+from bgpy_pathsec import TransitiveDroppingConversionsAllSubgraph
+from bgpy_pathsec import ShortestPathExportAll
+from bgpy_pathsec import TransitiveDroppingNoAdoptCustomers
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers8AS
+from bgpy_pathsec import BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS
+from bgpy_pathsec import TransitiveDroppingNoAdoptCustomers
 
-random.seed(os.environ['JOB_COMPLETION_INDEX'])
-sim = Simulation(
+# New
+from bgpy_pathsec import PathsecScenarioConfig
+from bgpy.subgraph_simulation_framework import SubgraphSimulation
+
+
+random.seed(os.environ.get('JOB_COMPLETION_INDEX', 0))
+sim = SubgraphSimulation(
     num_trials=7,
-    scenarios=[
-        ShortestPathExportAll(
-            AnnCls=PathManipulationAnn, 
+    scenario_configs=[
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers1AS,
-            BaseASCls=TransitiveDroppingNoAdoptCustomersAS),
-        ShortestPathExportAll(
-            AnnCls=PathManipulationAnn, 
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=1,
+        ),
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers2AS,
-            BaseASCls=TransitiveDroppingNoAdoptCustomers2AS),
-        ShortestPathExportAll(
-            AnnCls=PathManipulationAnn, 
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=2,
+        ),
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
             AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers4AS,
-            BaseASCls=TransitiveDroppingNoAdoptCustomers4AS),
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=4
+        ),
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers8AS,
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=8
+        ),
+        PathsecScenarioConfig(
+            ScenarioCls=TransitiveDroppingNoAdoptCustomers,
+            AnnCls=PathManipulationAnn,
+            AdoptASCls=BGPsecTransitiveDownOnlyNoHashUpTimidTransitiveDroppingNoAdoptCustomers16AS,
+            BaseASCls=BGPAS,
+            transitive_dropping_percent=16
+        ),
+
             ],
-    propagation_rounds=3,
+    propagation_rounds=1,
     subgraphs=[
         OverheadBPOAllSubgraph(),
         OverheadAllSubgraph(),
@@ -149,9 +160,13 @@ sim = Simulation(
         VictimSuccessNonAdoptingStubsAndMHSubgraph(),
     ],
     percent_adoptions=[0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 0.99],
-    output_path=Path(f"tdgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    output_path=Path(f"tdgraphs{ os.environ.get('JOB_COMPLETION_INDEX', 0) }"),
     #output_path=Path(f"/tmp/ezgraphs{ os.environ['JOB_COMPLETION_INDEX'] }"),
+    caida_run_kwargs={
+            "dl_time": date.fromisoformat('2022-09-01'),
+            "cache_dir": Path("caida_collector_cache"),
+            "tsv_path": Path("caida_collector.tsv")
+    },
     parse_cpus=1)
 
-sim.run()
-
+sim.run(include_graphs=False)
