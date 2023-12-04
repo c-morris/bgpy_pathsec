@@ -6,15 +6,15 @@ This package is for simulating defenses against BGP Path Manipulation attacks
 and Route Leaks. Additional documentation can be found in the docs directory.
 
 BGP propagation according to valley-free routing rules is provided by
-[https://github.com/jfuruness/bgp_simulator_pkg](https://github.com/jfuruness/bgp_simulator_pkg).
+[https://github.com/jfuruness/bgpy](https://github.com/jfuruness/bgpy).
 
 ## Installation
 
-This package requires Python >= 3.7.
+This package requires Python >= 3.10.
 
 To install for development
 ```sh
-git clone https://github.com/c-morris/bgp-simulator-policies.git
+git clone https://github.com/c-morris/bgpy_pathsec.git
 cd bgpy_pathsec
 pip install -e .
 ```
