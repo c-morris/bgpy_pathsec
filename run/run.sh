@@ -1,9 +1,5 @@
 #!/bin/bash 
 
-# Symlink the Caida Collector cache into a common directory
-# This prevents it from running once per container
-#ln -s /data/caida_collector_cache /tmp/caida_collector_cache
-
 # Source Virtual Environment
 source ~/env/bin/activate
 
