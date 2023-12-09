@@ -56,13 +56,14 @@ class TransitiveDroppingAS(BGPAS):
         for prefix, anns in self._recv_q.prefix_anns():
             anns = [a for a in anns if a.next_as == 0]
             self._recv_q._info[prefix] = anns
-                
+
         super().process_incoming_anns(
             from_rel=from_rel,
             propagation_round=propagation_round,  # noqa E501
             scenario=scenario,
             reset_q=reset_q,
         )
+
 
 class TransitiveDropping2AS(TransitiveDroppingAS):
     """Drops transitive attributes with some probability"""
