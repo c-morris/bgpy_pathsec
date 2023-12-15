@@ -1,163 +1,7 @@
 !yamlable/SimulationEngine
-1: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 1
-      - 4
-      - 5
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 1
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    2:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 2
-          - 3
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 1
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    4:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 4
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 1
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    6:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 6
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 6
-          next_as: 1
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    7:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 7
-          - 10
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 7
-          next_as: 1
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    2:
+as_dict:
+  1: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
       1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 1
@@ -169,9 +13,8 @@
         bgpsec_path: !!python/tuple
         - 777
         communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 1
-        next_as: 2
+        do_communities: !!python/tuple []
+        next_as: 1
         path_end_valid: true
         prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
@@ -186,143 +29,137 @@
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
-    4:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 1
-        - 4
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 1
-        next_as: 4
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    6:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 1
-        - 4
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 1
-        next_as: 6
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    7:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 1
-        - 4
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 1
-        next_as: 7
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 1
-  customer_cone_size: 5
-  customers: !!python/tuple
-  - 2
-  - 4
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 6
-  - 7
-  propagation_rank: 4
-  providers: !!python/tuple []
-2: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 2
-      - 3
-      - 5
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 2
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    1:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      2:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 2
+            - 3
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 1
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      4:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 1
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      6:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 6
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 6
+            next_as: 1
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      7:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 7
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 7
+            next_as: 1
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      2:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 1
           - 4
@@ -350,12 +187,398 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    3:
-      1.2.0.0/16: !yamlable/AnnInfo
+      4:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 1
+          - 4
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 1
+          next_as: 4
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      6:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 1
+          - 4
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 1
+          next_as: 6
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      7:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 1
+          - 4
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 1
+          next_as: 7
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+    _send_q: !yamlable/SendQueue {}
+    asn: 1
+    customer_cone_size: 5
+    customers: !!python/tuple
+    - 2
+    - 4
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 6
+    - 7
+    propagation_rank: 4
+    providers: !!python/tuple []
+  2: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 2
+        - 3
+        - 5
+        - 666
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple []
+        next_as: 2
+        path_end_valid: true
+        prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
           name: CUSTOMERS
           value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      1:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 1
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 1
+            next_as: 2
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      3:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 3
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 2
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      1:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 2
+          - 3
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 1
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      3:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 2
+          - 3
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 2
+          next_as: 3
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+    _send_q: !yamlable/SendQueue {}
+    asn: 2
+    customer_cone_size: 3
+    customers: !!python/tuple
+    - 3
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 3
+    providers: !!python/tuple
+    - 1
+  3: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 3
+        - 5
+        - 666
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple []
+        next_as: 3
+        path_end_valid: true
+        prefix: 1.2.0.0/16
+        recv_relationship: !simulator_codec/Relationships
+          name: CUSTOMERS
+          value: 3
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      2:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 2
+            - 3
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 2
+            next_as: 3
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      4:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 4
+            next_as: 3
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      5:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 3
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      2:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 3
           - 5
@@ -381,365 +604,8 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    1:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 2
-        - 3
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 1
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    3:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 2
-        - 3
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 2
-        next_as: 3
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 2
-  customer_cone_size: 3
-  customers: !!python/tuple
-  - 3
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 3
-  providers: !!python/tuple
-  - 1
-3: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 3
-      - 5
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 3
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    2:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 2
-          - 3
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 2
-          next_as: 3
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    4:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 4
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 4
-          next_as: 3
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    5:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 3
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    2:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 3
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 2
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    4:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 3
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 3
-        next_as: 4
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    5:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 3
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 3
-        next_as: 5
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 3
-  customer_cone_size: 2
-  customers: !!python/tuple
-  - 5
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 4
-  propagation_rank: 2
-  providers: !!python/tuple
-  - 2
-4: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 4
-      - 5
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 4
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    1:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 1
-          - 4
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 1
-          next_as: 4
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    3:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      4:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 3
           - 5
@@ -766,167 +632,8 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    5:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 4
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    1:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 4
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 1
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    3:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 4
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 4
-        next_as: 3
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    5:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 4
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 4
-        next_as: 5
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 4
-  customer_cone_size: 2
-  customers: !!python/tuple
-  - 5
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 3
-  propagation_rank: 2
-  providers: !!python/tuple
-  - 1
-5: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 5
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 666
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    3:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      5:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 3
           - 5
@@ -953,12 +660,201 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    4:
-      1.2.0.0/16: !yamlable/AnnInfo
+    _send_q: !yamlable/SendQueue {}
+    asn: 3
+    customer_cone_size: 2
+    customers: !!python/tuple
+    - 5
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 4
+    propagation_rank: 2
+    providers: !!python/tuple
+    - 2
+  4: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 4
+        - 5
+        - 666
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple []
+        next_as: 4
+        path_end_valid: true
+        prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+          name: CUSTOMERS
+          value: 3
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      1:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 1
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 1
+            next_as: 4
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      3:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 3
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 3
+            next_as: 4
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      5:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 4
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      1:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 4
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 1
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      3:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 4
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 4
+          next_as: 3
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      5:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 4
           - 5
@@ -985,37 +881,20 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    666:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 666
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    3:
+    _send_q: !yamlable/SendQueue {}
+    asn: 4
+    customer_cone_size: 2
+    customers: !!python/tuple
+    - 5
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 3
+    propagation_rank: 2
+    providers: !!python/tuple
+    - 1
+  5: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
       1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 5
@@ -1026,59 +905,6 @@
         - 777
         communities: !!python/tuple []
         do_communities: !!python/tuple []
-        next_as: 3
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    4:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 4
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    666:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 5
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 5
         next_as: 666
         path_end_valid: true
         prefix: 1.2.0.0/16
@@ -1094,57 +920,157 @@
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 5
-  customer_cone_size: 1
-  customers: !!python/tuple
-  - 666
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 1
-  providers: !!python/tuple
-  - 4
-  - 3
-6: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 6
-      - 9
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 6
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    1:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      3:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 3
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 3
+            next_as: 5
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      4:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 4
+            next_as: 5
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      666:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 666
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      3:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
-          - 1
-          - 4
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 3
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      4:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 5
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 4
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      666:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
           - 5
           - 666
           - 13
@@ -1153,8 +1079,8 @@
           - 777
           communities: !!python/tuple []
           do_communities: !!python/tuple
-          - 1
-          next_as: 6
+          - 5
+          next_as: 666
           path_end_valid: true
           prefix: 1.2.0.0/16
           recv_relationship: !simulator_codec/Relationships
@@ -1169,100 +1095,20 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    7:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 7
-          - 10
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 7
-          next_as: 6
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    8:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 8
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 6
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    9:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 6
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    1:
+    _send_q: !yamlable/SendQueue {}
+    asn: 5
+    customer_cone_size: 1
+    customers: !!python/tuple
+    - 666
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 1
+    providers: !!python/tuple
+    - 4
+    - 3
+  6: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
       1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 6
@@ -1273,9 +1119,8 @@
         bgpsec_path: !!python/tuple
         - 777
         communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 6
-        next_as: 1
+        do_communities: !!python/tuple []
+        next_as: 6
         path_end_valid: true
         prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
@@ -1290,19 +1135,271 @@
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
-    7:
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      1:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 1
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 1
+            next_as: 6
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      7:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 7
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 7
+            next_as: 6
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      8:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 8
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 6
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      9:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 6
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      1:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 6
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 6
+          next_as: 1
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      7:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 6
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 6
+          next_as: 7
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      8:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 6
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 6
+          next_as: 8
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      9:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 6
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 6
+          next_as: 9
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+    _send_q: !yamlable/SendQueue {}
+    asn: 6
+    customer_cone_size: 3
+    customers: !!python/tuple
+    - 8
+    - 9
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 1
+    - 7
+    propagation_rank: 3
+    providers: !!python/tuple []
+  7: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
       1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
-        - 6
-        - 9
-        - 666
+        - 7
+        - 10
         - 13
         - 777
         bgpsec_path: !!python/tuple
         - 777
         communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 6
+        do_communities: !!python/tuple []
         next_as: 7
         path_end_valid: true
         prefix: 1.2.0.0/16
@@ -1318,184 +1415,116 @@
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
-    8:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 6
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 6
-        next_as: 8
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    9:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 6
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 6
-        next_as: 9
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 6
-  customer_cone_size: 3
-  customers: !!python/tuple
-  - 8
-  - 9
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 1
-  - 7
-  propagation_rank: 3
-  providers: !!python/tuple []
-7: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 7
-      - 10
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 7
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    1:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 1
-          - 4
-          - 5
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 1
-          next_as: 7
-          path_end_valid: true
-          prefix: 1.2.0.0/16
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      1:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 1
+            - 4
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 1
+            next_as: 7
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      6:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 6
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 6
+            next_as: 7
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      10:
+        1.2.0.0/16: !yamlable/AnnInfo
           recv_relationship: !simulator_codec/Relationships
             name: CUSTOMERS
             value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    6:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 7
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      1:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
-          - 6
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 6
-          next_as: 7
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    10:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
+          - 7
           - 10
           - 13
           - 777
           bgpsec_path: !!python/tuple
           - 777
           communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 7
+          do_communities: !!python/tuple
+          - 7
+          next_as: 1
           path_end_valid: true
           prefix: 1.2.0.0/16
           recv_relationship: !simulator_codec/Relationships
@@ -1510,148 +1539,19 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    1:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 7
-        - 10
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 7
-        next_as: 1
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    6:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 7
-        - 10
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 7
-        next_as: 6
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    10:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 7
-        - 10
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 7
-        next_as: 10
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 7
-  customer_cone_size: 3
-  customers: !!python/tuple
-  - 10
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 6
-  - 1
-  propagation_rank: 3
-  providers: !!python/tuple []
-8: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 8
-      - 9
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 8
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    6:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      6:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
-          - 6
-          - 9
-          - 666
+          - 7
+          - 10
           - 13
           - 777
           bgpsec_path: !!python/tuple
           - 777
           communities: !!python/tuple []
           do_communities: !!python/tuple
-          - 6
-          next_as: 8
+          - 7
+          next_as: 6
           path_end_valid: true
           prefix: 1.2.0.0/16
           recv_relationship: !simulator_codec/Relationships
@@ -1666,351 +1566,8 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    9:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 8
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    6:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 8
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 6
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    9:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 8
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 8
-        next_as: 9
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 8
-  customer_cone_size: 2
-  customers: !!python/tuple
-  - 9
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 2
-  providers: !!python/tuple
-  - 6
-9: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 9
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 666
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    6:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 6
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 6
-          next_as: 9
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    8:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 8
-          - 9
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 8
-          next_as: 9
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-    666:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 666
-          - 13
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 666
-          path_end_valid: true
-          prefix: 1.2.0.0/16
-          recv_relationship: !simulator_codec/Relationships
-            name: CUSTOMERS
-            value: 3
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: null
-          timestamp: 0
-          traceback_end: false
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    6:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 6
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    8:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 8
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    666:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 9
-        - 666
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 9
-        next_as: 666
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 9
-  customer_cone_size: 1
-  customers: !!python/tuple
-  - 666
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 1
-  providers: !!python/tuple
-  - 6
-  - 8
-10: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 10
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 13
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    7:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      10:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 7
           - 10
@@ -2036,20 +1593,124 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    13:
-      1.2.0.0/16: !yamlable/AnnInfo
+    _send_q: !yamlable/SendQueue {}
+    asn: 7
+    customer_cone_size: 3
+    customers: !!python/tuple
+    - 10
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 6
+    - 1
+    propagation_rank: 3
+    providers: !!python/tuple []
+  8: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 8
+        - 9
+        - 666
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple []
+        next_as: 8
+        path_end_valid: true
+        prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
           name: CUSTOMERS
           value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      6:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 6
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 6
+            next_as: 8
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      9:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 8
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      6:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
+          - 8
+          - 9
+          - 666
           - 13
           - 777
           bgpsec_path: !!python/tuple
           - 777
           communities: !!python/tuple []
           do_communities: !!python/tuple []
-          next_as: 13
+          next_as: 6
           path_end_valid: true
           prefix: 1.2.0.0/16
           recv_relationship: !simulator_codec/Relationships
@@ -2064,8 +1725,261 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    7:
+      9:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 8
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 8
+          next_as: 9
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+    _send_q: !yamlable/SendQueue {}
+    asn: 8
+    customer_cone_size: 2
+    customers: !!python/tuple
+    - 9
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 2
+    providers: !!python/tuple
+    - 6
+  9: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 9
+        - 666
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple []
+        next_as: 666
+        path_end_valid: true
+        prefix: 1.2.0.0/16
+        recv_relationship: !simulator_codec/Relationships
+          name: CUSTOMERS
+          value: 3
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      6:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 6
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 6
+            next_as: 9
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      8:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 8
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 8
+            next_as: 9
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      666:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 666
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      6:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 6
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      8:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 8
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      666:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 9
+          - 666
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple
+          - 9
+          next_as: 666
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+    _send_q: !yamlable/SendQueue {}
+    asn: 9
+    customer_cone_size: 1
+    customers: !!python/tuple
+    - 666
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 1
+    providers: !!python/tuple
+    - 6
+    - 8
+  10: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
       1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 10
@@ -2075,58 +1989,6 @@
         - 777
         communities: !!python/tuple []
         do_communities: !!python/tuple []
-        next_as: 7
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    11:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 10
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 10
-        next_as: 11
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    13:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 10
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 10
         next_as: 13
         path_end_valid: true
         prefix: 1.2.0.0/16
@@ -2142,54 +2004,95 @@
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 10
-  customer_cone_size: 2
-  customers: !!python/tuple
-  - 13
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 11
-  propagation_rank: 2
-  providers: !!python/tuple
-  - 7
-11: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 11
-      - 10
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple
-      - 10
-      next_as: 11
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: PEERS
-        value: 2
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    10:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      7:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 7
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 7
+            next_as: 10
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      13:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 13
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      7:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 10
+          - 13
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 7
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: null
+          timestamp: 0
+          traceback_end: false
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+      11:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 10
           - 13
@@ -2214,96 +2117,8 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    14:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 11
-        - 10
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple
-        - 11
-        - 10
-        next_as: 14
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 11
-  customer_cone_size: 1
-  customers: !!python/tuple
-  - 14
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 10
-  - 15
-  propagation_rank: 1
-  providers: !!python/tuple
-  - 12
-12: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB {}
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn {}
-  _ribs_out: !yamlable/RIBsOut {}
-  _send_q: !yamlable/SendQueue {}
-  asn: 12
-  customer_cone_size: 0
-  customers: !!python/tuple
-  - 11
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 2
-  providers: !!python/tuple []
-13: !yamlable/BGPAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 13
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: CUSTOMERS
-        value: 3
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    10:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      13:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 10
           - 13
@@ -2328,156 +2143,81 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    777:
-      1.2.0.0/16: !yamlable/AnnInfo
+    _send_q: !yamlable/SendQueue {}
+    asn: 10
+    customer_cone_size: 2
+    customers: !!python/tuple
+    - 13
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 11
+    propagation_rank: 2
+    providers: !!python/tuple
+    - 7
+  11: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 11
+        - 10
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple
+        - 10
+        next_as: 11
+        path_end_valid: true
+        prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        unprocessed_ann: !yamlable/PathManipulationAnn
-          as_path: !!python/tuple
-          - 777
-          bgpsec_path: !!python/tuple
-          - 777
-          communities: !!python/tuple []
-          do_communities: !!python/tuple []
-          next_as: 13
-          path_end_valid: true
-          prefix: 1.2.0.0/16
+          name: PEERS
+          value: 2
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      10:
+        1.2.0.0/16: !yamlable/AnnInfo
           recv_relationship: !simulator_codec/Relationships
-            name: ORIGIN
-            value: 4
-          removed_signatures: !!python/tuple []
-          roa_origin: 777
-          roa_valid_length: true
-          seed_asn: 777
-          timestamp: 0
-          traceback_end: true
-          unknown_adopters: !!python/tuple []
-          up_pre: true
-          withdraw: false
-  _ribs_out: !yamlable/RIBsOut
-    10:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 13
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    14:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 13
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-    777:
-      1.2.0.0/16: !yamlable/PathManipulationAnn
-        as_path: !!python/tuple
-        - 13
-        - 777
-        bgpsec_path: !!python/tuple
-        - 777
-        communities: !!python/tuple []
-        do_communities: !!python/tuple []
-        next_as: 13
-        path_end_valid: true
-        prefix: 1.2.0.0/16
-        recv_relationship: !simulator_codec/Relationships
-          name: CUSTOMERS
-          value: 3
-        removed_signatures: !!python/tuple []
-        roa_origin: 777
-        roa_valid_length: true
-        seed_asn: null
-        timestamp: 0
-        traceback_end: false
-        unknown_adopters: !!python/tuple []
-        up_pre: true
-        withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 13
-  customer_cone_size: 1
-  customers: !!python/tuple
-  - 777
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 14
-  propagation_rank: 1
-  providers: !!python/tuple
-  - 10
-14: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 14
-      - 11
-      - 10
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple
-      - 11
-      - 10
-      next_as: 14
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: PROVIDERS
-        value: 1
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    11:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 10
+            next_as: 11
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      14:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 11
           - 10
@@ -2504,12 +2244,121 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    13:
-      1.2.0.0/16: !yamlable/AnnInfo
+    _send_q: !yamlable/SendQueue {}
+    asn: 11
+    customer_cone_size: 1
+    customers: !!python/tuple
+    - 14
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 10
+    - 15
+    propagation_rank: 1
+    providers: !!python/tuple
+    - 12
+  12: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB {}
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn {}
+    _ribs_out: !yamlable/RIBsOut {}
+    _send_q: !yamlable/SendQueue {}
+    asn: 12
+    customer_cone_size: 0
+    customers: !!python/tuple
+    - 11
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 2
+    providers: !!python/tuple []
+  13: !yamlable/BGPAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple []
+        next_as: 13
+        path_end_valid: true
+        prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
-          name: PEERS
-          value: 2
-        unprocessed_ann: !yamlable/PathManipulationAnn
+          name: CUSTOMERS
+          value: 3
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      10:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 10
+            next_as: 13
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      777:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: CUSTOMERS
+            value: 3
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 13
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: ORIGIN
+              value: 4
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: 777
+            timestamp: 0
+            traceback_end: true
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut
+      10:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
           - 13
           - 777
@@ -2532,97 +2381,16 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-  _ribs_out: !yamlable/RIBsOut {}
-  _send_q: !yamlable/SendQueue {}
-  asn: 14
-  customer_cone_size: 0
-  customers: !!python/tuple []
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 13
-  - 16
-  propagation_rank: 0
-  providers: !!python/tuple
-  - 11
-15: !yamlable/BGPAS
-  _local_rib: !yamlable/LocalRIB {}
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn {}
-  _ribs_out: !yamlable/RIBsOut {}
-  _send_q: !yamlable/SendQueue {}
-  asn: 15
-  customer_cone_size: 0
-  customers: !!python/tuple []
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 11
-  propagation_rank: 0
-  providers: !!python/tuple []
-16: !yamlable/BGPAS
-  _local_rib: !yamlable/LocalRIB {}
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn {}
-  _ribs_out: !yamlable/RIBsOut {}
-  _send_q: !yamlable/SendQueue {}
-  asn: 16
-  customer_cone_size: 0
-  customers: !!python/tuple []
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple
-  - 14
-  propagation_rank: 0
-  providers: !!python/tuple []
-666: !yamlable/BGPAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 666
-      - 5
-      - 666
-      - 13
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple
-      - 5
-      next_as: 666
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: PROVIDERS
-        value: 1
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: null
-      timestamp: 0
-      traceback_end: false
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn
-    5:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      14:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
-          - 5
-          - 666
           - 13
           - 777
           bgpsec_path: !!python/tuple
           - 777
           communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 5
-          next_as: 666
+          do_communities: !!python/tuple []
+          next_as: 13
           path_end_valid: true
           prefix: 1.2.0.0/16
           recv_relationship: !simulator_codec/Relationships
@@ -2637,23 +2405,16 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-    9:
-      1.2.0.0/16: !yamlable/AnnInfo
-        recv_relationship: !simulator_codec/Relationships
-          name: PROVIDERS
-          value: 1
-        unprocessed_ann: !yamlable/PathManipulationAnn
+      777:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
           as_path: !!python/tuple
-          - 9
-          - 666
           - 13
           - 777
           bgpsec_path: !!python/tuple
           - 777
           communities: !!python/tuple []
-          do_communities: !!python/tuple
-          - 9
-          next_as: 666
+          do_communities: !!python/tuple []
+          next_as: 13
           path_end_valid: true
           prefix: 1.2.0.0/16
           recv_relationship: !simulator_codec/Relationships
@@ -2668,46 +2429,260 @@
           unknown_adopters: !!python/tuple []
           up_pre: true
           withdraw: false
-  _ribs_out: !yamlable/RIBsOut {}
-  _send_q: !yamlable/SendQueue {}
-  asn: 666
-  customer_cone_size: 0
-  customers: !!python/tuple []
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 0
-  providers: !!python/tuple
-  - 5
-  - 9
-777: !yamlable/BGPsecTransitiveDownOnlyAS
-  _local_rib: !yamlable/LocalRIB
-    1.2.0.0/16: !yamlable/PathManipulationAnn
-      as_path: !!python/tuple
-      - 777
-      bgpsec_path: !!python/tuple
-      - 777
-      communities: !!python/tuple []
-      do_communities: !!python/tuple []
-      next_as: 777
-      path_end_valid: true
-      prefix: 1.2.0.0/16
-      recv_relationship: !simulator_codec/Relationships
-        name: ORIGIN
-        value: 4
-      removed_signatures: !!python/tuple []
-      roa_origin: 777
-      roa_valid_length: true
-      seed_asn: 777
-      timestamp: 0
-      traceback_end: true
-      unknown_adopters: !!python/tuple []
-      up_pre: true
-      withdraw: false
-  _recv_q: !yamlable/RecvQueue {}
-  _ribs_in: !yamlable/RIBsIn {}
-  _ribs_out: !yamlable/RIBsOut
-    13:
+    _send_q: !yamlable/SendQueue {}
+    asn: 13
+    customer_cone_size: 1
+    customers: !!python/tuple
+    - 777
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 14
+    propagation_rank: 1
+    providers: !!python/tuple
+    - 10
+  14: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 14
+        - 11
+        - 10
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple
+        - 11
+        - 10
+        next_as: 14
+        path_end_valid: true
+        prefix: 1.2.0.0/16
+        recv_relationship: !simulator_codec/Relationships
+          name: PROVIDERS
+          value: 1
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      11:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 11
+            - 10
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 11
+            - 10
+            next_as: 14
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: PEERS
+              value: 2
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      13:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PEERS
+            value: 2
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple []
+            next_as: 13
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut {}
+    _send_q: !yamlable/SendQueue {}
+    asn: 14
+    customer_cone_size: 0
+    customers: !!python/tuple []
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 13
+    - 16
+    propagation_rank: 0
+    providers: !!python/tuple
+    - 11
+  15: !yamlable/BGPAS
+    _local_rib: !yamlable/LocalRIB {}
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn {}
+    _ribs_out: !yamlable/RIBsOut {}
+    _send_q: !yamlable/SendQueue {}
+    asn: 15
+    customer_cone_size: 0
+    customers: !!python/tuple []
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 11
+    propagation_rank: 0
+    providers: !!python/tuple []
+  16: !yamlable/BGPAS
+    _local_rib: !yamlable/LocalRIB {}
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn {}
+    _ribs_out: !yamlable/RIBsOut {}
+    _send_q: !yamlable/SendQueue {}
+    asn: 16
+    customer_cone_size: 0
+    customers: !!python/tuple []
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple
+    - 14
+    propagation_rank: 0
+    providers: !!python/tuple []
+  666: !yamlable/BGPAS
+    _local_rib: !yamlable/LocalRIB
+      1.2.0.0/16: !yamlable/PathManipulationAnn
+        as_path: !!python/tuple
+        - 666
+        - 5
+        - 666
+        - 13
+        - 777
+        bgpsec_path: !!python/tuple
+        - 777
+        communities: !!python/tuple []
+        do_communities: !!python/tuple
+        - 5
+        next_as: 666
+        path_end_valid: true
+        prefix: 1.2.0.0/16
+        recv_relationship: !simulator_codec/Relationships
+          name: PROVIDERS
+          value: 1
+        removed_signatures: !!python/tuple []
+        roa_origin: 777
+        roa_valid_length: true
+        seed_asn: null
+        timestamp: 0
+        traceback_end: false
+        unknown_adopters: !!python/tuple []
+        up_pre: true
+        withdraw: false
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn
+      5:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 5
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 5
+            next_as: 666
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+      9:
+        1.2.0.0/16: !yamlable/AnnInfo
+          recv_relationship: !simulator_codec/Relationships
+            name: PROVIDERS
+            value: 1
+          unprocessed_ann: !yamlable/PathManipulationAnn
+            as_path: !!python/tuple
+            - 9
+            - 666
+            - 13
+            - 777
+            bgpsec_path: !!python/tuple
+            - 777
+            communities: !!python/tuple []
+            do_communities: !!python/tuple
+            - 9
+            next_as: 666
+            path_end_valid: true
+            prefix: 1.2.0.0/16
+            recv_relationship: !simulator_codec/Relationships
+              name: CUSTOMERS
+              value: 3
+            removed_signatures: !!python/tuple []
+            roa_origin: 777
+            roa_valid_length: true
+            seed_asn: null
+            timestamp: 0
+            traceback_end: false
+            unknown_adopters: !!python/tuple []
+            up_pre: true
+            withdraw: false
+    _ribs_out: !yamlable/RIBsOut {}
+    _send_q: !yamlable/SendQueue {}
+    asn: 666
+    customer_cone_size: 0
+    customers: !!python/tuple []
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 0
+    providers: !!python/tuple
+    - 5
+    - 9
+  777: !yamlable/BGPsecTransitiveDownOnlyAS
+    _local_rib: !yamlable/LocalRIB
       1.2.0.0/16: !yamlable/PathManipulationAnn
         as_path: !!python/tuple
         - 777
@@ -2715,7 +2690,7 @@
         - 777
         communities: !!python/tuple []
         do_communities: !!python/tuple []
-        next_as: 13
+        next_as: 777
         path_end_valid: true
         prefix: 1.2.0.0/16
         recv_relationship: !simulator_codec/Relationships
@@ -2730,13 +2705,40 @@
         unknown_adopters: !!python/tuple []
         up_pre: true
         withdraw: false
-  _send_q: !yamlable/SendQueue {}
-  asn: 777
-  customer_cone_size: 0
-  customers: !!python/tuple []
-  input_clique: false
-  ixp: false
-  peers: !!python/tuple []
-  propagation_rank: 0
-  providers: !!python/tuple
-  - 13
+    _recv_q: !yamlable/RecvQueue {}
+    _ribs_in: !yamlable/RIBsIn {}
+    _ribs_out: !yamlable/RIBsOut
+      13:
+        1.2.0.0/16: !yamlable/PathManipulationAnn
+          as_path: !!python/tuple
+          - 777
+          bgpsec_path: !!python/tuple
+          - 777
+          communities: !!python/tuple []
+          do_communities: !!python/tuple []
+          next_as: 13
+          path_end_valid: true
+          prefix: 1.2.0.0/16
+          recv_relationship: !simulator_codec/Relationships
+            name: ORIGIN
+            value: 4
+          removed_signatures: !!python/tuple []
+          roa_origin: 777
+          roa_valid_length: true
+          seed_asn: 777
+          timestamp: 0
+          traceback_end: true
+          unknown_adopters: !!python/tuple []
+          up_pre: true
+          withdraw: false
+    _send_q: !yamlable/SendQueue {}
+    asn: 777
+    customer_cone_size: 0
+    customers: !!python/tuple []
+    input_clique: false
+    ixp: false
+    peers: !!python/tuple []
+    propagation_rank: 0
+    providers: !!python/tuple
+    - 13
+ixp_asns: []
