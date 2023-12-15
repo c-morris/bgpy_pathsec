@@ -44,25 +44,26 @@ class TransitiveDroppingAS(BGPAS):
             as_obj, ann_to_send, propagate_to, send_rels, *args, **kwargs
         )
 
-    def process_incoming_anns(
-        self,
-        *,
-        from_rel,
-        propagation_round: int,
-        scenario,
-        reset_q: bool = True
-    ):
-        """Drop if transitive dropping"""
-        for prefix, anns in self._recv_q.prefix_anns():
-            anns = [a for a in anns if a.next_as == 0]
-            self._recv_q._info[prefix] = anns
+    # Uncomment for alternate transitive dropping behavior
+    #def process_incoming_anns(
+    #    self,
+    #    *,
+    #    from_rel,
+    #    propagation_round: int,
+    #    scenario,
+    #    reset_q: bool = True
+    #):
+    #    """Drop if transitive dropping"""
+    #    for prefix, anns in self._recv_q.prefix_anns():
+    #        anns = [a for a in anns if a.next_as == 0]
+    #        self._recv_q._info[prefix] = anns
 
-        super().process_incoming_anns(
-            from_rel=from_rel,
-            propagation_round=propagation_round,  # noqa E501
-            scenario=scenario,
-            reset_q=reset_q,
-        )
+    #    super().process_incoming_anns(
+    #        from_rel=from_rel,
+    #        propagation_round=propagation_round,  # noqa E501
+    #        scenario=scenario,
+    #        reset_q=reset_q,
+    #    )
 
 
 class TransitiveDropping2AS(TransitiveDroppingAS):
